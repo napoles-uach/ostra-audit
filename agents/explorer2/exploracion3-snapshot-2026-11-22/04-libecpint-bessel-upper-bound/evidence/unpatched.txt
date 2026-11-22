@@ -1,0 +1,12 @@
+L= 0: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L= 1: VIOLATIONS= 27  worst at z= 0.03: upper_bound=6.534919e-03 < K_L(z)=8.128091e-03 (ratio=8.039919e-01)
+L= 2: VIOLATIONS= 69  worst at z= 0.03: upper_bound=2.613938e-05 < K_L(z)=4.063973e-05 (ratio=6.431977e-01)
+L= 3: VIOLATIONS=130  worst at z= 0.03: upper_bound=7.468346e-08 < K_L(z)=1.451404e-07 (ratio=5.145600e-01)
+L= 5: VIOLATIONS=310  worst at z= 0.03: upper_bound=3.017493e-13 < K_L(z)=9.162822e-13 (ratio=3.293192e-01)
+L= 6: VIOLATIONS=596  worst at z= 0.03: upper_bound=4.642287e-16 < K_L(z)=1.761980e-15 (ratio=2.634700e-01)
+L= 8: VIOLATIONS=700  worst at z= 0.03: upper_bound=7.281999e-22 < K_L(z)=4.308816e-21 (ratio=1.690023e-01)
+L=10: VIOLATIONS=700  worst at z= 0.03: upper_bound=7.300236e-28 < K_L(z)=6.600013e-27 (ratio=1.106094e-01)
+L=12: VIOLATIONS=700  worst at z= 0.03: upper_bound=5.078419e-34 < K_L(z)=6.255294e-33 (ratio=8.118593e-02)
+L=16: VIOLATIONS=699  worst at z=34.98: upper_bound=9.474534e-06 < K_L(z)=2.975180e-04 (ratio=3.184525e-02)
+L=24: VIOLATIONS=699  worst at z=34.98: upper_bound=1.687602e-09 < K_L(z)=3.307914e-06 (ratio=5.101710e-04)
+TOTAL VIOLATIONS: 4630

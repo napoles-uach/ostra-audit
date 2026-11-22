@@ -1,0 +1,54 @@
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp.f90	2026-11-22 10:35:00
++++ gcp_p7.f90	2026-11-22 11:10:12
+@@ -98,17 +98,22 @@
+    !> Work partition of the atom pairs, absent selects the complete work
+    type(work_partition), intent(in), optional :: partition
+ 
+-   real(wp), allocatable :: lattr(:, :)
++   real(wp), allocatable :: lattr(:, :), grad_loc(:, :)
++   real(wp) :: sigma_loc(3, 3)
+    logical :: grad
+ 
+-   grad = present(gradient) .and. present(sigma)
++   grad = present(gradient) .or. present(sigma)
++   if (grad) then
++      allocate(grad_loc(3, mol%nat), source=0.0_wp)
++      sigma_loc = 0.0_wp
++   end if
+ 
+    if (allocated(param%emiss) .and. allocated(param%slater) .and. allocated(param%xv)) then
+       call get_lattice_points(mol%periodic, mol%lattice, cutoff%gcp, lattr)
+       if (grad) then
+          call gcp_deriv(mol, lattr, cutoff%gcp, param%zeff, param%emiss, param%slater, &
+             & param%xv, param%rvdw, param%sigma, param%alpha, param%beta, param%damp, &
+-            & param%dmp_scal, param%dmp_exp, energies, gradient, sigma, partition)
++            & param%dmp_scal, param%dmp_exp, energies, grad_loc, sigma_loc, partition)
+       else
+          call gcp_energy(mol, lattr, cutoff%gcp, param%zeff, param%emiss, param%slater, &
+             & param%xv, param%rvdw, param%sigma, param%alpha, param%beta, param%damp, &
+@@ -123,7 +128,7 @@
+    if (param%srb) then
+       if (grad) then
+          call srb_deriv(mol, lattr, cutoff%srb, mol%num, param%rvdw_srb, param%rscal, param%qscal, &
+-            & rexp_srb, zexp_srb, energies, gradient, sigma, partition)
++            & rexp_srb, zexp_srb, energies, grad_loc, sigma_loc, partition)
+       else
+          call srb_energy(mol, lattr, cutoff%srb, mol%num, param%rvdw_srb, param%rscal, param%qscal, &
+             & rexp_srb, zexp_srb, energies, partition)
+@@ -133,12 +138,15 @@
+    if (param%base) then
+       if (grad) then
+          call srb_deriv(mol, lattr, cutoff%srb, param%zeff, param%rvdw, param%rscal, param%qscal, &
+-            & rexp_base, zexp_base, energies, gradient, sigma, partition)
++            & rexp_base, zexp_base, energies, grad_loc, sigma_loc, partition)
+       else
+          call srb_energy(mol, lattr, cutoff%srb, param%zeff, param%rvdw, param%rscal, param%qscal, &
+             & rexp_base, zexp_base, energies, partition)
+       end if
+    end if
++
++   if (present(gradient)) gradient(:, :) = gradient(:, :) + grad_loc(:, :)
++   if (present(sigma)) sigma(:, :) = sigma(:, :) + sigma_loc(:, :)
+ end subroutine get_geometric_counterpoise_atomic
+ 
+ 

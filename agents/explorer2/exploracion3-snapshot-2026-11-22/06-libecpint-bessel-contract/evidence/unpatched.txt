@@ -1,0 +1,16 @@
+=== Vector calculate(0.0, 6, vals) on reused buffer ===
+  l=0: got=+1.0000000000e+00  prev=+9.9995460007e-02  exact=1.0  stale=no
+  l=1: got=+8.0005447992e-02  prev=+8.0005447992e-02  exact=0.0  stale=YES
+  l=2: got=+5.1992191212e-02  prev=+5.1992191212e-02  exact=0.0  stale=YES
+  l=3: got=+2.8013256779e-02  prev=+2.8013256779e-02  exact=0.0  stale=YES
+  l=4: got=+1.2773631721e-02  prev=+1.2773631721e-02  exact=0.0  stale=YES
+  l=5: got=+5.0207196821e-03  prev=+5.0207196821e-03  exact=0.0  stale=YES
+  l=6: got=+1.7280484203e-03  prev=+1.7280484203e-03  exact=0.0  stale=YES
+=== Scalar calculate(z, L) for z = 0.0 and z = -1.0 ===
+  l=0: calc(0.0)=+1.000000e+00  calc(-1.0)=+1.000000e+00  calc(1e-12)=+1.000000e+00  exact(0)=1.0
+  l=1: calc(0.0)=+1.000000e+00  calc(-1.0)=+1.000000e+00  calc(1e-12)=+3.333333e-13  exact(0)=0.0
+  l=2: calc(0.0)=+1.000000e+00  calc(-1.0)=+1.000000e+00  calc(1e-12)=+6.666667e-26  exact(0)=0.0
+  l=3: calc(0.0)=+1.000000e+00  calc(-1.0)=+1.000000e+00  calc(1e-12)=+9.523810e-39  exact(0)=0.0
+  l=4: calc(0.0)=+1.000000e+00  calc(-1.0)=+1.000000e+00  calc(1e-12)=+1.058201e-51  exact(0)=0.0
+  l=5: calc(0.0)=+1.000000e+00  calc(-1.0)=+1.000000e+00  calc(1e-12)=+9.620010e-65  exact(0)=0.0
+  l=6: calc(0.0)=+1.000000e+00  calc(-1.0)=+1.000000e+00  calc(1e-12)=+7.400007e-78  exact(0)=0.0

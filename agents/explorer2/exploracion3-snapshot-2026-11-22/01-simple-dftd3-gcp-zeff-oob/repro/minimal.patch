@@ -1,0 +1,28 @@
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90	2026-11-22 10:35:00
++++ param_patched.f90	2026-11-22 11:06:48
+@@ -124,7 +124,7 @@
+       & 1.232920_wp, 1.343390_wp, 1.448280_wp, 1.613360_wp, 1.768140_wp, 1.992010_wp, 2.233110_wp, 2.493230_wp, &
+       & 3.029640_wp, 3.389980_wp, &  ! H-Ca
+       & 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, &
+-      & 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp]
++      & 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp]
+ 
+    real(wp), parameter :: emiss_hf_631gd(*) = [ &! H-Ca + Br (no 3d)
+       & 0.010083_wp, 0.008147_wp, &
+@@ -1059,10 +1059,14 @@
+       zeff = number - 18
+    case(55:57)
+       zeff = number - 18*2
+-   case(58:71, 90:94)
++   case(58:71, 89:103)
+       zeff = 21
+-   case(72:89)
++   case(72:86)
+       zeff = number - 2*18 - 14
++   case(87:88)
++      zeff = number - 2*18 - 32
++   case(104:)
++      zeff = 36
+    end select
+ end function effective_atomic_number
+ 

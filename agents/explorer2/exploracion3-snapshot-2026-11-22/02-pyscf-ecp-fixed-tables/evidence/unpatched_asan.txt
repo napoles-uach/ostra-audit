@@ -1,0 +1,85 @@
+=== PySCF master UNPATCHED ASan mode 1 (z=16.0, order=7 -> _sph_ine_tab_order7[400] OOB) ===
+=================================================================
+==15386==ERROR: AddressSanitizer: global-buffer-overflow on address 0x0001004ec000 at pc 0x000100c2ac84 bp 0x00016f942df0 sp 0x00016f9425a0
+READ of size 64 at 0x0001004ec000 thread T0
+    #0 0x000100c2ac80 in __asan_memcpy+0x400 (libclang_rt.asan_osx_dynamic.dylib:arm64e+0x3ec80)
+    #1 0x0001004b9a40 in main repro_master_ecp_bessel.c:4707
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x0001004ec000 is located 0 bytes after global variable '_sph_ine_tab_order7' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/02-pyscf-ecp-fixed-tables/repro/repro_master_ecp_bessel.c' (0x0001004ba000) of size 204800
+SUMMARY: AddressSanitizer: global-buffer-overflow repro_master_ecp_bessel.c:4707 in main
+Shadow bytes around the buggy address:
+  0x0001004ebd80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001004ebe00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001004ebe80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001004ebf00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001004ebf80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0001004ec000:[f9]f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0001004ec080: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0001004ec100: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0001004ec180: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0001004ec200: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0001004ec280: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==15386==ABORTING
+
+=== PySCF master UNPATCHED ASan mode 2 (z=16.0, order=16 -> _sph_ine_tab[400] OOB) ===
+=================================================================
+==15390==ERROR: AddressSanitizer: global-buffer-overflow on address 0x00010010f480 at pc 0x00010089ac84 bp 0x00016fd3edf0 sp 0x00016fd3e5a0
+READ of size 192 at 0x00010010f480 thread T0
+    #0 0x00010089ac80 in __asan_memcpy+0x400 (libclang_rt.asan_osx_dynamic.dylib:arm64e+0x3ec80)
+    #1 0x0001000bd88c in main repro_master_ecp_bessel.c:4710
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x00010010f480 is located 0 bytes after global variable '_sph_ine_tab' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/02-pyscf-ecp-fixed-tables/repro/repro_master_ecp_bessel.c' (0x0001000fc880) of size 76800
+SUMMARY: AddressSanitizer: global-buffer-overflow repro_master_ecp_bessel.c:4710 in main
+Shadow bytes around the buggy address:
+  0x00010010f200: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010010f280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010010f300: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010010f380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010010f400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x00010010f480:[f9]f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x00010010f500: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x00010010f580: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x00010010f600: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x00010010f680: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+  0x00010010f700: f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9 f9
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==15390==ABORTING

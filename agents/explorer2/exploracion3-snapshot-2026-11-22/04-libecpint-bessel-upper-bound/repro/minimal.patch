@@ -1,0 +1,33 @@
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/libecpint/src/lib/bessel.cpp	2026-11-22 10:34:08
++++ bessel_patched.cpp	2026-11-22 11:08:39
+@@ -143,12 +143,25 @@
+ 
+ // Get an upper bound for M_l(z)
+ double BesselFunction::upper_bound(const double z, const int L) const {
+-  // find nearest point (on left) in tabulated values
+-  int ix = std::floor(N * z / 16.0);
+-  int minix = L > 0 ? 1 : 0;
+-  ix = std::min(N, std::max(minix, ix));
+   int lx = std::min(L, lMax);
+-  return K[ix * K_stride + lx];
++  if (z <= 0.0) return lx == 0 ? 1.0 : 0.0;
++  if (z >= 16.0) {
++    // Past z = 16: if K_L is already decreasing at z = 16, K[N, L] is a valid upper bound;
++    // otherwise (L >= 6, peak lies above z = 16), evaluate K_L(z) directly.
++    if (K[N * K_stride + lx] <= K[(N - 1) * K_stride + lx])
++      return K[N * K_stride + lx];
++    return calculate(z, lx);
++  }
++  int ix = std::max(0, std::min(N - 1, static_cast<int>(std::floor(N * z / 16.0))));
++  double k_left = K[ix * K_stride + lx];
++  double k_right = K[(ix + 1) * K_stride + lx];
++  // If the peak falls inside [z_ix, z_{ix+1}], evaluate directly; otherwise endpoint max bounds K_L.
++  if (ix > 0 && ix + 1 < N &&
++      K[ix * K_stride + lx] >= K[(ix - 1) * K_stride + lx] &&
++      K[(ix + 1) * K_stride + lx] <= K[ix * K_stride + lx]) {
++    return calculate(z, lx);
++  }
++  return std::max(k_left, k_right);
+ }
+ 
+ // Calculate modified spherical Bessel function K_l(z), weighted with an exponential factor e^(-z)

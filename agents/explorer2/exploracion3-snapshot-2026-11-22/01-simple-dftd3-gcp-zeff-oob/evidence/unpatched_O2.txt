@@ -1,0 +1,5 @@
+=== Unpatched simple-dftd3 (-O2) ===
+Fr-O r2scan3c: zeff=  37   8 emiss1=  7.930000E-03 slater1=  0.000000E+00 E=      Infinity gz=           NaN
+Ra-O r2scan3c: zeff=  38   8 emiss1=  3.310000E-03 slater1=  0.000000E+00 E=      Infinity gz=           NaN
+Ac-O r2scan3c: zeff=  39   8 emiss1=  8.676000E-02 slater1=  0.000000E+00 E=      Infinity gz=           NaN
+Kr-O hf/minis: zeff=  36   8 emiss1=  1.008300E-02 E=  2.991646E-05

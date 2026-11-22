@@ -1,0 +1,7 @@
+Date: 2026-11-22
+OS: macOS 26.7.3 (arm64)
+clang: Apple clang version 21.0.0 (clang-2100.1.1.101)
+gfortran: GNU Fortran (Homebrew GCC 16.2.0) 16.2.0
+python: Python 3.13.3
+Library 1: dftd4 (4a5bbf0ffbef983f6b225a4a275e61ea265088f6, 2026-11-16 09:56:15 +0100)
+Library 2: multicharge (4bb6c9637508bd1d21a28f72fa514fcf4e968fa0, 2026-11-17 16:44:17 +0100)
