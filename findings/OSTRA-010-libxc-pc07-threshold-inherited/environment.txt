@@ -1,0 +1,5 @@
+Explorer 2 environment (macOS, Apple Silicon): libxc devel 3c7794c50 built as libxc.dylib,
+PySCF 2.14.0 with bundled libxc 7.0.0 and XCFun 2.1.1 (libxcfun.2.dylib), Python 3.13 venv.
+Independent verification (verifier) done in the container environment below.
+libxc devel: gitlab libxc/libxc 3c7794c50 ("Merge branch 'fix-integrate-tail-check' into 'devel'"),
+built with CMake (Release) in a Linux VM; Python harness via ctypes (probes/lxc.py, LIBXC_PATH)

@@ -1,0 +1,6 @@
+Container (Linux x86_64, glibc 2.39), gcc 13.3.0
+Python 3.13.18, numpy 2.5.3, scipy 1.18.1, mpmath 1.4.1
+PySCF 2.15.1 (bundled libxc 7.1.2, bundled libcint, bundled XCFun 2.1.1)
+dftd4 4.3.1 (Python), multicharge source at 4bb6c96 (2026-11-17)
+libcint source: sunqm/libcint ab88a54 (v6.2.1, 2026-11-01), built with -DKEEP_GOING=1
+XCFun source: dftlibs/xcfun a89b783 (v2.1.1-12, 2022-11-30)
