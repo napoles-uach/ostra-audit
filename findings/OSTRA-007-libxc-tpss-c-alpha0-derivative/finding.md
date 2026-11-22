@@ -11,7 +11,7 @@
 | class | No impact |
 | impact_level | IV |
 | status | Documented; not reported |
-| report | none |
+| report | Not to be reported (no impact) |
 
 At alpha = 0 exactly, v_tau is 0 on half of the He grid points (clamped branch) and finite on the other half.
 RKS and UKS energies of He and H2 nevertheless agree to <1e-15 Eh for TPSS, SCAN and M06-L: in one-orbital

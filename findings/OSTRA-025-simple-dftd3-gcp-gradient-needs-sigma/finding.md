@@ -11,7 +11,7 @@
 | class | API contract, new |
 | impact_level | III (C API / Fortran callers requesting gradients without sigma) |
 | status | Verified (code) |
-| report | none yet |
+| report | Pending |
 
 With sigma absent (C API with NULL sigma: the unallocated Fortran array is passed as absent), grad is false
 and only energies are computed; the gradient stays at zero without a warning. The dispersion routine uses

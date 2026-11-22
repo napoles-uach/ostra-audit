@@ -11,7 +11,7 @@
 | class | New bug (parameters) or outdated preprint values |
 | impact_level | I-II (explorer: 0.5-0.9 kcal/mol; not re-measured) |
 | status | Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14 |
-| report | none yet |
+| report | Pending |
 
 XCFun vs libxc defaults: 1.0e-2 max relative difference; libxc with dp4 = da4 = 0.232: 1.5e-14 (exact attribution).
 XCFun added r4SCAN in 2020-09 (#140), before the r4SCAN paper; 0.232 may be a preliminary value.

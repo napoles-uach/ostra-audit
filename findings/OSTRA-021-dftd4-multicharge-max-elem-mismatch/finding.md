@@ -11,7 +11,7 @@
 | class | Fixed-size table across libraries, new |
 | impact_level | III (superheavy elements only) |
 | status | Verified (released dftd4 4.3.1) |
-| report | none yet |
+| report | Pending |
 
 d4.f90 rejects only 104-111; EEQ getters return -1.0 beyond 103 and new_eeq_model does not validate them.
 Verifier with dftd4 4.3.1 (Python): Hg-O gives q(Hg) = +0.48; Cn-O and Og-O give q(Cn) = -0.87, q(Og) = -0.87 and

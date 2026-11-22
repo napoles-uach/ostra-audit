@@ -11,7 +11,7 @@
 | class | API contract, new |
 | impact_level | IV inside libecpint (callers guard x > 0 or rely on zero-initialized buffers); III for external users |
 | status | Verified (code); impact downgraded |
-| report | none yet |
+| report | Pending |
 
 The vector overload leaves values[1..maxL] untouched at z <= 0, contradicting its own comment; the scalar
 overload returns 1.0 instead of 0.0 for L >= 1. radial.cpp guards x > 0 and sets the orders by hand (with a comment

@@ -11,7 +11,7 @@
 | class | Convergence, known |
 | impact_level | I (up to 18 % in charges, 1.25 % in E_D4 for skewed cells) |
 | status | Known issue; data contributed |
-| report | grimme-lab/multicharge#72 (comment with skewed-cell data and LLL workaround) |
+| report | Commented on known issue: [multicharge#72](https://github.com/grimme-lab/multicharge/issues/72) |
 
 Coordination numbers are invariant (1e-15); the discrepancy comes from the charge model. LLL lattice reduction
 before the Ewald sum is an effective workaround. Full comment text: `report/issue.md`.

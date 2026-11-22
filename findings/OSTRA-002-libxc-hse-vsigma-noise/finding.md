@@ -11,7 +11,7 @@
 | class | Numerical precision |
 | impact_level | II |
 | status | Already fixed in devel by the developers |
-| report | none needed |
+| report | Not needed (already fixed in devel by the developers) |
 
 ## Symptom
 In 7.1.2, v_sigma of HSE06/wPBEh shows noise of the order of its own value for small s.

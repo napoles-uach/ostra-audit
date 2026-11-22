@@ -11,7 +11,7 @@
 | class | Memory safety, new |
 | impact_level | III (SR integrals with l >~ 10; errors up to 3e8, build-dependent) |
 | status | Verified and attributed; issue drafted |
-| report | draft in report/issue.md (sunqm/libcint); prior #60 is unrelated (eigh.c) |
+| report | Pending (issue drafted in report/) |
 
 MXRYSROOTS = 32 lets the Rys code request m up to 2*nroots (Schmidt fallback) or 2*nroots-1 (SR Jacobi moments),
 but the table has 40 entries. Reading past it is undefined behaviour; the failing orders differ between binaries

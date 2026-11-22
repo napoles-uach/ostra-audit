@@ -11,7 +11,7 @@
 | class | Documented contract violated, new |
 | impact_level | IV inside libecpint (no caller); III for external users of the public header |
 | status | Verified (code); impact downgraded |
-| report | none yet |
+| report | Pending |
 
 upper_bound takes the tabulated point to the left of z, which bounds a decreasing function from above but
 is a lower bound where K_L(z) rises (L >= 1 below its maximum). Explorer reports underestimates up to 1958x

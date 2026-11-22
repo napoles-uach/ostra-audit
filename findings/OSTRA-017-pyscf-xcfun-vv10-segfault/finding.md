@@ -11,7 +11,7 @@
 | class | New bug (crash) |
 | impact_level | III (loud: process killed, exit 139) |
 | status | Verified |
-| report | none yet (check pyscf issues first) |
+| report | Pending |
 
 `mf._numint.libxc = dft.xcfun` with `wb97m_v` or `b97m_v` on H2/STO-3G terminates with SIGSEGV (exit 139);
 the same runs with libxc succeed.

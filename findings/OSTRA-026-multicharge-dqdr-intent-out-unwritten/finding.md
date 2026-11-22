@@ -11,7 +11,7 @@
 | class | API contract, new |
 | impact_level | III (callers requesting only Cartesian charge derivatives) |
 | status | Verified (code) |
-| report | none yet |
+| report | Pending |
 
 grad = (present(dqdr) .and. present(dqdL)) .or. present(cache); with only dqdr present no derivative is
 computed and the intent(out) array is never written.

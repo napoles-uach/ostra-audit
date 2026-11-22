@@ -11,7 +11,7 @@
 | class | Numerical precision, new |
 | impact_level | II (gCP derivatives for unlike-element pairs; energy impact not re-measured) |
 | status | Partly verified |
-| report | none yet |
+| report | Pending |
 
 Verifier (mpmath): the 12-term series has relative errors 3.5e-4 to 1.8e-3 at x = 5; the closed-form
 upward recursion has 4e-3 to 0.92 at x = 0.05-0.1 for k = 7-8. The switch uses |za - zb| < 0.1, while x = (zb - za)R/2

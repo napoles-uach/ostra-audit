@@ -11,7 +11,7 @@
 | class | Numerical bug or model singularity (pending the paper) |
 | impact_level | II-III (open-shell densities near rho ~ 2e-5) |
 | status | Verified (anomaly reproduced); cause: model pole vs implementation pending |
-| report | none yet |
+| report | Pending |
 
 Explorer 2 (batch 1) reported a NaN band; it was not reproduced at zeta = 0. In batch 3 it gave the exact
 condition: spin-polarized with 0 < |zeta| < 1. Verified in 7.1.2 (zeta = 0.4): NaN for |r_s - 22.7394121| < ~5e-5 and

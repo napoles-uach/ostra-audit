@@ -11,7 +11,7 @@
 | class | API contract, new |
 | impact_level | III (zero inside PySCF; garbage up to 1e256 for direct API users) |
 | status | Reported |
-| report | pyscf/pyscf#3669 |
+| report | Reported: [pyscf#3669](https://github.com/pyscf/pyscf/issues/3669) |
 
 `ECPscalar_iprinv` (and `_ipiprinv`, `_iprinvip`) return 0 without writing the output when `AS_RINV_ORIG_ATOM`
 points to an atom without ECP; `getints2c` allocates with `numpy.ndarray` (uninitialized).

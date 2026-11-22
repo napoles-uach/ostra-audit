@@ -11,7 +11,7 @@
 | class | New bug (registration + formula) |
 | impact_level | III (fails loudly: NaN as registered) |
 | status | Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15 |
-| report | none yet (XCFun last commit 2022-11) |
+| report | Pending |
 
 (a) flags lack XC_KINETIC, so PySCF types it as GGA and it returns NaN on all test points; (b) denominator
 (1 + sqrt(e) p) instead of (1 + sqrt(e) p)^2; (c) inside the square root `p` is used where TPSSX uses `p0 = p/sigma`,

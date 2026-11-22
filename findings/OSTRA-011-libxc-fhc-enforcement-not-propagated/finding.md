@@ -11,7 +11,7 @@
 | class | API contract, new |
 | impact_level | III (codes that disable FHC, e.g. PAW, with hybrid/mixed meta-GGAs) |
 | status | Verified |
-| report | none yet |
+| report | Pending |
 
 Every other setter (dens, zeta, sigma, tau thresholds) loops over `p->func_aux`; this one does not. Test with
 tau < tau_W: disabling FHC changes eps for pure TPSS exchange but has no effect for TPSSh and TPSS0.

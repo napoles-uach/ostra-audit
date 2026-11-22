@@ -11,7 +11,7 @@
 | class | New numerical bug |
 | impact_level | III (niche: lda_x_1d_soft for beta*kF >~ 38.6) |
 | status | Resolved upstream |
-| report | libxc#646, fixed in a19650f34 with regression test and credit |
+| report | Fixed upstream: [libxc#646](https://gitlab.com/libxc/libxc/-/issues/646) (commit a19650f34) |
 
 ## Symptom
 The exchange energy per particle of `lda_x_1d_soft` collapses and changes sign for beta*kF >~ 38.6.

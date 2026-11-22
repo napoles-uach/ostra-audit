@@ -11,7 +11,7 @@
 | class | New numerical bug |
 | impact_level | II (zk jump ~1.8e-6 relative per point; molecular impact not measured) |
 | status | Verified analytically |
-| report | none yet |
+| report | Pending |
 
 The comment justifies the cut with "pc07_fab0(a/40) ~ 1.6e-17"; that number omits the power b. With the original
 PC07 parameters (a = 0.5389, b = 3) the value is 4.2e-51, but SCAN-L and r2SCAN-L (exchange and correlation) use

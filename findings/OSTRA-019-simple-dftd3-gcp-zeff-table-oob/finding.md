@@ -11,7 +11,7 @@
 | class | Memory safety / fixed-size table, new |
 | impact_level | III (heavy elements: Kr/Xe/Rn with MINIS, Fr/Ra/Ac, Z > 94) |
 | status | Verified (code) |
-| report | none yet |
+| report | Pending |
 
 effective_atomic_number maps 72:89 to Z - 50 (Fr/Ra/Ac -> 37-39) and leaves Z > 94 unchanged, while the
 emission/basis tables have 36 entries (emiss_hf_minis has 35, so Kr/Xe/Rn -> 36 is already out of range). No element

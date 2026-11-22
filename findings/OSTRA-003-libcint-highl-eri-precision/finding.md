@@ -11,6 +11,6 @@
 | class | Documented limitation |
 | impact_level | IV (Delta E_HF = 1e-13 Eh with cc-pV6Z) |
 | status | Documented; not reported |
-| report | none (documented by libcint) |
+| report | Not to be reported (documented limitation) |
 
 Absolute errors ~1e-6 (l=6) and ~1e-4 (l=7) on small elements; propagated to HF energies the effect is 1e-13 Eh.

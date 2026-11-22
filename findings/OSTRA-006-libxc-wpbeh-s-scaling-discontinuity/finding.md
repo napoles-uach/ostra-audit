@@ -11,7 +11,7 @@
 | class | Known design (Henderson et al. 2009, eq. 8 vs eq. 9) |
 | impact_level | II |
 | status | Classified; not to be reported (deliberate fidelity to HSE06) |
-| report | none; possible mention to maintainers before publication |
+| report | Not to be reported (known design, Henderson et al. 2009) |
 
 ## Cause
 eq. (8) of Henderson, Izmaylov, Scalmani, Scuseria, J. Chem. Phys. 131, 044108 (2009) is piecewise: identity for

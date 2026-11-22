@@ -11,7 +11,7 @@
 | class | Unguarded edge case |
 | impact_level | III-IV (exact points rarely on molecular grids) |
 | status | Verified |
-| report | none yet |
+| report | Pending |
 
 At alpha = 1 exactly: SCANX exc = +inf, SCANC exc = -inf, v_sigma NaN (libxc finite). At s = 0, alpha = 1.2:
 SCANX v_sigma = -0.0508 vs libxc -0.0993; finite differences give -0.0993, so XCFun is wrong there.

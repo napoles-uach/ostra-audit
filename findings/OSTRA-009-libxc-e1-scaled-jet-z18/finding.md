@@ -11,7 +11,7 @@
 | class | New numerical bug |
 | impact_level | II (to be measured in molecules) |
 | status | Verified; attribution of the LC-wPBE inconsistency pending |
-| report | none yet |
+| report | Pending |
 
 ## Verified
 - Just above z = 18 the optimally truncated asymptotic series gives relative errors 8.4e-8 (value), 1.6e-6 (1st

@@ -11,7 +11,7 @@
 | class | New bug (formula), silent |
 | impact_level | I-II (explorer: SCF shifts 1.5-2.1 kcal/mol; not re-measured) |
 | status | Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11 |
-| report | none yet |
+| report | Pending |
 
 `revtpssc_eps.hpp` uses `pow2(...)` where `tpssc_eps.hpp` (same formula, same d = 2.8) uses `pow3(...)`.
 Max relative difference vs libxc 2 % on 200 random points (control TPSSC vs libxc: 3e-11). Silent: passes the
