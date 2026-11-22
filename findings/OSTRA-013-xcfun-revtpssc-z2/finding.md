@@ -10,9 +10,19 @@
 | oracle | Code comparison with TPSSC; differential vs libxc |
 | class | New bug (formula), silent |
 | impact_level | I-II (explorer: SCF shifts 1.5-2.1 kcal/mol; not re-measured) |
-| status | Verified |
+| status | Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11 |
 | report | none yet |
 
 `revtpssc_eps.hpp` uses `pow2(...)` where `tpssc_eps.hpp` (same formula, same d = 2.8) uses `pow3(...)`.
 Max relative difference vs libxc 2 % on 200 random points (control TPSSC vs libxc: 3e-11). Silent: passes the
 uniform gas (z = 0) and one-electron densities (z = 1).
+
+## Confirmation phase (2026-11-21) — level 3: defect scientifically confirmed
+- **Publication check.** revTPSS preprint (arXiv:0906.5029): "Aside from our use of Eq. (3), we keep the form of TPSS
+  correlation unchanged", i.e. eps_c = eps_c^revPKZB [1 + d eps_c^revPKZB z^3], d = 2.8; new beta(rs) and C(zeta, 0)
+  (XCFun's coefficients match the paper). Erratum PRL 106, 179902 does not touch the formulas.
+- **Minimal fix:** z^3 in the final expression only (the PKZB part keeps z^2, correctly).
+- **Result** vs libxc 7.1.2: eps 2.7e-2 -> 1.3e-5 (derivatives 69 -> 1.4e-3). The remainder is a convention: libxc uses
+  the exact PBE beta (0.06672455060314922, commented in gga_c_regtpss.mpl) instead of the paper's 0.066725. With it:
+  eps 4.0e-11, derivatives 1.6e-8, identical to the TPSSC control (3.9e-11).
+- **Status:** confirmed defect (formula). The beta rounding is a convention, not a defect.

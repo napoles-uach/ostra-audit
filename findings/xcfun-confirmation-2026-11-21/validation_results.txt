@@ -1,0 +1,45 @@
+# XCFun a89b783 (master, v2.1.1-12), built with XCFUN_MAX_ORDER=3, loaded into PySCF 2.15.1 via LD_PRELOAD; libxc 7.1.2 reference
+=== bundled
+REVTPSSX  type=GGA   ERROR cannot reshape array of size 2400 into shape (1,4,400)
+REVTPSSC  type=MGGA  eps rel 2.7e-02   vrho/vsigma/vtau rel 6.9e+01
+R4SCANX   type=MGGA  eps rel 2.4e-02   vrho/vsigma/vtau rel 1.3e+02
+TPSSX     type=MGGA  eps rel 7.1e-16   vrho/vsigma/vtau rel 3.0e-13
+TPSSC     type=MGGA  eps rel 3.9e-11   vrho/vsigma/vtau rel 1.8e-07
+R2SCANX   type=MGGA  eps rel 1.3e-14   vrho/vsigma/vtau rel 7.7e-12
+SCANX     type=MGGA  eps rel 5.6e-08   vrho/vsigma/vtau rel 1.6e-05
+TFK zeta=0.4  polarized vs exact spin scaling: rel -8.2e-02
+TFK zeta=0.8  polarized vs exact spin scaling: rel -2.7e-01
+TFK zeta=1.0  polarized vs exact spin scaling: rel -3.7e-01
+=== vanilla
+REVTPSSX  type=GGA   ERROR cannot reshape array of size 2400 into shape (1,4,400)
+REVTPSSC  type=MGGA  eps rel 2.7e-02   vrho/vsigma/vtau rel 6.9e+01
+R4SCANX   type=MGGA  eps rel 2.4e-02   vrho/vsigma/vtau rel 1.3e+02
+TPSSX     type=MGGA  eps rel 7.1e-16   vrho/vsigma/vtau rel 3.0e-13
+TPSSC     type=MGGA  eps rel 3.9e-11   vrho/vsigma/vtau rel 1.8e-07
+R2SCANX   type=MGGA  eps rel 1.3e-14   vrho/vsigma/vtau rel 7.7e-12
+SCANX     type=MGGA  eps rel 5.6e-08   vrho/vsigma/vtau rel 1.6e-05
+TFK zeta=0.4  polarized vs exact spin scaling: rel -8.2e-02
+TFK zeta=0.8  polarized vs exact spin scaling: rel -2.7e-01
+TFK zeta=1.0  polarized vs exact spin scaling: rel -3.7e-01
+=== fixed
+REVTPSSX  type=MGGA  eps rel 1.0e-08   vrho/vsigma/vtau rel 3.6e-06
+REVTPSSC  type=MGGA  eps rel 1.3e-05   vrho/vsigma/vtau rel 1.4e-03
+R4SCANX   type=MGGA  eps rel 3.2e-14   vrho/vsigma/vtau rel 1.4e-10
+TPSSX     type=MGGA  eps rel 7.1e-16   vrho/vsigma/vtau rel 3.0e-13
+TPSSC     type=MGGA  eps rel 3.9e-11   vrho/vsigma/vtau rel 1.8e-07
+R2SCANX   type=MGGA  eps rel 1.3e-14   vrho/vsigma/vtau rel 7.7e-12
+SCANX     type=MGGA  eps rel 5.6e-08   vrho/vsigma/vtau rel 1.6e-05
+TFK zeta=0.4  polarized vs exact spin scaling: rel 0.0e+00
+TFK zeta=0.8  polarized vs exact spin scaling: rel -1.1e-16
+TFK zeta=1.0  polarized vs exact spin scaling: rel 0.0e+00
+=== fixed+conventions
+REVTPSSX  type=MGGA  eps rel 9.6e-16   vrho/vsigma/vtau rel 1.0e-14
+REVTPSSC  type=MGGA  eps rel 4.0e-11   vrho/vsigma/vtau rel 1.6e-08
+R4SCANX   type=MGGA  eps rel 3.2e-14   vrho/vsigma/vtau rel 1.4e-10
+TPSSX     type=MGGA  eps rel 7.1e-16   vrho/vsigma/vtau rel 3.0e-13
+TPSSC     type=MGGA  eps rel 3.9e-11   vrho/vsigma/vtau rel 1.8e-07
+R2SCANX   type=MGGA  eps rel 1.3e-14   vrho/vsigma/vtau rel 7.7e-12
+SCANX     type=MGGA  eps rel 5.6e-08   vrho/vsigma/vtau rel 1.6e-05
+TFK zeta=0.4  polarized vs exact spin scaling: rel 0.0e+00
+TFK zeta=0.8  polarized vs exact spin scaling: rel -1.1e-16
+TFK zeta=1.0  polarized vs exact spin scaling: rel 0.0e+00
