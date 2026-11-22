@@ -1,0 +1,121 @@
+=== UNPATCHED vs PATCHED ASan MATRIX (master 484fd7c) ===
+
+--- intor: ECPscalar_scalar ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc6       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc7       | unpatched: PASS                                                 | patched: PASS
+  lb6_loconly   | unpatched: PASS                                                 | patched: PASS
+  lb6_lc0       | unpatched: PASS                                                 | patched: PASS
+  lb6_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb6_lc5       | unpatched: PASS                                                 | patched: PASS
+  lb6_lc6       | unpatched: PASS                                                 | patched: PASS
+  lb6_lc4_p3    | unpatched: PASS                                                 | patched: PASS
+  lb7_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+
+--- intor: ECPscalar_ipnuc ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc6       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc7       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_loconly   | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc5       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4_p3    | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+
+--- intor: ECPscalar_iprinv ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc6       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc7       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_loconly   | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc5       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4_p3    | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+
+--- intor: ECPscalar_ignuc ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc6       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc7       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_loconly   | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc5       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4_p3    | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+
+--- intor: ECPscalar_ipipnuc ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: SEGV nr_ecp.c:5054 in cache_3dfac                    | patched: PASS
+  lb5_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb5_lc7       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_loconly   | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc5       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4_p3    | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc0       | SKIP (lmax=16 > libcint ANG_MAX=15)
+  lb7_lc4       | SKIP (lmax=16 > libcint ANG_MAX=15)
+
+--- intor: ECPscalar_ipiprinv ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: SEGV nr_ecp.c:5054 in cache_3dfac                    | patched: PASS
+  lb5_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb5_lc7       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_loconly   | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc5       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4_p3    | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc0       | SKIP (lmax=16 > libcint ANG_MAX=15)
+  lb7_lc4       | SKIP (lmax=16 > libcint ANG_MAX=15)
+
+--- intor: ECPscalar_ipnucip ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc6       | unpatched: heap-buffer-overflow nr_ecp.c:4675 in ECPsph_ine     | patched: PASS
+  lb5_lc7       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_loconly   | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc5       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4_p3    | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc0       | SKIP (lmax=16 > libcint ANG_MAX=15)
+  lb7_lc4       | SKIP (lmax=16 > libcint ANG_MAX=15)
+
+--- intor: ECPscalar_iprinvip ---
+  lb4_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc4       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc5       | unpatched: PASS                                                 | patched: PASS
+  lb5_lc6       | unpatched: heap-buffer-overflow nr_ecp.c:4675 in ECPsph_ine     | patched: PASS
+  lb5_lc7       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_loconly   | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc0       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc5       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc6       | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb6_lc4_p3    | unpatched: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart | patched: PASS
+  lb7_lc0       | SKIP (lmax=16 > libcint ANG_MAX=15)
+  lb7_lc4       | SKIP (lmax=16 > libcint ANG_MAX=15)

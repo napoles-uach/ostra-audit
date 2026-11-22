@@ -1,0 +1,431 @@
+--- orig/gto/nr_ecp.h	2026-11-22 11:53:29
++++ patched/gto/nr_ecp.h	2026-11-22 11:53:29
+@@ -15,7 +15,7 @@
+ #define CUTOFF          460  // ~ 1e200
+ #define CLOSE_ENOUGH(x, y)      (fabs(x-y) <= 1e-12 * fmax(fabs(x), fabs(y)))
+ #define SQUARE(r)       (r[0]*r[0]+r[1]*r[1]+r[2]*r[2])
+-#define CART_CUM        (455+1) // upto l = 12
++#define CART_CUM        816     // upto l = 15 (matching ANG_MAX in cint.h)
+ #define K_TAYLOR_MAX    7
+ #define K_TAB_COL       24      // >= (7*2+1+K_TAYLOR_MAX)
+ #define K_TAB_ENTRIES   400
+--- orig/gto/nr_ecp.c	2026-11-22 11:53:29
++++ patched/gto/nr_ecp.c	2026-11-22 11:53:29
+@@ -4545,6 +4545,7 @@
+         5, 4, 3, 2, 1, 0,11,10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0,12,11,
+        10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0,13,12,11,10, 9, 8, 7, 6, 5,
+         4, 3, 2, 1, 0,14,13,12,11,10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
++       15,14,13,12,11,10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0,
+ };
+ static int _cart_pow_z[] = {
+         0, 0, 1, 0, 1, 2, 0, 1, 2, 3, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4,
+@@ -4553,6 +4554,7 @@
+         5, 6, 7, 8, 9,10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11, 0, 1,
+         2, 3, 4, 5, 6, 7, 8, 9,10,11,12, 0, 1, 2, 3, 4, 5, 6, 7, 8,
+         9,10,11,12,13, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,
++        0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14,15,
+ };
+ #define LOOP_CART(l, i, ix, iy, iz) \
+         for (i = 0; iy = _cart_pow_y[i], \
+@@ -4565,7 +4567,7 @@
+         for (k = 0; k <= iz; k++)
+ 
+ static int _offset_cart[] = {0, 1, 4, 10, 20, 35, 56, 84, 120,
+-                             165, 220, 286, 364, 455, 560};
++                             165, 220, 286, 364, 455, 560, 680, 816};
+ 
+ /*
+  * Matrix of angular moment operator l*1j on the real spherical harmonic basis.
+@@ -5402,21 +5404,27 @@
+         int *ecpshls;
+         int iloc;
+ 
++        int ecp_lmax = ECP_LMAX;
++        for (iloc = 0; iloc < necpbas; iloc++) {
++                int lc0 = ecpbas[ANG_OF+iloc*BAS_SLOTS];
++                if (lc0 > ecp_lmax) { ecp_lmax = lc0; }
++        }
+         double *rur, *radi, *radj, *angi, *angj, *rad_all, *buf;
+         double *prad, *plast;
+-        MALLOC_INSTACK(rad_all, nci*ncj*(li+lj+1)*(li+ECP_LMAX+1)*(lj+ECP_LMAX+1));
++        MALLOC_INSTACK(rad_all, nci*ncj*(li+lj+1)*(li+ecp_lmax+1)*(lj+ecp_lmax+1));
+         MARK_STACK;
+-        MALLOC_INSTACK(angi, (li+1)*nfi*(ECP_LMAX*2+1)*(li+ECP_LMAX+1));
+-        MALLOC_INSTACK(angj, (lj+1)*nfj*(ECP_LMAX*2+1)*(lj+ECP_LMAX+1));
+-        MALLOC_INSTACK(buf, nfi*(ECP_LMAX*2+1)*(lj+ECP_LMAX+1));
++        MALLOC_INSTACK(angi, (li+1)*nfi*(ecp_lmax*2+1)*(li+ecp_lmax+1));
++        MALLOC_INSTACK(angj, (lj+1)*nfj*(ecp_lmax*2+1)*(lj+ecp_lmax+1));
++        MALLOC_INSTACK(buf, nfi*(ecp_lmax*2+1)*(lj+ecp_lmax+1));
++        double *cache_ang = cache;
+ 
+         RESTORE_STACK;
+         MALLOC_INSTACK(rur, nrs*(li+lj+1));
+-        MALLOC_INSTACK(radi, nci*(li+ECP_LMAX+1)*nrs);
+-        MALLOC_INSTACK(radj, ncj*(lj+ECP_LMAX+1)*nrs);
++        MALLOC_INSTACK(radi, nci*(li+ecp_lmax+1)*nrs);
++        MALLOC_INSTACK(radj, ncj*(lj+ecp_lmax+1)*nrs);
+         int lilj1 = li + lj + 1;
+-        int lilc1 = li + ECP_LMAX + 1;
+-        int ljlc1 = lj + ECP_LMAX + 1;
++        int lilc1 = li + ecp_lmax + 1;
++        int ljlc1 = lj + ecp_lmax + 1;
+         int d2 = lilc1 * ljlc1;
+         int d3 = lilj1 * d2;
+         MALLOC_INSTACK(plast, d2);
+@@ -5532,8 +5540,9 @@
+                 }
+         }
+ 
+-        type2_facs_ang(angi, li, lc, rca, cache);
+-        type2_facs_ang(angj, lj, lc, rcb, cache);
++        double *ang_work = (cache > cache_ang) ? cache : cache_ang;
++        type2_facs_ang(angi, li, lc, rca, ang_work);
++        type2_facs_ang(angj, lj, lc, rcb, ang_work);
+         for (ic = 0; ic < nci; ic++) {
+         for (jc = 0; jc < ncj; jc++) {
+                 prad = rad_all + (ic*ncj+jc)*d3;
+@@ -5927,7 +5936,7 @@
+         int8_t *converged;
+         MALLOC_INSTACK(converged, npi*npj);
+ 
+-        for (i = 0; i < d3; i++) { rad_all[i] = 0; }
++        for (i = 0; i < npi*npj*d2; i++) { rad_all[i] = 0; }
+ 
+         for (iloc = 0; iloc < nslots; iloc++) {
+                 if (ecpbas[ANG_OF+ecploc[iloc]*BAS_SLOTS] != -1 ||
+@@ -6068,22 +6077,30 @@
+         return has_value1 | has_value2;
+ }
+ 
+-int ECPscalar_cache_size(int comp, int *shls,
+-                         int *atm, int natm, int *bas, int nbas, double *env)
++int ECPscalar_cache_size_deriv(int comp, int dli, int dlj, int *shls,
++                               int *atm, int natm, int *bas, int nbas, double *env)
+ {
+         const int ish = shls[0];
+         const int jsh = shls[1];
+-        const int li = bas[ANG_OF+ish*BAS_SLOTS];
+-        const int lj = bas[ANG_OF+jsh*BAS_SLOTS];
++        const int li = bas[ANG_OF+ish*BAS_SLOTS] + dli;
++        const int lj = bas[ANG_OF+jsh*BAS_SLOTS] + dlj;
+         const int nfi = (li+1) * (li+2) / 2;
+         const int nfj = (lj+1) * (lj+2) / 2;
+         const int npi = bas[NPRIM_OF+ish*BAS_SLOTS];
+         const int npj = bas[NPRIM_OF+jsh*BAS_SLOTS];
+         const int nci = bas[NCTR_OF+ish*BAS_SLOTS];
+         const int ncj = bas[NCTR_OF+jsh*BAS_SLOTS];
++        const int necpbas = (int)env[AS_NECPBAS];
++        const int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
++        int ecp_lmax = ECP_LMAX;
++        int i;
++        for (i = 0; i < necpbas; i++) {
++                int lc0 = ecpbas[ANG_OF+i*BAS_SLOTS];
++                if (lc0 > ecp_lmax) { ecp_lmax = lc0; }
++        }
+         const int lilj1 = li + lj + 1;
+-        const int lilc1 = li + ECP_LMAX + 1;
+-        const int ljlc1 = lj + ECP_LMAX + 1;
++        const int lilc1 = li + ecp_lmax + 1;
++        const int ljlc1 = lj + ecp_lmax + 1;
+         const int d1 = lilj1;
+         const int d2 = d1 * d1;
+         const int d3 = d2 * d1;
+@@ -6095,32 +6112,38 @@
+         const int dj3 = dj2 * dj1;
+         const int nrs =  1 << LEVEL_MAX;
+         int size1 = nci*ncj*(li+lj+1);
+-        size1 += ((li+1)*nfi*(ECP_LMAX*2+1)*(li+ECP_LMAX+1) +
+-                  (lj+1)*nfj*(ECP_LMAX*2+1)*(lj+ECP_LMAX+1));
+-        size1 += nfi*(ECP_LMAX*2+1)*(lj+ECP_LMAX+1);
+-        size1 += (lj+1)*nfj*(ECP_LMAX*2+1)*(lj+ECP_LMAX+1)*3;
++        size1 += ((li+1)*nfi*(ecp_lmax*2+1)*(li+ecp_lmax+1) +
++                  (lj+1)*nfj*(ecp_lmax*2+1)*(lj+ecp_lmax+1));
++        size1 += nfi*(ecp_lmax*2+1)*(lj+ecp_lmax+1);
++        size1 += (lj+1)*nfj*(ecp_lmax*2+1)*(lj+ecp_lmax+1)*3;
+         int size2 = nrs * (li+lj+1 + 1 +
+-                           nci*(li+ECP_LMAX+1) +
+-                           ncj*(lj+ECP_LMAX+1) +
++                           nci*(li+ecp_lmax+1) +
++                           ncj*(lj+ecp_lmax+1) +
+                            MAX(npi*lilc1, npj*ljlc1));
+         size2 += lilc1 * ljlc1;
+-        size2 += MAX(di1*di1*di1*lilc1, dj1*dj1*dj1*ljlc1) * (ECP_LMAX*2 + 1);
+-        int size = nfi*nfj*(nci*ncj+2) * comp;
+-        size += nci*ncj*(li+lj+1)*(li+ECP_LMAX+1)*(lj+ECP_LMAX+1);
+-        //size += MAX(size1, size2);  bugs in bufsize estimation, not sure where's the error
++        size2 += MAX(di1*di1*di1*lilc1, dj1*dj1*dj1*ljlc1) * (ecp_lmax*2 + 1);
++        size2 += 3 * MAX(di2, dj2);
++        int size = nfi*nfj*(nci*ncj+2) * (comp + 4);
++        size += nci*ncj*(li+lj+1)*(li+ecp_lmax+1)*(lj+ecp_lmax+1);
+         size += size1 + size2 + 120;
+-        size += nfi*(ECP_LMAX*2+1)*(lj+ECP_LMAX+1);
+-        size += npi*npj*d2;
++        size += nfi*(ecp_lmax*2+1)*(lj+ecp_lmax+1);
++        size += npi*npj*d2 + d2;
+         size += d3;
+         size += nci*ncj*d3;
+         size += nfi*di3;
+         size += nfj*dj3;
+-        size += npi*nci;
+-        size += npj*ncj;
++        size += npi*nci + npj*ncj + npi*npj;
++        size += (npi + npj) * BAS_SLOTS + necpbas + 1;
+         size += natm;
+         return size;
+ }
+ 
++int ECPscalar_cache_size(int comp, int *shls,
++                         int *atm, int natm, int *bas, int nbas, double *env)
++{
++        return ECPscalar_cache_size_deriv(comp, 0, 0, shls, atm, natm, bas, nbas, env);
++}
++
+ int ECPscalar_c2s_factory(Function_cart fcart, double *gctr, int comp, int *shls,
+                           int *ecpbas, int necpbas, int *atm, int natm,
+                           int *bas, int nbas, double *env, ECPOpt *opt,
+--- orig/gto/nr_ecp_deriv.c	2026-11-22 11:53:29
++++ patched/gto/nr_ecp_deriv.c	2026-11-22 11:53:29
+@@ -41,6 +41,8 @@
+                            const int comp, const int di, const int dj);
+ int ECPscalar_cache_size(int comp, int *shls,
+                          int *atm, int natm, int *bas, int nbas, double *env);
++int ECPscalar_cache_size_deriv(int comp, int dli, int dlj, int *shls,
++                               int *atm, int natm, int *bas, int nbas, double *env);
+ 
+ /*
+ static int _x_addr[] = {
+@@ -286,7 +288,7 @@
+ }
+ 
+ static int _cart_factory(Function_cart intor_cart, double *out, int comp,
+-                         int *dims, int *shls, int *ecpbas, int necpbas,
++                         int dli, int dlj, int *dims, int *shls, int *ecpbas, int necpbas,
+                          int *atm, int natm, int *bas, int nbas, double *env,
+                          ECPOpt *opt, double *cache)
+ {
+@@ -299,14 +301,14 @@
+         const int dij = di * dj;
+ 
+         if (out == NULL) {
+-                int cache_size = ECPscalar_cache_size(comp*2, shls,
+-                                                      atm, natm, bas, nbas, env);
++                int cache_size = ECPscalar_cache_size_deriv(comp*2, dli, dlj, shls,
++                                                            atm, natm, bas, nbas, env);
+                 return cache_size;
+         }
+         double *stack = NULL;
+         if (cache == NULL) {
+-                int cache_size = ECPscalar_cache_size(comp*2, shls,
+-                                                      atm, natm, bas, nbas, env);
++                int cache_size = ECPscalar_cache_size_deriv(comp*2, dli, dlj, shls,
++                                                            atm, natm, bas, nbas, env);
+                 stack = malloc(sizeof(double) * cache_size);
+                 cache = stack;
+         }
+@@ -335,7 +337,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         if (out == NULL) {
+-                int cache_size = _cart_factory(_deriv1_cart, out, 3,
++                int cache_size = _cart_factory(_deriv1_cart, out, 3, 1, 0,
+                                                dims, shls, NULL, necpbas,
+                                                atm, natm, bas, nbas, env, opt, cache);
+                 cache_size += necpbas * BAS_SLOTS;
+@@ -356,7 +358,7 @@
+                         opt1.u_ecp = opt->u_ecp + shl_id * (1 << LEVEL_MAX);
+                         opt = &opt1;
+                 }
+-                int has_value = _cart_factory(_deriv1_cart, out, 3,
++                int has_value = _cart_factory(_deriv1_cart, out, 3, 1, 0,
+                                               dims, shls, ecpbas, necpbas,
+                                               atm, natm, bas, nbas, env, opt, cache);
+                 return has_value;
+@@ -368,14 +370,14 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+-        int has_value = _cart_factory(_deriv1_cart, out, 3,
++        int has_value = _cart_factory(_deriv1_cart, out, 3, 1, 0,
+                                       dims, shls, ecpbas, necpbas,
+                                       atm, natm, bas, nbas, env, opt, cache);
+         return has_value;
+ }
+ 
+ static int _sph_factory(Function_cart intor_cart, double *out, int comp,
+-                        int *dims, int *shls, int *ecpbas, int necpbas,
++                        int dli, int dlj, int *dims, int *shls, int *ecpbas, int necpbas,
+                         int *atm, int natm, int *bas, int nbas, double *env,
+                         ECPOpt *opt, double *cache)
+ {
+@@ -388,14 +390,14 @@
+         const int dij = di * dj;
+ 
+         if (out == NULL) {
+-                int cache_size = ECPscalar_cache_size(comp*2+2, shls,
+-                                                      atm, natm, bas, nbas, env);
++                int cache_size = ECPscalar_cache_size_deriv(comp*2+2, dli, dlj, shls,
++                                                            atm, natm, bas, nbas, env);
+                 return cache_size;
+         }
+         double *stack = NULL;
+         if (cache == NULL) {
+-                int cache_size = ECPscalar_cache_size(comp*2+2, shls,
+-                                                      atm, natm, bas, nbas, env);
++                int cache_size = ECPscalar_cache_size_deriv(comp*2+2, dli, dlj, shls,
++                                                            atm, natm, bas, nbas, env);
+                 stack = malloc(sizeof(double) * cache_size);
+                 cache = stack;
+         }
+@@ -422,7 +424,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         if (out == NULL) {
+-                int cache_size = _sph_factory(_deriv1_cart, out, 3,
++                int cache_size = _sph_factory(_deriv1_cart, out, 3, 1, 0,
+                                               dims, shls, NULL, necpbas,
+                                               atm, natm, bas, nbas, env, opt, cache);
+                 cache_size += necpbas * BAS_SLOTS;
+@@ -443,7 +445,7 @@
+                         opt1.u_ecp = opt->u_ecp + shl_id * (1 << LEVEL_MAX);
+                         opt = &opt1;
+                 }
+-                int has_value = _sph_factory(_deriv1_cart, out, 3,
++                int has_value = _sph_factory(_deriv1_cart, out, 3, 1, 0,
+                                              dims, shls, ecpbas, necpbas,
+                                              atm, natm, bas, nbas, env, opt, cache);
+                 return has_value;
+@@ -455,7 +457,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+-        int has_value = _sph_factory(_deriv1_cart, out, 3,
++        int has_value = _sph_factory(_deriv1_cart, out, 3, 1, 0,
+                                      dims, shls, ecpbas, necpbas,
+                                      atm, natm, bas, nbas, env, opt, cache);
+         return has_value;
+@@ -564,7 +566,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         if (out == NULL) {
+-                int cache_size = _cart_factory(_ipipv_cart, out, 9,
++                int cache_size = _cart_factory(_ipipv_cart, out, 9, 2, 0,
+                                                dims, shls, NULL, necpbas,
+                                                atm, natm, bas, nbas, env, opt, cache);
+                 cache_size += necpbas * BAS_SLOTS;
+@@ -585,7 +587,7 @@
+                         opt1.u_ecp = opt->u_ecp + shl_id * (1 << LEVEL_MAX);
+                         opt = &opt1;
+                 }
+-                int has_value = _cart_factory(_ipipv_cart, out, 9,
++                int has_value = _cart_factory(_ipipv_cart, out, 9, 2, 0,
+                                               dims, shls, ecpbas, necpbas,
+                                               atm, natm, bas, nbas, env, opt, cache);
+                 return has_value;
+@@ -597,7 +599,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+-        int has_value = _cart_factory(_ipipv_cart, out, 9,
++        int has_value = _cart_factory(_ipipv_cart, out, 9, 2, 0,
+                                       dims, shls, ecpbas, necpbas,
+                                       atm, natm, bas, nbas, env, opt, cache);
+         return has_value;
+@@ -608,7 +610,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         if (out == NULL) {
+-                int cache_size = _sph_factory(_ipipv_cart, out, 9,
++                int cache_size = _sph_factory(_ipipv_cart, out, 9, 2, 0,
+                                               dims, shls, NULL, necpbas,
+                                               atm, natm, bas, nbas, env, opt, cache);
+                 cache_size += necpbas * BAS_SLOTS;
+@@ -629,7 +631,7 @@
+                         opt1.u_ecp = opt->u_ecp + shl_id * (1 << LEVEL_MAX);
+                         opt = &opt1;
+                 }
+-                int has_value = _sph_factory(_ipipv_cart, out, 9,
++                int has_value = _sph_factory(_ipipv_cart, out, 9, 2, 0,
+                                              dims, shls, ecpbas, necpbas,
+                                              atm, natm, bas, nbas, env, opt, cache);
+                 return has_value;
+@@ -641,7 +643,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+-        int has_value = _sph_factory(_ipipv_cart, out, 9,
++        int has_value = _sph_factory(_ipipv_cart, out, 9, 2, 0,
+                                      dims, shls, ecpbas, necpbas,
+                                      atm, natm, bas, nbas, env, opt, cache);
+         return has_value;
+@@ -799,7 +801,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         if (out == NULL) {
+-                int cache_size = _cart_factory(_ipvip_cart, out, 9,
++                int cache_size = _cart_factory(_ipvip_cart, out, 9, 1, 1,
+                                                dims, shls, NULL, necpbas,
+                                                atm, natm, bas, nbas, env, opt, cache);
+                 cache_size += necpbas * BAS_SLOTS;
+@@ -820,7 +822,7 @@
+                         opt1.u_ecp = opt->u_ecp + shl_id * (1 << LEVEL_MAX);
+                         opt = &opt1;
+                 }
+-                int has_value = _cart_factory(_ipvip_cart, out, 9,
++                int has_value = _cart_factory(_ipvip_cart, out, 9, 1, 1,
+                                               dims, shls, ecpbas, necpbas,
+                                               atm, natm, bas, nbas, env, opt, cache);
+                 return has_value;
+@@ -832,7 +834,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+-        int has_value = _cart_factory(_ipvip_cart, out, 9,
++        int has_value = _cart_factory(_ipvip_cart, out, 9, 1, 1,
+                                       dims, shls, ecpbas, necpbas,
+                                       atm, natm, bas, nbas, env, opt, cache);
+         return has_value;
+@@ -843,7 +845,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         if (out == NULL) {
+-                int cache_size = _sph_factory(_ipvip_cart, out, 9,
++                int cache_size = _sph_factory(_ipvip_cart, out, 9, 1, 1,
+                                               dims, shls, NULL, necpbas,
+                                               atm, natm, bas, nbas, env, opt, cache);
+                 cache_size += necpbas * BAS_SLOTS;
+@@ -864,7 +866,7 @@
+                         opt1.u_ecp = opt->u_ecp + shl_id * (1 << LEVEL_MAX);
+                         opt = &opt1;
+                 }
+-                int has_value = _sph_factory(_ipvip_cart, out, 9,
++                int has_value = _sph_factory(_ipvip_cart, out, 9, 1, 1,
+                                              dims, shls, ecpbas, necpbas,
+                                              atm, natm, bas, nbas, env, opt, cache);
+                 return has_value;
+@@ -876,7 +878,7 @@
+ {
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+-        int has_value = _sph_factory(_ipvip_cart, out, 9,
++        int has_value = _sph_factory(_ipvip_cart, out, 9, 1, 1,
+                                      dims, shls, ecpbas, necpbas,
+                                      atm, natm, bas, nbas, env, opt, cache);
+         return has_value;
+@@ -967,7 +969,7 @@
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+         int comp = 3;
+-        int has_value = _cart_factory(_igv_cart, out, comp,
++        int has_value = _cart_factory(_igv_cart, out, comp, 1, 0,
+                                       dims, shls, ecpbas, necpbas,
+                                       atm, natm, bas, nbas, env, opt, cache);
+         return has_value;
+@@ -979,7 +981,7 @@
+         int necpbas = (int)env[AS_NECPBAS];
+         int *ecpbas = bas + ((int)env[AS_ECPBAS_OFFSET])*BAS_SLOTS;
+         int comp = 3;
+-        int has_value = _sph_factory(_igv_cart, out, comp,
++        int has_value = _sph_factory(_igv_cart, out, comp, 1, 0,
+                                      dims, shls, ecpbas, necpbas,
+                                      atm, natm, bas, nbas, env, opt, cache);
+         return has_value;

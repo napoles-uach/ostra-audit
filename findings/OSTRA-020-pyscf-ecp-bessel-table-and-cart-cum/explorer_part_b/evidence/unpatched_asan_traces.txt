@@ -1,0 +1,192 @@
+=== UNPATCHED TRACE 1: lb=6, lc=0, ECPscalar_ipnuc (stack-buffer-overflow on omega_nuc in type1_rad_ang) ===
+=================================================================
+==17648==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x00016b78c660 at pc 0x000104673e2c bp 0x00016b78b0b0 sp 0x00016b78b0a8
+WRITE of size 8 at 0x00016b78c660 thread T0
+    #0 0x000104673e28 in ang_nuc_in_cart nr_ecp.c:5023
+    #1 0x000104674e08 in type1_rad_ang nr_ecp.c:5258
+    #2 0x000104679d24 in ECPtype1_cart nr_ecp.c:6026
+    #3 0x00010467e6c8 in _deriv1_cart nr_ecp_deriv.c:256
+    #4 0x00010467ac44 in ECPscalar_c2s_factory nr_ecp.c:6153
+    #5 0x00010467f5e4 in _sph_factory nr_ecp_deriv.c:406
+    #6 0x00010467f73c in ECPscalar_ipnuc_sph nr_ecp_deriv.c:458
+    #7 0x000104670ff8 in main run_ecp_asan.c:72
+    #8 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+Address 0x00016b78c660 is located in stack of thread T0 at offset 3680 in frame
+    #0 0x000104674c28 in type1_rad_ang nr_ecp.c:5240
+
+  This frame has 1 object(s):
+    [32, 3680) 'omega_nuc' (line 5253) <== Memory access at offset 3680 overflows this variable
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart
+Shadow bytes around the buggy address:
+  0x00016b78c380: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b78c400: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b78c480: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b78c500: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b78c580: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x00016b78c600: 00 00 00 00 00 00 00 00 00 00 00 00[f3]f3 f3 f3
+  0x00016b78c680: f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 f3 00 00 00 00
+  0x00016b78c700: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b78c780: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b78c800: f1 f1 f1 f1 00 00 00 f2 f2 f2 f2 f2 00 00 00 f2
+  0x00016b78c880: f2 f2 f2 f2 00 00 00 f3 f3 f3 f3 f3 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==17648==ABORTING
+
+=== UNPATCHED TRACE 2: lb=5, lc=7, ECPscalar_ipnuc (stack-buffer-overflow on omega_nuc in type2_facs_ang) ===
+=================================================================
+==17650==ERROR: AddressSanitizer: stack-buffer-overflow on address 0x00016b35c0e0 at pc 0x000104aa3e2c bp 0x00016b35ab30 sp 0x00016b35ab28
+WRITE of size 8 at 0x00016b35c0e0 thread T0
+    #0 0x000104aa3e28 in ang_nuc_in_cart nr_ecp.c:5023
+    #1 0x000104aa2ce8 in type2_facs_ang nr_ecp.c:5083
+    #2 0x000104aa61c8 in ECPtype2_cart nr_ecp.c:5535
+    #3 0x000104aae714 in _deriv1_cart nr_ecp_deriv.c:258
+    #4 0x000104aaac44 in ECPscalar_c2s_factory nr_ecp.c:6153
+    #5 0x000104aaf5e4 in _sph_factory nr_ecp_deriv.c:406
+    #6 0x000104aaf73c in ECPscalar_ipnuc_sph nr_ecp_deriv.c:458
+    #7 0x000104aa0ff8 in main run_ecp_asan.c:72
+    #8 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+Address 0x00016b35c0e0 is located in stack of thread T0 at offset 3680 in frame
+    #0 0x000104aa2ac4 in type2_facs_ang nr_ecp.c:5062
+
+  This frame has 2 object(s):
+    [32, 3680) 'omega_nuc' (line 5078) <== Memory access at offset 3680 overflows this variable
+    [3808, 4896) 'buf' (line 5089)
+HINT: this may be a false positive if your program uses some custom stack unwind mechanism, swapcontext or vfork
+      (longjmp and C++ exceptions *are* supported)
+SUMMARY: AddressSanitizer: stack-buffer-overflow nr_ecp.c:5023 in ang_nuc_in_cart
+Shadow bytes around the buggy address:
+  0x00016b35be00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b35be80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b35bf00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b35bf80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00016b35c000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x00016b35c080: 00 00 00 00 00 00 00 00 00 00 00 00[f2]f2 f2 f2
+  0x00016b35c100: f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f2 f8 f8 f8 f8
+  0x00016b35c180: f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8
+  0x00016b35c200: f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8
+  0x00016b35c280: f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8
+  0x00016b35c300: f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8 f8
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==17650==ABORTING
+
+=== UNPATCHED TRACE 3: lb=5, lc=5, ECPscalar_ipipnuc (heap SEGV/overflow in cache_3dfac: ECPscalar_cache_size ignores dli=+2) ===
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==17652==ERROR: AddressSanitizer: SEGV on unknown address 0x000107f2e100 (pc 0x0001003981b4 bp 0x00016fa67170 sp 0x00016fa66ec0 T0)
+==17652==The signal is caused by a WRITE memory access.
+    #0 0x0001003981b4 in cache_3dfac nr_ecp.c:5054
+    #1 0x00010039741c in type2_facs_ang nr_ecp.c:5145
+    #2 0x00010039a1c8 in ECPtype2_cart nr_ecp.c:5535
+    #3 0x0001003a4504 in _ipipv_cart nr_ecp_deriv.c:519
+    #4 0x00010039ec44 in ECPscalar_c2s_factory nr_ecp.c:6153
+    #5 0x0001003a35e4 in _sph_factory nr_ecp_deriv.c:406
+    #6 0x0001003a5a18 in ECPscalar_ipipnuc_sph nr_ecp_deriv.c:644
+    #7 0x000100394ff8 in main run_ecp_asan.c:72
+    #8 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+==17652==Register values:
+ x[0] = 0x000000016fa67020   x[1] = 0x0000000107f2e500   x[2] = 0x0000000107f2e500   x[3] = 0x0000000000000040  
+ x[4] = 0x0000000107f2e300   x[5] = 0x000000016fa66f80   x[6] = 0x0000000000000002   x[7] = 0x00000001003a9ac0  
+ x[8] = 0x00000001003a9ac0   x[9] = 0x0000000107f2e100  x[10] = 0x000000016fa66ee0  x[11] = 0x000000016fa66ee0  
+x[12] = 0x000000016fa66f80  x[13] = 0x000000016fa67020  x[14] = 0x0000000100405420  x[15] = 0x0000000000000000  
+x[16] = 0x0000000000000000  x[17] = 0x0000000107f2e300  x[18] = 0x0000000000000000  x[19] = 0x000000016fa670c0  
+x[20] = 0x0000000000000000  x[21] = 0x0000000107f2e100  x[22] = 0x0000000107f2e100  x[23] = 0x0000000000000000  
+x[24] = 0x0000007000020000  x[25] = 0x0000000000000001  x[26] = 0x0000000000000000  x[27] = 0x0000000000000008  
+x[28] = 0x00000001003a9ac0     fp = 0x000000016fa67170     lr = 0x00000001003a9ac0     sp = 0x000000016fa66ec0  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV nr_ecp.c:5054 in cache_3dfac
+==17652==ABORTING
+
+=== UNPATCHED TRACE 4: lb=5, lc=6, ECPscalar_ipnucip (heap-buffer-overflow in type2_facs_rad: hardcoded ECP_LMAX=5 + dli=+1,dlj=+1) ===
+=================================================================
+==17654==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x00010333a0b0 at pc 0x000102fbd4a4 bp 0x00016ce402f0 sp 0x00016ce402e8
+WRITE of size 8 at 0x00010333a0b0 thread T0
+    #0 0x000102fbd4a0 in ECPsph_ine nr_ecp.c:4675
+    #1 0x000102fbd71c in ECPsph_ine_opt nr_ecp.c:4718
+    #2 0x000102fc0770 in type2_facs_rad nr_ecp.c:5199
+    #3 0x000102fc1d50 in ECPtype2_cart nr_ecp.c:5478
+    #4 0x000102fce80c in _ipvip_cart nr_ecp_deriv.c:708
+    #5 0x000102fcb5e4 in _sph_factory nr_ecp_deriv.c:406
+    #6 0x000102fcff3c in ECPscalar_ipnucip_sph nr_ecp_deriv.c:879
+    #7 0x000102fbcff8 in main run_ecp_asan.c:72
+    #8 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x00010333a0b0 is located 0 bytes after 334000-byte region [0x0001032e8800,0x00010333a0b0)
+allocated by thread T0 here:
+    #0 0x000103a59164 in malloc+0x78 (libclang_rt.asan_osx_dynamic.dylib:arm64e+0x41164)
+    #1 0x000102fbcfc0 in main run_ecp_asan.c:71
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+SUMMARY: AddressSanitizer: heap-buffer-overflow nr_ecp.c:4675 in ECPsph_ine
+Shadow bytes around the buggy address:
+  0x000103339e00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000103339e80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000103339f00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000103339f80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010333a000: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x00010333a080: 00 00 00 00 00 00[fa]fa fa fa fa fa fa fa fa fa
+  0x00010333a100: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x00010333a180: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x00010333a200: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x00010333a280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+  0x00010333a300: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==17654==ABORTING

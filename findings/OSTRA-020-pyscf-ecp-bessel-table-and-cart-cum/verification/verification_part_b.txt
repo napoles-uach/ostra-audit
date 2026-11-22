@@ -1,0 +1,9 @@
+[AgH cc-pv5z-pp def2-svp ECPscalar] exit=0 , np.int32(5), np.int32(6)] ecp channels: [np.int32(-1), np.int32(0), np.int32(1), np.int32(2)] ECPscalar ok (149, 149) 
+/bin/bash: line 1:   258 Segmentation fault      timeout 600 python3 ecp_real.py $a > o.txt 2>&1
+[AgH cc-pv5z-pp def2-svp ECPscalar_ipnuc] exit=139 
+/bin/bash: line 1:   265 Segmentation fault      timeout 600 python3 ecp_real.py $a > o.txt 2>&1
+[AgH cc-pv5z-pp def2-svp ECPscalar_iprinv] exit=139 
+[AgH def2-qzvpp def2-svp ECPscalar_ipnuc] exit=0 t32(3), np.int32(4)] ecp channels: [np.int32(-1), np.int32(0), np.int32(1), np.int32(2)] ECPscalar_ipnuc ok (3, 89, 89) 
+[synthetic 5 5 ECPscalar_ipipnuc 9] exit=0 lb=5 lc=5 ok, max|v|=3.087e+00 
+[synthetic 5 6 ECPscalar_ipnucip 9] exit=0 lb=5 lc=6 ok, max|v|=3.383e+00 
+[synthetic 5 5 ECPscalar_ipiprinv 9] exit=0 lb=5 lc=5 ok, max|v|=3.087e+00 

@@ -1,0 +1,13 @@
+=== Bit-for-bit regression check (lb <= 5, lc <= 4) ===
+  scalar   lb4_lc4 : n=  100, max|u-p| = 0.000e+00
+  scalar   lb5_lc4 : n=  144, max|u-p| = 0.000e+00
+  ipnuc    lb4_lc4 : n=  300, max|u-p| = 0.000e+00
+  ipnuc    lb5_lc4 : n=  432, max|u-p| = 0.000e+00
+  iprinv   lb4_lc4 : n=  300, max|u-p| = 0.000e+00
+  iprinv   lb5_lc4 : n=  432, max|u-p| = 0.000e+00
+  ignuc    lb4_lc4 : n=  300, max|u-p| = 0.000e+00
+  ignuc    lb5_lc4 : n=  432, max|u-p| = 0.000e+00
+  ipipnuc  lb4_lc4 : n=  900, max|u-p| = 0.000e+00
+  ipipnuc  lb5_lc4 : n= 1296, max|u-p| = 0.000e+00
+  ipnucip  lb4_lc4 : n=  900, max|u-p| = 0.000e+00
+  ipnucip  lb5_lc4 : n= 1296, max|u-p| = 0.000e+00

@@ -1,0 +1,21 @@
+=== 1. UNPATCHED PySCF: mf.nuc_grad_method() on AgH (built-in cc-pv5z-pp + def2-svp ECP) ===
+Exit code: -6 (-6 = SIGABRT stack smash)
+RHF E = -146.647710898546 Eh (converged=True)
+
+=== 2. UNPATCHED PySCF: mf.nuc_grad_method() on NaH_l6_custom ===
+Exit code: -6 (-6 = SIGABRT stack smash)
+RHF E = -0.469838384250 Eh (converged=True)
+
+=== 3. PATCHED libcgto (master 484fd7c + minimal.patch): mf.nuc_grad_method() vs FD4 ===
+[NaH_l6_custom] max_lb=6, ecp_ch=[-1, 0, 1], nao=18
+  RHF E = -0.469838384250 Eh
+  Analytical grad_z(atom 1) = +5.994325447891e-02 Eh/Bohr
+  Translational sum |g0+g1| = 1.110e-16
+  FD4 (h=1e-02 Bohr): +5.994325454305e-02  |anal-FD4|=6.414e-11  rel=1.070e-09
+  FD4 (h=1e-03 Bohr): +5.994325447886e-02  |anal-FD4|=5.168e-14  rel=8.622e-13
+  FD4 (h=1e-04 Bohr): +5.994325448048e-02  |anal-FD4|=1.567e-12  rel=2.615e-11
+[AgH_builtin_ccpv5zpp_def2ecp] max_lb=6, ecp_ch=[-1, 0, 1, 2], nao=149
+  RHF E = -146.647710898552 Eh
+  Analytical grad_z(atom 1) = -1.626501750585e-02 Eh/Bohr
+  Translational sum |g0+g1| = 8.882e-16
+  FD4 (h=1e-03 Bohr): -1.626501738391e-02  |anal-FD4|=1.219e-10  rel=7.497e-09

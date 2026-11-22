@@ -48,3 +48,10 @@ same commits: simple-dftd3 84cb7cd, dftd4 4a5bbf0, multicharge 4bb6c96, libecpin
 Corrections to the explorer's summary: "8 confirmed defects" holds for the code defects, but two (04, 06) have no
 impact inside their own library and 02-B is not fully attributed. Catalog gains: fixed-size tables (01, 02-A, 03),
 unverified numerical comments/contracts in comments (04, 05, 06), implicit API contracts (06, 07, 08).
+
+## Batch 4 — explorer 2, isolation of OSTRA-020 part B (2026-11-22)
+Single assigned task. Verifier outcome: cause confirmed by reading the code (local-channel `omega_nuc` in
+`type1_rad_ang`), practical impact confirmed with real built-in basis/ECP pairs (AgH cc-pV5Z-PP + def2-SVP: ECP
+gradient integrals segfault). Two additional ASan-only claims (cache-size underestimate, ECP_LMAX) not reproduced as
+crashes in an ordinary build; pending an ASan build. Verifier error recorded: a first attempt called second-derivative
+integrals without `comp=9` and crashed for that reason; corrected before drawing conclusions.
