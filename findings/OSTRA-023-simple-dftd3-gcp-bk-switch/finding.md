@@ -1,4 +1,4 @@
-# OSTRA-023: simple-dftd3 gCP: B_k(x) series vs closed form chosen by |za - zb| instead of |x|
+# OSTRA-023: simple-dftd3 gCP: B_k(x) series vs closed form chosen by abs(za - zb) instead of abs(x)
 
 | Field | Value |
 |---|---|
