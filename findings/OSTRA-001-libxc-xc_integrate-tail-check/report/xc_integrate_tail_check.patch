@@ -1,0 +1,20 @@
+--- a/src/integrate.c
++++ b/src/integrate.c
+@@ -111,7 +111,7 @@
+     T += w * (pts[0] + pts[1]);
+     /* tail check: once the weight is well below relative tolerance,
+        further terms cannot move the integral inside the target. */
+-    if(w * (fabs(pts[0]) + fabs(pts[1])) <= tol * (1.0 + fabs(T)))
++    if(w <= tol && w * (fabs(pts[0]) + fabs(pts[1])) <= tol * (1.0 + fabs(T)))
+       break;
+   }
+   T *= h;
+@@ -138,7 +138,7 @@
+       pts[1] = mid - xt;
+       func(pts, 2, ex);
+       new_terms += w * (pts[0] + pts[1]);
+-      if(w * (fabs(pts[0]) + fabs(pts[1])) <= tol * (1.0 + fabs(T)))
++      if(w <= tol && w * (fabs(pts[0]) + fabs(pts[1])) <= tol * (1.0 + fabs(T)))
+         break;
+     }
+     T = 0.5 * T + h * new_terms;
