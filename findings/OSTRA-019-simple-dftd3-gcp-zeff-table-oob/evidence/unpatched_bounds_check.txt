@@ -1,0 +1,70 @@
+=== Unpatched simple-dftd3 (-fcheck=bounds): Fr ===
+At line 899 of file /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90
+Fortran runtime error: Index '37' of dimension 1 of array 'emiss_hf_def2mtzvpp' outside of expected range (1:36)
+
+Error termination. Backtrace:
+#0  0x102c872f3 in ???
+#1  0x102c87ef7 in ???
+#2  0x102c88287 in ???
+#3  0x1028683ab in __dftd3_gcp_param_MOD_get_gcp_param
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90:899
+#4  0x102884667 in repro_gcp_oob
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:25
+#5  0x102885d6b in main
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:2
+=== Unpatched simple-dftd3 (-fcheck=bounds): Ra ===
+At line 899 of file /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90
+Fortran runtime error: Index '38' of dimension 1 of array 'emiss_hf_def2mtzvpp' outside of expected range (1:36)
+
+Error termination. Backtrace:
+#0  0x1004ab2f3 in ???
+#1  0x1004abef7 in ???
+#2  0x1004ac287 in ???
+#3  0x1000ec3ab in __dftd3_gcp_param_MOD_get_gcp_param
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90:899
+#4  0x100108b7f in repro_gcp_oob
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:31
+#5  0x100109d6b in main
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:2
+=== Unpatched simple-dftd3 (-fcheck=bounds): Ac ===
+At line 899 of file /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90
+Fortran runtime error: Index '39' of dimension 1 of array 'emiss_hf_def2mtzvpp' outside of expected range (1:36)
+
+Error termination. Backtrace:
+#0  0x10276f2f3 in ???
+#1  0x10276fef7 in ???
+#2  0x102770287 in ???
+#3  0x1023c83ab in __dftd3_gcp_param_MOD_get_gcp_param
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90:899
+#4  0x1023e5097 in repro_gcp_oob
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:37
+#5  0x1023e5d6b in main
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:2
+=== Unpatched simple-dftd3 (-fcheck=bounds): Kr ===
+At line 652 of file /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90
+Fortran runtime error: Index '36' of dimension 1 of array 'emiss_hf_minis' outside of expected range (1:35)
+
+Error termination. Backtrace:
+#0  0x10058f2f3 in ???
+#1  0x10058fef7 in ???
+#2  0x100590287 in ???
+#3  0x100197df3 in __dftd3_gcp_param_MOD_get_gcp_param
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90:652
+#4  0x1001bd5b3 in repro_gcp_oob
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:43
+#5  0x1001bdd6b in main
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:2
+=== Unpatched simple-dftd3 (-fcheck=bounds): Am ===
+At line 899 of file /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90
+Fortran runtime error: Index '95' of dimension 1 of array 'emiss_hf_def2mtzvpp' outside of expected range (1:36)
+
+Error termination. Backtrace:
+#0  0x104e732f3 in ???
+#1  0x104e73ef7 in ???
+#2  0x104e74287 in ???
+#3  0x104c183ab in __dftd3_gcp_param_MOD_get_gcp_param
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/simple-dftd3/src/dftd3/gcp/param.f90:899
+#4  0x104c359d7 in repro_gcp_oob
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:48
+#5  0x104c35d6b in main
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/01-simple-dftd3-gcp-zeff-oob/repro/repro_gcp_oob.f90:2

@@ -1,0 +1,6 @@
+=== Patched simple-dftd3 (-fcheck=bounds) ===
+Fr-O r2scan3c: zeff=  19   8 emiss1=  0.000000E+00 slater1=  1.230669E+00 E=  1.557311E-04 gz= -3.493186E-04
+Ra-O r2scan3c: zeff=  20   8 emiss1=  0.000000E+00 slater1=  1.621208E+00 E=  1.933906E-04 gz= -4.034886E-04
+Ac-O r2scan3c: zeff=  21   8 emiss1=  3.000000E-01 slater1=  3.102734E+00 E=  3.442883E-03 gz= -5.553208E-03
+Kr-O hf/minis: zeff=  36   8 emiss1=  0.000000E+00 E=  0.000000E+00
+Am-O r2scan3c: zeff=  21   8 emiss1=  3.000000E-01 slater1=  3.102734E+00 E=  3.442883E-03

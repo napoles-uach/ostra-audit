@@ -1,0 +1,6 @@
+=== multicharge UNPATCHED ===
+Charges Q(O,H):          -3.61499774E-01  3.61499774E-01
+dq_O/dz_H (FD ref):       2.0865449037E-01
+dq_O/dz_H (with dqdL):    2.0865449039E-01
+dq_O/dz_H (no dqdL):     -9.9900000000E+02
+Abs diff (no dqdL vs FD):  9.9921E+02

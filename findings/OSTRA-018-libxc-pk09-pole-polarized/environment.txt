@@ -1,0 +1,1 @@
+Verifier: Linux container, PySCF 2.15.1 (libxc 7.1.2), dftd4 4.3.1 (Python), sources cloned at the commits listed in finding.md.

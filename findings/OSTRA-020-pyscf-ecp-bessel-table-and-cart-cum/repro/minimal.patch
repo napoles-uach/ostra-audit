@@ -1,0 +1,57 @@
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/_tmp_check/nr_ecp_master.c	2026-11-22 11:02:08
++++ nr_ecp_patched.c	2026-11-22 11:07:47
+@@ -4660,19 +4660,33 @@
+                 for (i = 1; i <= order; i++) {
+                         out[i] = out[i-1] * z / (i*2+1);
+                 }
+-        } else if (z > 16) {
+-                // R_l(z) = \sum_k (l+k)!/(k!(l-k)!(2x)^k)
+-                double z2 = -.5 / z;
+-                double ti, s;
+-                for (i = 0; i <= order; i++) {
+-                        ti = .5 / z;
+-                        s = ti;
+-                        for (k = 1; k <= i; k++) {
+-                                ti *= z2;
+-                                s += ti * _factorial[i+k]
+-                                        / (_factorial[k] * _factorial[i-k]);
++        } else if (z >= 16) {
++                // Stable upward recurrence while 2*l+1 <= z, Miller downward recurrence above
++                double oz = 1.0 / z, e2 = exp(-2.0 * z);
++                out[0] = 0.5 * oz * (1.0 - e2);
++                if (order > 0) out[1] = 0.5 * oz * ((1.0 - oz) + e2 * (1.0 + oz));
++                int lup = (int)(0.5 * (z - 1.0));
++                if (lup > order) lup = order;
++                for (i = 1; i < lup; i++) {
++                        out[i+1] = out[i-1] - (2*i + 1) * oz * out[i];
++                }
++                if (lup < order) {
++                        int top = order;
++                        double damp = 1.0;
++                        while (damp < 1e20) {
++                                double r = (2*top + 3) * oz;
++                                damp *= r * r;
++                                top++;
+                         }
+-                        out[i] = s;
++                        double kp = 0.0, kk = 1.0;
++                        for (i = top; i > lup; i--) {
++                                if (i <= order) out[i] = kk;
++                                double km = kp + (2*i + 1) * oz * kk;
++                                kp = kk;
++                                kk = km;
++                        }
++                        double scale = out[lup] / kk;
++                        for (i = lup + 1; i <= order; i++) out[i] *= scale;
+                 }
+         } else {
+                 // z^l e^{-z} \sum (z^2/2)^k/(k!(2k+2l+1)!!)
+@@ -4714,7 +4728,7 @@
+         // would overrun the K_TAB_COL-wide _sph_ine_tab row (and the K_TAB_COL
+         // local buf) when order > K_TAB_COL-K_TAYLOR_MAX-1 = 16. Fall back to
+         // the slow general routine for high-l basis combined with high-l ECP.
+-        if (z < 1e-7 || z > 16 || order > K_TAB_COL - K_TAYLOR_MAX - 1) {
++        if (z < 1e-7 || z >= 16 || order > K_TAB_COL - K_TAYLOR_MAX - 1) {
+                 return ECPsph_ine(out, order, z);
+         } else {
+                 /*

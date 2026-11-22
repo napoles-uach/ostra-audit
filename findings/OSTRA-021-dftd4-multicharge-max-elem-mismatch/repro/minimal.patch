@@ -1,0 +1,14 @@
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/multicharge/src/multicharge/model/eeq.f90	2026-11-22 10:35:28
++++ eeq_patched.f90	2026-11-22 11:07:53
+@@ -88,6 +88,11 @@
+    !> Maximum CN cutoff for CN
+    real(wp), intent(in), optional :: cn_max
+ 
++   if (any(rad <= 0.0_wp)) then
++      call fatal_error(error, "Missing EEQ parameters (non-positive atomic radius; unsupported element)")
++      return
++   end if
++
+    self%chi = chi
+    self%rad = rad
+    self%eta = eta

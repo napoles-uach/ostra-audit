@@ -1,0 +1,52 @@
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/multicharge/src/multicharge/charge.f90	2026-11-22 10:35:28
++++ charge_p8.f90	2026-11-22 11:13:01
+@@ -64,7 +64,7 @@
+    real(wp), allocatable :: qloc(:), dqlocdr(:, :, :), dqlocdL(:, :, :)
+    real(wp), allocatable :: trans(:, :)
+ 
+-   grad = (present(dqdr) .and. present(dqdL)) .or. present(cache)
++   grad = present(dqdr) .or. present(dqdL) .or. present(cache)
+ 
+    allocate(cn(mol%nat), qloc(mol%nat))
+    if (grad) then
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/multicharge/src/multicharge/model/type.F90	2026-11-22 10:35:28
++++ type_p8.F90	2026-11-22 11:13:01
+@@ -217,8 +217,8 @@
+ 
+    ! Calculate gradient if the respective arrays are present
+    dcn = present(dcndr) .and. present(dcndL)
+-   grad = present(gradient) .and. present(sigma) .and. dcn
+-   cpq = ((present(dqdr) .and. present(dqdL)) .or. present(response)) .and. dcn
++   grad = (present(gradient) .or. present(sigma)) .and. dcn
++   cpq = (present(dqdr) .or. present(dqdL) .or. present(response)) .and. dcn
+ 
+    cache => local_cache
+    if (present(response)) then
+@@ -307,10 +307,14 @@
+ 
+    if (grad) then
+       gradient = 0.0_wp
+-      call gemv(dadr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=0.5_wp)
+-      call gemv(dxdr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=-1.0_wp)
+-      call gemv(dadL, vrhs, sigma, beta=1.0_wp, alpha=0.5_wp)
+-      call gemv(dxdL, vrhs, sigma, beta=1.0_wp, alpha=-1.0_wp)
++      if (present(gradient)) then
++         call gemv(dadr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=0.5_wp)
++         call gemv(dxdr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=-1.0_wp)
++      end if
++      if (present(sigma)) then
++         call gemv(dadL, vrhs, sigma, beta=1.0_wp, alpha=0.5_wp)
++         call gemv(dxdL, vrhs, sigma, beta=1.0_wp, alpha=-1.0_wp)
++      end if
+    end if
+ 
+    if (cpq) then
+@@ -327,7 +331,7 @@
+          call move_alloc(vrhs, cache%qvec)
+          call move_alloc(ainv, cache%ainv)
+       else
+-         call gemm(dadr, ainv(:, :mol%nat), dqdr, alpha=-1.0_wp)
++         if (present(dqdr)) call gemm(dadr, ainv(:, :mol%nat), dqdr, alpha=-1.0_wp)
+       end if
+    end if
+ end subroutine solve

@@ -1,0 +1,23 @@
+--- /Users/napolesd/Documents/Antigravity/PhysAud/exploracion3/repos/libecpint/src/lib/bessel.cpp	2026-11-22 10:34:08
++++ bessel_patched.cpp	2026-11-22 11:08:42
+@@ -160,7 +160,10 @@
+   }
+ 
+   // Set K_0(z) = 1.0, and K_l(z) = 0.0 (for l != 0) if z <= 0
+-  if (z <= 0) values[0] = 1.0;
++  if (z <= 0) {
++    values[0] = 1.0;
++    for (int l = 1; l <= maxL; l++) values[l] = 0.0;
++  }
+   // Zeroth order case
+   // K_l(z) ~ (1-z)*z^l / (2l + 1)!!
+   else if (z < SMALL) {
+@@ -221,7 +224,7 @@
+   double value = 0.0;
+ 
+   if (z <= 0)
+-    value = 1.0;
++    value = (L == 0) ? 1.0 : 0.0;
+   else if (z < SMALL) {
+     // K_L(z) ~ (1 - z) z^L / (2L+1)!! = (1 - z) prod_{k=1}^{L} z/(2k+1)
+     value = 1.0 - z;

@@ -1,0 +1,8 @@
+=== simple-dftd3 UNPATCHED ===
+Energy (with sigma):       4.7649130194E-03
+Energy (without sigma):    4.7649130194E-03
+Grad_z (FD reference):    -2.3043983216E-03
+Grad_z (with sigma):      -2.3043983340E-03
+Grad_z (no sigma, -999):  -9.9900000000E+02
+Grad_z (no sigma, 0.0):    0.0000000000E+00
+Abs diff (no sigma vs FD):  2.3044E-03

@@ -1,0 +1,4 @@
+=== multicharge PATCHED ===
+EEQ2019 Lr (Z=103): NO ERROR! (chi,rad,eta,kcn)=   1.14   1.34  -0.00   0.01  Q=   0.55046  -0.55046
+EEQ2019 Cn (Z=112): ERROR -> Missing EEQ parameters (non-positive atomic radius; unsupported element)
+EEQ2019 Og (Z=118): ERROR -> Missing EEQ parameters (non-positive atomic radius; unsupported element)

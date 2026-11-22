@@ -1,0 +1,10 @@
+args=2 2 exit=0 lb=2 lc=2 ok, max|v|=4.829e-02 
+args=5 5 exit=0 lb=5 lc=5 ok, max|v|=1.243e-02 
+args=5 6 exit=0 lb=5 lc=6 ok, max|v|=1.243e-02 
+/bin/bash: line 75:   165 Segmentation fault      timeout 300 python3 ecp_cartcum.py $c > o.txt 2>&1
+args=5 7 exit=139 
+/bin/bash: line 75:   172 Segmentation fault      timeout 300 python3 ecp_cartcum.py $c > o.txt 2>&1
+args=6 0 exit=139 
+/bin/bash: line 75:   179 Segmentation fault      timeout 300 python3 ecp_cartcum.py $c > o.txt 2>&1
+args=6 4 exit=139 
+args=6 4 ECPscalar exit=0 lb=6 lc=4 ok, max|v|=1.041e-01 

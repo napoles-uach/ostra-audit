@@ -33,9 +33,11 @@ and run the verification harnesses; every result is checked, and every report re
 3. Before any report, check that it is not already known (issue trackers, changelogs, the original paper).
 4. Prefer collecting and verifying over filing issues one by one; issues are filed once a finding is mature.
 
-## Summary (2026-11-21)
+## Summary (2026-11-22)
 
-17 findings in six libraries (libxc, libcint, PySCF, multicharge/dftd4, XCFun, and PySCF's XCFun interface):
+26 findings in nine libraries (libxc, libcint, PySCF, multicharge, dftd4, XCFun, simple-dftd3, libecpint, and
+PySCF's XCFun interface). Through OSTRA-017 (2026-11-21):
 12 new defects (one may be outdated preprint parameters, OSTRA-014), 2 known cases rediscovered and quantified,
 1 already fixed upstream before our report, 1 documented limitation, 1 case with no impact. One fix merged upstream (libxc#646), two reports filed
-(pyscf#3669, multicharge#72 comment). See `findings/INDEX.md`.
+(pyscf#3669, multicharge#72 comment). OSTRA-018 to OSTRA-026 (2026-11-22, explorer 2 batch 3, independently verified) add
+seven new defects and the confirmed PK09 anomaly. See `findings/INDEX.md`.

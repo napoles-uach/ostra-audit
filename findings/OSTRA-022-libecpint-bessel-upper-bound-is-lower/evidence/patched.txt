@@ -1,0 +1,12 @@
+L= 0: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L= 1: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L= 2: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L= 3: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L= 5: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L= 6: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L= 8: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L=10: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L=12: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L=16: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+L=24: VIOLATIONS=  0  (valid upper bound across [0.02, 35.0])
+TOTAL VIOLATIONS: 0
