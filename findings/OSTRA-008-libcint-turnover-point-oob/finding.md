@@ -10,8 +10,8 @@
 | oracle | Boys values vs 40-digit quadrature; erfc + erf = full Coulomb |
 | class | Memory safety, new |
 | impact_level | III (SR integrals with l >~ 10; errors up to 3e8, build-dependent) |
-| status | Verified (independent, blind), attributed, minimal fix verified; issue drafted |
-| report | Pending (issue drafted in report/) |
+| status | Reported (verified independently, attributed, minimal fix verified) |
+| report | Reported: [libcint#143](https://github.com/sunqm/libcint/issues/143) (2026-11-23) |
 
 MXRYSROOTS = 32 lets the Rys code request m up to 2*nroots (Schmidt fallback) or 2*nroots-1 (SR Jacobi moments),
 but the table has 40 entries. Reading past it is undefined behaviour; the failing orders differ between binaries
