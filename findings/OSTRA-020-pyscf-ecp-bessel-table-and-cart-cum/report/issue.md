@@ -56,13 +56,13 @@ Tested by rebuilding `libcgto` from the v2.15.1 sources with and without this ch
 | Test | Unpatched | Patched |
 |---|---|---|
 | AgH (cc-pV5Z-PP / def2-SVP), `ECPscalar_ipnuc`, `ECPscalar_iprinv` | stack smashing | runs |
-| Synthetic l = 6 shell, local-only ECP and lc = 4; l = 5 shell, lc = 7 (`ECPscalar_ipnuc`) | stack smashing | runs |
+| Synthetic: l = 6 shell with ECP channels {-1, 0} and {-1, 0..4}; l = 5 shell with {-1, 0..7} (`ECPscalar_ipnuc`) | stack smashing | runs |
 | `ECPscalar`, `_ipnuc`, `_iprinv` for (l, lc) = (3,2), (4,3), (5,5), (5,6) | — | bit-identical to unpatched (12/12) |
 | AgH RHF gradient on H (z), analytic vs 4-point FD (h = 1e-3 bohr) | aborts | agree to 2.3e-9 Eh/bohr; sum of forces 1.6e-14 |
 
 ## Related, minor
 
-`ECPsph_ine_opt` leaves the [0, 16) tables with `z > 16` (nr_ecp.c:4717); for `z == 16.0` exactly, `entry = floor(16.0/K_TAB_INTERVAL) = 400` is one row past the 400-row table. Using `z >= 16` there (and at nr_ecp.c:4663) avoids it. It only affects that exact value.
+`ECPsph_ine_opt` leaves the [0, 16) tables with `z > 16` (nr_ecp.c:4717); for `z == 16.0` exactly, `entry = floor(16.0/K_TAB_INTERVAL) = 400` is one row past the 400-row table. Using `z >= 16` there avoids it. It only affects that exact value.
 
 This is in the same ECP derivative code as #3669 (uninitialized output of the `iprinv` kernels for atoms without ECP).
 
