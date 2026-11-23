@@ -1,10 +1,10 @@
-TITLE: ECP nuclear gradients crash (stack overflow) with i functions: omega_nuc[CART_CUM] in type1_rad_ang is too small
+TITLE: [BUG REPORT] ECP nuclear gradients crash (stack overflow) with i functions: omega_nuc[CART_CUM] in type1_rad_ang is too small
 
 ## Summary
 
 `ECPscalar_ipnuc` and `ECPscalar_iprinv`, the integrals used by ECP nuclear gradients, overflow a stack array when the basis contains i functions (l = 6) and the ECP has a local channel (l = -1). The process aborts with `*** stack smashing detected ***` (or segfaults). As a result, `mf.nuc_grad_method()` cannot run with built-in i-function basis sets (e.g. cc-pV5Z-PP, cc-pwCV5Z-PP) combined with ECPs that have a local channel (def2, LANL2DZ, SBKJC, CRENBL...).
 
-Seen in PySCF 2.15.1 (pip). The same code is on master (484fd7c).
+Seen in PySCF 2.15.1 (PyPI/pip) on Linux x86_64. The same code is on master (484fd7c).
 
 ## Cause
 
