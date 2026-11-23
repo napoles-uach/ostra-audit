@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/ostra-logo.png" alt="OSTRA logo" width="360">
+</p>
+
 # OSTRA — Open-Source elecTRonic-structure Audit
 
 OSTRA is a physics-based, AI-assisted audit of the shared numerical libraries that electronic-structure codes
