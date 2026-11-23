@@ -83,6 +83,7 @@ So either the semilocal parts are mapped in the XCFun backend, or the backend sh
 +    _check_no_nlc(xc_code, fn_facs)
      if omega is not None:
          hyb = hyb[:2] + (float(omega),)
+ 
 ```
 </details>
 
