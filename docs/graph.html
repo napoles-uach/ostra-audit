@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OSTRA findings graph</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:wght@500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a journal figure, calm and exact; the graph is the evidence.
+   IDEA: the figure page of a methods paper - one large plate, caption, legend, a table beneath.
+   PICTURE: force-directed network of findings, libraries, fragile patterns and oracles.
+   COLOUR and TYPE: white / ink, ultramarine for libraries, coral for patterns, teal for oracles; Spectral + Inter.
+   LAYOUT: title and caption, plate with side panel (stacks below 860px), pattern table below. */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0d0e18);--ink:light-dark(#14110f,#ecebf3);--mute:light-dark(#5f5c58,#a3a2b3);--line:light-dark(#e3e1dc,#262838);--panel:light-dark(#f6f5f2,#151726);
+--lib:light-dark(#1d2bd8,#7d87ff);--pat:light-dark(#c4471d,#f08a62);--ora:light-dark(#0f7a5c,#4fc7a0);--fnd:light-dark(#a9a6a0,#6d6b78);--rep:light-dark(#1d2bd8,#9aa2ff)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,system-ui,sans-serif;overflow-x:clip}
+.band{padding:clamp(24px,4vw,56px) max(5vw,16px);max-width:1240px;margin:0 auto}
+h1{font:500 clamp(28px,4vw,44px)/1.08 Spectral,Georgia,serif;margin:0 0 10px;text-wrap:balance}
+.cap{color:var(--mute);max-width:70ch;margin:0}
+.plate{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;margin-top:24px}
+.fig{position:relative;min-height:600px;border:1px solid var(--line);border-radius:6px}
+.fig>svg{position:absolute;inset:0;width:100%;height:100%}
+.side{display:flex;flex-direction:column;gap:14px;font-size:14px}
+.box{background:var(--panel);border-radius:6px;padding:14px 16px}
+.box h2{font:500 13px/1.3 Inter,sans-serif;color:var(--mute);margin:0 0 8px}
+label.t{display:flex;align-items:center;gap:10px;min-height:32px;cursor:pointer}
+input[type=checkbox]{width:18px;height:18px;accent-color:var(--lib)}
+button{font:500 14px Inter,sans-serif;min-height:40px;padding:0 14px;border-radius:6px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+button:focus-visible,input:focus-visible{outline:2px solid var(--lib);outline-offset:2px}
+#info{line-height:1.55;min-height:120px}#info b{font-weight:500}#info .m{color:var(--mute)}
+.lg{display:grid;gap:6px;font-size:13px;color:var(--mute)}.lg span{display:flex;align-items:center;gap:8px}
+table{border-collapse:collapse;width:100%;font-size:14px;margin-top:12px}
+th{font-weight:500;text-align:left;color:var(--mute);border-bottom:1px solid var(--line);padding:8px 10px 8px 0}
+td{border-bottom:1px solid var(--line);padding:8px 10px 8px 0;vertical-align:top}td.n{text-align:right;white-space:nowrap}
+tr.pick{cursor:pointer}tr.pick:hover td{background:var(--panel)}
+h3{font:500 22px/1.2 Spectral,Georgia,serif;margin:0}
+.note{font-size:13px;color:var(--mute);margin-top:14px}
+svg text{pointer-events:none;font-family:Inter,sans-serif}
+@media(max-width:860px){.plate{grid-template-columns:minmax(0,1fr)}.fig{min-height:560px}}
+@media(max-width:600px){table{font-size:13px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px}.stack td{display:flow-root;border:0;padding:3px 0;padding-inline-start:8em;text-align:start}.stack td::before{content:attr(data-l);float:inline-start;width:7.5em;margin-inline-start:-8em;white-space:normal;color:var(--mute)}.stack td:empty{display:none}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<div class="band">
+<h1 id="ttl">OSTRA findings graph</h1>
+<p class="cap">Each finding is linked to the library where the defect lives, the fragile numerical decision behind it and the oracle that detected it. Dashed lines are dependencies between libraries. Select a library to see its neighbours up to second order; select anything else to see its direct links. Drag nodes to untangle.</p>
+<div class="plate">
+<div class="fig" id="fig"><svg id="g" role="img" aria-label="Network of OSTRA findings, libraries, patterns and oracles"></svg></div>
+<div class="side">
+<div class="box"><h2>Layers</h2>
+<label class="t"><input type="checkbox" id="cPat" checked> Fragile patterns</label>
+<label class="t"><input type="checkbox" id="cOra"> Oracles</label>
+<label class="t"><input type="checkbox" id="cDep" checked> Library dependencies</label>
+<button id="reset" type="button" style="margin-top:6px">Clear selection</button></div>
+<div class="box" id="info" aria-live="polite"></div>
+<div class="box lg">
+<span><svg width="14" height="14" aria-hidden="true"><rect x="1" y="1" width="12" height="12" rx="2" fill="var(--lib)"/></svg>Library</span>
+<span><svg width="14" height="14" aria-hidden="true"><polygon points="7,1 13,7 7,13 1,7" fill="var(--pat)"/></svg>Fragile pattern</span>
+<span><svg width="14" height="14" aria-hidden="true"><polygon points="7,1 13,12 1,12" fill="var(--ora)"/></svg>Oracle</span>
+<span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="var(--fnd)"/></svg>Finding (larger = higher impact)</span>
+<span><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" fill="var(--fnd)" stroke="var(--rep)" stroke-width="2"/></svg>Reported upstream</span>
+</div>
+</div>
+</div>
+</div>
+<div class="band" style="padding-top:0">
+<h3>Fragile patterns</h3>
+<table class="stack"><thead><tr><th>Pattern</th><th>Findings</th><th>Libraries</th><th class="n">Cases</th></tr></thead><tbody id="pt"></tbody></table>
+<p class="note" id="gen"></p>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+{
+const DATA={"findings": [{"id": "OSTRA-001", "num": "001", "title": "Tanh-sinh quadrature tail check in xc_integrate truncates integrals with mass away from the midpoint", "path": "findings/OSTRA-001-libxc-xc_integrate-tail-check", "libraries": ["libxc"], "patterns": ["convergence-fixed"], "oracles": ["analytic-reference"], "impact": 3, "impact_level": "III (niche: lda_x_1d_soft for beta*kF >~ 38.6)", "status": "Resolved upstream", "reported": true}, {"id": "OSTRA-002", "num": "002", "title": "Noisy v_sigma of HSE-family exchange at small reduced gradient", "path": "findings/OSTRA-002-libxc-hse-vsigma-noise", "libraries": ["libxc"], "patterns": [], "oracles": ["energy-potential-consistency"], "impact": 2, "impact_level": "II", "status": "Already fixed in devel by the developers", "reported": false}, {"id": "OSTRA-003", "num": "003", "title": "Four-centre ERIs lose precision at high angular momentum (Rys roots)", "path": "findings/OSTRA-003-libcint-highl-eri-precision", "libraries": ["libcint"], "patterns": [], "oracles": ["invariance", "analytic-reference"], "impact": 4, "impact_level": "IV (Delta E_HF = 1e-13 Eh with cc-pV6Z)", "status": "Documented; not reported", "reported": false}, {"id": "OSTRA-004", "num": "004", "title": "ECP-centre derivative kernels return uninitialized memory when the rinv atom has no ECP", "path": "findings/OSTRA-004-pyscf-ecp-iprinv-uninitialized", "libraries": ["PySCF"], "patterns": ["implicit-api-contract"], "oracles": ["api-contract"], "impact": 3, "impact_level": "III (zero inside PySCF; garbage up to 1e256 for direct API users)", "status": "Reported", "reported": true}, {"id": "OSTRA-005", "num": "005", "title": "EEQ Ewald sums with a fixed +-2 image range: charges depend on the equivalent unit cell", "path": "findings/OSTRA-005-multicharge-ewald-fixed-images", "libraries": ["multicharge", "dftd4"], "patterns": ["convergence-fixed"], "oracles": ["invariance"], "impact": 1, "impact_level": "I (up to 18 % in charges, 1.25 % in E_D4 for skewed cells)", "status": "Known issue; data contributed", "reported": true}, {"id": "OSTRA-006", "num": "006", "title": "HSE03/06/12, LC-wPBE and wPBEh energy is discontinuous at s = 1 (s_scaling_2)", "path": "findings/OSTRA-006-libxc-wpbeh-s-scaling-discontinuity", "libraries": ["libxc"], "patterns": ["hard-branch-switch"], "oracles": ["exact-identity"], "impact": 2, "impact_level": "II", "status": "Classified; not to be reported (deliberate fidelity to HSE06)", "reported": false}, {"id": "OSTRA-007", "num": "007", "title": "Derivative of TPSS/TM-family correlation at tau = tau_W (z = 1) depends on rounding", "path": "findings/OSTRA-007-libxc-tpss-c-alpha0-derivative", "libraries": ["libxc"], "patterns": [], "oracles": ["exact-identity"], "impact": 4, "impact_level": "IV", "status": "Documented; not reported", "reported": false}, {"id": "OSTRA-008", "num": "008", "title": "Out-of-bounds read of TURNOVER_POINT[40] for Boys order m >= 40 corrupts SR integrals at high l", "path": "findings/OSTRA-008-libcint-turnover-point-oob", "libraries": ["libcint"], "patterns": ["fixed-size-table"], "oracles": ["exact-identity", "analytic-reference"], "impact": 3, "impact_level": "III (SR integrals with l >~ 10; errors up to 3e8, build-dependent)", "status": "Reported (verified independently, attributed, minimal fix verified)", "reported": true}, {"id": "OSTRA-009", "num": "009", "title": "xc_E1_scaled_jet switches to the asymptotic series at z = 18, where it is still inaccurate", "path": "findings/OSTRA-009-libxc-e1-scaled-jet-z18", "libraries": ["libxc"], "patterns": ["hard-branch-switch"], "oracles": ["analytic-reference", "branch-boundary"], "impact": 2, "impact_level": "II (to be measured in molecules)", "status": "Verified; attribution of the LC-wPBE inconsistency pending", "reported": false}, {"id": "OSTRA-010", "num": "010", "title": "pc07_thr = 1/40 inherited by PC07-opt (SCAN-L, r2SCAN-L): a 4.6e-5 indicator value is truncated to zero", "path": "findings/OSTRA-010-libxc-pc07-threshold-inherited", "libraries": ["libxc"], "patterns": ["hard-branch-switch", "stale-threshold", "unverified-comment"], "oracles": ["branch-boundary"], "impact": 2, "impact_level": "II (zk jump ~1.8e-6 relative per point; molecular impact not measured)", "status": "Verified analytically", "reported": false}, {"id": "OSTRA-011", "num": "011", "title": "xc_func_set_fhc_enforcement does not propagate to auxiliary functionals of mixed meta-GGAs", "path": "findings/OSTRA-011-libxc-fhc-enforcement-not-propagated", "libraries": ["libxc"], "patterns": ["inconsistent-configuration"], "oracles": ["api-contract"], "impact": 3, "impact_level": "III (codes that disable FHC, e.g. PAW, with hybrid/mixed meta-GGAs)", "status": "Verified", "reported": false}, {"id": "OSTRA-012", "num": "012", "title": "REVTPSSX registered without XC_KINETIC and with two formula errors", "path": "findings/OSTRA-012-xcfun-revtpssx", "libraries": ["XCFun"], "patterns": ["inconsistent-configuration", "transcription-slip"], "oracles": ["independent-implementation"], "impact": 3, "impact_level": "III (fails loudly: NaN as registered)", "status": "Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15", "reported": false}, {"id": "OSTRA-013", "num": "013", "title": "REVTPSSC uses z^2 instead of z^3 in eps_c = eps_PKZB (1 + d eps_PKZB z^3)", "path": "findings/OSTRA-013-xcfun-revtpssc-z2", "libraries": ["XCFun"], "patterns": ["transcription-slip"], "oracles": ["independent-implementation"], "impact": 1, "impact_level": "I-II (explorer: SCF shifts 1.5-2.1 kcal/mol; not re-measured)", "status": "Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11", "reported": false}, {"id": "OSTRA-014", "num": "014", "title": "R4SCANX uses d_p4 = d_a4 = 0.232 instead of 0.802 / 0.178", "path": "findings/OSTRA-014-xcfun-r4scanx-damping-params", "libraries": ["XCFun"], "patterns": ["stale-threshold"], "oracles": ["independent-implementation"], "impact": 1, "impact_level": "I-II (explorer: 0.5-0.9 kcal/mol; not re-measured)", "status": "Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14", "reported": false}, {"id": "OSTRA-015", "num": "015", "title": "SCANX/SCANC return +-inf at alpha = 1 (uniform gas) and SCANX v_sigma is halved at s = 0", "path": "findings/OSTRA-015-xcfun-scan-alpha1-s0", "libraries": ["XCFun"], "patterns": ["hard-branch-switch"], "oracles": ["independent-implementation", "energy-potential-consistency", "branch-boundary"], "impact": 3, "impact_level": "III-IV (exact points rarely on molecular grids)", "status": "Verified", "reported": false}, {"id": "OSTRA-016", "num": "016", "title": "TFK (Thomas-Fermi kinetic) ignores spin polarization", "path": "findings/OSTRA-016-xcfun-tfk-spin", "libraries": ["XCFun"], "patterns": ["transcription-slip"], "oracles": ["exact-identity", "independent-implementation"], "impact": 3, "impact_level": "III (spin-polarized kinetic-energy use, e.g. embedding)", "status": "Confirmed (level 3): exact spin scaling after minimal fix", "reported": false}, {"id": "OSTRA-017", "num": "017", "title": "Segmentation fault for VV10/rVV10 functionals with the XCFun backend", "path": "findings/OSTRA-017-pyscf-xcfun-vv10-segfault", "libraries": ["PySCF"], "patterns": ["inconsistent-configuration"], "oracles": ["api-contract"], "impact": 3, "impact_level": "III (loud: process killed, exit 139)", "status": "Verified", "reported": false}, {"id": "OSTRA-018", "num": "018", "title": "lda_c_pk09: NaN and huge values in a band around r_s = 22.739 for spin-polarized densities", "path": "findings/OSTRA-018-libxc-pk09-pole-polarized", "libraries": ["libxc"], "patterns": [], "oracles": ["branch-boundary", "exact-identity"], "impact": 2, "impact_level": "II-III (open-shell densities near rho ~ 2e-5)", "status": "Verified (anomaly reproduced); cause: model pole vs implementation pending", "reported": false}, {"id": "OSTRA-019", "num": "019", "title": "simple-dftd3 gCP: effective atomic numbers beyond the 35/36-entry parameter tables", "path": "findings/OSTRA-019-simple-dftd3-gcp-zeff-table-oob", "libraries": ["simple-dftd3"], "patterns": ["fixed-size-table"], "oracles": ["sanitizer-code-reading"], "impact": 3, "impact_level": "III (heavy elements: Kr/Xe/Rn with MINIS, Fr/Ra/Ac, Z > 94)", "status": "Verified (code)", "reported": false}, {"id": "OSTRA-020", "num": "020", "title": "PySCF ECP: table index 400 at z = 16 and crashes of ECPscalar_ipnuc at high angular momentum", "path": "findings/OSTRA-020-pyscf-ecp-bessel-table-and-cart-cum", "libraries": ["PySCF"], "patterns": ["fixed-size-table"], "oracles": ["sanitizer-code-reading"], "impact": 2, "impact_level": "II-III (A: only z exactly 16; B: nuclear gradients crash with built-in i-function bases and ECPs with a local channel)", "status": "A verified; B attributed, impact measured, minimal fix verified; extra ASan claims pending", "reported": true}, {"id": "OSTRA-021", "num": "021", "title": "dftd4 accepts Z = 112-118 but multicharge EEQ parameters stop at Z = 103: unphysical charges without error", "path": "findings/OSTRA-021-dftd4-multicharge-max-elem-mismatch", "libraries": ["dftd4", "multicharge"], "patterns": ["fixed-size-table"], "oracles": ["api-contract"], "impact": 3, "impact_level": "III (superheavy elements only)", "status": "Verified (released dftd4 4.3.1)", "reported": false}, {"id": "OSTRA-022", "num": "022", "title": "libecpint BesselFunction::upper_bound returns a lower bound on the rising side of K_L(z)", "path": "findings/OSTRA-022-libecpint-bessel-upper-bound-is-lower", "libraries": ["libecpint"], "patterns": ["unverified-comment"], "oracles": ["analytic-reference"], "impact": 4, "impact_level": "IV inside libecpint (no caller); III for external users of the public header", "status": "Verified (code); impact downgraded", "reported": false}, {"id": "OSTRA-023", "num": "023", "title": "simple-dftd3 gCP: B_k(x) series vs closed form chosen by abs(za - zb) instead of abs(x)", "path": "findings/OSTRA-023-simple-dftd3-gcp-bk-switch", "libraries": ["simple-dftd3"], "patterns": ["hard-branch-switch", "unverified-comment"], "oracles": ["analytic-reference", "energy-potential-consistency", "branch-boundary"], "impact": 2, "impact_level": "II (gCP derivatives for unlike-element pairs; energy impact not re-measured)", "status": "Partly verified", "reported": false}, {"id": "OSTRA-024", "num": "024", "title": "libecpint BesselFunction::calculate at z <= 0 writes only K_0; scalar overload returns 1 for all L", "path": "findings/OSTRA-024-libecpint-bessel-z0-contract", "libraries": ["libecpint"], "patterns": ["unverified-comment", "implicit-api-contract"], "oracles": ["api-contract"], "impact": 4, "impact_level": "IV inside libecpint (callers guard x > 0 or rely on zero-initialized buffers); III for external users", "status": "Verified (code); impact downgraded", "reported": false}, {"id": "OSTRA-025", "num": "025", "title": "simple-dftd3 gCP: gradient silently zero unless the virial is also requested", "path": "findings/OSTRA-025-simple-dftd3-gcp-gradient-needs-sigma", "libraries": ["simple-dftd3"], "patterns": ["implicit-api-contract"], "oracles": ["api-contract"], "impact": 3, "impact_level": "III (C API / Fortran callers requesting gradients without sigma)", "status": "Verified (code)", "reported": false}, {"id": "OSTRA-026", "num": "026", "title": "multicharge get_charges: intent(out) dqdr left undefined when dqdL is not requested", "path": "findings/OSTRA-026-multicharge-dqdr-intent-out-unwritten", "libraries": ["multicharge"], "patterns": ["implicit-api-contract"], "oracles": ["api-contract"], "impact": 3, "impact_level": "III (callers requesting only Cartesian charge derivatives)", "status": "Verified (code)", "reported": false}], "libraries": ["libxc", "XCFun", "libcint", "PySCF", "multicharge", "dftd4", "simple-dftd3", "libecpint"], "dependencies": [{"from": "PySCF", "to": "libcint", "relation": "bundles"}, {"from": "PySCF", "to": "XCFun", "relation": "bundles"}, {"from": "PySCF", "to": "libxc", "relation": "uses"}, {"from": "dftd4", "to": "multicharge", "relation": "uses"}], "patterns": {"hard-branch-switch": "Hard branch switches", "stale-threshold": "Thresholds or parameters reused or stale", "unverified-comment": "Unverified numerical comments", "fixed-size-table": "Fixed-size tables", "convergence-fixed": "Convergence fixed for the typical case", "inconsistent-configuration": "Inconsistent configuration", "implicit-api-contract": "Implicit API contracts", "transcription-slip": "Formula transcription slips"}, "oracles": {"energy-potential-consistency": "Energy-potential consistency", "invariance": "Invariances", "exact-identity": "Exact identities", "analytic-reference": "Analytic reference", "independent-implementation": "Independent implementation", "api-contract": "API contract", "branch-boundary": "Branch boundaries", "sanitizer-code-reading": "Sanitizer / code reading"}};
+const F=DATA.findings,P=DATA.patterns,O=DATA.oracles,LIB=DATA.libraries;
+const nodes=[],links=[];
+LIB.forEach(l=>nodes.push({id:"lib:"+l,t:"lib",label:l}));
+Object.entries(P).forEach(([k,v])=>nodes.push({id:"pat:"+k,t:"pat",label:v}));
+Object.entries(O).forEach(([k,v])=>nodes.push({id:"ora:"+k,t:"ora",label:v}));
+F.forEach(f=>{nodes.push({id:f.id,t:"f",label:f.num,f});
+ f.libraries.forEach(l=>links.push({source:f.id,target:"lib:"+l,t:"lib"}));
+ f.patterns.forEach(p=>links.push({source:f.id,target:"pat:"+p,t:"pat"}));
+ f.oracles.forEach(o=>links.push({source:f.id,target:"ora:"+o,t:"ora"}));});
+DATA.dependencies.forEach(d=>links.push({source:"lib:"+d.from,target:"lib:"+d.to,t:"dep",rel:d.relation}));
+document.getElementById("ttl").textContent=`${F.length} findings in ${LIB.length} libraries: where fragile decisions cluster`;
+document.getElementById("gen").textContent="Generated from finding.md by tools/make_graph.py. Pattern and oracle assignments are part of each finding record; they reflect where we looked, not where all defects are.";
+const rad=n=>n.t==="f"?[0,11,9,7.5,6][n.f.impact]:9;
+const cv=t=>`var(--${t==="f"?"fnd":t})`;
+const svg=d3.select("#g"),lk=svg.append("g"),nd=svg.append("g"),lb=svg.append("g");
+let W=600,H=600,show={pat:true,ora:false,dep:true},sel=null;
+const sim=d3.forceSimulation(nodes)
+ .force("link",d3.forceLink(links).id(d=>d.id).distance(l=>l.t==="dep"?100:l.t==="lib"?48:80).strength(l=>l.t==="lib"?0.7:l.t==="dep"?0.3:0.22))
+ .force("charge",d3.forceManyBody().strength(d=>d.t==="f"?-70:-260))
+ .force("collide",d3.forceCollide(d=>rad(d)+(d.t==="f"?4:16)))
+ .force("x",d3.forceX(()=>W/2).strength(0.04)).force("y",d3.forceY(()=>H/2).strength(0.06));
+const shape=n=>{const r=rad(n);if(n.t==="lib")return `M${-r},${-r}h${2*r}v${2*r}h${-2*r}Z`;if(n.t==="pat")return `M0,${-r-2}L${r+2},0L0,${r+2}L${-r-2},0Z`;if(n.t==="ora")return `M0,${-r-1}L${r+1},${r}L${-r-1},${r}Z`;return d3.symbol(d3.symbolCircle,Math.PI*r*r)();};
+const ls=lk.selectAll("line").data(links).join("line").attr("stroke",l=>l.t==="lib"?"var(--mute)":cv(l.t)).attr("stroke-dasharray",l=>l.t==="dep"?"6 4":null);
+const ns=nd.selectAll("path").data(nodes).join("path").attr("d",shape).attr("fill",n=>cv(n.t))
+ .attr("stroke",n=>n.t==="f"&&n.f.reported?"var(--rep)":"none").attr("stroke-width",2.5).style("cursor","pointer")
+ .call(d3.drag().on("start",(e,d)=>{if(!e.active)sim.alphaTarget(0.2).restart();d.fx=d.x;d.fy=d.y}).on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y}).on("end",(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}))
+ .on("click",(e,d)=>select(sel===d.id?null:d.id));
+ns.append("title").text(n=>n.t==="f"?`${n.f.id}: ${n.f.title}`:n.label);
+const ts=lb.selectAll("text").data(nodes).join("text").text(n=>n.label).attr("text-anchor","middle")
+ .attr("font-size",n=>n.t==="f"?11:12).attr("font-weight",n=>n.t==="lib"?500:400).attr("fill",n=>n.t==="f"?"var(--mute)":"var(--ink)");
+const vis=l=>!((l.t==="pat"&&!show.pat)||(l.t==="ora"&&!show.ora)||(l.t==="dep"&&!show.dep));
+const nvis=n=>!((n.t==="pat"&&!show.pat)||(n.t==="ora"&&!show.ora));
+function bfs(s,maxd){const dist=new Map([[s,0]]);let fr=new Set([s]);
+ for(let d=1;d<=maxd;d++){const nx=new Set();links.forEach(l=>{if(!vis(l))return;const a=l.source.id,b=l.target.id;
+  if(fr.has(a)&&!dist.has(b)){dist.set(b,d);nx.add(b)}if(fr.has(b)&&!dist.has(a)){dist.set(a,d);nx.add(a)}});fr=nx;}return dist;}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const own=lib=>F.filter(f=>f.libraries.includes(lib));
+function count(fs,key,M){const c={};fs.forEach(f=>f[key].forEach(k=>c[k]=(c[k]||0)+1));return Object.entries(c).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`${esc(M[k])} (${v})`).join(", ")||"none";}
+function upd(){
+ const info=document.getElementById("info");
+ const dist=sel?bfs(sel,sel.startsWith("lib:")?2:1):null;
+ const onE=l=>{if(!dist)return false;const a=dist.get(l.source.id),b=dist.get(l.target.id);return a!==undefined&&b!==undefined&&Math.abs(a-b)===1};
+ const lv=l=>Math.max(dist.get(l.source.id),dist.get(l.target.id));
+ ls.attr("display",l=>vis(l)?null:"none").attr("stroke-opacity",l=>!sel?0.5:onE(l)?(lv(l)===1?0.95:0.5):0.05).attr("stroke-width",l=>sel&&onE(l)&&lv(l)===1?1.8:(l.t==="dep"?1.5:0.9));
+ const op=x=>{if(!sel)return 1;const d=dist.get(x.id);return d===undefined?0.12:d<=1?1:0.55};
+ ns.attr("display",x=>nvis(x)?null:"none").attr("opacity",op);ts.attr("display",x=>nvis(x)?null:"none").attr("opacity",op);
+ if(!sel){info.innerHTML='<span class="m">Select a node. Libraries show neighbours up to second order.</span>';return}
+ const n=nodes.find(x=>x.id===sel);
+ if(n.t==="f"){const f=n.f;info.innerHTML=`<b>${f.id}</b> <span class="m">· ${esc(f.libraries.join(", "))} · impact ${esc(f.impact_level.split(" (")[0])}${f.reported?" · reported":""}</span><br>${esc(f.title)}<br><span class="m">Pattern: ${f.patterns.map(p=>esc(P[p])).join(", ")||"none"}<br>Oracle: ${f.oracles.map(o=>esc(O[o])).join(", ")}<br>Status: ${esc(f.status)}</span>`;return}
+ if(n.t==="lib"){const fs=own(n.label),deps=DATA.dependencies.filter(d=>d.from===n.label||d.to===n.label).map(d=>d.from===n.label?`${d.relation} ${d.to}`:`${d.relation==="bundles"?"bundled by":"used by"} ${d.from}`);
+  info.innerHTML=`<b>${esc(n.label)}</b> <span class="m">· ${fs.length} findings</span><br>${fs.map(f=>f.num).join(", ")}<br><span class="m">Patterns: ${count(fs,"patterns",P)}<br>Oracles: ${count(fs,"oracles",O)}${deps.length?"<br>Dependencies: "+esc(deps.join("; ")):""}</span>`;return}
+ const key=n.t==="pat"?"patterns":"oracles",k=sel.slice(4),fs=F.filter(f=>f[key].includes(k)),libs=[...new Set(fs.flatMap(f=>f.libraries))];
+ info.innerHTML=`<b>${esc(n.label)}</b> <span class="m">· ${fs.length} findings in ${libs.length} libraries</span><br>${fs.map(f=>f.num).join(", ")}<br><span class="m">${esc(libs.join(", "))}</span>`;
+}
+function select(id){sel=id;if(id&&id.startsWith("pat:")&&!show.pat){show.pat=true;document.getElementById("cPat").checked=true}upd();sim.alpha(0.05).restart()}
+["cPat","cOra","cDep"].forEach(id=>document.getElementById(id).addEventListener("change",e=>{show[{cPat:"pat",cOra:"ora",cDep:"dep"}[id]]=e.target.checked;if(sel&&!nvis(nodes.find(x=>x.id===sel)))sel=null;upd();sim.alpha(0.3).restart()}));
+document.getElementById("reset").addEventListener("click",()=>select(null));
+document.getElementById("pt").innerHTML=Object.entries(P).map(([k,v])=>{const fs=F.filter(f=>f.patterns.includes(k)),libs=[...new Set(fs.flatMap(f=>f.libraries))];return [fs.length,`<tr class="pick" data-k="${k}" tabindex="0"><td>${esc(v)}</td><td>${fs.map(f=>f.num).join(", ")}</td><td>${esc(libs.join(", "))}</td><td class="n">${fs.length}</td></tr>`]}).sort((a,b)=>b[0]-a[0]).map(x=>x[1]).join("")+
+ (()=>{const fs=F.filter(f=>!f.patterns.length);return fs.length?`<tr><td class="m" style="color:var(--mute)">No pattern assigned</td><td>${fs.map(f=>f.num).join(", ")}</td><td>${esc([...new Set(fs.flatMap(f=>f.libraries))].join(", "))}</td><td class="n">${fs.length}</td></tr>`:""})();
+document.querySelectorAll("tr.pick").forEach(tr=>{const go=()=>{select("pat:"+tr.dataset.k);document.getElementById("fig").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"center"})};tr.addEventListener("click",go);tr.addEventListener("keydown",e=>{if(e.key==="Enter")go()})});
+const short=s=>s.split(" ").slice(0,2).join(" ");
+const lab=n=>n.t==="f"||n.t==="lib"||W>=520?n.label:short(n.label);
+const half=n=>n.t==="f"?10:lab(n).length*3.4+4;
+sim.on("tick",()=>{nodes.forEach(n=>{const r=Math.max(rad(n)+8,half(n));n.x=Math.max(r+4,Math.min(W-r-4,n.x||W/2));n.y=Math.max(r+14,Math.min(H-r-10,n.y||H/2))});
+ ls.attr("x1",l=>l.source.x).attr("y1",l=>l.source.y).attr("x2",l=>l.target.x).attr("y2",l=>l.target.y);
+ ns.attr("transform",n=>`translate(${n.x},${n.y})`);ts.attr("x",n=>n.x).attr("y",n=>n.y-rad(n)-(n.t==="f"?3:6))});
+const fig=document.getElementById("fig");let placed=false;
+const ro=new ResizeObserver(()=>{W=fig.clientWidth;H=fig.clientHeight;svg.attr("viewBox",`0 0 ${W} ${H}`);ts.text(lab);sim.force("x").x(W/2);sim.force("y").y(H/2);if(!placed){placed=true;nodes.forEach(n=>{n.x=W/2+(Math.random()-0.5)*W*0.7;n.y=H/2+(Math.random()-0.5)*H*0.7});sim.alpha(1).restart();return}sim.force("charge").strength(d=>d.t==="f"?(W<520?-40:-70):(W<520?-150:-260));sim.alpha(0.5).restart()});
+ro.observe(fig);
+upd();
+}
+</script>
+</body>
+</html>

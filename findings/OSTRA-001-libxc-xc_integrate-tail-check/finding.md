@@ -8,6 +8,9 @@
 | detected | 2026-11-19 |
 | detected_by | Explorer 1 (Claude, main session) |
 | oracle | Analytic reference (closed-form integrals of 2K0, 2tK0) |
+| libraries | libxc |
+| pattern | convergence-fixed |
+| oracle_class | analytic-reference |
 | class | New numerical bug |
 | impact_level | III (niche: lda_x_1d_soft for beta*kF >~ 38.6) |
 | status | Resolved upstream |

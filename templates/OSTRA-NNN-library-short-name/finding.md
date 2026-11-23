@@ -7,7 +7,10 @@
 | versions | <release(s) and commit hash(es) where it was observed> |
 | detected | <YYYY-MM-DD> |
 | detected_by | <person or agent (model, tool), batch; verified by ...> |
-| oracle | <which oracle from PROTOCOL.md detected it> |
+| oracle | <which oracle from PROTOCOL.md detected it, in words> |
+| libraries | <where the defect lives, comma-separated; names from tools/graph_config.json> |
+| pattern | <fragile-pattern slugs from tools/graph_config.json, comma-separated, or none> |
+| oracle_class | <oracle slugs from tools/graph_config.json, comma-separated> |
 | class | <class from PROTOCOL.md>, new |
 | impact_level | <I / II / III / IV> (<one-line justification>) |
 | status | candidate |

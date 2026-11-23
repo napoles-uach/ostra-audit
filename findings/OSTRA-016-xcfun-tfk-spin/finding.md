@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2 (XCFun vs libxc differential audit); verified by explorer 1 |
 | oracle | Exact spin scaling T[ra, rb] = (T[2ra] + T[2rb]) / 2 |
+| libraries | XCFun |
+| pattern | transcription-slip |
+| oracle_class | exact-identity, independent-implementation |
 | class | New bug (formula) |
 | impact_level | III (spin-polarized kinetic-energy use, e.g. embedding) |
 | status | Confirmed (level 3): exact spin scaling after minimal fix |

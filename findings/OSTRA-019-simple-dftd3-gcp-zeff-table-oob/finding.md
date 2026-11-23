@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | Code reading; bounds-checked build (explorer) |
+| libraries | simple-dftd3 |
+| pattern | fixed-size-table |
+| oracle_class | sanitizer-code-reading |
 | class | Memory safety / fixed-size table, new |
 | impact_level | III (heavy elements: Kr/Xe/Rn with MINIS, Fr/Ra/Ac, Z > 94) |
 | status | Verified (code) |

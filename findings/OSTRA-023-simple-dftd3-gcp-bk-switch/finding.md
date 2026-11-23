@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | mpmath reference; FD gradient vs Hessian (explorer) |
+| libraries | simple-dftd3 |
+| pattern | hard-branch-switch, unverified-comment |
+| oracle_class | analytic-reference, energy-potential-consistency, branch-boundary |
 | class | Numerical precision, new |
 | impact_level | II (gCP derivatives for unlike-element pairs; energy impact not re-measured) |
 | status | Partly verified |

@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2 (threshold inventory); verified by explorer 1 |
 | oracle | Boundary test of branch switch; mpmath reference; energy-potential consistency |
+| libraries | libxc |
+| pattern | hard-branch-switch |
+| oracle_class | analytic-reference, branch-boundary |
 | class | New numerical bug |
 | impact_level | II (to be measured in molecules) |
 | status | Verified; attribution of the LC-wPBE inconsistency pending |

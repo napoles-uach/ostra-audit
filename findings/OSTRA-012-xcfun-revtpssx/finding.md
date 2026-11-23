@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2 (XCFun vs libxc differential audit); verified by explorer 1 |
 | oracle | Code comparison with TPSSX in the same library; differential vs libxc |
+| libraries | XCFun |
+| pattern | inconsistent-configuration, transcription-slip |
+| oracle_class | independent-implementation |
 | class | New bug (registration + formula) |
 | impact_level | III (fails loudly: NaN as registered) |
 | status | Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15 |

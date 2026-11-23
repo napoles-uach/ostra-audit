@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2 (XCFun vs libxc differential audit); verified by explorer 1 |
 | oracle | Edge cases; FD of v_sigma |
+| libraries | XCFun |
+| pattern | hard-branch-switch |
+| oracle_class | independent-implementation, energy-potential-consistency, branch-boundary |
 | class | Unguarded edge case |
 | impact_level | III-IV (exact points rarely on molecular grids) |
 | status | Verified |

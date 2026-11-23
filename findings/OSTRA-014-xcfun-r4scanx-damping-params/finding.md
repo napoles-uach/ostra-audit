@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2 (XCFun vs libxc differential audit); verified by explorer 1 |
 | oracle | Differential vs libxc with exact parameter attribution |
+| libraries | XCFun |
+| pattern | stale-threshold |
+| oracle_class | independent-implementation |
 | class | New bug (parameters) or outdated preprint values |
 | impact_level | I-II (explorer: 0.5-0.9 kcal/mol; not re-measured) |
 | status | Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14 |

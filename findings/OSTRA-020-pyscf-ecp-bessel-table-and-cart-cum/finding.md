@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | ASan (explorer); crash / exit code (verifier) |
+| libraries | PySCF |
+| pattern | fixed-size-table |
+| oracle_class | sanitizer-code-reading |
 | class | Memory safety, new |
 | impact_level | II-III (A: only z exactly 16; B: nuclear gradients crash with built-in i-function bases and ECPs with a local channel) |
 | status | A verified; B attributed, impact measured, minimal fix verified; extra ASan claims pending |

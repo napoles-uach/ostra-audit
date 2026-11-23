@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | Edge scan; zeta = 0 vs zeta != 0 comparison |
+| libraries | libxc |
+| pattern | none |
+| oracle_class | branch-boundary, exact-identity |
 | class | Numerical bug or model singularity (pending the paper) |
 | impact_level | II-III (open-shell densities near rho ~ 2e-5) |
 | status | Verified (anomaly reproduced); cause: model pole vs implementation pending |

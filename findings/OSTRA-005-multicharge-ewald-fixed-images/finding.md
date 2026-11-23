@@ -8,6 +8,9 @@
 | detected | 2026-11-20 |
 | detected_by | Explorer 1 |
 | oracle | Invariance under equivalent cells (a' = a + k b) |
+| libraries | multicharge, dftd4 |
+| pattern | convergence-fixed |
+| oracle_class | invariance |
 | class | Convergence, known |
 | impact_level | I (up to 18 % in charges, 1.25 % in E_D4 for skewed cells) |
 | status | Known issue; data contributed |

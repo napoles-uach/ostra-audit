@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2; verified by explorer 1 |
 | oracle | API contract (setter must act on composite functionals like its siblings) |
+| libraries | libxc |
+| pattern | inconsistent-configuration |
+| oracle_class | api-contract |
 | class | API contract, new |
 | impact_level | III (codes that disable FHC, e.g. PAW, with hybrid/mixed meta-GGAs) |
 | status | Verified |

@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2 (XCFun vs libxc differential audit); verified by explorer 1 |
 | oracle | Code comparison with TPSSC; differential vs libxc |
+| libraries | XCFun |
+| pattern | transcription-slip |
+| oracle_class | independent-implementation |
 | class | New bug (formula), silent |
 | impact_level | I-II (explorer: SCF shifts 1.5-2.1 kcal/mol; not re-measured) |
 | status | Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11 |

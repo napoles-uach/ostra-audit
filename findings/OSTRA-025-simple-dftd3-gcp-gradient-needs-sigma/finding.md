@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | API contract; consistency with sibling routine (disp.f90:102 uses .or.) |
+| libraries | simple-dftd3 |
+| pattern | implicit-api-contract |
+| oracle_class | api-contract |
 | class | API contract, new |
 | impact_level | III (C API / Fortran callers requesting gradients without sigma) |
 | status | Verified (code) |

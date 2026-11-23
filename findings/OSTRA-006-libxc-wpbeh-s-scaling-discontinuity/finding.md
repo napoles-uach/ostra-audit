@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 1 (spin-polarization oracle, by chance) |
 | oracle | Spin-polarized vs unpolarized identity; energy scan; FD vs analytic forces |
+| libraries | libxc |
+| pattern | hard-branch-switch |
+| oracle_class | exact-identity |
 | class | Known design (Henderson et al. 2009, eq. 8 vs eq. 9) |
 | impact_level | II |
 | status | Classified; not to be reported (deliberate fidelity to HSE06) |

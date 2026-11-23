@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | API contract (comment states K_l = 0 for l > 0) |
+| libraries | libecpint |
+| pattern | unverified-comment, implicit-api-contract |
+| oracle_class | api-contract |
 | class | API contract, new |
 | impact_level | IV inside libecpint (callers guard x > 0 or rely on zero-initialized buffers); III for external users |
 | status | Verified (code); impact downgraded |

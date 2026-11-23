@@ -8,6 +8,9 @@
 | detected | 2026-11-19 |
 | detected_by | Explorer 1 |
 | oracle | Energy-potential consistency (FD with step scan) |
+| libraries | libxc |
+| pattern | none |
+| oracle_class | energy-potential-consistency |
 | class | Numerical precision |
 | impact_level | II |
 | status | Already fixed in devel by the developers |

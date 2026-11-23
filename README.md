@@ -25,6 +25,7 @@ and run the verification harnesses; every result is checked, and every report re
 | `CONTRIBUTING.md` | How to contribute: fork/branch/PR workflow, adding or verifying a finding, working with AI agents |
 | `templates/` | Skeleton of a finding folder |
 | `tools/make_index.py` | Regenerates `findings/INDEX.md` and `index.json` from each `finding.md` |
+| `tools/make_graph.py` | Builds `findings/graph.json` and `docs/graph.html` (interactive graph) from each `finding.md` and `tools/graph_config.json` |
 | `findings/INDEX.md` | Table of all findings with class, impact level and status |
 | `findings/OSTRA-NNN-*/` | One folder per finding: `finding.md` (record), `environment.txt` (exact versions), `repro/` (minimal reproducers), `evidence/` (raw outputs, figures, data), `verification/` (independent checks), `report/` (draft or submitted issue text) |
 | `candidates/` | Signals not yet verified, or not reproduced |

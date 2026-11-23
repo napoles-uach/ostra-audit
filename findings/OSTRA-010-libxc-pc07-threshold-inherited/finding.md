@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2; verified by explorer 1 |
 | oracle | Boundary test; analytic evaluation |
+| libraries | libxc |
+| pattern | hard-branch-switch, stale-threshold, unverified-comment |
+| oracle_class | branch-boundary |
 | class | New numerical bug |
 | impact_level | II (zk jump ~1.8e-6 relative per point; molecular impact not measured) |
 | status | Verified analytically |

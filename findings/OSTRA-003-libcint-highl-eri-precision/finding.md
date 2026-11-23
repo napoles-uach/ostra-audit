@@ -8,6 +8,9 @@
 | detected | 2026-11-20 |
 | detected_by | Explorer 1 |
 | oracle | Invariances and analytic references |
+| libraries | libcint |
+| pattern | none |
+| oracle_class | invariance, analytic-reference |
 | class | Documented limitation |
 | impact_level | IV (Delta E_HF = 1e-13 Eh with cc-pV6Z) |
 | status | Documented; not reported |

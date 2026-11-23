@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | Chemical sanity of charges; API contract |
+| libraries | dftd4, multicharge |
+| pattern | fixed-size-table |
+| oracle_class | api-contract |
 | class | Fixed-size table across libraries, new |
 | impact_level | III (superheavy elements only) |
 | status | Verified (released dftd4 4.3.1) |

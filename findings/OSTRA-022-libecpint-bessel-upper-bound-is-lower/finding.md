@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | Comparison with exact values (explorer); code reading (verifier) |
+| libraries | libecpint |
+| pattern | unverified-comment |
+| oracle_class | analytic-reference |
 | class | Documented contract violated, new |
 | impact_level | IV inside libecpint (no caller); III for external users of the public header |
 | status | Verified (code); impact downgraded |

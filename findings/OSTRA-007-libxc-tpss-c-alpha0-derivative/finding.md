@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 1 (spin-polarization oracle) |
 | oracle | Spin-polarized vs unpolarized identity; RKS vs UKS |
+| libraries | libxc |
+| pattern | none |
+| oracle_class | exact-identity |
 | class | No impact |
 | impact_level | IV |
 | status | Documented; not reported |

@@ -8,6 +8,9 @@
 | detected | 2026-11-20 |
 | detected_by | Explorer 1 (harness bug exposed it) |
 | oracle | API contract (outputs must be written) |
+| libraries | PySCF |
+| pattern | implicit-api-contract |
+| oracle_class | api-contract |
 | class | API contract, new |
 | impact_level | III (zero inside PySCF; garbage up to 1e256 for direct API users) |
 | status | Reported |

@@ -8,6 +8,9 @@
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | API contract (intent(out) must be defined) |
+| libraries | multicharge |
+| pattern | implicit-api-contract |
+| oracle_class | api-contract |
 | class | API contract, new |
 | impact_level | III (callers requesting only Cartesian charge derivatives) |
 | status | Verified (code) |

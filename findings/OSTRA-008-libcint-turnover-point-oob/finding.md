@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 1 (Claude, threshold mining); independently verified by explorer 2 (Gemini, Antigravity), 2026-11-23 |
 | oracle | Boys values vs 40-digit quadrature; erfc + erf = full Coulomb |
+| libraries | libcint |
+| pattern | fixed-size-table |
+| oracle_class | exact-identity, analytic-reference |
 | class | Memory safety, new |
 | impact_level | III (SR integrals with l >~ 10; errors up to 3e8, build-dependent) |
 | status | Reported (verified independently, attributed, minimal fix verified) |

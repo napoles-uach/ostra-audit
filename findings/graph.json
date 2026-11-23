@@ -1,0 +1,558 @@
+{
+  "findings": [
+    {
+      "id": "OSTRA-001",
+      "num": "001",
+      "title": "Tanh-sinh quadrature tail check in xc_integrate truncates integrals with mass away from the midpoint",
+      "path": "findings/OSTRA-001-libxc-xc_integrate-tail-check",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [
+        "convergence-fixed"
+      ],
+      "oracles": [
+        "analytic-reference"
+      ],
+      "impact": 3,
+      "impact_level": "III (niche: lda_x_1d_soft for beta*kF >~ 38.6)",
+      "status": "Resolved upstream",
+      "reported": true
+    },
+    {
+      "id": "OSTRA-002",
+      "num": "002",
+      "title": "Noisy v_sigma of HSE-family exchange at small reduced gradient",
+      "path": "findings/OSTRA-002-libxc-hse-vsigma-noise",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [],
+      "oracles": [
+        "energy-potential-consistency"
+      ],
+      "impact": 2,
+      "impact_level": "II",
+      "status": "Already fixed in devel by the developers",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-003",
+      "num": "003",
+      "title": "Four-centre ERIs lose precision at high angular momentum (Rys roots)",
+      "path": "findings/OSTRA-003-libcint-highl-eri-precision",
+      "libraries": [
+        "libcint"
+      ],
+      "patterns": [],
+      "oracles": [
+        "invariance",
+        "analytic-reference"
+      ],
+      "impact": 4,
+      "impact_level": "IV (Delta E_HF = 1e-13 Eh with cc-pV6Z)",
+      "status": "Documented; not reported",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-004",
+      "num": "004",
+      "title": "ECP-centre derivative kernels return uninitialized memory when the rinv atom has no ECP",
+      "path": "findings/OSTRA-004-pyscf-ecp-iprinv-uninitialized",
+      "libraries": [
+        "PySCF"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (zero inside PySCF; garbage up to 1e256 for direct API users)",
+      "status": "Reported",
+      "reported": true
+    },
+    {
+      "id": "OSTRA-005",
+      "num": "005",
+      "title": "EEQ Ewald sums with a fixed +-2 image range: charges depend on the equivalent unit cell",
+      "path": "findings/OSTRA-005-multicharge-ewald-fixed-images",
+      "libraries": [
+        "multicharge",
+        "dftd4"
+      ],
+      "patterns": [
+        "convergence-fixed"
+      ],
+      "oracles": [
+        "invariance"
+      ],
+      "impact": 1,
+      "impact_level": "I (up to 18 % in charges, 1.25 % in E_D4 for skewed cells)",
+      "status": "Known issue; data contributed",
+      "reported": true
+    },
+    {
+      "id": "OSTRA-006",
+      "num": "006",
+      "title": "HSE03/06/12, LC-wPBE and wPBEh energy is discontinuous at s = 1 (s_scaling_2)",
+      "path": "findings/OSTRA-006-libxc-wpbeh-s-scaling-discontinuity",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [
+        "hard-branch-switch"
+      ],
+      "oracles": [
+        "exact-identity"
+      ],
+      "impact": 2,
+      "impact_level": "II",
+      "status": "Classified; not to be reported (deliberate fidelity to HSE06)",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-007",
+      "num": "007",
+      "title": "Derivative of TPSS/TM-family correlation at tau = tau_W (z = 1) depends on rounding",
+      "path": "findings/OSTRA-007-libxc-tpss-c-alpha0-derivative",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [],
+      "oracles": [
+        "exact-identity"
+      ],
+      "impact": 4,
+      "impact_level": "IV",
+      "status": "Documented; not reported",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-008",
+      "num": "008",
+      "title": "Out-of-bounds read of TURNOVER_POINT[40] for Boys order m >= 40 corrupts SR integrals at high l",
+      "path": "findings/OSTRA-008-libcint-turnover-point-oob",
+      "libraries": [
+        "libcint"
+      ],
+      "patterns": [
+        "fixed-size-table"
+      ],
+      "oracles": [
+        "exact-identity",
+        "analytic-reference"
+      ],
+      "impact": 3,
+      "impact_level": "III (SR integrals with l >~ 10; errors up to 3e8, build-dependent)",
+      "status": "Reported (verified independently, attributed, minimal fix verified)",
+      "reported": true
+    },
+    {
+      "id": "OSTRA-009",
+      "num": "009",
+      "title": "xc_E1_scaled_jet switches to the asymptotic series at z = 18, where it is still inaccurate",
+      "path": "findings/OSTRA-009-libxc-e1-scaled-jet-z18",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [
+        "hard-branch-switch"
+      ],
+      "oracles": [
+        "analytic-reference",
+        "branch-boundary"
+      ],
+      "impact": 2,
+      "impact_level": "II (to be measured in molecules)",
+      "status": "Verified; attribution of the LC-wPBE inconsistency pending",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-010",
+      "num": "010",
+      "title": "pc07_thr = 1/40 inherited by PC07-opt (SCAN-L, r2SCAN-L): a 4.6e-5 indicator value is truncated to zero",
+      "path": "findings/OSTRA-010-libxc-pc07-threshold-inherited",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [
+        "hard-branch-switch",
+        "stale-threshold",
+        "unverified-comment"
+      ],
+      "oracles": [
+        "branch-boundary"
+      ],
+      "impact": 2,
+      "impact_level": "II (zk jump ~1.8e-6 relative per point; molecular impact not measured)",
+      "status": "Verified analytically",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-011",
+      "num": "011",
+      "title": "xc_func_set_fhc_enforcement does not propagate to auxiliary functionals of mixed meta-GGAs",
+      "path": "findings/OSTRA-011-libxc-fhc-enforcement-not-propagated",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [
+        "inconsistent-configuration"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (codes that disable FHC, e.g. PAW, with hybrid/mixed meta-GGAs)",
+      "status": "Verified",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-012",
+      "num": "012",
+      "title": "REVTPSSX registered without XC_KINETIC and with two formula errors",
+      "path": "findings/OSTRA-012-xcfun-revtpssx",
+      "libraries": [
+        "XCFun"
+      ],
+      "patterns": [
+        "inconsistent-configuration",
+        "transcription-slip"
+      ],
+      "oracles": [
+        "independent-implementation"
+      ],
+      "impact": 3,
+      "impact_level": "III (fails loudly: NaN as registered)",
+      "status": "Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-013",
+      "num": "013",
+      "title": "REVTPSSC uses z^2 instead of z^3 in eps_c = eps_PKZB (1 + d eps_PKZB z^3)",
+      "path": "findings/OSTRA-013-xcfun-revtpssc-z2",
+      "libraries": [
+        "XCFun"
+      ],
+      "patterns": [
+        "transcription-slip"
+      ],
+      "oracles": [
+        "independent-implementation"
+      ],
+      "impact": 1,
+      "impact_level": "I-II (explorer: SCF shifts 1.5-2.1 kcal/mol; not re-measured)",
+      "status": "Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-014",
+      "num": "014",
+      "title": "R4SCANX uses d_p4 = d_a4 = 0.232 instead of 0.802 / 0.178",
+      "path": "findings/OSTRA-014-xcfun-r4scanx-damping-params",
+      "libraries": [
+        "XCFun"
+      ],
+      "patterns": [
+        "stale-threshold"
+      ],
+      "oracles": [
+        "independent-implementation"
+      ],
+      "impact": 1,
+      "impact_level": "I-II (explorer: 0.5-0.9 kcal/mol; not re-measured)",
+      "status": "Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-015",
+      "num": "015",
+      "title": "SCANX/SCANC return +-inf at alpha = 1 (uniform gas) and SCANX v_sigma is halved at s = 0",
+      "path": "findings/OSTRA-015-xcfun-scan-alpha1-s0",
+      "libraries": [
+        "XCFun"
+      ],
+      "patterns": [
+        "hard-branch-switch"
+      ],
+      "oracles": [
+        "independent-implementation",
+        "energy-potential-consistency",
+        "branch-boundary"
+      ],
+      "impact": 3,
+      "impact_level": "III-IV (exact points rarely on molecular grids)",
+      "status": "Verified",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-016",
+      "num": "016",
+      "title": "TFK (Thomas-Fermi kinetic) ignores spin polarization",
+      "path": "findings/OSTRA-016-xcfun-tfk-spin",
+      "libraries": [
+        "XCFun"
+      ],
+      "patterns": [
+        "transcription-slip"
+      ],
+      "oracles": [
+        "exact-identity",
+        "independent-implementation"
+      ],
+      "impact": 3,
+      "impact_level": "III (spin-polarized kinetic-energy use, e.g. embedding)",
+      "status": "Confirmed (level 3): exact spin scaling after minimal fix",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-017",
+      "num": "017",
+      "title": "Segmentation fault for VV10/rVV10 functionals with the XCFun backend",
+      "path": "findings/OSTRA-017-pyscf-xcfun-vv10-segfault",
+      "libraries": [
+        "PySCF"
+      ],
+      "patterns": [
+        "inconsistent-configuration"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (loud: process killed, exit 139)",
+      "status": "Verified",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-018",
+      "num": "018",
+      "title": "lda_c_pk09: NaN and huge values in a band around r_s = 22.739 for spin-polarized densities",
+      "path": "findings/OSTRA-018-libxc-pk09-pole-polarized",
+      "libraries": [
+        "libxc"
+      ],
+      "patterns": [],
+      "oracles": [
+        "branch-boundary",
+        "exact-identity"
+      ],
+      "impact": 2,
+      "impact_level": "II-III (open-shell densities near rho ~ 2e-5)",
+      "status": "Verified (anomaly reproduced); cause: model pole vs implementation pending",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-019",
+      "num": "019",
+      "title": "simple-dftd3 gCP: effective atomic numbers beyond the 35/36-entry parameter tables",
+      "path": "findings/OSTRA-019-simple-dftd3-gcp-zeff-table-oob",
+      "libraries": [
+        "simple-dftd3"
+      ],
+      "patterns": [
+        "fixed-size-table"
+      ],
+      "oracles": [
+        "sanitizer-code-reading"
+      ],
+      "impact": 3,
+      "impact_level": "III (heavy elements: Kr/Xe/Rn with MINIS, Fr/Ra/Ac, Z > 94)",
+      "status": "Verified (code)",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-020",
+      "num": "020",
+      "title": "PySCF ECP: table index 400 at z = 16 and crashes of ECPscalar_ipnuc at high angular momentum",
+      "path": "findings/OSTRA-020-pyscf-ecp-bessel-table-and-cart-cum",
+      "libraries": [
+        "PySCF"
+      ],
+      "patterns": [
+        "fixed-size-table"
+      ],
+      "oracles": [
+        "sanitizer-code-reading"
+      ],
+      "impact": 2,
+      "impact_level": "II-III (A: only z exactly 16; B: nuclear gradients crash with built-in i-function bases and ECPs with a local channel)",
+      "status": "A verified; B attributed, impact measured, minimal fix verified; extra ASan claims pending",
+      "reported": true
+    },
+    {
+      "id": "OSTRA-021",
+      "num": "021",
+      "title": "dftd4 accepts Z = 112-118 but multicharge EEQ parameters stop at Z = 103: unphysical charges without error",
+      "path": "findings/OSTRA-021-dftd4-multicharge-max-elem-mismatch",
+      "libraries": [
+        "dftd4",
+        "multicharge"
+      ],
+      "patterns": [
+        "fixed-size-table"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (superheavy elements only)",
+      "status": "Verified (released dftd4 4.3.1)",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-022",
+      "num": "022",
+      "title": "libecpint BesselFunction::upper_bound returns a lower bound on the rising side of K_L(z)",
+      "path": "findings/OSTRA-022-libecpint-bessel-upper-bound-is-lower",
+      "libraries": [
+        "libecpint"
+      ],
+      "patterns": [
+        "unverified-comment"
+      ],
+      "oracles": [
+        "analytic-reference"
+      ],
+      "impact": 4,
+      "impact_level": "IV inside libecpint (no caller); III for external users of the public header",
+      "status": "Verified (code); impact downgraded",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-023",
+      "num": "023",
+      "title": "simple-dftd3 gCP: B_k(x) series vs closed form chosen by abs(za - zb) instead of abs(x)",
+      "path": "findings/OSTRA-023-simple-dftd3-gcp-bk-switch",
+      "libraries": [
+        "simple-dftd3"
+      ],
+      "patterns": [
+        "hard-branch-switch",
+        "unverified-comment"
+      ],
+      "oracles": [
+        "analytic-reference",
+        "energy-potential-consistency",
+        "branch-boundary"
+      ],
+      "impact": 2,
+      "impact_level": "II (gCP derivatives for unlike-element pairs; energy impact not re-measured)",
+      "status": "Partly verified",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-024",
+      "num": "024",
+      "title": "libecpint BesselFunction::calculate at z <= 0 writes only K_0; scalar overload returns 1 for all L",
+      "path": "findings/OSTRA-024-libecpint-bessel-z0-contract",
+      "libraries": [
+        "libecpint"
+      ],
+      "patterns": [
+        "unverified-comment",
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 4,
+      "impact_level": "IV inside libecpint (callers guard x > 0 or rely on zero-initialized buffers); III for external users",
+      "status": "Verified (code); impact downgraded",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-025",
+      "num": "025",
+      "title": "simple-dftd3 gCP: gradient silently zero unless the virial is also requested",
+      "path": "findings/OSTRA-025-simple-dftd3-gcp-gradient-needs-sigma",
+      "libraries": [
+        "simple-dftd3"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (C API / Fortran callers requesting gradients without sigma)",
+      "status": "Verified (code)",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-026",
+      "num": "026",
+      "title": "multicharge get_charges: intent(out) dqdr left undefined when dqdL is not requested",
+      "path": "findings/OSTRA-026-multicharge-dqdr-intent-out-unwritten",
+      "libraries": [
+        "multicharge"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (callers requesting only Cartesian charge derivatives)",
+      "status": "Verified (code)",
+      "reported": false
+    }
+  ],
+  "libraries": [
+    "libxc",
+    "XCFun",
+    "libcint",
+    "PySCF",
+    "multicharge",
+    "dftd4",
+    "simple-dftd3",
+    "libecpint"
+  ],
+  "dependencies": [
+    {
+      "from": "PySCF",
+      "to": "libcint",
+      "relation": "bundles"
+    },
+    {
+      "from": "PySCF",
+      "to": "XCFun",
+      "relation": "bundles"
+    },
+    {
+      "from": "PySCF",
+      "to": "libxc",
+      "relation": "uses"
+    },
+    {
+      "from": "dftd4",
+      "to": "multicharge",
+      "relation": "uses"
+    }
+  ],
+  "patterns": {
+    "hard-branch-switch": "Hard branch switches",
+    "stale-threshold": "Thresholds or parameters reused or stale",
+    "unverified-comment": "Unverified numerical comments",
+    "fixed-size-table": "Fixed-size tables",
+    "convergence-fixed": "Convergence fixed for the typical case",
+    "inconsistent-configuration": "Inconsistent configuration",
+    "implicit-api-contract": "Implicit API contracts",
+    "transcription-slip": "Formula transcription slips"
+  },
+  "oracles": {
+    "energy-potential-consistency": "Energy-potential consistency",
+    "invariance": "Invariances",
+    "exact-identity": "Exact identities",
+    "analytic-reference": "Analytic reference",
+    "independent-implementation": "Independent implementation",
+    "api-contract": "API contract",
+    "branch-boundary": "Branch boundaries",
+    "sanitizer-code-reading": "Sanitizer / code reading"
+  }
+}

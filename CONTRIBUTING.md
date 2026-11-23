@@ -29,7 +29,7 @@ git remote add upstream https://github.com/napoles-uach/ostra-audit.git
 # for each piece of work
 git fetch upstream && git switch -c <you>/<topic> upstream/main
 # ... work ...
-python3 tools/make_index.py
+python3 tools/make_index.py && python3 tools/make_graph.py
 git add -A && git commit -m "OSTRA-NNN: <short description>"
 git push -u origin <you>/<topic>
 # open a pull request against napoles-uach/ostra-audit:main
@@ -48,12 +48,14 @@ git push -u origin <you>/<topic>
    ```bash
    cp -r templates/OSTRA-NNN-library-short-name findings/OSTRA-027-libxc-short-name
    ```
-3. Fill `finding.md` (the table fields are parsed by `tools/make_index.py`; keep the field names) and
-   `environment.txt`. Put minimal reproducers in `repro/`, raw outputs in `evidence/`.
+3. Fill `finding.md` (the table fields are parsed by `tools/make_index.py` and `tools/make_graph.py`; keep the
+   field names) and `environment.txt`. `libraries`, `pattern` and `oracle_class` take values from
+   `tools/graph_config.json`; adding a new library or pattern means adding it there (a new pattern also goes to
+   `catalog/README.md` and needs two independent cases before it is presented as a pattern). Put minimal reproducers in `repro/`, raw outputs in `evidence/`.
 4. Status starts at `candidate` and advances only with evidence:
    `candidate → verified → attributed → impact measured → reported → resolved` (or `reclassified` / `refuted`).
-5. Run `python3 tools/make_index.py` and commit the regenerated `findings/INDEX.md` and `findings/index.json`.
-   Never edit those two files by hand.
+5. Run `python3 tools/make_index.py && python3 tools/make_graph.py` and commit the regenerated
+   `findings/INDEX.md`, `findings/index.json`, `findings/graph.json` and `docs/graph.html`. Never edit them by hand.
 
 ## Verifying someone else's finding
 
@@ -84,7 +86,8 @@ Independent verification is the most valuable contribution and the condition for
 | `catalog/` | Fragile numerical decisions: recurring patterns with linked cases |
 | `probes/` | General harnesses and scan results |
 | `agents/` | Agent folders and `LOG.md` |
-| `tools/` | Repository utilities |
+| `docs/graph.html` | Interactive graph of findings, libraries, patterns and oracles (generated) |
+| `tools/` | Repository utilities (`make_index.py`, `make_graph.py`, `graph_config.json`) |
 
 ## Authorship
 

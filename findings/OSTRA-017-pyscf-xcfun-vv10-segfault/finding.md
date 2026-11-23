@@ -8,6 +8,9 @@
 | detected | 2026-11-21 |
 | detected_by | Explorer 2; verified by explorer 1 |
 | oracle | Crash / exit code |
+| libraries | PySCF |
+| pattern | inconsistent-configuration |
+| oracle_class | api-contract |
 | class | New bug (crash) |
 | impact_level | III (loud: process killed, exit 139) |
 | status | Verified |

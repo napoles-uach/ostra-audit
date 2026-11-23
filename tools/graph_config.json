@@ -1,0 +1,29 @@
+{
+  "libraries": ["libxc", "XCFun", "libcint", "PySCF", "multicharge", "dftd4", "simple-dftd3", "libecpint"],
+  "dependencies": [
+    {"from": "PySCF", "to": "libcint", "relation": "bundles"},
+    {"from": "PySCF", "to": "XCFun", "relation": "bundles"},
+    {"from": "PySCF", "to": "libxc", "relation": "uses"},
+    {"from": "dftd4", "to": "multicharge", "relation": "uses"}
+  ],
+  "patterns": {
+    "hard-branch-switch": "Hard branch switches",
+    "stale-threshold": "Thresholds or parameters reused or stale",
+    "unverified-comment": "Unverified numerical comments",
+    "fixed-size-table": "Fixed-size tables",
+    "convergence-fixed": "Convergence fixed for the typical case",
+    "inconsistent-configuration": "Inconsistent configuration",
+    "implicit-api-contract": "Implicit API contracts",
+    "transcription-slip": "Formula transcription slips"
+  },
+  "oracles": {
+    "energy-potential-consistency": "Energy-potential consistency",
+    "invariance": "Invariances",
+    "exact-identity": "Exact identities",
+    "analytic-reference": "Analytic reference",
+    "independent-implementation": "Independent implementation",
+    "api-contract": "API contract",
+    "branch-boundary": "Branch boundaries",
+    "sanitizer-code-reading": "Sanitizer / code reading"
+  }
+}

@@ -6,7 +6,7 @@
 - [ ] Each finding folder follows `templates/` (finding.md, environment.txt, repro/, evidence/, verification/, report/)
 - [ ] `finding.md` records the state at detection time; later changes go under "Corrections"
 - [ ] Reproducers run with only the library installed; raw outputs are in `evidence/`
-- [ ] `python3 tools/make_index.py` was run and INDEX.md / index.json are committed
+- [ ] `python3 tools/make_index.py && python3 tools/make_graph.py` were run and their outputs are committed
 - [ ] `agents/LOG.md` updated if an AI agent proposed or verified something
 - [ ] No secrets, no large binaries or third-party repositories committed
 - [ ] Nothing was reported upstream (reports are filed only after review, see REPORTING.md)
