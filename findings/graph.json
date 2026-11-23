@@ -324,8 +324,8 @@
       ],
       "impact": 3,
       "impact_level": "III (loud: process killed, exit 139)",
-      "status": "Verified, attributed, fix tested; issue drafted",
-      "reported": false
+      "status": "Reported (verified, attributed, fix tested)",
+      "reported": true
     },
     {
       "id": "OSTRA-018",

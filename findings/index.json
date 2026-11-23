@@ -317,8 +317,8 @@
     "oracle_class": "api-contract",
     "class": "New bug (crash)",
     "impact_level": "III (loud: process killed, exit 139)",
-    "status": "Verified, attributed, fix tested; issue drafted",
-    "report": "Pending (issue drafted in report/)",
+    "status": "Reported (verified, attributed, fix tested)",
+    "report": "Reported: [pyscf#3679](https://github.com/pyscf/pyscf/issues/3679) (2026-11-23)",
     "path": "findings/OSTRA-017-pyscf-xcfun-vv10-segfault",
     "slug": "pyscf-xcfun-vv10-segfault"
   },

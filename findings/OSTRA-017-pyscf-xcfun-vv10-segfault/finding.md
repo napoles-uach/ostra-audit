@@ -13,8 +13,8 @@
 | oracle_class | api-contract |
 | class | New bug (crash) |
 | impact_level | III (loud: process killed, exit 139) |
-| status | Verified, attributed, fix tested; issue drafted |
-| report | Pending (issue drafted in report/) |
+| status | Reported (verified, attributed, fix tested) |
+| report | Reported: [pyscf#3679](https://github.com/pyscf/pyscf/issues/3679) (2026-11-23) |
 
 `mf._numint.libxc = dft.xcfun` with `wb97m_v` or `b97m_v` on H2/STO-3G terminates with SIGSEGV (exit 139);
 the same runs with libxc succeed.
