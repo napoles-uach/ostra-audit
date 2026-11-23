@@ -22,6 +22,9 @@ and run the verification harnesses; every result is checked, and every report re
 |---|---|
 | `PROTOCOL.md` | The six-step audit protocol, finding classes, impact levels, status workflow |
 | `REPORTING.md` | How a verified finding becomes an upstream issue: gate checklist, issue structure, signature, follow-up |
+| `CONTRIBUTING.md` | How to contribute: fork/branch/PR workflow, adding or verifying a finding, working with AI agents |
+| `templates/` | Skeleton of a finding folder |
+| `tools/make_index.py` | Regenerates `findings/INDEX.md` and `index.json` from each `finding.md` |
 | `findings/INDEX.md` | Table of all findings with class, impact level and status |
 | `findings/OSTRA-NNN-*/` | One folder per finding: `finding.md` (record), `environment.txt` (exact versions), `repro/` (minimal reproducers), `evidence/` (raw outputs, figures, data), `verification/` (independent checks), `report/` (draft or submitted issue text) |
 | `candidates/` | Signals not yet verified, or not reproduced |

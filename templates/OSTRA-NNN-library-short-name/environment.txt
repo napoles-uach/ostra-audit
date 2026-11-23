@@ -1,0 +1,6 @@
+date:
+machine / OS (where the tests actually ran):
+compiler and flags:
+python and numpy versions:
+library versions and commits:
+how the library was built or installed:
