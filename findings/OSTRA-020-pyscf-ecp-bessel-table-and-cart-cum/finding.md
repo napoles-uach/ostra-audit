@@ -11,7 +11,7 @@
 | class | Memory safety, new |
 | impact_level | II-III (A: only z exactly 16; B: nuclear gradients crash with built-in i-function bases and ECPs with a local channel) |
 | status | A verified; B attributed, impact measured, minimal fix verified; extra ASan claims pending |
-| report | Pending (issue drafted in report/) |
+| report | Reported: [pyscf#3674](https://github.com/pyscf/pyscf/issues/3674) (2026-11-23) |
 
 A. ECPsph_ine_opt uses `z > 16` to leave the [0,16) tables; floor(16.0/(16/400)) = 400, one row past the
 400-row tables (only for z exactly 16). B. `double omega_nuc[CART_CUM]` with CART_CUM = 456 (up to l = 12). Verifier,
