@@ -55,3 +55,11 @@ Single assigned task. Verifier outcome: cause confirmed by reading the code (loc
 gradient integrals segfault). Two additional ASan-only claims (cache-size underestimate, ECP_LMAX) not reproduced as
 crashes in an ordinary build; pending an ASan build. Verifier error recorded: a first attempt called second-derivative
 integrals without `comp=9` and crashed for that reason; corrected before drawing conclusions.
+
+## 2026-11-23 — Blind verification of OSTRA-008 by explorer 2 (Gemini 4 Neon, Antigravity)
+First finding by explorer 1 verified blind by another agent (location and claim only; patch given after phase 1).
+Result: anomaly, cause and defect confirmed on macOS arm64 with four binaries, ASan and mpmath / full - LR oracles.
+Corrections to explorer 1: the m = 71 bound is loose (reachable max 47 in SR, 62-63 overall) and a guard is still
+needed for direct calls with m >= 72. New side observations moved to candidates: double-precision loss above t0
+(partly re-checked by explorer 1) and an lrys_wheeler singularity at R = 1.0 on arm64 without quadmath.
+Two 503 capacity errors from the model API during the run; no effect on results.

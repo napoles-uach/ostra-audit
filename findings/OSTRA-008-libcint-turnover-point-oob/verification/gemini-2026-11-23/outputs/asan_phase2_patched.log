@@ -1,0 +1,78 @@
+===== CASE: boys_ok (EXIT=0) =====
+boys_ok m=39: f[0]=5.036217745043e-02 f[39]=7.611980968150e-07
+
+===== CASE: boys_gamma_40 (EXIT=0) =====
+boys_gamma_40: f[40]=7.367359942951e-07
+
+===== CASE: boys_lgamma_40 (EXIT=0) =====
+boys_lgamma_40: f[40]=7.367359942951e-07
+
+===== CASE: boys_erfc_40 (EXIT=0) =====
+boys_erfc_40: f[40]=7.367359942951e-07
+
+===== CASE: boys_lerfc_41 (EXIT=0) =====
+boys_lerfc_41: f[41]=7.137842887709e-07
+
+===== CASE: boys_gamma_71 (EXIT=0) =====
+m=71 ok: 3.681520940048e-07
+
+===== CASE: eri_sr_l9 (EXIT=0) =====
+int2e_sph l=(10,10|10,9) omega=-0.5 -> ret=1 sum_abs=2.687429119250e+01 buf[0]=0.000000000000e+00
+libcint lrys_wheeler singular value n=20 i=11 b=-1.8361
+
+===== CASE: eri_sr_l10 (EXIT=0) =====
+int2e_sph l=(10,10|10,10) omega=-0.5 -> ret=1 sum_abs=3.185281674520e+01 buf[0]=3.669984532162e-02
+libcint lrys_wheeler singular value n=21 i=11 b=-1.8361
+
+===== CASE: eri_full_l10 (EXIT=0) =====
+int2e_sph l=(10,10|10,10) omega=0 -> ret=1 sum_abs=1.379515063785e+02 buf[0]=2.671661986755e-01
+
+===== CASE: eri_lr_l10 (EXIT=0) =====
+int2e_sph l=(10,10|10,10) omega=0.5 -> ret=1 sum_abs=1.064481188742e+02 buf[0]=2.304663533533e-01
+
+===== CASE: eri_sr_3c2e (EXIT=0) =====
+int3c2e_sph l=(14,14|12) omega=-0.5 -> ret=1 sum_abs=2.101930133987e+00
+libcint lrys_wheeler singular value n=21 i=11 b=-1.61748
+
+===== CASE: boys_gamma_72 (EXIT=-6) =====
+=================================================================
+==25713==ERROR: AddressSanitizer: global-buffer-overflow on address 0x0001033aec40 at pc 0x0001031d14e8 bp 0x00016d18df60 sp 0x00016d18df58
+READ of size 8 at 0x0001033aec40 thread T0
+    #0 0x0001031d14e4 in gamma_inc_like fmt.c:246
+    #1 0x000102c70d28 in main test_asan_patched.c:159
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x0001033aec40 is located 0 bytes after global variable 'TURNOVER_POINT' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/patched/fmt.c' (0x0001033aea00) of size 576
+SUMMARY: AddressSanitizer: global-buffer-overflow fmt.c:246 in gamma_inc_like
+Shadow bytes around the buggy address:
+  0x0001033ae980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001033aea00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001033aea80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001033aeb00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001033aeb80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0001033aec00: 00 00 00 00 00 00 00 00[f9]f9 f9 f9 f9 f9 f9 f9
+  0x0001033aec80: f9 f9 f9 f9 f9 f9 f9 f9 00 00 00 00 00 00 00 00
+  0x0001033aed00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001033aed80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001033aee00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0001033aee80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==25713==ABORTING

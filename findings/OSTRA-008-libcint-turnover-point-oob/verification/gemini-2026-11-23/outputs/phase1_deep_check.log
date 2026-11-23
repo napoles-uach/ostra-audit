@@ -1,0 +1,127 @@
+libcint lrys_wheeler singular value n=20 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=20 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=20 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=20 i=10 b=-0.051681
+libcint lrys_wheeler singular value n=20 i=10 b=-0.051681
+libcint lrys_wheeler singular value n=20 i=10 b=-0.051681
+libcint lrys_wheeler singular value n=20 i=11 b=-19.7932
+libcint lrys_wheeler singular value n=20 i=11 b=-19.7932
+libcint lrys_wheeler singular value n=20 i=11 b=-19.7932
+libcint lrys_wheeler singular value n=20 i=10 b=-0.0202413
+libcint lrys_wheeler singular value n=20 i=10 b=-0.0202413
+libcint lrys_wheeler singular value n=20 i=10 b=-0.0202413
+libcint lrys_wheeler singular value n=20 i=12 b=-451.821
+libcint lrys_wheeler singular value n=20 i=12 b=-451.821
+libcint lrys_wheeler singular value n=20 i=12 b=-451.821
+libcint lrys_wheeler singular value n=20 i=12 b=-0.0390953
+libcint lrys_wheeler singular value n=20 i=12 b=-0.0390953
+libcint lrys_wheeler singular value n=20 i=12 b=-0.0390953
+libcint lrys_wheeler singular value n=21 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=21 i=5 b=-24607.1
+libcint lrys_wheeler singular value n=21 i=10 b=-0.0176814
+libcint lrys_wheeler singular value n=21 i=5 b=-24607.1
+libcint lrys_wheeler singular value n=21 i=5 b=-10.2362
+libcint lrys_wheeler singular value n=21 i=10 b=-0.051681
+libcint qrys_wheeler singular value n=21 i=9 b=-522.242
+libcint lrys_wheeler singular value n=21 i=5 b=-10.2362
+libcint lrys_wheeler singular value n=21 i=11 b=-19.7932
+libcint lrys_wheeler singular value n=21 i=6 b=-353.297
+libcint lrys_wheeler singular value n=21 i=10 b=-0.0456161
+libcint qrys_wheeler singular value n=21 i=10 b=-24.9473
+libcint lrys_wheeler singular value n=21 i=6 b=-353.297
+libcint lrys_wheeler singular value n=21 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=21 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=21 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=21 i=15 b=-41.6688
+libcint lrys_wheeler singular value n=21 i=15 b=-41.6688
+libcint lrys_wheeler singular value n=21 i=15 b=-41.6688
+libcint lrys_wheeler singular value n=22 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=22 i=5 b=-10.2362
+libcint lrys_wheeler singular value n=22 i=10 b=-0.051681
+libcint qrys_wheeler singular value n=22 i=9 b=-522.242
+libcint lrys_wheeler singular value n=22 i=5 b=-10.2362
+libcint lrys_wheeler singular value n=22 i=21 b=-2.06132e+06
+libcint lrys_wheeler singular value n=22 i=11 b=-19.7932
+libcint lrys_wheeler singular value n=22 i=21 b=-2.06132e+06
+libcint lrys_wheeler singular value n=22 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=22 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=22 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=24 i=22 b=-685904
+libcint lrys_wheeler singular value n=24 i=12 b=-0.868936
+libcint qrys_wheeler singular value n=24 i=23 b=-2.15256
+libcint lrys_wheeler singular value n=24 i=22 b=-685904
+libcint lrys_wheeler singular value n=24 i=5 b=-10.2362
+libcint lrys_wheeler singular value n=24 i=10 b=-0.051681
+libcint qrys_wheeler singular value n=24 i=23 b=-163.746
+libcint lrys_wheeler singular value n=24 i=5 b=-10.2362
+libcint lrys_wheeler singular value n=24 i=21 b=-2.06132e+06
+libcint lrys_wheeler singular value n=24 i=11 b=-19.7932
+libcint qrys_wheeler singular value n=24 i=23 b=-2.62115
+libcint lrys_wheeler singular value n=24 i=21 b=-2.06132e+06
+libcint lrys_wheeler singular value n=24 i=23 b=-11053.9
+libcint lrys_wheeler singular value n=24 i=23 b=-11053.9
+libcint lrys_wheeler singular value n=24 i=23 b=-11053.9
+libcint qrys_wheeler singular value n=24 i=22 b=-1.81389
+libcint lrys_wheeler singular value n=24 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=24 i=8 b=-8.84414
+libcint lrys_wheeler singular value n=24 i=8 b=-8.84414
+=== A. Exact IEEE-754 doubles sitting at TURNOVER_POINT[38..51] in each binary ===
+  m |          clang_O2_v621 |          clang_O0_v621 |     gcc16_O2_quad_v621 |             pyscf_v613
+-------------------------------------------------------------------------------------------------------
+ 38 |           1.456467e+01 |           1.456467e+01 |           1.456467e+01 |           1.456467e+01  <-- IN BOUNDS
+ 39 |           1.493688e+01 |           1.493688e+01 |           1.493688e+01 |           1.493688e+01  <-- IN BOUNDS
+ 40 |           0.000000e+00 |           3.333333e-01 |           8.862269e-01 |           0.000000e+00  <-- FIRST OOB
+ 41 |          4.940656e-324 |           5.238095e-01 |           2.000000e-20 |          4.940656e-324
+ 42 |          4.243992e-314 |           5.064935e-01 |         -3.105036e+231 |          4.243992e-314
+ 43 |          2.121996e-314 |           5.030303e-01 |           1.301833e-02 |          2.121996e-314
+ 44 |          4.243992e-314 |           5.017544e-01 |         -4.493468e-104 |          4.243992e-314
+ 45 |          2.121996e-314 |           5.011442e-01 |           1.923278e+00 |          2.121996e-314
+ 46 |          4.243992e-314 |           5.008052e-01 |           0.000000e+00 |          4.243992e-314
+ 47 |          1.482197e-323 |           5.005974e-01 |           1.937500e+00 |          1.482197e-323
+ 48 |          4.243992e-314 |           5.004608e-01 |           0.000000e+00 |          4.243992e-314
+ 49 |          6.365987e-314 |           5.003663e-01 |           1.875000e+00 |          6.365987e-314
+ 50 |          1.976263e-323 |           5.002982e-01 |           0.000000e+00 |          1.976263e-323
+ 51 |          4.243992e-314 |           5.002474e-01 |           2.820312e+00 |          4.243992e-314
+
+=== B. High-l SR ERI (int2e_sph) across small-to-medium R (demonstrating quadmath failure + binary dependence) ===
+
+--- ctrl_n20_m39: l=(10, 10, 10, 9) (nroots=20, m=39, omega=-0.5) ---
+   R      x |        clang_O2_v621 |        clang_O0_v621 |   gcc16_O2_quad_v621 |           pyscf_v613
+ 0.2  0.040 |            2.998e-12 |            3.039e-12 |            2.021e-12 |            2.998e-12
+ 0.5  0.249 |            2.076e-11 |            2.077e-11 |            2.348e-12 |            2.076e-11
+ 0.6  0.359 |            1.099e-11 |            1.096e-11 |            2.456e-12 |            1.099e-11
+ 0.8  0.638 |            6.253e-11 |            6.253e-11 |            1.847e-12 |            6.253e-11
+ 1.0  0.997 |            1.072e-05 |            1.072e-05 |            1.952e-12 |            1.072e-05
+ 2.0  3.990 |            6.143e-10 |            6.143e-10 |            2.565e-12 |            6.143e-10
+
+--- oob_n21_m41: l=(10, 10, 10, 10) (nroots=21, m=41, omega=-0.5) ---
+   R      x |        clang_O2_v621 |        clang_O0_v621 |   gcc16_O2_quad_v621 |           pyscf_v613
+ 0.2  0.040 |            1.731e+40 |            4.832e-12 |            2.397e+22 |            1.731e+40
+ 0.4  0.160 |            1.594e+32 |            7.183e-12 |            4.586e+09 |            1.594e+32
+ 0.5  0.249 |            2.704e-04 |            8.439e-12 |            7.001e-05 |            2.704e-04
+ 0.6  0.359 |            1.512e+21 |            6.567e-12 |            9.458e+01 |            1.512e+21
+ 0.7  0.489 |            3.309e+09 |            1.832e-11 |            8.986e-11 |            3.309e+09
+ 0.8  0.638 |            3.238e+16 |            3.238e+16 |            3.304e-04 |            3.238e+16
+ 1.0  0.997 |            4.368e+11 |            4.368e+11 |            3.023e-07 |            4.368e+11
+ 1.5  2.244 |            4.803e-06 |            4.803e-06 |            6.727e-12 |            4.803e-06
+ 2.0  3.990 |            3.096e+00 |            3.096e+00 |            7.882e-12 |            3.096e+00
+
+--- oob_n22_m43: l=(11, 11, 10, 10) (nroots=22, m=43, omega=-0.5) ---
+   R      x |        clang_O2_v621 |        clang_O0_v621 |   gcc16_O2_quad_v621 |           pyscf_v613
+ 0.2  0.040 |            3.148e+43 |            8.948e-12 |            4.358e+25 |            3.148e+43
+ 0.5  0.249 |            2.966e-04 |            1.580e-11 |            5.948e-04 |            2.966e-04
+ 0.6  0.359 |            3.059e+23 |            1.165e-11 |            1.914e+04 |            3.059e+23
+ 0.8  0.638 |            3.690e+18 |            3.690e+18 |            3.766e-02 |            3.690e+18
+ 1.0  0.997 |            3.189e+13 |            3.189e+13 |            2.208e-05 |            3.189e+13
+ 1.5  2.244 |            8.325e-06 |            8.325e-06 |            1.453e-11 |            8.325e-06
+
+--- oob_n24_m47: l=(12, 12, 11, 11) (nroots=24, m=47, omega=-0.5) ---
+   R      x |        clang_O2_v621 |        clang_O0_v621 |   gcc16_O2_quad_v621 |           pyscf_v613
+ 0.2  0.040 |            1.420e+50 |            3.673e-11 |            3.684e-11 |            1.420e+50
+ 0.5  0.249 |            3.985e-04 |            5.193e-11 |            3.448e-11 |            3.985e-04
+ 0.6  0.359 |            1.704e+28 |            4.341e-11 |            3.714e-11 |            1.704e+28
+ 0.8  0.638 |            6.501e+22 |            6.501e+22 |            3.984e-11 |            6.501e+22
+ 1.0  0.997 |            2.301e+17 |            2.301e+17 |            3.843e-11 |            2.301e+17
+ 1.5  2.244 |            2.566e-05 |            2.566e-05 |            1.105e-09 |            2.566e-05
+
+Saved to /Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/outputs/phase1_deep_check.json

@@ -36,6 +36,8 @@ The failing orders differ between binaries, as expected for an out-of-bounds rea
 
 With l <= 9 (m <= 37) all three agree at 1e-12. No warning is printed in the failing cases.
 
+3) Independent confirmation on macOS arm64. A second, independent verification (own test code, not ours) reproduced the problem with four binaries: clang -O0, clang -O2, gcc-16 -O2 with libquadmath, and the libcint 6.1.3 shipped with PySCF. AddressSanitizer reports a `global-buffer-overflow` (READ of size 8, just past `TURNOVER_POINT`) at fmt.c:214/256/363/404 for m >= 40 and in `int2e_sph` with SR for (10,10|10,10), and not for m = 39 or (10,10|10,9). The size of the error again depends on the binary; one silent case was a 3.8 % relative error in an SR `int2e_sph` (11,11|10,10) element with gcc-16, with nothing printed to stderr.
+
 <details><summary>libcint_turnover_repro.py</summary>
 
 ```python
@@ -92,7 +94,7 @@ It only matters for very high angular momentum: SR integrals need roughly sum of
 
 ## Suggested fix
 
-Extend the table to cover every m that can be requested. The formula in the comment above the table, t0 = 0.5*((2m-1)!!/(2m-1)^0.5)^(1/(m-1)), reproduces the existing 38 non-zero entries to 8e-12. The patch below extends the table to m = 71 with values generated from that formula. With it, both reproducers give 1e-17 (Boys values) and 1e-11 (integrals) at every m and distance tested. A guard against m exceeding the table size would also prevent the problem from reappearing if MXRYSROOTS grows.
+Extend the table to cover every m that can be requested. The formula in the comment above the table, t0 = 0.5*((2m-1)!!/(2m-1)^0.5)^(1/(m-1)), reproduces the existing 38 non-zero entries to 8e-12. The patch below extends the table to m = 71 with values generated from that formula; this is above the largest m reachable today (63, the size of `fmt[MXRYSROOTS*2]`), leaving some margin. With it, both reproducers give 1e-17 (Boys values) and 1e-11 (integrals) at every m and distance tested. Low angular momentum is unaffected: in the independent check, results for m <= 39 and for `int2e_sph` with l <= 5 are bit-identical with and without the patch. A direct call to the exported functions with m >= 72 still reads out of bounds, so a guard against m exceeding the table size would also prevent the problem from reappearing if MXRYSROOTS grows.
 
 <details><summary>Patch (src/fmt.c)</summary>
 
@@ -140,4 +142,4 @@ Extend the table to cover every m that can be requested. The formula in the comm
 </details>
 
 ---
-Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries. Analysis assisted by an AI model (Claude, Anthropic); all results were checked and the report reviewed by a human before submission.
+Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries. Analysis assisted by AI models (Claude, Anthropic; Gemini, Google); all results were checked and the report reviewed by a human before submission.

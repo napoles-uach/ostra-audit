@@ -1,0 +1,856 @@
+{
+  "turnover_memory_dump": {
+    "clang_O2_v621": {
+      "vmaddr": "0xe8270",
+      "file_offset": "0xe8270",
+      "entries": {
+        "38": {
+          "double": 14.5646704771,
+          "hex": "0x402d211c7d20528b"
+        },
+        "39": {
+          "double": 14.93687515212,
+          "hex": "0x402ddfae199594b3"
+        },
+        "40": {
+          "double": 0.0,
+          "hex": "0x0000000000000000"
+        },
+        "41": {
+          "double": 5e-324,
+          "hex": "0x0000000000000001"
+        },
+        "42": {
+          "double": 4.2439915824e-314,
+          "hex": "0x0000000200000001"
+        },
+        "43": {
+          "double": 2.121995791e-314,
+          "hex": "0x0000000100000000"
+        },
+        "44": {
+          "double": 4.2439915834e-314,
+          "hex": "0x0000000200000003"
+        },
+        "45": {
+          "double": 2.121995791e-314,
+          "hex": "0x0000000100000000"
+        },
+        "46": {
+          "double": 4.243991584e-314,
+          "hex": "0x0000000200000004"
+        },
+        "47": {
+          "double": 1.5e-323,
+          "hex": "0x0000000000000003"
+        },
+        "48": {
+          "double": 4.2439915824e-314,
+          "hex": "0x0000000200000001"
+        },
+        "49": {
+          "double": 6.3659873754e-314,
+          "hex": "0x0000000300000005"
+        },
+        "50": {
+          "double": 2e-323,
+          "hex": "0x0000000000000004"
+        },
+        "51": {
+          "double": 4.2439915824e-314,
+          "hex": "0x0000000200000001"
+        }
+      }
+    },
+    "clang_O0_v621": {
+      "vmaddr": "0x22cd40",
+      "file_offset": "0x22cd40",
+      "entries": {
+        "38": {
+          "double": 14.5646704771,
+          "hex": "0x402d211c7d20528b"
+        },
+        "39": {
+          "double": 14.93687515212,
+          "hex": "0x402ddfae199594b3"
+        },
+        "40": {
+          "double": 0.3333333333333333,
+          "hex": "0x3fd5555555555555"
+        },
+        "41": {
+          "double": 0.5238095238095238,
+          "hex": "0x3fe0c30c30c30c31"
+        },
+        "42": {
+          "double": 0.5064935064935064,
+          "hex": "0x3fe03531dec0d4c7"
+        },
+        "43": {
+          "double": 0.503030303030303,
+          "hex": "0x3fe018d3018d3019"
+        },
+        "44": {
+          "double": 0.5017543859649123,
+          "hex": "0x3fe00e5f36cb00e6"
+        },
+        "45": {
+          "double": 0.5011441647597255,
+          "hex": "0x3fe0095f7cc72d1c"
+        },
+        "46": {
+          "double": 0.500805152979066,
+          "hex": "0x3fe006988736d3e4"
+        },
+        "47": {
+          "double": 0.5005973715651135,
+          "hex": "0x3fe004e4c76abe3e"
+        },
+        "48": {
+          "double": 0.5004608294930876,
+          "hex": "0x3fe003c66df3424d"
+        },
+        "49": {
+          "double": 0.5003663003663004,
+          "hex": "0x3fe0030030030030"
+        },
+        "50": {
+          "double": 0.5002981514609421,
+          "hex": "0x3fe0027144d8c49e"
+        },
+        "51": {
+          "double": 0.500247402276101,
+          "hex": "0x3fe00206d715e9f6"
+        }
+      }
+    },
+    "gcc16_O2_quad_v621": {
+      "vmaddr": "0xa84c0",
+      "file_offset": "0xa84c0",
+      "entries": {
+        "38": {
+          "double": 14.5646704771,
+          "hex": "0x402d211c7d20528b"
+        },
+        "39": {
+          "double": 14.93687515212,
+          "hex": "0x402ddfae199594b3"
+        },
+        "40": {
+          "double": 0.886226925452758,
+          "hex": "0x3fec5bf891b4ef6b"
+        },
+        "41": {
+          "double": 2e-20,
+          "hex": "0x3bd79ca10c924223"
+        },
+        "42": {
+          "double": -3.105036184601418e+231,
+          "hex": "0xf000000000000000"
+        },
+        "43": {
+          "double": 0.013018327634146065,
+          "hex": "0x3f8aa95a5b7f87a0"
+        },
+        "44": {
+          "double": -4.4934684517253606e-104,
+          "hex": "0xaa79c3b0520d5db9"
+        },
+        "45": {
+          "double": 1.9232783656815946,
+          "hex": "0x3ffec5bf891b4ef6"
+        },
+        "46": {
+          "double": 0.0,
+          "hex": "0x0000000000000000"
+        },
+        "47": {
+          "double": 1.9375,
+          "hex": "0x3fff000000000000"
+        },
+        "48": {
+          "double": 0.0,
+          "hex": "0x0000000000000000"
+        },
+        "49": {
+          "double": 1.875,
+          "hex": "0x3ffe000000000000"
+        },
+        "50": {
+          "double": 0.0,
+          "hex": "0x0000000000000000"
+        },
+        "51": {
+          "double": 2.8203125,
+          "hex": "0x4006900000000000"
+        }
+      }
+    },
+    "pyscf_v613": {
+      "vmaddr": "0xe6140",
+      "file_offset": "0xe6140",
+      "entries": {
+        "38": {
+          "double": 14.5646704771,
+          "hex": "0x402d211c7d20528b"
+        },
+        "39": {
+          "double": 14.93687515212,
+          "hex": "0x402ddfae199594b3"
+        },
+        "40": {
+          "double": 0.0,
+          "hex": "0x0000000000000000"
+        },
+        "41": {
+          "double": 5e-324,
+          "hex": "0x0000000000000001"
+        },
+        "42": {
+          "double": 4.2439915824e-314,
+          "hex": "0x0000000200000001"
+        },
+        "43": {
+          "double": 2.121995791e-314,
+          "hex": "0x0000000100000000"
+        },
+        "44": {
+          "double": 4.2439915834e-314,
+          "hex": "0x0000000200000003"
+        },
+        "45": {
+          "double": 2.121995791e-314,
+          "hex": "0x0000000100000000"
+        },
+        "46": {
+          "double": 4.243991584e-314,
+          "hex": "0x0000000200000004"
+        },
+        "47": {
+          "double": 1.5e-323,
+          "hex": "0x0000000000000003"
+        },
+        "48": {
+          "double": 4.2439915824e-314,
+          "hex": "0x0000000200000001"
+        },
+        "49": {
+          "double": 6.3659873754e-314,
+          "hex": "0x0000000300000005"
+        },
+        "50": {
+          "double": 2e-323,
+          "hex": "0x0000000000000004"
+        },
+        "51": {
+          "double": 4.2439915824e-314,
+          "hex": "0x0000000200000001"
+        }
+      }
+    }
+  },
+  "eri_small_R": {
+    "ctrl_n20_m39": {
+      "0.2": {
+        "x": 0.039900000000000005,
+        "ref_norm": 0.10362267677742798,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 2.998074883091354e-12,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 3.0393428212609016e-12,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 2.0207903403161567e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 2.998074883091354e-12,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.5": {
+        "x": 0.24937499999999999,
+        "ref_norm": 0.22815022312250424,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 2.07586388072622e-11,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 2.076846005027606e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 2.3479296318810613e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 2.07586388072622e-11,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.6": {
+        "x": 0.3590999999999999,
+        "ref_norm": 0.26176277352324645,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 1.098587127351875e-11,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 1.0962393222102433e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 2.4562786982156028e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 1.098587127351875e-11,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.8": {
+        "x": 0.6384000000000001,
+        "ref_norm": 0.31731743955862673,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 6.252694107486217e-11,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 6.252579010883054e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 1.8472956404977412e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 6.252694107486217e-11,
+            "nonfinite": false
+          }
+        }
+      },
+      "1.0": {
+        "x": 0.9974999999999999,
+        "ref_norm": 0.3590873892597336,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 1.0717559452797373e-05,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 1.0717559450772152e-05,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 1.951970358619557e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 1.0717559452797373e-05,
+            "nonfinite": false
+          }
+        }
+      },
+      "2.0": {
+        "x": 3.9899999999999998,
+        "ref_norm": 0.43248268691107955,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 6.143411661332363e-10,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 6.143413416260144e-10,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 2.5649900196867503e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 6.143411661332363e-10,
+            "nonfinite": false
+          }
+        }
+      }
+    },
+    "oob_n21_m41": {
+      "0.2": {
+        "x": 0.039900000000000005,
+        "ref_norm": 1.2610055929661024,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 1.7314093296302909e+40,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 4.832330554625047e-12,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 2.3971202511280913e+22,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 1.7314093296302909e+40,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.4": {
+        "x": 0.15960000000000002,
+        "ref_norm": 1.2226858729344297,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 1.594320482450498e+32,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 7.1829529658949434e-12,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 4586309908.988206,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 1.594320482450498e+32,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.5": {
+        "x": 0.24937499999999999,
+        "ref_norm": 1.1963236892178706,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 0.0002703815739386571,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 8.4392351833244e-12,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 7.001099995281233e-05,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 0.0002703815739386571,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.6": {
+        "x": 0.3590999999999999,
+        "ref_norm": 1.1663095894569562,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 1.511767609736533e+21,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 6.566876800350174e-12,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 94.58465407562903,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 1.511767609736533e+21,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.7": {
+        "x": 0.4887749999999999,
+        "ref_norm": 1.1335629930424396,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 3308671420.0472317,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 1.8324011701898968e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 8.985593413069157e-11,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 3308671420.0472317,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.8": {
+        "x": 0.6384000000000001,
+        "ref_norm": 1.0989148404367084,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 3.237760900468604e+16,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 3.237760900468604e+16,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 0.0003304426987754659,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 3.237760900468604e+16,
+            "nonfinite": false
+          }
+        }
+      },
+      "1.0": {
+        "x": 0.9974999999999999,
+        "ref_norm": 1.0267203562169465,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 436809850254.29785,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 436809850254.29785,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 3.023384453664867e-07,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 436809850254.29785,
+            "nonfinite": false
+          }
+        }
+      },
+      "1.5": {
+        "x": 2.244375,
+        "ref_norm": 0.8515319663689513,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 4.802718752484457e-06,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 4.802718747448721e-06,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 6.7272747817922646e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 4.802718752484457e-06,
+            "nonfinite": false
+          }
+        }
+      },
+      "2.0": {
+        "x": 3.9899999999999998,
+        "ref_norm": 0.7043331840731322,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 3.0955182829548558,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 3.0955182829548584,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 7.882004067605762e-12,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 3.0955182829548558,
+            "nonfinite": false
+          }
+        }
+      }
+    },
+    "oob_n22_m43": {
+      "0.2": {
+        "x": 0.039900000000000005,
+        "ref_norm": 1.2640526363291513,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 3.147533255896911e+43,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 8.948291726849636e-12,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 4.357730768635654e+25,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 3.147533255896911e+43,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.5": {
+        "x": 0.24937499999999999,
+        "ref_norm": 1.1977009552149747,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 0.0002965666427966643,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 1.5795172178281764e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 0.0005947694311213618,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 0.0002965666427966643,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.6": {
+        "x": 0.3590999999999999,
+        "ref_norm": 1.166992585264512,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 3.059182026605915e+23,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 1.1649185893823942e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 19139.95719292438,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 3.059182026605915e+23,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.8": {
+        "x": 0.6384000000000001,
+        "ref_norm": 1.0982493561783107,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 3.689786546553861e+18,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 3.689786546553861e+18,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 0.03765759929666902,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 3.689786546553861e+18,
+            "nonfinite": false
+          }
+        }
+      },
+      "1.0": {
+        "x": 0.9974999999999999,
+        "ref_norm": 1.024943720080593,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 31894088391825.695,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 31894088391825.695,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 2.2075569919654673e-05,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 31894088391825.695,
+            "nonfinite": false
+          }
+        }
+      },
+      "1.5": {
+        "x": 2.244375,
+        "ref_norm": 0.8483671279132335,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 8.325343843689714e-06,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 8.325343849150666e-06,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 1.4534459891817666e-11,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 8.325343843689714e-06,
+            "nonfinite": false
+          }
+        }
+      }
+    },
+    "oob_n24_m47": {
+      "0.2": {
+        "x": 0.039900000000000005,
+        "ref_norm": 1.2442487573698835,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 1.4199474460046976e+50,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 3.673138626963635e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 3.683678030004003e-11,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 1.4199474460046976e+50,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.5": {
+        "x": 0.24937499999999999,
+        "ref_norm": 1.1790146421335757,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 0.000398469971085024,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 5.1927910116952854e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 3.448474881200983e-11,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 0.000398469971085024,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.6": {
+        "x": 0.3590999999999999,
+        "ref_norm": 1.1488147906016075,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 1.7038345627400652e+28,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 4.341220734675834e-11,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 3.713767604288735e-11,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 1.7038345627400652e+28,
+            "nonfinite": false
+          }
+        }
+      },
+      "0.8": {
+        "x": 0.6384000000000001,
+        "ref_norm": 1.081208956449989,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 6.501099368016106e+22,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 6.501099368016106e+22,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 3.984133826642994e-11,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 6.501099368016106e+22,
+            "nonfinite": false
+          }
+        }
+      },
+      "1.0": {
+        "x": 0.9974999999999999,
+        "ref_norm": 1.009138057147003,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 2.301439874165978e+17,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 2.301439874165978e+17,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 3.843087432065113e-11,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 2.301439874165978e+17,
+            "nonfinite": false
+          }
+        }
+      },
+      "1.5": {
+        "x": 2.244375,
+        "ref_norm": 0.8357707487114359,
+        "builds": {
+          "clang_O2_v621": {
+            "rel_err": 2.566206000742956e-05,
+            "nonfinite": false
+          },
+          "clang_O0_v621": {
+            "rel_err": 2.5662060021409534e-05,
+            "nonfinite": false
+          },
+          "gcc16_O2_quad_v621": {
+            "rel_err": 1.1047702514743876e-09,
+            "nonfinite": false
+          },
+          "pyscf_v613": {
+            "rel_err": 2.566206000742956e-05,
+            "nonfinite": false
+          }
+        }
+      }
+    }
+  }
+}

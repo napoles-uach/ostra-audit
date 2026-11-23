@@ -118,11 +118,11 @@
     "location": "src/fmt.c:42 (TURNOVER_POINT), callers in rys_roots.c / rys_wheeler.c",
     "versions": "v6.2.1 (ab88a54) and PySCF 2.15.1 bundled; table unchanged since 8fdc4d8 (2021-07)",
     "detected": "2026-11-21",
-    "detected_by": "Explorer 1 (threshold mining)",
+    "detected_by": "Explorer 1 (Claude, threshold mining); independently verified by explorer 2 (Gemini, Antigravity), 2026-11-23",
     "oracle": "Boys values vs 40-digit quadrature; erfc + erf = full Coulomb",
     "class": "Memory safety, new",
     "impact_level": "III (SR integrals with l >~ 10; errors up to 3e8, build-dependent)",
-    "status": "Verified and attributed; issue drafted",
+    "status": "Verified (independent, blind), attributed, minimal fix verified; issue drafted",
     "report": "Pending (issue drafted in report/)",
     "path": "findings/OSTRA-008-libcint-turnover-point-oob",
     "slug": "libcint-turnover-point-oob"

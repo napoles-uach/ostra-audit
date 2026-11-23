@@ -13,3 +13,5 @@ conditions before it can move to `findings/` or `discarded/`.
 | Explorer 1 | dftd3 (simple-dftd3) | Triclinic FD deviations in periodic D3 | Unclassified (runs timed out); likely hard cutoffs |
 | Explorer 1 | libxc | LTA / TH / TLDA family differ at tau = 0 with rho > 0 (7.1.2 `mgga_x_lta` returned 1e273) | Degenerate input; low priority |
 | Explorer 2 | libxc | Inventory of 84 numerical decisions and 143 boundary tests | Material lives in the explorer's folder (`PhysAud/`); to be imported verbatim |
+| Explorer 2 | libcint | Double-precision Boys F_m loses digits just above TURNOVER_POINT (pre-existing: 1e-8 at m = 39; 1e-4 at m = 63); matters where long double = double and no quadmath (macOS arm64) | Partly re-checked by explorer 1 (2026-11-23, values in OSTRA-008 finding.md); impact on integrals not measured |
+| Explorer 2 | libcint | lrys_wheeler singularity at R = 1.0 on macOS arm64 without libquadmath (also with m = 39) | Not verified; seen during OSTRA-008 verification |

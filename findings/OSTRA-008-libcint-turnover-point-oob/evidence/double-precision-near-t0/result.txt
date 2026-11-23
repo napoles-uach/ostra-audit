@@ -1,0 +1,9 @@
+m  t0     double gamma_inc_like  double fmt_erfc_like(lower=.2)  long double lgamma_inc_like
+39 14.94  1.1e-08                1.2e-08                         2.7e-12
+41 15.68  2.7e-08                3.5e-08
+45 17.17  3.0e-08                1.1e-07
+47 17.91  8.4e-08                1.4e-07                         1.1e-10
+55 20.88  4.5e-06                3.1e-06
+63 23.85  1.1e-04                1.4e-04                         7.2e-08
+71 26.81  1.5e-03                1.9e-03
+(worst case always at T just above t0)

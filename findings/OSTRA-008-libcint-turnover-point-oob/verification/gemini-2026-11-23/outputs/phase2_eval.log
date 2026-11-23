@@ -1,0 +1,207 @@
+libcint lrys_wheeler singular value n=21 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=21 i=5 b=-10.2362
+libcint lrys_wheeler singular value n=21 i=10 b=-0.051681
+libcint qrys_wheeler singular value n=21 i=9 b=-522.242
+libcint lrys_wheeler singular value n=21 i=11 b=-19.7932
+libcint lrys_wheeler singular value n=21 i=10 b=-0.0202413
+libcint lrys_wheeler singular value n=21 i=12 b=-451.822
+libcint lrys_wheeler singular value n=21 i=15 b=-41.6688
+libcint lrys_wheeler singular value n=21 i=12 b=-0.0390953
+libcint lrys_wheeler singular value n=21 i=12 b=-0.0513796
+libcint lrys_wheeler singular value n=21 i=12 b=-0.0513796
+=== Phase 2(b): Formula vs 40 existing TURNOVER_POINT entries (m=0..39) ===
+Existing entries count: 40 (indices 0..39)
+m=0,1: table=0., 0. (formula singular at m=1, undefined at m=0; defined as 0.)
+m=2..39 max abs diff: 8.245e-12 (at m=27: table=10.46165248270 vs formula=10.4616524827082)
+m=2..39 max rel diff: 7.881e-13 (at m=27: table=10.46165248270 vs formula=10.4616524827082)
+Note: existing table entries have 12-13 significant digits (12 decimal places for m<10, 11 for m>=10).
+  notable diff m=27: table=10.46165248270 formula=10.4616524827082 abs=8.245e-12
+  notable diff m=32: table=12.32892831326 formula=12.3289283132677 abs=7.721e-12
+  notable diff m=34: table=13.07469909673 formula=13.0746990967352 abs=5.158e-12
+  notable diff m=37: table=14.19235654675 formula=14.1923565467553 abs=5.324e-12
+
+Wrote isolated patched fmt.c to /Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/patched/fmt.c (72 entries: m=0..71)
+  m=40: 15.30897591434
+  m=47: 17.91114778117
+  m=63: 23.8468338627
+  m=71: 26.81029820184
+
+=== Phase 2(c): Building patched libraries ===
+Built /Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/build-patched-asan/libcint_asan.dylib (42 objects, cc=clang, quadmath=False)
+Built /Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/build-patched-o2/libcint.dylib (42 objects, cc=clang, quadmath=False)
+Built /Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/build-patched-gcc/libcint.dylib (42 objects, cc=/opt/homebrew/bin/gcc-16, quadmath=True)
+
+=== Phase 2(c.1): ASan verification on patched build ===
+  boys_ok          -> EXIT=0
+  boys_gamma_40    -> EXIT=0
+  boys_lgamma_40   -> EXIT=0
+  boys_erfc_40     -> EXIT=0
+  boys_lerfc_41    -> EXIT=0
+  boys_gamma_71    -> EXIT=0
+  eri_sr_l9        -> EXIT=0
+  eri_sr_l10       -> EXIT=0
+  eri_full_l10     -> EXIT=0
+  eri_lr_l10       -> EXIT=0
+  eri_sr_3c2e      -> EXIT=0
+  boys_gamma_72    -> EXIT=-6
+
+=== Phase 2(c.2): Boys F_m(T) patched vs 60-digit mpmath ===
+
+--- gamma_inc_like m=40 (t0=15.3090) ---
+  T=  0.50: orig_gcc= 1.144e-16  patched_clang= 1.144e-16  patched_gcc= 1.144e-16
+  T=  2.00: orig_gcc= 1.983e+21  patched_clang= 3.706e-16  patched_gcc= 3.706e-16
+  T=  5.00: orig_gcc= 1.226e+07  patched_clang= 1.434e-16  patched_gcc= 1.434e-16
+  T= 10.00: orig_gcc= 9.950e-04  patched_clang= 1.437e-16  patched_gcc= 1.437e-16
+  T= 14.00: orig_gcc= 6.728e-08  patched_clang= 2.148e-16  patched_gcc= 2.148e-16
+  T= 14.81: orig_gcc= 5.170e-08  patched_clang= 1.173e-16  patched_gcc= 1.173e-16
+  T= 15.81: orig_gcc= 6.642e-09  patched_clang= 4.401e-09  patched_gcc= 6.642e-09
+  T= 30.00: orig_gcc= 1.665e-14  patched_clang= 5.691e-15  patched_gcc= 1.665e-14
+  T= 40.00: orig_gcc= 5.381e-15  patched_clang= 1.988e-15  patched_gcc= 5.381e-15
+
+--- gamma_inc_like m=41 (t0=15.6810) ---
+  T=  0.50: orig_gcc= 7.896e+46  patched_clang= 1.173e-16  patched_gcc= 1.173e-16
+  T=  2.00: orig_gcc= 4.119e+22  patched_clang= 3.802e-16  patched_gcc= 3.802e-16
+  T=  5.00: orig_gcc= 1.021e+08  patched_clang= 1.474e-16  patched_gcc= 1.474e-16
+  T= 10.00: orig_gcc= 4.159e-03  patched_clang= 1.483e-16  patched_gcc= 1.483e-16
+  T= 14.00: orig_gcc= 2.017e-07  patched_clang= 2.226e-16  patched_gcc= 2.226e-16
+  T= 15.18: orig_gcc= 3.757e-08  patched_clang= 1.739e-16  patched_gcc= 1.739e-16
+  T= 16.18: orig_gcc= 4.340e-09  patched_clang= 5.337e-10  patched_gcc= 4.340e-09
+  T= 30.00: orig_gcc= 2.394e-14  patched_clang= 8.243e-15  patched_gcc= 2.394e-14
+  T= 40.00: orig_gcc= 6.222e-15  patched_clang= 2.515e-15  patched_gcc= 6.222e-15
+
+--- gamma_inc_like m=45 (t0=17.1681) ---
+  T=  0.50: orig_gcc= 0.000e+00  patched_clang= 0.000e+00  patched_gcc= 0.000e+00
+  T=  2.00: orig_gcc= 9.677e+27  patched_clang= 4.186e-16  patched_gcc= 4.186e-16
+  T=  5.00: orig_gcc= 6.183e+11  patched_clang= 0.000e+00  patched_gcc= 0.000e+00
+  T= 10.00: orig_gcc= 1.597e+00  patched_clang= 0.000e+00  patched_gcc= 0.000e+00
+  T= 14.00: orig_gcc= 2.045e-05  patched_clang= 2.540e-16  patched_gcc= 2.540e-16
+  T= 16.67: orig_gcc= 5.384e-08  patched_clang= 2.109e-16  patched_gcc= 2.109e-16
+  T= 17.67: orig_gcc= 2.395e-09  patched_clang= 5.465e-09  patched_gcc= 2.395e-09
+  T= 30.00: orig_gcc= 1.280e-13  patched_clang= 4.385e-14  patched_gcc= 1.280e-13
+  T= 40.00: orig_gcc= 1.282e-14  patched_clang= 5.409e-15  patched_gcc= 1.282e-14
+
+--- gamma_inc_like m=47 (t0=17.9111) ---
+  T=  0.50: orig_gcc= 2.689e-16  patched_clang= 2.689e-16  patched_gcc= 2.689e-16
+  T=  2.00: orig_gcc= 5.353e+30  patched_clang= 4.378e-16  patched_gcc= 4.378e-16
+  T=  5.00: orig_gcc= 5.490e+13  patched_clang= 0.000e+00  patched_gcc= 0.000e+00
+  T= 10.00: orig_gcc= 3.567e+01  patched_clang= 1.761e-16  patched_gcc= 1.761e-16
+  T= 14.00: orig_gcc= 2.345e-04  patched_clang= 1.349e-16  patched_gcc= 1.349e-16
+  T= 17.41: orig_gcc= 4.185e-07  patched_clang= 2.306e-16  patched_gcc= 2.306e-16
+  T= 18.41: orig_gcc= 1.148e-07  patched_clang= 8.865e-08  patched_gcc= 1.148e-07
+  T= 30.00: orig_gcc= 3.332e-13  patched_clang= 1.147e-13  patched_gcc= 3.332e-13
+  T= 40.00: orig_gcc= 2.064e-14  patched_clang= 8.659e-15  patched_gcc= 2.064e-14
+
+--- gamma_inc_like m=50 (t0=19.0252) ---
+  T=  0.50: orig_gcc= 4.061e+64  patched_clang= 1.430e-16  patched_gcc= 1.430e-16
+  T=  2.00: orig_gcc= 8.133e+34  patched_clang= 4.666e-16  patched_gcc= 4.666e-16
+  T=  5.00: orig_gcc= 5.360e+16  patched_clang= 1.835e-16  patched_gcc= 1.835e-16
+  T= 10.00: orig_gcc= 4.389e+03  patched_clang= 1.900e-16  patched_gcc= 1.900e-16
+  T= 14.00: orig_gcc= 1.060e-02  patched_clang= 0.000e+00  patched_gcc= 0.000e+00
+  T= 18.53: orig_gcc= 1.381e-07  patched_clang= 1.875e-16  patched_gcc= 1.875e-16
+  T= 19.53: orig_gcc= 1.471e-07  patched_clang= 1.025e-07  patched_gcc= 1.471e-07
+  T= 30.00: orig_gcc= 1.618e-12  patched_clang= 5.569e-13  patched_gcc= 1.618e-12
+  T= 40.00: orig_gcc= 4.619e-14  patched_clang= 1.948e-14  patched_gcc= 4.619e-14
+
+--- gamma_inc_like m=60 (t0=22.7349) ---
+  T=  0.50: orig_gcc= 1.247e+85  patched_clang= 1.716e-16  patched_gcc= 1.716e-16
+  T=  2.00: orig_gcc= 2.393e+49  patched_clang= 1.876e-16  patched_gcc= 1.876e-16
+  T=  5.00: orig_gcc= 1.671e+27  patched_clang= 0.000e+00  patched_gcc= 0.000e+00
+  T= 10.00: orig_gcc= 1.365e+11  patched_clang= 1.182e-16  patched_gcc= 1.182e-16
+  T= 14.00: orig_gcc= 1.162e+04  patched_clang= 1.862e-16  patched_gcc= 1.862e-16
+  T= 22.23: orig_gcc= 4.395e-05  patched_clang= 2.830e-16  patched_gcc= 2.830e-16
+  T= 23.23: orig_gcc= 1.468e-06  patched_clang= 7.543e-06  patched_gcc= 1.468e-06
+  T= 30.00: orig_gcc= 9.882e-10  patched_clang= 3.401e-10  patched_gcc= 9.882e-10
+  T= 40.00: orig_gcc= 1.879e-12  patched_clang= 7.962e-13  patched_gcc= 1.879e-12
+
+--- gamma_inc_like m=71 (t0=26.8103) ---
+  T=  0.50: orig_gcc= 2.031e-16  patched_clang= 2.031e-16  patched_gcc= 2.031e-16
+  T=  2.00: orig_gcc= 1.305e+66  patched_clang= 2.228e-16  patched_gcc= 2.228e-16
+  T=  5.00: orig_gcc= 3.853e+39  patched_clang= 0.000e+00  patched_gcc= 0.000e+00
+  T= 10.00: orig_gcc= 1.560e+20  patched_clang= 1.438e-16  patched_gcc= 1.438e-16
+  T= 14.00: orig_gcc= 3.327e+11  patched_clang= 2.297e-16  patched_gcc= 2.297e-16
+  T= 26.31: orig_gcc= 3.986e-03  patched_clang= 4.623e-16  patched_gcc= 4.623e-16
+  T= 27.31: orig_gcc= 9.512e-04  patched_clang= 1.455e-03  patched_gcc= 9.512e-04
+  T= 30.00: orig_gcc= 7.043e-06  patched_clang= 2.424e-06  patched_gcc= 7.043e-06
+  T= 40.00: orig_gcc= 6.212e-10  patched_clang= 2.633e-10  patched_gcc= 6.212e-10
+
+=== Phase 2(c.3): High-l SR ERI (int2e_sph) patched vs exact reference (full - LR) ===
+
+--- oob_n21_m41: l=(10, 10, 10, 10) omega=-0.5 ---
+   R      x |   orig_clang |    pat_clang |   orig_gcc_q |    pat_gcc_q
+ 0.2  0.040 |    1.731e+40 |    4.806e-12 |    2.397e+22 |    4.957e-12
+ 0.5  0.249 |    2.704e-04 |    8.451e-12 |    7.001e-05 |    5.920e-12
+ 0.6  0.359 |    1.512e+21 |    6.618e-12 |    9.458e+01 |    5.224e-12
+ 0.8  0.638 |    3.238e+16 |    2.548e-11 |    3.304e-04 |    5.875e-12
+ 1.0  0.997 |    4.368e+11 |    2.841e-05 |    3.023e-07 |    6.672e-12
+ 2.0  3.990 |    3.096e+00 |    5.735e-10 |    7.882e-12 |    8.016e-12
+ 4.0 15.960 |    8.214e-09 |    8.214e-09 |    1.147e-11 |    1.147e-11
+
+--- oob_n22_m43: l=(11, 11, 10, 10) omega=-0.5 ---libcint lrys_wheeler singular value n=22 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=22 i=21 b=-2.06132e+06
+libcint lrys_wheeler singular value n=22 i=11 b=-19.7932
+libcint lrys_wheeler singular value n=22 i=10 b=-0.0202413
+libcint lrys_wheeler singular value n=22 i=12 b=-451.822
+libcint lrys_wheeler singular value n=22 i=15 b=-41.6688
+libcint lrys_wheeler singular value n=22 i=12 b=-0.0390953
+libcint qrys_wheeler singular value n=22 i=21 b=-0.193602
+libcint lrys_wheeler singular value n=22 i=12 b=-0.0513796
+libcint lrys_wheeler singular value n=22 i=13 b=-0.386266
+libcint lrys_wheeler singular value n=23 i=22 b=-685904
+libcint lrys_wheeler singular value n=23 i=12 b=-0.868936
+libcint lrys_wheeler singular value n=23 i=10 b=-0.0202413
+libcint lrys_wheeler singular value n=23 i=12 b=-451.822
+libcint qrys_wheeler singular value n=23 i=22 b=-1.81389
+libcint qrys_wheeler singular value n=23 i=22 b=-1.81389
+libcint lrys_wheeler singular value n=23 i=11 b=-0.0567945
+libcint lrys_wheeler singular value n=23 i=11 b=-0.00294597
+libcint qrys_wheeler singular value n=23 i=22 b=-1.12729
+libcint lrys_wheeler singular value n=24 i=22 b=-685904
+libcint lrys_wheeler singular value n=24 i=12 b=-0.868936
+libcint qrys_wheeler singular value n=24 i=23 b=-2.15256
+libcint qrys_wheeler singular value n=24 i=23 b=-2.15256
+libcint lrys_wheeler singular value n=24 i=23 b=-11053.9
+libcint lrys_wheeler singular value n=24 i=10 b=-0.0202413
+libcint lrys_wheeler singular value n=24 i=12 b=-451.821
+libcint qrys_wheeler singular value n=24 i=22 b=-1.81389
+libcint qrys_wheeler singular value n=24 i=22 b=-1.81389
+libcint lrys_wheeler singular value n=24 i=11 b=-0.0567945
+libcint lrys_wheeler singular value n=24 i=11 b=-0.00294597
+libcint qrys_wheeler singular value n=24 i=22 b=-1.12729
+libcint lrys_wheeler singular value n=11 i=10 b=-0.051681
+libcint lrys_wheeler singular value n=11 i=10 b=-0.051681
+libcint lrys_wheeler singular value n=20 i=10 b=-0.051681
+libcint lrys_wheeler singular value n=20 i=10 b=-0.051681
+libcint lrys_wheeler singular value n=20 i=11 b=-1.8361
+libcint lrys_wheeler singular value n=20 i=11 b=-1.8361
+libcint lrys_wheeler singular value n=20 i=12 b=-9.23993
+libcint lrys_wheeler singular value n=20 i=12 b=-9.23993
+
+   R      x |   orig_clang |    pat_clang |   orig_gcc_q |    pat_gcc_q
+ 0.2  0.040 |    3.148e+43 |    8.942e-12 |    4.358e+25 |    8.814e-12
+ 0.6  0.359 |    3.059e+23 |    1.154e-11 |    1.914e+04 |    9.626e-12
+ 0.8  0.638 |    3.690e+18 |    4.168e-11 |    3.766e-02 |    1.177e-11
+ 1.0  0.997 |    3.189e+13 |    1.603e-03 |    2.208e-05 |    9.600e-12
+ 2.0  3.990 |    6.112e+01 |    1.322e-09 |    1.383e-11 |    1.376e-11
+ 4.0 15.960 |    1.326e-08 |    1.724e-08 |    2.403e-11 |    2.393e-11
+
+--- oob_n23_m45: l=(12, 11, 11, 10) omega=-0.5 ---
+   R      x |   orig_clang |    pat_clang |   orig_gcc_q |    pat_gcc_q
+ 0.2  0.040 |    8.979e+46 |    1.024e-11 |    1.149e-11 |    1.149e-11
+ 0.8  0.638 |    6.911e+20 |    7.370e-11 |    1.157e-11 |    1.157e-11
+ 1.0  0.997 |    3.918e+15 |    1.413e-01 |    1.182e-11 |    1.182e-11
+ 3.0  8.977 |    5.713e-10 |    1.208e-09 |    1.489e-11 |    1.433e-11
+
+--- oob_n24_m47: l=(12, 12, 11, 11) omega=-0.5 ---
+   R      x |   orig_clang |    pat_clang |   orig_gcc_q |    pat_gcc_q
+ 0.2  0.040 |    1.420e+50 |    3.746e-11 |    3.684e-11 |    3.684e-11
+ 0.8  0.638 |    6.501e+22 |    1.030e-10 |    3.984e-11 |    3.984e-11
+ 1.0  0.997 |    2.301e+17 |    5.630e+00 |    3.843e-11 |    3.843e-11
+ 3.0  8.977 |    5.895e-10 |    1.225e-09 |    7.099e-11 |    7.064e-11
+
+=== Phase 2(c.4): Bit-for-bit identity check for low-l and m <= 39 ===
+  Boys m=0..39 [clang_O2]: bit_identical=True max_abs_gamma=0.0 max_abs_erfc=0.0
+  Boys m=0..39 [gcc16_quad]: bit_identical=True max_abs_gamma=0.0 max_abs_erfc=0.0
+  ERIs low-l & ctrl(m=39) [clang_O2]: bit_identical=True max_abs=0.0 mismatches=0
+  ERIs low-l & ctrl(m=39) [gcc16_quad]: bit_identical=True max_abs=0.0 mismatches=0
+
+Saved Phase 2 results to /Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/outputs/phase2_results.json

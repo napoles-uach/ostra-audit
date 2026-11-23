@@ -1,0 +1,285 @@
+===== CASE: boys_ok =====
+boys_ok m=39: f[0]=5.036217745043e-02 f[39]=7.611980968150e-07
+EXIT=0
+===== CASE: boys_gamma_40 =====
+=================================================================
+==24605==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000104b52b40 at pc 0x0001049754e0 bp 0x00016baf1b60 sp 0x00016baf1b58
+READ of size 8 at 0x000104b52b40 thread T0
+    #0 0x0001049754dc in gamma_inc_like fmt.c:214
+    #1 0x00010430cb6c in main test_asan.c:135
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x000104b52b40 is located 0 bytes after global variable 'TURNOVER_POINT' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/libcint/src/fmt.c' (0x000104b52a00) of size 320
+SUMMARY: AddressSanitizer: global-buffer-overflow fmt.c:214 in gamma_inc_like
+Shadow bytes around the buggy address:
+  0x000104b52880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52a00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52a80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x000104b52b00: 00 00 00 00 00 00 00 00[f9]f9 f9 f9 f9 f9 f9 f9
+  0x000104b52b80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52c00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52c80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52d00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b52d80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==24605==ABORTING
+EXIT=134
+===== CASE: boys_lgamma_40 =====
+=================================================================
+==24612==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000104e9eb40 at pc 0x000104cc1784 bp 0x00016b995b80 sp 0x00016b995b78
+READ of size 8 at 0x000104e9eb40 thread T0
+    #0 0x000104cc1780 in lgamma_inc_like fmt.c:256
+    #1 0x000104468b90 in main test_asan.c:138
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x000104e9eb40 is located 0 bytes after global variable 'TURNOVER_POINT' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/libcint/src/fmt.c' (0x000104e9ea00) of size 320
+SUMMARY: AddressSanitizer: global-buffer-overflow fmt.c:256 in lgamma_inc_like
+Shadow bytes around the buggy address:
+  0x000104e9e880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9e900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9e980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9ea00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9ea80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x000104e9eb00: 00 00 00 00 00 00 00 00[f9]f9 f9 f9 f9 f9 f9 f9
+  0x000104e9eb80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9ec00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9ec80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9ed00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e9ed80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==24612==ABORTING
+EXIT=134
+===== CASE: boys_erfc_40 =====
+=================================================================
+==24618==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000104ecab40 at pc 0x000104cedcbc bp 0x00016b7b9b40 sp 0x00016b7b9b38
+READ of size 8 at 0x000104ecab40 thread T0
+    #0 0x000104cedcb8 in fmt_erfc_like fmt.c:363
+    #1 0x000104644bc0 in main test_asan.c:141
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x000104ecab40 is located 0 bytes after global variable 'TURNOVER_POINT' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/libcint/src/fmt.c' (0x000104ecaa00) of size 320
+SUMMARY: AddressSanitizer: global-buffer-overflow fmt.c:363 in fmt_erfc_like
+Shadow bytes around the buggy address:
+  0x000104eca880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104eca900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104eca980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104ecaa00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104ecaa80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x000104ecab00: 00 00 00 00 00 00 00 00[f9]f9 f9 f9 f9 f9 f9 f9
+  0x000104ecab80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104ecac00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104ecac80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104ecad00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104ecad80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==24618==ABORTING
+EXIT=134
+===== CASE: boys_lerfc_41 =====
+=================================================================
+==24624==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000104b0ab48 at pc 0x00010492e05c bp 0x00016bd69b60 sp 0x00016bd69b58
+READ of size 8 at 0x000104b0ab48 thread T0
+    #0 0x00010492e058 in fmt_lerfc_like fmt.c:404
+    #1 0x000104094bf0 in main test_asan.c:144
+    #2 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x000104b0ab48 is located 8 bytes after global variable 'TURNOVER_POINT' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/libcint/src/fmt.c' (0x000104b0aa00) of size 320
+SUMMARY: AddressSanitizer: global-buffer-overflow fmt.c:404 in fmt_lerfc_like
+Shadow bytes around the buggy address:
+  0x000104b0a880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0a900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0a980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0aa00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0aa80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x000104b0ab00: 00 00 00 00 00 00 00 00 f9[f9]f9 f9 f9 f9 f9 f9
+  0x000104b0ab80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0ac00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0ac80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0ad00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104b0ad80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==24624==ABORTING
+EXIT=134
+===== CASE: eri_sr_l9 =====
+libcint lrys_wheeler singular value n=20 i=11 b=-1.8361
+int2e_sph l=(10,10|10,9) omega=-0.5 -> ret=1 sum_abs=2.687429119250e+01 buf[0]=0.000000000000e+00
+EXIT=0
+===== CASE: eri_sr_l10 =====
+=================================================================
+==24635==ERROR: AddressSanitizer: global-buffer-overflow on address 0x000104e6ab48 at pc 0x000104c8e05c bp 0x00016b77b600 sp 0x00016b77b5f8
+READ of size 8 at 0x000104e6ab48 thread T0
+    #0 0x000104c8e058 in fmt_lerfc_like fmt.c:404
+    #1 0x000104c903b8 in CINTlrys_jacobi rys_wheeler.c:3712
+    #2 0x000104ca37a0 in CINTsr_rys_roots rys_roots.c
+    #3 0x000104c7fe60 in CINTg0_2e g2e.c:4465
+    #4 0x000104c34654 in CINT2e_loop_nopt cint2e.c:248
+    #5 0x000104c3d890 in CINT2e_drv cint2e.c:841
+    #6 0x000104c41ff0 in int2e_sph cint2e.c:1196
+    #7 0x000104680ff0 in run_eri_2e test_asan.c:58
+    #8 0x000104680cb0 in main test_asan.c
+    #9 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x000104e6ab48 is located 8 bytes after global variable 'TURNOVER_POINT' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/libcint/src/fmt.c' (0x000104e6aa00) of size 320
+SUMMARY: AddressSanitizer: global-buffer-overflow fmt.c:404 in fmt_lerfc_like
+Shadow bytes around the buggy address:
+  0x000104e6a880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6a900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6a980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6aa00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6aa80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x000104e6ab00: 00 00 00 00 00 00 00 00 f9[f9]f9 f9 f9 f9 f9 f9
+  0x000104e6ab80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6ac00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6ac80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6ad00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x000104e6ad80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==24635==ABORTING
+EXIT=134
+===== CASE: eri_full_l10 =====
+int2e_sph l=(10,10|10,10) omega=0 -> ret=1 sum_abs=1.379515063785e+02 buf[0]=2.671661986755e-01
+EXIT=0
+===== CASE: eri_lr_l10 =====
+int2e_sph l=(10,10|10,10) omega=0.5 -> ret=1 sum_abs=1.064481188742e+02 buf[0]=2.304663533533e-01
+EXIT=0
+===== CASE: eri_sr_3c2e =====
+=================================================================
+==24651==ERROR: AddressSanitizer: global-buffer-overflow on address 0x00010088ab48 at pc 0x0001006ae05c bp 0x00016fdc7780 sp 0x00016fdc7778
+READ of size 8 at 0x00010088ab48 thread T0
+    #0 0x0001006ae058 in fmt_lerfc_like fmt.c:404
+    #1 0x0001006b03b8 in CINTlrys_jacobi rys_wheeler.c:3712
+    #2 0x0001006c37a0 in CINTsr_rys_roots rys_roots.c
+    #3 0x00010069fe60 in CINTg0_2e g2e.c:4465
+    #4 0x0001006c9fe0 in CINT3c2e_loop_nopt cint3c2e.c:192
+    #5 0x0001006cf4c0 in CINT3c2e_drv cint3c2e.c:590
+    #6 0x0001006d09c0 in int3c2e_sph cint3c2e.c:700
+    #7 0x00010003541c in run_eri_3c2e test_asan.c:111
+    #8 0x000100034cb8 in main test_asan.c:155
+    #9 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+0x00010088ab48 is located 8 bytes after global variable 'TURNOVER_POINT' defined in '/Users/napolesd/Documents/Antigravity/PhysAud/verif-OSTRA-008/libcint/src/fmt.c' (0x00010088aa00) of size 320
+SUMMARY: AddressSanitizer: global-buffer-overflow fmt.c:404 in fmt_lerfc_like
+Shadow bytes around the buggy address:
+  0x00010088a880: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088a900: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088a980: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088aa00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088aa80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x00010088ab00: 00 00 00 00 00 00 00 00 f9[f9]f9 f9 f9 f9 f9 f9
+  0x00010088ab80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088ac00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088ac80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088ad00: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x00010088ad80: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+==24651==ABORTING
+EXIT=134
