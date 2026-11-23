@@ -16,7 +16,9 @@ Read first: [`PROTOCOL.md`](PROTOCOL.md) (how a signal becomes a finding) and [`
    overwritten. Refuted and reclassified signals are kept in `discarded/`: they measure the method.
 4. **Be fair to the code and its authors.** We describe fragile numerical decisions, not careless people.
 5. **Declare AI assistance**: which model or tool did what, and what a human checked.
-6. The repository is **private** for now. Do not share its contents outside the collaborators without agreement.
+6. The repository is **public**. Write every record so that the maintainers of the library could read it today:
+   factual, with evidence, and with its status clear. Public visibility here is not a substitute for reporting: a
+   finding that passes the gate in `REPORTING.md` is reported upstream without unnecessary delay.
 
 ## Workflow (fork / branch / pull request)
 

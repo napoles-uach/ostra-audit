@@ -13,8 +13,11 @@ identities, invariances, energy–potential consistency, analytic references and
 Started at the Universidad Autónoma de Chihuahua (UACH) and open to collaborators. AI models (Claude, Gemini, ChatGPT) build
 and run the verification harnesses; every result is checked, and every report reviewed, by a human before submission.
 
-> **Status: private working repository.** Findings not yet reported to maintainers are kept here until they have
-> passed independent verification. Each upstream report links back to its folder in this repository.
+> **Status: public working repository.** It contains verified findings that have already been reported upstream and
+> findings still under verification or waiting to be reported (see the Report column in `findings/INDEX.md`).
+> Records marked *Pending* have not yet been reviewed by the maintainers of the library concerned and may be
+> reclassified. Maintainers are welcome to open an issue here or contact us; each upstream report links back to its
+> folder in this repository.
 
 ## Layout
 
