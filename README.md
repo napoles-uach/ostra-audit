@@ -10,7 +10,7 @@ depend on (exchange-correlation functionals, Gaussian integrals, dispersion and 
 oracle, so ordinary testing and security tooling do not see them. OSTRA uses physics as the oracle: exact
 identities, invariances, energy–potential consistency, analytic references and independent implementations.
 
-Project at the Universidad Autónoma de Chihuahua (UACH). AI models (Claude, Anthropic, and a second agent) build
+Started at the Universidad Autónoma de Chihuahua (UACH) and open to collaborators. AI models (Claude, Gemini, ChatGPT) build
 and run the verification harnesses; every result is checked, and every report reviewed, by a human before submission.
 
 > **Status: private working repository.** Findings not yet reported to maintainers are kept here until they have

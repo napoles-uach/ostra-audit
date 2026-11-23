@@ -140,4 +140,4 @@ Extend the table to cover every m that can be requested. The formula in the comm
 </details>
 
 ---
-Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries at UACH. Analysis assisted by an AI model (Claude, Anthropic); all results were checked and the report reviewed by a human before submission.
+Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries. Analysis assisted by an AI model (Claude, Anthropic); all results were checked and the report reviewed by a human before submission.

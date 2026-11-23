@@ -70,4 +70,4 @@ Related, minor: `ECPsph_ine_opt` leaves the [0, 16) tables with `z > 16` (nr_ecp
 This is in the same ECP derivative code as #3669 (uninitialized output of the `iprinv` kernels for atoms without ECP).
 
 ---
-Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries at UACH. Analysis assisted by AI models (Claude, Anthropic; Gemini, Google); all results were checked and the report reviewed by a human before submission.
+Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries. Analysis assisted by AI models (Claude, Anthropic; Gemini, Google); all results were checked and the report reviewed by a human before submission.

@@ -67,4 +67,4 @@ Tested by rebuilding `libcgto` from the v2.15.1 sources with and without this ch
 This is in the same ECP derivative code as #3669 (uninitialized output of the `iprinv` kernels for atoms without ECP).
 
 ---
-Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries at UACH. Analysis assisted by AI models (Claude, Anthropic; Gemini, Google); all results were checked and the report reviewed by a human before submission.
+Found and verified as part of OSTRA (Open-Source elecTRonic-structure Audit), a physics-based audit of electronic-structure libraries. Analysis assisted by AI models (Claude, Anthropic; Gemini, Google); all results were checked and the report reviewed by a human before submission.
