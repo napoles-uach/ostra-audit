@@ -21,6 +21,7 @@ and run the verification harnesses; every result is checked, and every report re
 | Path | Contents |
 |---|---|
 | `PROTOCOL.md` | The six-step audit protocol, finding classes, impact levels, status workflow |
+| `REPORTING.md` | How a verified finding becomes an upstream issue: gate checklist, issue structure, signature, follow-up |
 | `findings/INDEX.md` | Table of all findings with class, impact level and status |
 | `findings/OSTRA-NNN-*/` | One folder per finding: `finding.md` (record), `environment.txt` (exact versions), `repro/` (minimal reproducers), `evidence/` (raw outputs, figures, data), `verification/` (independent checks), `report/` (draft or submitted issue text) |
 | `candidates/` | Signals not yet verified, or not reproduced |

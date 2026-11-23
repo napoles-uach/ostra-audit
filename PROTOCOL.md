@@ -18,7 +18,7 @@
 4. **Isolate the cause** — minimal reproducer and exact source line; attribution by changing only the suspected
    part (patch, parameter, post-hoc subtraction) and showing the discrepancy disappears.
 5. **Measure the impact** on real observables (energies, forces, charges), not only on point values.
-6. **Report** — only with explicit human approval, after checking it is not already known.
+6. **Report** — only with explicit human approval, after checking it is not already known. See [`REPORTING.md`](REPORTING.md).
 
 ## Classes
 New numerical bug · numerical precision · design (deliberate, possibly known in the literature) · documented
