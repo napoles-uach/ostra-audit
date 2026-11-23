@@ -88,5 +88,44 @@ Independent verification is the most valuable contribution and the condition for
 
 ## Authorship
 
-People who contribute findings, verifications or substantial analysis will be invited to the paper. Discuss
-authorship with the coordinator (J. M. Nápoles-Duarte) early; the PR history and `agents/LOG.md` document who did what.
+### Who is an author
+To be an author of an OSTRA paper, a contributor must meet all three conditions:
+
+1. **A substantial contribution**, for example: a finding that reaches `verified`; a complete independent
+   verification; an oracle, probe or tool used in the paper's results; impact analysis or statistics; or a
+   drafted section of the manuscript.
+2. **Review and approval** of the final manuscript before submission.
+3. **Accountability** for their part: being able to explain and defend it if questioned.
+
+Contributions below this threshold (a single unverified candidate, minor fixes, comments) are acknowledged by name
+in the Acknowledgements. When in doubt, ask early; the decision rests with the coordinator
+(J. M. Nápoles-Duarte), based on the PR history and `agents/LOG.md`.
+
+### How contributions are described: CRediT
+Contributions are reported with the [CRediT taxonomy](https://credit.niso.org/), as recommended by RSC journals.
+How the 14 roles map onto this project:
+
+| CRediT role | In OSTRA |
+|---|---|
+| Conceptualization | The project idea; physics as the oracle |
+| Methodology | The protocol, oracle design |
+| Software | Probes, harnesses, tools, patches |
+| Investigation | Exploring libraries and finding signals |
+| Validation | Independent verification of other people's findings |
+| Formal analysis | Impact measurement, statistics for the paper |
+| Data curation | Finding records, index, `agents/LOG.md` |
+| Resources | Computing, access to codes or literature |
+| Visualization | Figures |
+| Writing – original draft | Drafting the manuscript |
+| Writing – review & editing | Revising the manuscript or upstream reports |
+| Supervision | Supervising students working on the project |
+| Project administration | Coordination; deciding what is reported |
+| Funding acquisition | Funding |
+
+Each author's roles (optionally with degree: lead / equal / supporting) are agreed by all authors before submission.
+The order of authors is agreed with the coordinator early, not at the end.
+
+### AI models
+AI models are not authors and receive no CRediT roles. Their use is declared in the Methods and in an AI-use
+statement (which models, for what, and what was checked by humans). A finding produced by a contributor's AI agent
+is credited to the contributor who directed and verified the work.
