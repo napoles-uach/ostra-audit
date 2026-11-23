@@ -1,0 +1,34 @@
+diff --git a/pyscf/dft/xcfun.py b/pyscf/dft/xcfun.py
+index a9e6478f..d8d5d612 100644
+--- a/pyscf/dft/xcfun.py
++++ b/pyscf/dft/xcfun.py
+@@ -324,6 +324,13 @@ VV10_XC = {
+ }
+ VV10_XC.update([(key.replace('_', ''), val) for key, val in VV10_XC.items()])
+ 
++def _check_no_nlc(xc_code, fn_facs):
++    '''NLC placeholder ids (>= 5000) are not XCFun functionals and must not reach libxcfun_itrf.'''
++    if any(xid >= 5000 for xid, fac in fn_facs):
++        raise NotImplementedError(
++            f'{xc_code} contains a VV10 functional. The semilocal part of VV10 functionals is not '
++            'available in the XCFun backend. Use the libxc backend, or a semilocal xc with mf.nlc.')
++
+ @lru_cache(100)
+ def xc_type(xc_code):
+     if xc_code is None:
+@@ -332,6 +339,7 @@ def xc_type(xc_code):
+         hyb, fn_facs = parse_xc(xc_code)
+     else:
+         fn_facs = [(xc_code, 1)]  # mimic fn_facs
++    _check_no_nlc(xc_code, fn_facs)
+ 
+     if not fn_facs:
+         return 'HF'
+@@ -1037,6 +1045,7 @@ def eval_xc1(xc_code, rho, spin=0, deriv=1, omega=None):
+         rho = numpy.asarray(rho[...,[0,1,2,3,5],:], order='C')
+ 
+     hyb, fn_facs = parse_xc(xc_code)
++    _check_no_nlc(xc_code, fn_facs)
+     if omega is not None:
+         hyb = hyb[:2] + (float(omega),)
+ 

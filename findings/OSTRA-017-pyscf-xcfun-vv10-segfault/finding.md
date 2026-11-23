@@ -13,8 +13,8 @@
 | oracle_class | api-contract |
 | class | New bug (crash) |
 | impact_level | III (loud: process killed, exit 139) |
-| status | Verified |
-| report | Pending |
+| status | Verified, attributed, fix tested; issue drafted |
+| report | Pending (issue drafted in report/) |
 
 `mf._numint.libxc = dft.xcfun` with `wb97m_v` or `b97m_v` on H2/STO-3G terminates with SIGSEGV (exit 139);
 the same runs with libxc succeed.
@@ -25,3 +25,11 @@ See `evidence/2026-11-23-master/results.md`. The segfault happens in `xc_type`, 
 The supported route (`mf.nlc = 'vv10'`) works with XCFun and matches libxc. Important for the fix: named VV10
 functionals map only to the placeholder in the XCFun backend, so simply skipping ids >= 5000 would replace the
 crash with a silent ~0.6 Eh error (no XC at all). Pending: blind verification by explorer 2; GitHub issue search.
+
+## Prior art and history (2026-11-23)
+GitHub search by the human reviewer: #919 "Bug in VV10 with XCFun backend" (2021, wb97m_v + XCFun, ZeroDivisionError),
+closed by #928 (parser refactor, VV10_XC dict). The placeholder ids 5000+ were added later in #1681 (eb7d9043,
+2023-04-11, "Refactor NLC parser and integral code"). Loading the pre-#1681 xcfun.py, `parse_xc('wb97m_v')` raised
+KeyError 'Unknown XC functional WB97M_V': the change turned a clear error into a segfault. The #919 script segfaults on
+2.15.1. Candidate fix (report/xcfun_vv10_guard.patch) applied to 2.15.1: named VV10 strings raise NotImplementedError;
+mf.nlc route, b3lyp, pbe unchanged; test_xcfun.py 11 passed.

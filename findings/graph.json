@@ -324,7 +324,7 @@
       ],
       "impact": 3,
       "impact_level": "III (loud: process killed, exit 139)",
-      "status": "Verified",
+      "status": "Verified, attributed, fix tested; issue drafted",
       "reported": false
     },
     {
