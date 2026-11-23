@@ -10,8 +10,8 @@
 | oracle | ASan (explorer); crash / exit code (verifier) |
 | class | Memory safety, new |
 | impact_level | II-III (A: only z exactly 16; B: nuclear gradients crash with built-in i-function bases and ECPs with a local channel) |
-| status | A verified; B attributed (local-channel omega_nuc) and impact measured; extra ASan claims pending |
-| report | Pending |
+| status | A verified; B attributed, impact measured, minimal fix verified; extra ASan claims pending |
+| report | Pending (issue drafted in report/) |
 
 A. ECPsph_ine_opt uses `z > 16` to leave the [0,16) tables; floor(16.0/(16/400)) = 400, one row past the
 400-row tables (only for z exactly 16). B. `double omega_nuc[CART_CUM]` with CART_CUM = 456 (up to l = 12). Verifier,
@@ -45,3 +45,12 @@ it needs an ASan build of libcgto. The explorer's patch also covers `_offset_car
 `_offset_cart` to ANG_MAX = 15.
 
 Status: B attributed and impact measured (crash of nuclear gradients with real basis/ECP pairs). Ready to report.
+
+## Minimal fix verified (2026-11-23)
+Rebuilt `libcgto` from the v2.15.1 sources with and without the two-line change in `report/minimal.patch`
+(CART_CUM -> 816, `_offset_cart` up to l = 16). Unpatched build reproduces the crash ("stack smashing detected");
+patched: AgH `ECPscalar_ipnuc`/`_iprinv` and synthetic l = 6 / lc = 0, 4 and l = 5 / lc = 7 cases run;
+12/12 integral sets for l <= 5 are bit-identical; AgH RHF analytic gradient vs 4-point FD agrees to 2.3e-9 Eh/bohr
+(`verification/patch_check_*`). The explorer's broader patch is not needed for this defect. Issue text: `report/issue.md`.
+(Verifier note: a first patched build silently used the unpatched header, because sources include "gto/nr_ecp.h";
+fixed before drawing conclusions.)

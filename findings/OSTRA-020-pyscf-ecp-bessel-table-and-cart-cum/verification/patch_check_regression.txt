@@ -1,0 +1,12 @@
+lb,lc=3 2 ECPscalar  max|vanilla-patched| = 0.0
+lb,lc=3 2 ECPscalar_ipnuc  max|vanilla-patched| = 0.0
+lb,lc=3 2 ECPscalar_iprinv  max|vanilla-patched| = 0.0
+lb,lc=4 3 ECPscalar  max|vanilla-patched| = 0.0
+lb,lc=4 3 ECPscalar_ipnuc  max|vanilla-patched| = 0.0
+lb,lc=4 3 ECPscalar_iprinv  max|vanilla-patched| = 0.0
+lb,lc=5 5 ECPscalar  max|vanilla-patched| = 0.0
+lb,lc=5 5 ECPscalar_ipnuc  max|vanilla-patched| = 0.0
+lb,lc=5 5 ECPscalar_iprinv  max|vanilla-patched| = 0.0
+lb,lc=5 6 ECPscalar  max|vanilla-patched| = 0.0
+lb,lc=5 6 ECPscalar_ipnuc  max|vanilla-patched| = 0.0
+lb,lc=5 6 ECPscalar_iprinv  max|vanilla-patched| = 0.0

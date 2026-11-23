@@ -1,0 +1,22 @@
+--- a/pyscf/lib/gto/nr_ecp.h	2026-11-23 09:10:13.429932584 -0600
++++ b/pyscf/lib/gto/nr_ecp.h	2026-11-23 09:10:13.557202544 -0600
+@@ -15,7 +15,7 @@
+ #define CUTOFF          460  // ~ 1e200
+ #define CLOSE_ENOUGH(x, y)      (fabs(x-y) <= 1e-12 * fmax(fabs(x), fabs(y)))
+ #define SQUARE(r)       (r[0]*r[0]+r[1]*r[1]+r[2]*r[2])
+-#define CART_CUM        (455+1) // upto l = 12
++#define CART_CUM        (815+1) // upto l = 15 (ANG_MAX in libcint)
+ #define K_TAYLOR_MAX    7
+ #define K_TAB_COL       24      // >= (7*2+1+K_TAYLOR_MAX)
+ #define K_TAB_ENTRIES   400
+--- a/pyscf/lib/gto/nr_ecp.c	2026-11-23 09:10:13.429529368 -0600
++++ b/pyscf/lib/gto/nr_ecp.c	2026-11-23 09:10:13.559186924 -0600
+@@ -4565,7 +4565,7 @@
+         for (k = 0; k <= iz; k++)
+ 
+ static int _offset_cart[] = {0, 1, 4, 10, 20, 35, 56, 84, 120,
+-                             165, 220, 286, 364, 455, 560};
++                             165, 220, 286, 364, 455, 560, 680, 816};
+ 
+ /*
+  * Matrix of angular moment operator l*1j on the real spherical harmonic basis.
