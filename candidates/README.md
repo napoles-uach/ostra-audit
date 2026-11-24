@@ -15,3 +15,4 @@ conditions before it can move to `findings/` or `discarded/`.
 | Explorer 2 | libxc | Inventory of 84 numerical decisions and 143 boundary tests | Material lives in the explorer's folder (`PhysAud/`); to be imported verbatim |
 | Explorer 2 | libcint | Double-precision Boys F_m loses digits just above TURNOVER_POINT (pre-existing: 1e-8 at m = 39; 1e-4 at m = 63); matters where long double = double and no quadmath (macOS arm64) | Partly re-checked by explorer 1 (2026-11-23, values in OSTRA-008 finding.md); impact on integrals not measured |
 | Explorer 2 | libcint | lrys_wheeler singularity at R = 1.0 on macOS arm64 without libquadmath (also with m = 39) | Not verified; seen during OSTRA-008 verification |
+| Explorer 1 | XCFun | TPSSX and REVTPSSX return NaN for a fully spin-polarized one-electron density (H atom), released and fixed builds; libxc finite | Seen in impact study 2026-11-24 (`studies/impact-xcfun-2026-11-24/scripts/hatom.py`); not yet attributed |

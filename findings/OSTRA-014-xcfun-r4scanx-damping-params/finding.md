@@ -25,3 +25,8 @@ XCFun added r4SCAN in 2020-09 (#140), before the r4SCAN paper; 0.232 may be a pr
 - **Minimal fix:** DX_DAMP4_P = 0.802, DX_DAMP4_A = 0.178.
 - **Result** vs libxc 7.1.2: eps 2.4e-2 -> 3.2e-14, derivatives 1.3e2 -> 1.4e-10. Controls unchanged.
 - **Status:** confirmed defect (parameters). Origin of 0.232 unknown (r4SCAN entered XCFun in 2020-09, before the preprint).
+
+## Impact on observables (2026-11-24)
+`studies/impact-xcfun-2026-11-24/`: self-consistent r4SCAN, released vs fixed XCFun, 26 molecules, def2-TZVP.
+Atomization energies: MAD 0.63, max 1.99 kcal/mol (C2H6); reaction energies: MAD 0.58, max 2.03 kcal/mol
+(2 H2O2 -> 2 H2O + O2). Fixed build matches libxc. Silent. Impact level I confirmed.

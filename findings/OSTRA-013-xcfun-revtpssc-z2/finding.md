@@ -29,3 +29,8 @@ uniform gas (z = 0) and one-electron densities (z = 1).
   the exact PBE beta (0.06672455060314922, commented in gga_c_regtpss.mpl) instead of the paper's 0.066725. With it:
   eps 4.0e-11, derivatives 1.6e-8, identical to the TPSSC control (3.9e-11).
 - **Status:** confirmed defect (formula). The beta rounding is a convention, not a defect.
+
+## Impact on observables (2026-11-24)
+`studies/impact-xcfun-2026-11-24/`: first-order change of E_c on self-consistent revTPSS densities, 26 molecules,
+def2-TZVP. Atomization energies: MAD 0.54, max 1.35 kcal/mol (C2H6); reaction energies: MAD 0.59, max 1.32 kcal/mol
+(N2 + 3 H2 -> 2 NH3). Silent. Impact level I confirmed (order of chemical accuracy).

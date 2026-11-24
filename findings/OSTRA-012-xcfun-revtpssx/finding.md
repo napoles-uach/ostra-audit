@@ -30,3 +30,7 @@ so the term carries an extra factor sigma. (b) and (c) only matter once (a) is f
   (`xcfun_fixes_plus_libxc_constant_conventions.patch`): eps 9.6e-16, derivatives 1.0e-14. Controls TPSSX, TPSSC,
   R2SCANX, SCANX unchanged.
 - **Status:** confirmed defect (registration + two formula errors). Convention difference in constants is not a defect.
+
+## Impact on observables (2026-11-24)
+`studies/impact-xcfun-2026-11-24/`: with the released XCFun, revTPSS SCF in PySCF does not finish for 7 of 26
+molecules (singular matrix or > 15 min); loud failure, no silent wrong results observed.
