@@ -13,8 +13,8 @@
 | oracle_class | analytic-reference, energy-potential-consistency, branch-boundary |
 | class | Numerical precision, new |
 | impact_level | II (gCP derivatives for unlike-element pairs; energy impact not re-measured) |
-| status | Partly verified |
-| report | Pending |
+| status | Partly verified; included as a minor note in the simple-dftd3 issue |
+| report | Pending (issue drafted in OSTRA-019/report/, together with 023 and 025) |
 
 Verifier (mpmath): the 12-term series has relative errors 3.5e-4 to 1.8e-3 at x = 5; the closed-form
 upward recursion has 4e-3 to 0.92 at x = 0.05-0.1 for k = 7-8. The switch uses |za - zb| < 0.1, while x = (zb - za)R/2
@@ -22,3 +22,7 @@ depends on R, so each formula can be used in the regime where it fails. Explorer
 Hessian diverges to 4.7e-3 at h = 1e-5, 1e-11 with the patch.
 
 Explorer's original record: `agents/explorer2/exploracion3-snapshot-2026-11-22/05-simple-dftd3-gcp-bint-baux/finding.md` (copied below as `explorer_finding.md`).
+
+## Gradient vs energy (2026-11-25)
+Released 1.7.0, Cl-Ge r2SCAN-3c, R = 1.6-6 Angstrom: analytic gradient vs central FD of the energy agree to 3e-5 or
+better. Effect on energies/gradients small; reported as a minor note without a patch.

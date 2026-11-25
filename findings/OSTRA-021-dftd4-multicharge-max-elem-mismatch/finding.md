@@ -13,11 +13,15 @@
 | oracle_class | api-contract |
 | class | Fixed-size table across libraries, new |
 | impact_level | III (superheavy elements only) |
-| status | Verified (released dftd4 4.3.1) |
-| report | Pending |
+| status | Verified (run), attributed, fix tested; issue drafted |
+| report | Pending (issue drafted in OSTRA-026/report/, together with 021) |
 
 d4.f90 rejects only 104-111; EEQ getters return -1.0 beyond 103 and new_eeq_model does not validate them.
 Verifier with dftd4 4.3.1 (Python): Hg-O gives q(Hg) = +0.48; Cn-O and Og-O give q(Cn) = -0.87, q(Og) = -0.87 and
 oxygen +0.87, no error raised.
 
 Explorer's original record: `agents/explorer2/exploracion3-snapshot-2026-11-22/03-dftd4-multicharge-maxelem/finding.md` (copied below as `explorer_finding.md`).
+
+## Dynamic confirmation and tested fix (2026-11-25)
+multicharge main: Cn-O q(Cn) = -0.89, Og-O -0.88, no error. Patch (OSTRA-026/report/multicharge.patch): EEQ2019 and
+EEQBC2025 constructors return "parameters are not available for element 'Cn'"; Hg/Lr charges unchanged.

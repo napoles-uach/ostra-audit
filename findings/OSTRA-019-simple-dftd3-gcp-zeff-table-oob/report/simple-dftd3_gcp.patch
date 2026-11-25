@@ -1,0 +1,86 @@
+diff --git a/src/dftd3/gcp.f90 b/src/dftd3/gcp.f90
+index 5e8d3a2..bf289d1 100644
+--- a/src/dftd3/gcp.f90
++++ b/src/dftd3/gcp.f90
+@@ -98,17 +98,21 @@ subroutine get_geometric_counterpoise_atomic(mol, param, cutoff, energies, gradi
+    !> Work partition of the atom pairs, absent selects the complete work
+    type(work_partition), intent(in), optional :: partition
+ 
+-   real(wp), allocatable :: lattr(:, :)
++   real(wp), allocatable :: lattr(:, :), gtmp(:, :), stmp(:, :)
+    logical :: grad
+ 
+-   grad = present(gradient) .and. present(sigma)
++   grad = present(gradient) .or. present(sigma)
++   if (grad) then
++      allocate(gtmp(3, mol%nat), source=0.0_wp)
++      allocate(stmp(3, 3), source=0.0_wp)
++   end if
+ 
+    if (allocated(param%emiss) .and. allocated(param%slater) .and. allocated(param%xv)) then
+       call get_lattice_points(mol%periodic, mol%lattice, cutoff%gcp, lattr)
+       if (grad) then
+          call gcp_deriv(mol, lattr, cutoff%gcp, param%zeff, param%emiss, param%slater, &
+             & param%xv, param%rvdw, param%sigma, param%alpha, param%beta, param%damp, &
+-            & param%dmp_scal, param%dmp_exp, energies, gradient, sigma, partition)
++            & param%dmp_scal, param%dmp_exp, energies, gtmp, stmp, partition)
+       else
+          call gcp_energy(mol, lattr, cutoff%gcp, param%zeff, param%emiss, param%slater, &
+             & param%xv, param%rvdw, param%sigma, param%alpha, param%beta, param%damp, &
+@@ -123,7 +127,7 @@ subroutine get_geometric_counterpoise_atomic(mol, param, cutoff, energies, gradi
+    if (param%srb) then
+       if (grad) then
+          call srb_deriv(mol, lattr, cutoff%srb, mol%num, param%rvdw_srb, param%rscal, param%qscal, &
+-            & rexp_srb, zexp_srb, energies, gradient, sigma, partition)
++            & rexp_srb, zexp_srb, energies, gtmp, stmp, partition)
+       else
+          call srb_energy(mol, lattr, cutoff%srb, mol%num, param%rvdw_srb, param%rscal, param%qscal, &
+             & rexp_srb, zexp_srb, energies, partition)
+@@ -133,12 +137,18 @@ subroutine get_geometric_counterpoise_atomic(mol, param, cutoff, energies, gradi
+    if (param%base) then
+       if (grad) then
+          call srb_deriv(mol, lattr, cutoff%srb, param%zeff, param%rvdw, param%rscal, param%qscal, &
+-            & rexp_base, zexp_base, energies, gradient, sigma, partition)
++            & rexp_base, zexp_base, energies, gtmp, stmp, partition)
+       else
+          call srb_energy(mol, lattr, cutoff%srb, param%zeff, param%rvdw, param%rscal, param%qscal, &
+             & rexp_base, zexp_base, energies, partition)
+       end if
+    end if
++
++   if (grad) then
++      if (present(gradient)) gradient(:, :) = gradient + gtmp
++      if (present(sigma)) sigma(:, :) = sigma + stmp
++   end if
++
+ end subroutine get_geometric_counterpoise_atomic
+ 
+ 
+diff --git a/src/dftd3/gcp/param.f90 b/src/dftd3/gcp/param.f90
+index d091571..861229a 100644
+--- a/src/dftd3/gcp/param.f90
++++ b/src/dftd3/gcp/param.f90
+@@ -124,7 +124,7 @@ module dftd3_gcp_param
+       & 1.232920_wp, 1.343390_wp, 1.448280_wp, 1.613360_wp, 1.768140_wp, 1.992010_wp, 2.233110_wp, 2.493230_wp, &
+       & 3.029640_wp, 3.389980_wp, &  ! H-Ca
+       & 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, &
+-      & 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp]
++      & 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp, 0.0_wp]
+ 
+    real(wp), parameter :: emiss_hf_631gd(*) = [ &! H-Ca + Br (no 3d)
+       & 0.010083_wp, 0.008147_wp, &
+@@ -1059,10 +1059,12 @@ pure function effective_atomic_number(number) result(zeff)
+       zeff = number - 18
+    case(55:57)
+       zeff = number - 18*2
+-   case(58:71, 90:94)
++   case(58:71, 89:94)
+       zeff = 21
+-   case(72:89)
++   case(72:86)
+       zeff = number - 2*18 - 14
++   case(87:88)
++      zeff = number - 2*18 - 32
+    end select
+ end function effective_atomic_number
+ 

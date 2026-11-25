@@ -13,8 +13,8 @@
 | oracle_class | sanitizer-code-reading |
 | class | Memory safety / fixed-size table, new |
 | impact_level | III (heavy elements: Kr/Xe/Rn with MINIS, Fr/Ra/Ac, Z > 94) |
-| status | Verified (code) |
-| report | Pending |
+| status | Verified (run on released 1.7.0), attributed, fix tested; issue drafted |
+| report | Pending (issue drafted in OSTRA-019/report/, together with 023 and 025) |
 
 effective_atomic_number maps 72:89 to Z - 50 (Fr/Ra/Ac -> 37-39) and leaves Z > 94 unchanged, while the
 emission/basis tables have 36 entries (emiss_hf_minis has 35, so Kr/Xe/Rn -> 36 is already out of range). No element
@@ -23,3 +23,9 @@ validation in the parameter setup. Explorer's bounds-checked build reports E = +
 code and counting table lengths, not by running the Fortran build.
 
 Explorer's original record: `agents/explorer2/exploracion3-snapshot-2026-11-22/01-simple-dftd3-gcp-zeff-oob/finding.md` (copied below as `explorer_finding.md`).
+
+## Dynamic confirmation and tested fix (explorer 1, 2026-11-25)
+Released dftd3 1.7.0: Fr/Ra/Ac-O with r2SCAN-3c give E = inf, NaN gradient; Kr/Xe-O with HF/MINIS give E = 0;
+Z >= 95 aborts the process with `ERROR STOP invalid shell combination in ssovl` (new). Patch in report/ (mapping
+Fr/Ra like Cs/Ba, Ac with the actinides, 36th MINIS entry) built from main 84cb7cd: Fr/Ra/Ac finite and equal to
+K/Ca/Th; regression bit-identical; meson test 78 OK. Z >= 95 left to the maintainers (suggest validation).

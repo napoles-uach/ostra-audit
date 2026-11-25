@@ -13,8 +13,8 @@
 | oracle_class | api-contract |
 | class | API contract, new |
 | impact_level | III (C API / Fortran callers requesting gradients without sigma) |
-| status | Verified (code) |
-| report | Pending |
+| status | Verified (run), attributed, fix tested; issue drafted |
+| report | Pending (issue drafted in OSTRA-019/report/, together with 023 and 025) |
 
 With sigma absent (C API with NULL sigma: the unallocated Fortran array is passed as absent), grad is false
 and only energies are computed; the gradient stays at zero without a warning. The dispersion routine uses
@@ -30,3 +30,6 @@ is silently zero: water dimer with HF-3c parameters, max |grad| 0.0215 Eh/bohr -
 optimization threshold (3e-4 to 4.5e-4). No known downstream caller found; impact level III kept (severe when hit,
 reachable only through the C/Fortran API). `evidence/impact_2026-11-25.py`.
 
+## Tested fix (2026-11-25)
+Patch in OSTRA-019/report/ (local derivative arrays, added to whichever output is present): sigma = NULL now gives
+the same gradient as the full call; regression bit-identical.

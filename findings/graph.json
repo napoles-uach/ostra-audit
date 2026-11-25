@@ -361,7 +361,7 @@
       ],
       "impact": 3,
       "impact_level": "III (heavy elements: Kr/Xe/Rn with MINIS, Fr/Ra/Ac, Z > 94)",
-      "status": "Verified (code)",
+      "status": "Verified (run on released 1.7.0), attributed, fix tested; issue drafted",
       "reported": false
     },
     {
@@ -400,7 +400,7 @@
       ],
       "impact": 3,
       "impact_level": "III (superheavy elements only)",
-      "status": "Verified (released dftd4 4.3.1)",
+      "status": "Verified (run), attributed, fix tested; issue drafted",
       "reported": false
     },
     {
@@ -441,7 +441,7 @@
       ],
       "impact": 2,
       "impact_level": "II (gCP derivatives for unlike-element pairs; energy impact not re-measured)",
-      "status": "Partly verified",
+      "status": "Partly verified; included as a minor note in the simple-dftd3 issue",
       "reported": false
     },
     {
@@ -480,7 +480,7 @@
       ],
       "impact": 3,
       "impact_level": "III (C API / Fortran callers requesting gradients without sigma)",
-      "status": "Verified (code)",
+      "status": "Verified (run), attributed, fix tested; issue drafted",
       "reported": false
     },
     {
@@ -499,7 +499,7 @@
       ],
       "impact": 3,
       "impact_level": "III (callers requesting only Cartesian charge derivatives)",
-      "status": "Verified (code)",
+      "status": "Verified (run), attributed, fix tested; issue drafted",
       "reported": false
     }
   ],

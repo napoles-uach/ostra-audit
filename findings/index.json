@@ -355,8 +355,8 @@
     "oracle_class": "sanitizer-code-reading",
     "class": "Memory safety / fixed-size table, new",
     "impact_level": "III (heavy elements: Kr/Xe/Rn with MINIS, Fr/Ra/Ac, Z > 94)",
-    "status": "Verified (code)",
-    "report": "Pending",
+    "status": "Verified (run on released 1.7.0), attributed, fix tested; issue drafted",
+    "report": "Pending (issue drafted in OSTRA-019/report/, together with 023 and 025)",
     "path": "findings/OSTRA-019-simple-dftd3-gcp-zeff-table-oob",
     "slug": "simple-dftd3-gcp-zeff-table-oob"
   },
@@ -393,8 +393,8 @@
     "oracle_class": "api-contract",
     "class": "Fixed-size table across libraries, new",
     "impact_level": "III (superheavy elements only)",
-    "status": "Verified (released dftd4 4.3.1)",
-    "report": "Pending",
+    "status": "Verified (run), attributed, fix tested; issue drafted",
+    "report": "Pending (issue drafted in OSTRA-026/report/, together with 021)",
     "path": "findings/OSTRA-021-dftd4-multicharge-max-elem-mismatch",
     "slug": "dftd4-multicharge-max-elem-mismatch"
   },
@@ -431,8 +431,8 @@
     "oracle_class": "analytic-reference, energy-potential-consistency, branch-boundary",
     "class": "Numerical precision, new",
     "impact_level": "II (gCP derivatives for unlike-element pairs; energy impact not re-measured)",
-    "status": "Partly verified",
-    "report": "Pending",
+    "status": "Partly verified; included as a minor note in the simple-dftd3 issue",
+    "report": "Pending (issue drafted in OSTRA-019/report/, together with 023 and 025)",
     "path": "findings/OSTRA-023-simple-dftd3-gcp-bk-switch",
     "slug": "simple-dftd3-gcp-bk-switch"
   },
@@ -469,8 +469,8 @@
     "oracle_class": "api-contract",
     "class": "API contract, new",
     "impact_level": "III (C API / Fortran callers requesting gradients without sigma)",
-    "status": "Verified (code)",
-    "report": "Pending",
+    "status": "Verified (run), attributed, fix tested; issue drafted",
+    "report": "Pending (issue drafted in OSTRA-019/report/, together with 023 and 025)",
     "path": "findings/OSTRA-025-simple-dftd3-gcp-gradient-needs-sigma",
     "slug": "simple-dftd3-gcp-gradient-needs-sigma"
   },
@@ -488,8 +488,8 @@
     "oracle_class": "api-contract",
     "class": "API contract, new",
     "impact_level": "III (callers requesting only Cartesian charge derivatives)",
-    "status": "Verified (code)",
-    "report": "Pending",
+    "status": "Verified (run), attributed, fix tested; issue drafted",
+    "report": "Pending (issue drafted in OSTRA-026/report/, together with 021)",
     "path": "findings/OSTRA-026-multicharge-dqdr-intent-out-unwritten",
     "slug": "multicharge-dqdr-intent-out-unwritten"
   }
