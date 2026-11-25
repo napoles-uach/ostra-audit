@@ -12,7 +12,7 @@
 | pattern | stale-threshold |
 | oracle_class | independent-implementation |
 | class | New bug (parameters) or outdated preprint values |
-| impact_level | I-II (explorer: 0.5-0.9 kcal/mol; not re-measured) |
+| impact_level | I (silent; atomization energies MAD 0.63, max 1.99 kcal/mol, impact study 2026-11-24) |
 | status | Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14 |
 | report | Pending |
 

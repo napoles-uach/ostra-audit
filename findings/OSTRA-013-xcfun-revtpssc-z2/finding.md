@@ -12,7 +12,7 @@
 | pattern | transcription-slip |
 | oracle_class | independent-implementation |
 | class | New bug (formula), silent |
-| impact_level | I-II (explorer: SCF shifts 1.5-2.1 kcal/mol; not re-measured) |
+| impact_level | I (silent; atomization energies MAD 0.54, max 1.35 kcal/mol, impact study 2026-11-24) |
 | status | Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11 |
 | report | Pending |
 

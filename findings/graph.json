@@ -244,7 +244,7 @@
         "independent-implementation"
       ],
       "impact": 1,
-      "impact_level": "I-II (explorer: SCF shifts 1.5-2.1 kcal/mol; not re-measured)",
+      "impact_level": "I (silent; atomization energies MAD 0.54, max 1.35 kcal/mol, impact study 2026-11-24)",
       "status": "Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11",
       "reported": false
     },
@@ -263,7 +263,7 @@
         "independent-implementation"
       ],
       "impact": 1,
-      "impact_level": "I-II (explorer: 0.5-0.9 kcal/mol; not re-measured)",
+      "impact_level": "I (silent; atomization energies MAD 0.63, max 1.99 kcal/mol, impact study 2026-11-24)",
       "status": "Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14",
       "reported": false
     },
