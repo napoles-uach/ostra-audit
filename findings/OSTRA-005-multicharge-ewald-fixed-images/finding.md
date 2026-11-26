@@ -23,3 +23,10 @@ before the Ewald sum is an effective workaround. Full comment text: `report/issu
 `studies/impact-d4-ewald-2026-11-25/`: 8 crystals, equivalent cells. Standard cells agree to < 0.001 kJ/mol/f.u.
 except the MgO primitive cell (0.046 kJ/mol/f.u., 0.15 %). Sheared equivalent cells (a' = a + 2b): MgO -10.2
 kJ/mol/f.u. (-34 %), q(Mg) +0.61; CaF2 -2.1 %; LiF -1.9 %. Silent.
+
+## Gradient consistency on sheared cells (guided search, 2026-11-26)
+dftd4 4.3.1, MgO a' = a + 2b: analytic gradient 3.8e-5 Eh/bohr while central FD of the energy is ~0 (forces must
+vanish by symmetry): the gradient is not the derivative of the energy. Sheared CaF2: forces 5.7e-5 Eh/bohr,
+consistent with FD but nonzero, breaking the crystal symmetry. Standard cells: consistent to 1e-12. Virial consistent
+in all cases. `searches/2026-11-26-guided/cell_invariance/d4_virial.py`.
+

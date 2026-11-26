@@ -501,6 +501,46 @@
       "impact_level": "III (callers requesting only Cartesian charge derivatives)",
       "status": "Verified (run), attributed, fix tested; issue drafted",
       "reported": false
+    },
+    {
+      "id": "OSTRA-027",
+      "num": "027",
+      "title": "XCFun TW (von Weizsäcker kinetic energy) squares the squared gradient: T_W of the H atom is 0.0075 Eh instead of 0.5",
+      "path": "findings/OSTRA-027-xcfun-tw-squared-gradient",
+      "libraries": [
+        "XCFun"
+      ],
+      "patterns": [
+        "transcription-slip"
+      ],
+      "oracles": [
+        "independent-implementation",
+        "exact-identity"
+      ],
+      "impact": 3,
+      "impact_level": "III (wrong by orders of magnitude when used; kinetic functional, used in orbital-free DFT and embedding)",
+      "status": "Verified (run), attributed, fix tested; needs blind verification by a second agent",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-028",
+      "num": "028",
+      "title": "XCFun SPBEC (sPBE correlation for SSB) has the PBE beta and gamma constants swapped: E_c 63 % too negative",
+      "path": "findings/OSTRA-028-xcfun-spbec-swapped-constants",
+      "libraries": [
+        "XCFun"
+      ],
+      "patterns": [
+        "transcription-slip"
+      ],
+      "oracles": [
+        "independent-implementation",
+        "analytic-reference"
+      ],
+      "impact": 1,
+      "impact_level": "I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed)",
+      "status": "Verified (run), attributed, fix tested; needs blind verification and a check against the paper",
+      "reported": false
     }
   ],
   "libraries": [

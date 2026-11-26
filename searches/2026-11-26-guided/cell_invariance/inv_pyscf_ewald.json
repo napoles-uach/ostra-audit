@@ -1,0 +1,282 @@
+{
+ "NaCl (rocksalt)": {
+  "primitive": {
+   "E_fu_kJ": -90325.09442129223,
+   "q": null,
+   "nat": 2,
+   "t": 1.7,
+   "dE": 0.0
+  },
+  "conventional cubic": {
+   "E_fu_kJ": -90325.09442129232,
+   "q": null,
+   "nat": 8,
+   "t": 0.0,
+   "dE": -8.731149137020111e-11
+  },
+  "Niggli-reduced": {
+   "E_fu_kJ": -90325.09442129223,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "2x2x2 supercell": {
+   "E_fu_kJ": -90325.09442129226,
+   "q": null,
+   "nat": 16,
+   "t": 0.0,
+   "dE": -2.9103830456733704e-11
+  },
+  "a' = a + 1b": {
+   "E_fu_kJ": -90325.09442129223,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "a' = a + 2b": {
+   "E_fu_kJ": -90325.09442129225,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": -1.4551915228366852e-11
+  }
+ },
+ "MgO (rocksalt)": {
+  "primitive": {
+   "E_fu_kJ": -124465.90344908241,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": -1.4551915228366852e-11
+  },
+  "conventional cubic": {
+   "E_fu_kJ": -124465.9034490824,
+   "q": null,
+   "nat": 8,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "Niggli-reduced": {
+   "E_fu_kJ": -124465.9034490824,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "2x2x2 supercell": {
+   "E_fu_kJ": -124465.90344908238,
+   "q": null,
+   "nat": 16,
+   "t": 0.0,
+   "dE": 1.4551915228366852e-11
+  },
+  "a' = a + 1b": {
+   "E_fu_kJ": -124465.9034490824,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "a' = a + 2b": {
+   "E_fu_kJ": -124465.9034490824,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  }
+ },
+ "LiF (rocksalt)": {
+  "primitive": {
+   "E_fu_kJ": -53728.16466040812,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": -7.275957614183426e-12
+  },
+  "conventional cubic": {
+   "E_fu_kJ": -53728.16466040815,
+   "q": null,
+   "nat": 8,
+   "t": 0.0,
+   "dE": -3.637978807091713e-11
+  },
+  "Niggli-reduced": {
+   "E_fu_kJ": -53728.16466040811,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "2x2x2 supercell": {
+   "E_fu_kJ": -53728.16466040817,
+   "q": null,
+   "nat": 16,
+   "t": 0.0,
+   "dE": -5.820766091346741e-11
+  },
+  "a' = a + 1b": {
+   "E_fu_kJ": -53728.16466040812,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": -7.275957614183426e-12
+  },
+  "a' = a + 2b": {
+   "E_fu_kJ": -53728.16466040812,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": -7.275957614183426e-12
+  }
+ },
+ "CsCl": {
+  "primitive": {
+   "err": "BasisNotFoundError: Basis set not found for Cs in gth-szv"
+  },
+  "conventional cubic": {
+   "err": "BasisNotFoundError: Basis set not found for Cs in gth-szv"
+  },
+  "Niggli-reduced": {
+   "err": "BasisNotFoundError: Basis set not found for Cs in gth-szv"
+  },
+  "2x2x2 supercell": {
+   "err": "BasisNotFoundError: Basis set not found for Cs in gth-szv"
+  },
+  "a' = a + 1b": {
+   "err": "BasisNotFoundError: Basis set not found for Cs in gth-szv"
+  },
+  "a' = a + 2b": {
+   "err": "BasisNotFoundError: Basis set not found for Cs in gth-szv"
+  }
+ },
+ "CaF2 (fluorite)": {
+  "primitive": {
+   "err": "BasisNotFoundError: Basis set not found for Ca in gth-szv"
+  },
+  "conventional cubic": {
+   "err": "BasisNotFoundError: Basis set not found for Ca in gth-szv"
+  },
+  "Niggli-reduced": {
+   "err": "BasisNotFoundError: Basis set not found for Ca in gth-szv"
+  },
+  "2x2x2 supercell": {
+   "err": "BasisNotFoundError: Basis set not found for Ca in gth-szv"
+  },
+  "a' = a + 1b": {
+   "err": "BasisNotFoundError: Basis set not found for Ca in gth-szv"
+  },
+  "a' = a + 2b": {
+   "err": "BasisNotFoundError: Basis set not found for Ca in gth-szv"
+  }
+ },
+ "ZnO (wurtzite)": {
+  "primitive": {
+   "err": "BasisNotFoundError: Basis set not found for Zn in gth-szv"
+  },
+  "hexagonal, gamma = 60": {
+   "err": "BasisNotFoundError: Basis set not found for Zn in gth-szv"
+  },
+  "Niggli-reduced": {
+   "err": "BasisNotFoundError: Basis set not found for Zn in gth-szv"
+  },
+  "2x2x2 supercell": {
+   "err": "BasisNotFoundError: Basis set not found for Zn in gth-szv"
+  },
+  "a' = a + 1b": {
+   "err": "BasisNotFoundError: Basis set not found for Zn in gth-szv"
+  },
+  "a' = a + 2b": {
+   "err": "BasisNotFoundError: Basis set not found for Zn in gth-szv"
+  }
+ },
+ "GaN (wurtzite)": {
+  "primitive": {
+   "E_fu_kJ": -153039.69121081,
+   "q": null,
+   "nat": 4,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "hexagonal, gamma = 60": {
+   "E_fu_kJ": -153039.69121081004,
+   "q": null,
+   "nat": 4,
+   "t": 0.0,
+   "dE": -2.9103830456733704e-11
+  },
+  "Niggli-reduced": {
+   "E_fu_kJ": -153039.69121081,
+   "q": null,
+   "nat": 4,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "2x2x2 supercell": {
+   "E_fu_kJ": -153039.69121081042,
+   "q": null,
+   "nat": 32,
+   "t": 0.0,
+   "dE": -4.0745362639427185e-10
+  },
+  "a' = a + 1b": {
+   "E_fu_kJ": -153039.69121081,
+   "q": null,
+   "nat": 4,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "a' = a + 2b": {
+   "E_fu_kJ": -153039.69121081,
+   "q": null,
+   "nat": 4,
+   "t": 0.0,
+   "dE": 0.0
+  }
+ },
+ "Si (diamond)": {
+  "primitive": {
+   "E_fu_kJ": -11026.405013220381,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "conventional cubic": {
+   "E_fu_kJ": -11026.405013220365,
+   "q": null,
+   "nat": 8,
+   "t": 0.0,
+   "dE": 1.6370904631912708e-11
+  },
+  "Niggli-reduced": {
+   "E_fu_kJ": -11026.405013220381,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": 0.0
+  },
+  "2x2x2 supercell": {
+   "E_fu_kJ": -11026.40501322039,
+   "q": null,
+   "nat": 16,
+   "t": 0.0,
+   "dE": -9.094947017729282e-12
+  },
+  "a' = a + 1b": {
+   "E_fu_kJ": -11026.405013220383,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": -1.8189894035458565e-12
+  },
+  "a' = a + 2b": {
+   "E_fu_kJ": -11026.405013220383,
+   "q": null,
+   "nat": 2,
+   "t": 0.0,
+   "dE": -1.8189894035458565e-12
+  }
+ }
+}

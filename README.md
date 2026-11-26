@@ -34,6 +34,7 @@ and run the verification harnesses; every result is checked, and every report re
 | `candidates/` | Signals not yet verified, or not reproduced |
 | `discarded/` | Signals removed by the protocol, and why (also evidence that the filter works) |
 | `catalog/` | Fragile numerical decisions: recurring patterns across libraries, with linked cases |
+| `searches/` | Search log (including negative results) and guided-search material |
 | `studies/` | Impact studies: effect of findings on chemical observables (released vs minimally fixed code) |
 | `probes/` | General harnesses and raw scan results |
 | `agents/` | Log of which agent proposed what and how verification changed it |

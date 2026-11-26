@@ -17,3 +17,11 @@ Signals removed by the protocol. They are evidence that the filter works and par
 | PySCF | VV10 and implicit-solvent analytic gradients (explorer 2) | — (clean) | Analytic vs FD4 agree to 6e-10–1.5e-9 Eh/bohr |
 | XCFun | M05X / M052XX vs libxc | 3 (convention) | Exact (1 - a_HF) scaling convention |
 | libxc | wPBEh "0.10–0.20 kcal/mol vs CP2K" (explorer 2) | 3 (definition) | Compares two different rescaling definitions (Heyd 2004 vs Henderson 2009), not a defect |
+
+## 2026-11-26 guided search
+- Periodic D3 "triclinic FD deviations" (candidate from 2026-11-19): refuted. Energies invariant to 1e-12 kJ/mol over
+  equivalent cells; analytic gradients and virial agree with FD to 1e-11 (NaCl, MgO, ZnO; triclinic cells).
+- tblite supercell energies differ by 10^2 kJ/mol/f.u.: Gamma-point-only sampling (design); equivalent cells with
+  the same atoms agree to 0.01 kJ/mol/f.u.
+- XCFun vs libxc: M05X/M052XX/M06X... components (no HF fraction in the XCFun component), VWN3C (RPA parametrization),
+  alpha for global hybrids (unused when omega = 0), PBE-family 6.7e-6 (constants), zvPBEint/zvPBEsol (documented fit).

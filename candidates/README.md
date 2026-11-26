@@ -10,9 +10,11 @@ conditions before it can move to `findings/` or `discarded/`.
 | Explorer 2 | libxc | `mgga_c_lak`: `m_max(rs*a, eps)` algebraic error for alpha < 0 | Not verified. alpha < 0 means tau < tau_W, unphysical and normally removed by FHC enforcement; check whether reachable |
 | Explorer 2 | libxc | LB94: 0.32 % jump at x_s = 300 | Not verified. Probably the asymptotic switch of the method (design) |
 | Explorer 1 | libxc | MCML / VCML small flags in devel consistency scan; BEEF noise | Open since 2026-11-19 |
-| Explorer 1 | dftd3 (simple-dftd3) | Triclinic FD deviations in periodic D3 | Unclassified (runs timed out); likely hard cutoffs |
 | Explorer 1 | libxc | LTA / TH / TLDA family differ at tau = 0 with rho > 0 (7.1.2 `mgga_x_lta` returned 1e273) | Degenerate input; low priority |
 | Explorer 2 | libxc | Inventory of 84 numerical decisions and 143 boundary tests | Material lives in the explorer's folder (`PhysAud/`); to be imported verbatim |
 | Explorer 2 | libcint | Double-precision Boys F_m loses digits just above TURNOVER_POINT (pre-existing: 1e-8 at m = 39; 1e-4 at m = 63); matters where long double = double and no quadmath (macOS arm64) | Partly re-checked by explorer 1 (2026-11-23, values in OSTRA-008 finding.md); impact on integrals not measured |
 | Explorer 2 | libcint | lrys_wheeler singularity at R = 1.0 on macOS arm64 without libquadmath (also with m = 39) | Not verified; seen during OSTRA-008 verification |
 | Explorer 1 | XCFun | TPSSX and REVTPSSX return NaN for a fully spin-polarized one-electron density (H atom), released and fixed builds; libxc finite | Seen in impact study 2026-11-24 (`studies/impact-xcfun-2026-11-24/scripts/hatom.py`); not yet attributed |
+| Explorer 1 | XCFun | P86C vs libxc GGA_C_P86: 0.08 mEh in H2O, rel 2e-4 in exc (also BP86, B3P86); XCFun has DL reference data | Guided search 2026-11-26; constants to compare |
+| Explorer 1 | XCFun | PW91C: potential differs from libxc by rel 2e-3 while energies agree | Guided search 2026-11-26 |
+| Explorer 1 | PySCF | BRX and CSC are listed in PySCF's XCFun codes but cannot be evaluated (need jp / laplacian): RuntimeError | Guided search 2026-11-26; loud, low priority |

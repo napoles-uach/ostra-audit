@@ -1,0 +1,18 @@
+--- a/src/functionals/spbec.cpp	2026-11-21 19:43:33.212040827 -0600
++++ b/src/functionals/spbec.cpp	2026-11-26 09:20:15.309834312 -0600
+@@ -19,12 +19,12 @@
+ /* "Simplified" PBEc, spbec. Implemented by ulfek */
+ 
+ /* These are the constants in the paper, not very high precision.. */
+-static const parameter gamm = 0.066725;
+-static const parameter beta = 0.031091;
++static const parameter gamm = 0.031091;
++static const parameter beta = 0.066725;
+ static const parameter beta_gamma = beta / gamm;
+ 
+ template <typename num> static num G(const num & eps, const num & phi3) {
+-  return beta_gamma / expm1(-eps / (beta_gamma * phi3));
++  return beta_gamma / expm1(-eps / (gamm * phi3));
+ }
+ 
+ template <typename num>

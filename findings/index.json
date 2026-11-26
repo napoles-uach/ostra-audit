@@ -492,5 +492,43 @@
     "report": "Pending (issue drafted in OSTRA-026/report/, together with 021)",
     "path": "findings/OSTRA-026-multicharge-dqdr-intent-out-unwritten",
     "slug": "multicharge-dqdr-intent-out-unwritten"
+  },
+  {
+    "id": "OSTRA-027",
+    "title": "XCFun TW (von Weizsäcker kinetic energy) squares the squared gradient: T_W of the H atom is 0.0075 Eh instead of 0.5",
+    "library": "XCFun",
+    "location": "src/functionals/tw.cpp:21 (`1./8.*pow(d.gaa + d.gbb, 2.0)/d.n`)",
+    "versions": "2.1.1 (a89b783, master, unchanged since 2015) and the XCFun bundled with PySCF 2.15.1",
+    "detected": "2026-11-26",
+    "detected_by": "Explorer 1 (Claude), guided search (pattern: formula transcription slips)",
+    "oracle": "Independent implementation (libxc GGA_K_VW) and exact limit (T_W = T_s for one orbital)",
+    "libraries": "XCFun",
+    "pattern": "transcription-slip",
+    "oracle_class": "independent-implementation, exact-identity",
+    "class": "New bug (formula)",
+    "impact_level": "III (wrong by orders of magnitude when used; kinetic functional, used in orbital-free DFT and embedding)",
+    "status": "Verified (run), attributed, fix tested; needs blind verification by a second agent",
+    "report": "Pending",
+    "path": "findings/OSTRA-027-xcfun-tw-squared-gradient",
+    "slug": "xcfun-tw-squared-gradient"
+  },
+  {
+    "id": "OSTRA-028",
+    "title": "XCFun SPBEC (sPBE correlation for SSB) has the PBE beta and gamma constants swapped: E_c 63 % too negative",
+    "library": "XCFun",
+    "location": "src/functionals/spbec.cpp:22-27 (gamm = 0.066725, beta = 0.031091; G uses beta_gamma*phi3)",
+    "versions": "2.1.1 (a89b783, master; constants unchanged since the import from Dalton, 2010-2011) and PySCF 2.15.1 bundle",
+    "detected": "2026-11-26",
+    "detected_by": "Explorer 1 (Claude), guided search (pattern: formula transcription slips)",
+    "oracle": "Independent implementation (libxc GGA_C_SPBE) and re-implementation from the published formula",
+    "libraries": "XCFun",
+    "pattern": "transcription-slip",
+    "oracle_class": "independent-implementation, analytic-reference",
+    "class": "New bug (parameters)",
+    "impact_level": "I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed)",
+    "status": "Verified (run), attributed, fix tested; needs blind verification and a check against the paper",
+    "report": "Pending",
+    "path": "findings/OSTRA-028-xcfun-spbec-swapped-constants",
+    "slug": "xcfun-spbec-swapped-constants"
   }
 ]
