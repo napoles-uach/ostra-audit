@@ -1,10 +1,67 @@
 {
-  "libraries": ["libxc", "XCFun", "libcint", "PySCF", "multicharge", "dftd4", "simple-dftd3", "libecpint"],
+  "libraries": [
+    "libxc",
+    "XCFun",
+    "libcint",
+    "PySCF",
+    "multicharge",
+    "dftd4",
+    "simple-dftd3",
+    "libecpint",
+    "tblite",
+    "mctc-lib"
+  ],
   "dependencies": [
-    {"from": "PySCF", "to": "libcint", "relation": "bundles"},
-    {"from": "PySCF", "to": "XCFun", "relation": "bundles"},
-    {"from": "PySCF", "to": "libxc", "relation": "uses"},
-    {"from": "dftd4", "to": "multicharge", "relation": "uses"}
+    {
+      "from": "PySCF",
+      "to": "libcint",
+      "relation": "bundles"
+    },
+    {
+      "from": "PySCF",
+      "to": "XCFun",
+      "relation": "bundles"
+    },
+    {
+      "from": "PySCF",
+      "to": "libxc",
+      "relation": "uses"
+    },
+    {
+      "from": "dftd4",
+      "to": "multicharge",
+      "relation": "uses"
+    },
+    {
+      "from": "tblite",
+      "to": "dftd4",
+      "relation": "uses"
+    },
+    {
+      "from": "tblite",
+      "to": "simple-dftd3",
+      "relation": "uses"
+    },
+    {
+      "from": "tblite",
+      "to": "mctc-lib",
+      "relation": "uses"
+    },
+    {
+      "from": "dftd4",
+      "to": "mctc-lib",
+      "relation": "uses"
+    },
+    {
+      "from": "simple-dftd3",
+      "to": "mctc-lib",
+      "relation": "uses"
+    },
+    {
+      "from": "multicharge",
+      "to": "mctc-lib",
+      "relation": "uses"
+    }
   ],
   "patterns": {
     "hard-branch-switch": "Hard branch switches",

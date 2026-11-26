@@ -1,0 +1,498 @@
+# Testing: model
+  Starting r4r2-val ... (1/10)
+       ... r4r2-val [PASSED]
+  Starting vdw-rad ... (2/10)
+       ... vdw-rad [PASSED]
+  Starting gw-mb01 ... (3/10)
+       ... gw-mb01 [PASSED]
+  Starting gw-mb02 ... (4/10)
+       ... gw-mb02 [PASSED]
+  Starting gw-mb03 ... (5/10)
+       ... gw-mb03 [PASSED]
+  Starting gw-amf3 ... (6/10)
+       ... gw-amf3 [PASSED]
+  Starting ghost-atoms ... (7/10)
+       ... ghost-atoms [PASSED]
+  Starting dgw-mb04 ... (8/10)
+       ... dgw-mb04 [PASSED]
+  Starting dgw-mb05 ... (9/10)
+       ... dgw-mb05 [PASSED]
+  Starting gw-stable ... (10/10)
+       ... gw-stable [PASSED]
+# Testing: dftd3
+  Starting PBE-D3(BJ) ... (1/44)
+       ... PBE-D3(BJ) [PASSED]
+  Starting B97-D3(BJ) ... (2/44)
+       ... B97-D3(BJ) [PASSED]
+  Starting TPSS-D3(BJ) ... (3/44)
+       ... TPSS-D3(BJ) [PASSED]
+  Starting PWPB95-D3(BJ) ... (4/44)
+       ... PWPB95-D3(BJ) [PASSED]
+  Starting B2PLYP-D3(BJ) ... (5/44)
+       ... B2PLYP-D3(BJ) [PASSED]
+  Starting PW6B95-D3(BJ) ... (6/44)
+       ... PW6B95-D3(BJ) [PASSED]
+  Starting OLYP-D3(BJ) ... (7/44)
+       ... OLYP-D3(BJ) [PASSED]
+  Starting PBE0-D3(BJ) ... (8/44)
+       ... PBE0-D3(BJ) [PASSED]
+  Starting RPBE-D3(0) ... (9/44)
+       ... RPBE-D3(0) [PASSED]
+  Starting B2GPPLYP-D3(0) ... (10/44)
+       ... B2GPPLYP-D3(0) [PASSED]
+  Starting SSB-D3(0) ... (11/44)
+       ... SSB-D3(0) [PASSED]
+  Starting B1B95-D3(0) ... (12/44)
+       ... B1B95-D3(0) [PASSED]
+  Starting M06L-D3(0) ... (13/44)
+       ... M06L-D3(0) [PASSED]
+  Starting TPSSh-D3(0) ... (14/44)
+       ... TPSSh-D3(0) [PASSED]
+  Starting HF-D3(0) ... (15/44)
+       ... HF-D3(0) [PASSED]
+  Starting CAM-B3LYP-D3(0) ... (16/44)
+       ... CAM-B3LYP-D3(0) [PASSED]
+  Starting DSD-BLYP-D3(BJ)-ATM ... (17/44)
+       ... DSD-BLYP-D3(BJ)-ATM [PASSED]
+  Starting mPWLYP-D3(BJ)-ATM ... (18/44)
+       ... mPWLYP-D3(BJ)-ATM [PASSED]
+  Starting TPSS0-D3(BJ)-ATM ... (19/44)
+       ... TPSS0-D3(BJ)-ATM [PASSED]
+  Starting BPBE-D3(BJ)-ATM ... (20/44)
+       ... BPBE-D3(BJ)-ATM [PASSED]
+  Starting PWB6K-D3(BJ)-ATM ... (21/44)
+       ... PWB6K-D3(BJ)-ATM [PASSED]
+  Starting lc-wPBE-D3(BJ)-ATM ... (22/44)
+       ... lc-wPBE-D3(BJ)-ATM [PASSED]
+  Starting PW1PW-D3(BJ)-ATM ... (23/44)
+       ... PW1PW-D3(BJ)-ATM [PASSED]
+  Starting mPW1B95-D3(BJ)-ATM ... (24/44)
+       ... mPW1B95-D3(BJ)-ATM [PASSED]
+  Starting BLYP-D3(0)-ATM ... (25/44)
+       ... BLYP-D3(0)-ATM [PASSED]
+  Starting revPBE-D3(0)-ATM ... (26/44)
+       ... revPBE-D3(0)-ATM [PASSED]
+  Starting HSE06-D3(0)-ATM ... (27/44)
+       ... HSE06-D3(0)-ATM [PASSED]
+  Starting BMK-D3(0)-ATM ... (28/44)
+       ... BMK-D3(0)-ATM [PASSED]
+  Starting M06-D3(0)-ATM ... (29/44)
+       ... M06-D3(0)-ATM [PASSED]
+  Starting B3LYP-D3(0)-ATM ... (30/44)
+       ... B3LYP-D3(0)-ATM [PASSED]
+  Starting BP-D3(0)-ATM ... (31/44)
+       ... BP-D3(0)-ATM [PASSED]
+  Starting M05-D3(0)-ATM ... (32/44)
+       ... M05-D3(0)-ATM [PASSED]
+  Starting PBE-D3(0M) ... (33/44)
+       ... PBE-D3(0M) [PASSED]
+  Starting BLYP-D3(0M) ... (34/44)
+       ... BLYP-D3(0M) [PASSED]
+  Starting B97-D3(0M) ... (35/44)
+       ... B97-D3(0M) [PASSED]
+  Starting lc-wPBE-D3(0M) ... (36/44)
+       ... lc-wPBE-D3(0M) [PASSED]
+  Starting B97h-D3(op) ... (37/44)
+       ... B97h-D3(op) [PASSED]
+  Starting TPSSh-D3(op) ... (38/44)
+       ... TPSSh-D3(op) [PASSED]
+  Starting B3LYP-D3(CSO) ... (39/44)
+       ... B3LYP-D3(CSO) [PASSED]
+  Starting PBE-D3(Z) ... (40/44)
+       ... PBE-D3(Z) [PASSED]
+  Starting PBE-D3(Z) sensitive gradient ... (41/44)
+       ... PBE-D3(Z) sensitive gradient [PASSED]
+  Starting PBE-D3(CSO)-ATM ... (42/44)
+       ... PBE-D3(CSO)-ATM [PASSED]
+  Starting PBE-D3(BJ) Actinides ... (43/44)
+       ... PBE-D3(BJ) Actinides [PASSED]
+  Starting PBE-D3(BJ)-ATM smooth cutoff gradient ... (44/44)
+       ... PBE-D3(BJ)-ATM smooth cutoff gradient [PASSED]
+# Testing: fourier
+  Starting jacobi-eigendecomposition ... (1/35)
+       ... jacobi-eigendecomposition [PASSED]
+  Starting jacobi-diagonal ... (2/35)
+       ... jacobi-diagonal [PASSED]
+  Starting model-setup ... (3/35)
+       ... model-setup [PASSED]
+  Starting model-citation ... (4/35)
+       ... model-citation [PASSED]
+  Starting reference-c6-mb01 ... (5/35)
+       ... reference-c6-mb01 [PASSED]
+  Starting atomic-c6-mb01 ... (6/35)
+       ... atomic-c6-mb01 [PASSED]
+  Starting atomic-c6-acetic ... (7/35)
+       ... atomic-c6-acetic [PASSED]
+  Starting rank-accuracy-mb01 ... (8/35)
+       ... rank-accuracy-mb01 [PASSED]
+  Starting truncation-mb01 ... (9/35)
+       ... truncation-mb01 [PASSED]
+  Starting ghost-atoms-mb01 ... (10/35)
+       ... ghost-atoms-mb01 [PASSED]
+  Starting energy-mb01 ... (11/35)
+       ... energy-mb01 [PASSED]
+  Starting energy-ewald-acetic ... (12/35)
+       ... energy-ewald-acetic [PASSED]
+  Starting gradient-slab ... (13/35)
+       ... gradient-slab [PASSED]
+  Starting hessian-mb01 ... (14/35)
+       ... hessian-mb01 [PASSED]
+  Starting fourier-transform ... (15/35)
+       ... fourier-transform [PASSED]
+  Starting fft-mesh-size ... (16/35)
+       ... fft-mesh-size [PASSED]
+  Starting fft-transform ... (17/35)
+       ... fft-transform [PASSED]
+  Starting ewald-molecular ... (18/35)
+       ... ewald-molecular [PASSED]
+  Starting ewald-unsupported-damping ... (19/35)
+       ... ewald-unsupported-damping [PASSED]
+  Starting spme-energy ... (20/35)
+       ... spme-energy [PASSED]
+  Starting spme-gradient ... (21/35)
+       ... spme-gradient [PASSED]
+  Starting spme-zero-mixed-mesh ... (22/35)
+       ... spme-zero-mixed-mesh [PASSED]
+  Starting ewald-hessian-rejected ... (23/35)
+       ... ewald-hessian-rejected [PASSED]
+  Starting ewald-pairwise-rejected ... (24/35)
+       ... ewald-pairwise-rejected [PASSED]
+  Starting ewald-converged-bj ... (25/35)
+       ... ewald-converged-bj [PASSED]
+  Starting ewald-converged-zero ... (26/35)
+       ... ewald-converged-zero [PASSED]
+  Starting ewald-kcut-convergence ... (27/35)
+       ... ewald-kcut-convergence [PASSED]
+  Starting ewald-supercell ... (28/35)
+       ... ewald-supercell [PASSED]
+  Starting ewald-translation ... (29/35)
+       ... ewald-translation [PASSED]
+  Starting ewald-gradient ... (30/35)
+       ... ewald-gradient [PASSED]
+  Starting ewald-sigma ... (31/35)
+       ... ewald-sigma [PASSED]
+  Starting cutoff-accuracy-cubic ... (32/35)
+       ... cutoff-accuracy-cubic [PASSED]
+  Starting cutoff-accuracy-benzene ... (33/35)
+       ... cutoff-accuracy-benzene [PASSED]
+  Starting cutoff-accuracy-slab ... (34/35)
+       ... cutoff-accuracy-slab [PASSED]
+  Starting cutoff-accuracy-molecular ... (35/35)
+       ... cutoff-accuracy-molecular [PASSED]
+# Testing: hessian
+  Starting PBE-D3(BJ) hessian ... (1/10)
+       ... PBE-D3(BJ) hessian [PASSED]
+  Starting RPBE-D3(0) hessian ... (2/10)
+       ... RPBE-D3(0) hessian [PASSED]
+  Starting PBE-D3(0M) hessian ... (3/10)
+       ... PBE-D3(0M) hessian [PASSED]
+  Starting B97h-D3(op) hessian ... (4/10)
+       ... B97h-D3(op) hessian [PASSED]
+  Starting PBE-D3(Z) hessian ... (5/10)
+       ... PBE-D3(Z) hessian [PASSED]
+  Starting DSD-BLYP-D3(BJ)-ATM hessian ... (6/10)
+       ... DSD-BLYP-D3(BJ)-ATM hessian [PASSED]
+  Starting B3LYP-D3(CSO) hessian ... (7/10)
+       ... B3LYP-D3(CSO) hessian [PASSED]
+  Starting PBE-D3(CSO)-ATM hessian ... (8/10)
+       ... PBE-D3(CSO)-ATM hessian [PASSED]
+  Starting BLYP-D3(0)-ATM hessian ... (9/10)
+       ... BLYP-D3(0)-ATM hessian [PASSED]
+  Starting PBE-D3(BJ)-ATM smooth cutoff hessian ... (10/10)
+       ... PBE-D3(BJ)-ATM smooth cutoff hessian [PASSED]
+# Testing: mpi
+  Starting feature query ... (1/3)
+       ... feature query [PASSED]
+  Starting uninitialized partition ... (2/3)
+       ... uninitialized partition [PASSED]
+  Starting uninitialized dispersion ... (3/3)
+       ... uninitialized dispersion [PASSED]
+# Testing: param
+  Starting DFT-D3(BJ) ... (1/21)
+       ... DFT-D3(BJ) [PASSED]
+  Starting DFT-D3(0) ... (2/21)
+       ... DFT-D3(0) [PASSED]
+  Starting DFT-D3(BJM) ... (3/21)
+       ... DFT-D3(BJM) [PASSED]
+  Starting DFT-D3(0M) ... (4/21)
+       ... DFT-D3(0M) [PASSED]
+  Starting DFT-D3(op) ... (5/21)
+       ... DFT-D3(op) [PASSED]
+  Starting DFT-D3(BJ)-ATM ... (6/21)
+       ... DFT-D3(BJ)-ATM [PASSED]
+  Starting DFT-D3(0)-ATM ... (7/21)
+       ... DFT-D3(0)-ATM [PASSED]
+  Starting DFT-D3(BJM)-ATM ... (8/21)
+       ... DFT-D3(BJM)-ATM [PASSED]
+  Starting DFT-D3(0M)-ATM ... (9/21)
+       ... DFT-D3(0M)-ATM [PASSED]
+  Starting DFT-D3(op)-ATM ... (10/21)
+       ... DFT-D3(op)-ATM [PASSED]
+  Starting DFT-D3(CSO) ... (11/21)
+       ... DFT-D3(CSO) [PASSED]
+  Starting DFT-D3(CSO)-ATM ... (12/21)
+       ... DFT-D3(CSO)-ATM [PASSED]
+  Starting DFT-D3(Z) ... (13/21)
+       ... DFT-D3(Z) [PASSED]
+  Starting DFT-D3(Z)-ATM ... (14/21)
+       ... DFT-D3(Z)-ATM [PASSED]
+  Starting unknown-D3(BJ) ... (15/21)
+       ... unknown-D3(BJ) [EXPECTED FAIL]
+  Message: No entry for 'unknown' present
+  Starting unknown-D3(0) ... (16/21)
+       ... unknown-D3(0) [EXPECTED FAIL]
+  Message: No entry for 'unknown' present
+  Starting unknown-D3(BJM) ... (17/21)
+       ... unknown-D3(BJM) [EXPECTED FAIL]
+  Message: No entry for 'unknown' present
+  Starting unknown-D3(0M) ... (18/21)
+       ... unknown-D3(0M) [EXPECTED FAIL]
+  Message: No entry for 'unknown' present
+  Starting unknown-D3(op) ... (19/21)
+       ... unknown-D3(op) [EXPECTED FAIL]
+  Message: No entry for 'unknown' present
+  Starting unknown-D3(CSO) ... (20/21)
+       ... unknown-D3(CSO) [EXPECTED FAIL]
+  Message: No entry for 'unknown' present
+  Starting unknown-D3(Z) ... (21/21)
+       ... unknown-D3(Z) [EXPECTED FAIL]
+  Message: No entry for 'unknown' present
+# Testing: pairwise
+  Starting PBE-D3(BJ) ... (1/12)
+       ... PBE-D3(BJ) [PASSED]
+  Starting B97-D3(BJ)-ATM ... (2/12)
+       ... B97-D3(BJ)-ATM [PASSED]
+  Starting TPSS-D3(BJ)-ATM ... (3/12)
+       ... TPSS-D3(BJ)-ATM [PASSED]
+  Starting HF-D3(0) ... (4/12)
+       ... HF-D3(0) [PASSED]
+  Starting HSE06-D3(0)-ATM ... (5/12)
+       ... HSE06-D3(0)-ATM [PASSED]
+  Starting BLYP-D3(0)-ATM ... (6/12)
+       ... BLYP-D3(0)-ATM [PASSED]
+  Starting B3LYP-D3M(0) ... (7/12)
+       ... B3LYP-D3M(0) [PASSED]
+  Starting PBE0-D3M(0)-ATM ... (8/12)
+       ... PBE0-D3M(0)-ATM [PASSED]
+  Starting BP86-D3M(0)-ATM ... (9/12)
+       ... BP86-D3M(0)-ATM [PASSED]
+  Starting PBE0-D3(op) ... (10/12)
+       ... PBE0-D3(op) [PASSED]
+  Starting PBE0-D3(op)-ATM ... (11/12)
+       ... PBE0-D3(op)-ATM [PASSED]
+  Starting PBE-D3(BJ)-ATM smooth cutoff ... (12/12)
+       ... PBE-D3(BJ)-ATM smooth cutoff [PASSED]
+# Testing: partition
+  Starting invalid partition ... (1/9)
+       ... invalid partition [PASSED]
+  Starting serial partition ... (2/9)
+       ... serial partition [PASSED]
+  Starting coordination number ... (3/9)
+       ... coordination number [PASSED]
+  Starting c6 on demand ... (4/9)
+       ... c6 on demand [PASSED]
+  Starting reducer ... (5/9)
+       ... reducer [PASSED]
+  Starting dispersion ... (6/9)
+       ... dispersion [PASSED]
+  Starting hessian ... (7/9)
+       ... hessian [PASSED]
+  Starting ewald ... (8/9)
+       ... ewald [PASSED]
+  Starting counterpoise ... (9/9)
+       ... counterpoise [PASSED]
+# Testing: periodic_1d
+  Starting revPBE-D3(BJ) ... (1/1)
+       ... revPBE-D3(BJ) [PASSED]
+# Testing: periodic_2d
+  Starting BP86-D3(0) ... (1/2)
+       ... BP86-D3(0) [PASSED]
+  Starting gh185 ... (2/2)
+       ... gh185 [PASSED]
+# Testing: periodic_3d
+  Starting PBE-D3(BJ) ... (1/8)
+       ... PBE-D3(BJ) [PASSED]
+  Starting PBEsol-D3(BJ) ... (2/8)
+       ... PBEsol-D3(BJ) [PASSED]
+  Starting TPSS-D3(BJ) ... (3/8)
+       ... TPSS-D3(BJ) [PASSED]
+  Starting HSE06-D3(BJ) ... (4/8)
+       ... HSE06-D3(BJ) [PASSED]
+  Starting BLYP-D3(0) ... (5/8)
+       ... BLYP-D3(0) [PASSED]
+  Starting M06L-D3(0) ... (6/8)
+       ... M06L-D3(0) [PASSED]
+  Starting rPW86PBE-D3(0) ... (7/8)
+       ... rPW86PBE-D3(0) [PASSED]
+  Starting revSSB-D3(0) ... (8/8)
+       ... revSSB-D3(0) [PASSED]
+# Testing: periodic_atm
+  Starting HSEsol-D3(BJ)-ATM ... (1/3)
+       ... HSEsol-D3(BJ)-ATM [PASSED]
+  Starting B3PW91-D3(0)-ATM ... (2/3)
+       ... B3PW91-D3(0)-ATM [PASSED]
+  Starting RPBE-D3(0)-ATM ... (3/3)
+       ... RPBE-D3(0)-ATM [PASSED]
+# Testing: gcp
+  Starting sv ... (1/66)
+       ... sv [PASSED]
+  Starting sv(p) ... (2/66)
+       ... sv(p) [PASSED]
+  Starting svx ... (3/66)
+       ... svx [PASSED]
+  Starting svp ... (4/66)
+       ... svp [PASSED]
+  Starting minis ... (5/66)
+       ... minis [PASSED]
+  Starting minix ... (6/66)
+       ... minix [PASSED]
+  Starting 631gd ... (7/66)
+       ... 631gd [PASSED]
+  Starting def2tzvp ... (8/66)
+       ... def2tzvp [PASSED]
+  Starting def1tzvp ... (9/66)
+       ... def1tzvp [PASSED]
+  Starting ccdz ... (10/66)
+       ... ccdz [PASSED]
+  Starting accdz ... (11/66)
+       ... accdz [PASSED]
+  Starting pobtzvp ... (12/66)
+       ... pobtzvp [PASSED]
+  Starting 2g ... (13/66)
+       ... 2g [PASSED]
+  Starting dz ... (14/66)
+       ... dz [PASSED]
+  Starting dzp ... (15/66)
+       ... dzp [PASSED]
+  Starting lanl ... (16/66)
+       ... lanl [PASSED]
+  Starting msvp ... (17/66)
+       ... msvp [PASSED]
+  Starting def2mtzvp ... (18/66)
+       ... def2mtzvp [PASSED]
+  Starting hf3c ... (19/66)
+       ... hf3c [PASSED]
+  Starting pbeh3c ... (20/66)
+       ... pbeh3c [PASSED]
+  Starting hse3c ... (21/66)
+       ... hse3c [PASSED]
+  Starting b973c ... (22/66)
+       ... b973c [PASSED]
+  Starting r2scan3c ... (23/66)
+       ... r2scan3c [PASSED]
+  Starting hf/sv ... (24/66)
+       ... hf/sv [PASSED]
+  Starting hybrid/sv ... (25/66)
+       ... hybrid/sv [PASSED]
+  Starting gga/sv ... (26/66)
+       ... gga/sv [PASSED]
+  Starting hf/sv(p) ... (27/66)
+       ... hf/sv(p) [PASSED]
+  Starting dft/sv(p) ... (28/66)
+       ... dft/sv(p) [PASSED]
+  Starting dft/svx ... (29/66)
+       ... dft/svx [PASSED]
+  Starting hf/svp ... (30/66)
+       ... hf/svp [PASSED]
+  Starting tpss/svp ... (31/66)
+       ... tpss/svp [PASSED]
+  Starting pw6b95/svp ... (32/66)
+       ... pw6b95/svp [PASSED]
+  Starting hybrid/svp ... (33/66)
+       ... hybrid/svp [PASSED]
+  Starting gga/svp ... (34/66)
+       ... gga/svp [PASSED]
+  Starting hf/minis ... (35/66)
+       ... hf/minis [PASSED]
+  Starting tpss/minis ... (36/66)
+       ... tpss/minis [PASSED]
+  Starting pw6b95/minis ... (37/66)
+       ... pw6b95/minis [PASSED]
+  Starting hybrid/minis ... (38/66)
+       ... hybrid/minis [PASSED]
+  Starting gga/minis ... (39/66)
+       ... gga/minis [PASSED]
+  Starting hf/631gd ... (40/66)
+       ... hf/631gd [PASSED]
+  Starting dft/631gd ... (41/66)
+       ... dft/631gd [PASSED]
+  Starting hf/tz ... (42/66)
+       ... hf/tz [PASSED]
+  Starting hybrid/tz ... (43/66)
+       ... hybrid/tz [PASSED]
+  Starting gga/tz ... (44/66)
+       ... gga/tz [PASSED]
+  Starting hf/deftzvp ... (45/66)
+       ... hf/deftzvp [PASSED]
+  Starting dft/deftzvp ... (46/66)
+       ... dft/deftzvp [PASSED]
+  Starting hf/ccdz ... (47/66)
+       ... hf/ccdz [PASSED]
+  Starting dft/ccdz ... (48/66)
+       ... dft/ccdz [PASSED]
+  Starting hf/accdz ... (49/66)
+       ... hf/accdz [PASSED]
+  Starting dft/accdz ... (50/66)
+       ... dft/accdz [PASSED]
+  Starting dft/pobtz ... (51/66)
+       ... dft/pobtz [PASSED]
+  Starting hf/minix ... (52/66)
+       ... hf/minix [PASSED]
+  Starting dft/minix ... (53/66)
+       ... dft/minix [PASSED]
+  Starting hf/2g ... (54/66)
+       ... hf/2g [PASSED]
+  Starting hf/dzp ... (55/66)
+       ... hf/dzp [PASSED]
+  Starting dft/dzp ... (56/66)
+       ... dft/dzp [PASSED]
+  Starting hf/dz ... (57/66)
+       ... hf/dz [PASSED]
+  Starting dft/dz ... (58/66)
+       ... dft/dz [PASSED]
+  Starting b3pbe3c/def2mtzvp ... (59/66)
+       ... b3pbe3c/def2mtzvp [PASSED]
+  Starting dft/lanl2 ... (60/66)
+       ... dft/lanl2 [PASSED]
+  Starting grad:hf/dz ... (61/66)
+       ... grad:hf/dz [PASSED]
+  Starting grad:dft/sv ... (62/66)
+       ... grad:dft/sv [PASSED]
+  Starting grad:hse3c ... (63/66)
+       ... grad:hse3c [PASSED]
+  Starting grad:hf3c ... (64/66)
+       ... grad:hf3c [PASSED]
+  Starting grad:b973c ... (65/66)
+       ... grad:b973c [PASSED]
+  Starting without-args ... (66/66)
+       ... without-args [PASSED]
+# Testing: gcp_hessian
+  Starting hf/dz ... (1/9)
+       ... hf/dz [PASSED]
+  Starting hf/minix ... (2/9)
+       ... hf/minix [PASSED]
+  Starting dft/lanl2 ... (3/9)
+       ... dft/lanl2 [PASSED]
+  Starting hf3c ... (4/9)
+       ... hf3c [PASSED]
+  Starting pbeh3c ... (5/9)
+       ... pbeh3c [PASSED]
+  Starting hse3c ... (6/9)
+       ... hse3c [PASSED]
+  Starting b973c ... (7/9)
+       ... b973c [PASSED]
+  Starting r2scan3c ... (8/9)
+       ... r2scan3c [PASSED]
+  Starting pbc:hf3c ... (9/9)
+       ... pbc:hf3c [PASSED]
+# Testing: output
+  Starting turbomole-gradient-corrupt ... (1/2)
+       ... turbomole-gradient-corrupt [PASSED]
+  Starting turbomole-gradlatt-corrupt ... (2/2)
+       ... turbomole-gradlatt-corrupt [PASSED]
+# Testing: regression
+  Starting dftbplus#871 ... (1/1)
+       ... dftbplus#871 [PASSED]
+   6.1019823481831397        0.0000000000000000        18.998195977781840     
+   1.8532222850711499        32.917216843534561       -33.352106069884037     
+   0.0000000000000000        0.0000000000000000        575.00265348192272     

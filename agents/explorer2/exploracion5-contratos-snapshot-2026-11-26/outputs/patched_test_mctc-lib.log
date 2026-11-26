@@ -1,0 +1,45 @@
+ninja: Entering directory `/Users/napolesd/Documents/Antigravity/PhysAud/exploracion5-contratos/builds-patched/mctc-lib'
+ninja: no work to do.
+ 1/38 mctc-lib:data            OK              0.68s
+ 2/38 mctc-lib:csrlist-linal   OK              0.69s
+ 3/38 mctc-lib:cutoff          OK              0.69s
+ 4/38 mctc-lib:math            OK              0.69s
+ 5/38 mctc-lib:read            OK              0.69s
+ 6/38 mctc-lib:read-aims       OK              0.03s
+ 7/38 mctc-lib:read-cjson      OK              0.03s
+ 8/38 mctc-lib:dotfiles        OK              0.72s
+ 9/38 mctc-lib:read-gaussian   OK              0.03s
+10/38 mctc-lib:read-ctfile     OK              0.04s
+11/38 mctc-lib:read-genformat  OK              0.03s
+12/38 mctc-lib:read-json       OK              0.02s
+13/38 mctc-lib:read-pdb        OK              0.03s
+14/38 mctc-lib:read-pymatgen   OK              0.03s
+15/38 mctc-lib:read-qchem      OK              0.03s
+16/38 mctc-lib:read-qcschema   OK              0.03s
+17/38 mctc-lib:read-turbomole  OK              0.03s
+18/38 mctc-lib:read-vasp       OK              0.03s
+19/38 mctc-lib:read-xyz        OK              0.03s
+20/38 mctc-lib:symbols         OK              0.03s
+21/38 mctc-lib:write-aims      OK              0.01s
+22/38 mctc-lib:write           OK              0.02s
+23/38 mctc-lib:write-cjson     OK              0.02s
+24/38 mctc-lib:write-gaussian  OK              0.01s
+25/38 mctc-lib:write-genformat OK              0.01s
+26/38 mctc-lib:write-pdb       OK              0.02s
+27/38 mctc-lib:write-ctfile    OK              0.04s
+28/38 mctc-lib:write-pymatgen  OK              0.02s
+29/38 mctc-lib:write-qchem     OK              0.02s
+30/38 mctc-lib:write-qcschema  OK              0.02s
+31/38 mctc-lib:write-turbomole OK              0.02s
+32/38 mctc-lib:utils           OK              0.09s
+33/38 mctc-lib:write-vasp      OK              0.01s
+34/38 mctc-lib:write-xyz       OK              0.01s
+35/38 mctc-lib:csrlist         OK              0.98s
+36/38 mctc-lib:wignerseitz     OK              0.23s
+37/38 mctc-lib:timer           OK              1.02s
+38/38 mctc-lib:ncoord          OK              4.16s
+
+Ok:                38  
+Fail:              0   
+
+Full log written to /Users/napolesd/Documents/Antigravity/PhysAud/exploracion5-contratos/builds-patched/mctc-lib/meson-logs/testlog.txt

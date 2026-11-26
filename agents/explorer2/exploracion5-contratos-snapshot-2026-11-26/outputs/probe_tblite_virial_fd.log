@@ -1,0 +1,10 @@
+--- baseline ---
+GFN2 virial oracle: E=-5.07003218E+00 max|s_ref|= 3.94635E-02 max|s_only-s_ref|= 9.99039E+02
+  4pt-FD virial h= 1.0E-03 max|s_ref-FD|=  2.311E-11
+  4pt-FD virial h= 1.0E-04 max|s_ref-FD|=  3.608E-11
+  4pt-FD virial h= 1.0E-05 max|s_ref-FD|=  1.793E-10
+--- patched ---
+GFN2 virial oracle: E=-5.07003218E+00 max|s_ref|= 3.94635E-02 max|s_only-s_ref|= 0.00000E+00
+  4pt-FD virial h= 1.0E-03 max|s_ref-FD|=  2.311E-11
+  4pt-FD virial h= 1.0E-04 max|s_ref-FD|=  3.608E-11
+  4pt-FD virial h= 1.0E-05 max|s_ref-FD|=  1.793E-10

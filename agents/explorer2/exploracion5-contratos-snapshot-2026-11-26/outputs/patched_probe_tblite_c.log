@@ -1,0 +1,21 @@
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 162 of file ../../repos-patched/tblite/src/tblite/scf/iterator.f90
+Fortran runtime warning: An array temporary was created
+At line 265 of file ../../repos-patched/tblite/src/tblite/wavefunction/mulliken.f90
+Fortran runtime warning: An array temporary was created
+At line 265 of file ../../repos-patched/tblite/src/tblite/wavefunction/mulliken.f90
+Fortran runtime warning: An array temporary was created
+tblite C API: E=-5.066597828879e+00 max|g|=2.089824e-02 max|s|=1.396445e-02 sum(q)=-5.773e-15 err=0

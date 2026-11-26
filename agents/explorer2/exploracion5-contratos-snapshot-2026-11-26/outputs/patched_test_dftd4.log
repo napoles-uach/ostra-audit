@@ -1,0 +1,75 @@
+ninja: Entering directory `/Users/napolesd/Documents/Antigravity/PhysAud/exploracion5-contratos/builds-patched/dftd4'
+ninja: no work to do.
+ 1/66 mctc-lib:cutoff           OK              0.32s
+ 2/66 mctc-lib:data             OK              0.33s
+ 3/66 mctc-lib:math             OK              0.33s
+ 4/66 mctc-lib:csrlist-linal    OK              0.34s
+ 5/66 mctc-lib:read-aims        OK              0.33s
+ 6/66 mctc-lib:read             OK              0.33s
+ 7/66 mctc-lib:read-cjson       OK              0.03s
+ 8/66 mctc-lib:read-ctfile      OK              0.03s
+ 9/66 mctc-lib:read-gaussian    OK              0.03s
+10/66 mctc-lib:read-genformat   OK              0.04s
+11/66 mctc-lib:read-json        OK              0.03s
+12/66 mctc-lib:read-pdb         OK              0.04s
+13/66 mctc-lib:read-pymatgen    OK              0.04s
+14/66 mctc-lib:read-qchem       OK              0.05s
+15/66 mctc-lib:read-qcschema    OK              0.05s
+16/66 mctc-lib:read-vasp        OK              0.04s
+17/66 mctc-lib:read-turbomole   OK              0.05s
+18/66 mctc-lib:read-xyz         OK              0.05s
+19/66 mctc-lib:symbols          OK              0.05s
+20/66 mctc-lib:wignerseitz      OK              0.02s
+21/66 mctc-lib:write            OK              0.02s
+22/66 mctc-lib:write-aims       OK              0.02s
+23/66 mctc-lib:write-cjson      OK              0.02s
+24/66 mctc-lib:write-gaussian   OK              0.02s
+25/66 mctc-lib:write-genformat  OK              0.02s
+26/66 mctc-lib:write-pdb        OK              0.02s
+27/66 mctc-lib:write-ctfile     OK              0.04s
+28/66 mctc-lib:write-pymatgen   OK              0.02s
+29/66 mctc-lib:write-qchem      OK              0.02s
+30/66 mctc-lib:write-qcschema   OK              0.02s
+31/66 mctc-lib:write-turbomole  OK              0.02s
+32/66 mctc-lib:write-vasp       OK              0.02s
+33/66 mctc-lib:write-xyz        OK              0.02s
+34/66 mctc-lib:utils            OK              0.11s
+35/66 mctc-lib:csrlist          OK              0.62s
+36/66 multicharge:wignerseitz   OK              0.31s
+37/66 multicharge:model         OK              0.43s
+38/66 dftd4:app-version         OK              0.67s
+39/66 dftd4:app-help-run        OK              0.37s
+40/66 dftd4:app-help-param      OK              0.27s
+41/66 dftd4:app-help            OK              0.61s
+42/66 dftd4:app-param-list      OK              0.03s
+43/66 dftd4:app-license         OK              0.03s
+44/66 dftd4:app-citation        OK              0.03s
+45/66 dftd4:app-noargs          EXPECTEDFAIL    0.03s   exit status 1
+46/66 mctc-lib:timer            OK              1.02s
+47/66 dftd4:app-gradient        SKIP            0.33s   exit status 77
+48/66 dftd4:app-hessian         SKIP            0.15s   exit status 77
+49/66 dftd4:app-energy-d4s      SKIP            0.34s   exit status 77
+50/66 dftd4:app-gradient-d4s    SKIP            0.34s   exit status 77
+51/66 dftd4:app-energy          SKIP            0.40s   exit status 77
+52/66 dftd4:app-energy-d4-eeqbc SKIP            0.05s   exit status 77
+53/66 dftd4:app-pair-analysis   SKIP            0.06s   exit status 77
+54/66 dftd4:app-properties      SKIP            0.08s   exit status 77
+55/66 dftd4:app-r2scan3c        SKIP            0.06s   exit status 77
+56/66 dftd4:app-r2scan3c-mod    SKIP            0.05s   exit status 77
+57/66 dftd4:app-r2scan3c-cli    SKIP            0.05s   exit status 77
+58/66 dftd4:api-test            OK              0.32s
+59/66 dftd4:model               OK              0.67s
+60/66 dftd4:pairwise            OK              1.05s
+61/66 dftd4:param               OK              1.30s
+62/66 mctc-lib:ncoord           OK              6.93s
+63/66 multicharge:hessian       OK              6.89s
+64/66 multicharge:pbc           OK             11.76s
+65/66 dftd4:periodic            OK             26.48s
+66/66 dftd4:dftd4               OK             27.14s
+
+Ok:                54  
+Expected Fail:     1   
+Fail:              0   
+Skipped:           11  
+
+Full log written to /Users/napolesd/Documents/Antigravity/PhysAud/exploracion5-contratos/builds-patched/dftd4/meson-logs/testlog.txt

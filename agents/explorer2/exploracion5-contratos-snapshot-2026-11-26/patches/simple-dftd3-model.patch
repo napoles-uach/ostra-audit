@@ -1,0 +1,107 @@
+diff --git a/src/dftd3/model.f90 b/src/dftd3/model.f90
+index 6f077f7..29a829f 100644
+--- a/src/dftd3/model.f90
++++ b/src/dftd3/model.f90
+@@ -242,11 +242,11 @@ subroutine weight_references(self, mol, cn, gwvec, gwdcn, gwd2cn)
+       gw(:nref) = gw(:nref) / norm
+       gwvec(:nref, iat) = gw(:nref)
+ 
+-      if (present(gwdcn)) then
++      if (present(gwdcn) .or. present(gwd2cn)) then
+          slope(:nref) = 2 * self%wf * dcn(:nref)
+          mean = sum(gw(:nref) * slope(:nref))
+          slope(:nref) = slope(:nref) - mean
+-         gwdcn(:nref, iat) = gw(:nref) * slope(:nref)
++         if (present(gwdcn)) gwdcn(:nref, iat) = gw(:nref) * slope(:nref)
+          if (present(gwd2cn)) then
+             var = sum(gw(:nref) * slope(:nref)**2)
+             gwd2cn(:nref, iat) = gw(:nref) * (slope(:nref)**2 - var)
+@@ -302,16 +302,18 @@ subroutine get_atomic_c6(self, mol, gwvec, gwdcn, c6, dc6dcn, gwd2cn, d2c6dcn2,
+    integer :: iat, jat, izp, jzp, iref, jref
+    real(wp) :: refc6, dc6, dc6dcni, dc6dcnj
+    real(wp) :: d2c6dcni, d2c6dcnj, d2c6mix
+-   logical :: second
++   logical :: do_first, do_d2, do_mix
+ 
+    if (allocated(self%lowrank)) then
+       call self%lowrank%get_atomic_c6(mol, self%ghost, gwvec, gwdcn, c6, dc6dcn)
+       return
+    end if
+ 
+-   second = present(gwd2cn) .and. present(d2c6dcn2) .and. present(d2c6dcnij)
++   do_first = present(gwdcn) .and. present(dc6dcn)
++   do_d2 = present(gwd2cn) .and. present(d2c6dcn2)
++   do_mix = present(gwdcn) .and. present(d2c6dcnij)
+ 
+-   if (second) then
++   if (do_first .and. do_d2 .and. do_mix) then
+       c6(:, :) = 0.0_wp
+       dc6dcn(:, :) = 0.0_wp
+       d2c6dcn2(:, :) = 0.0_wp
+@@ -357,7 +359,65 @@ subroutine get_atomic_c6(self, mol, gwvec, gwdcn, c6, dc6dcn, gwd2cn, d2c6dcn2,
+          end do
+       end do
+ 
+-   else if (present(gwdcn).and.present(dc6dcn)) then
++   else if (do_d2 .or. do_mix) then
++      c6(:, :) = 0.0_wp
++      if (do_first) dc6dcn(:, :) = 0.0_wp
++      if (do_d2) d2c6dcn2(:, :) = 0.0_wp
++      if (do_mix) d2c6dcnij(:, :) = 0.0_wp
++
++      !$omp parallel do schedule(runtime) default(none) &
++      !$omp shared(c6, dc6dcn, d2c6dcn2, d2c6dcnij, mol, self, gwvec, gwdcn, gwd2cn) &
++      !$omp shared(partition, do_first, do_d2, do_mix) &
++      !$omp private(iat, jat, izp, jzp, iref, jref, refc6, dc6, dc6dcni, dc6dcnj, &
++      !$omp& d2c6dcni, d2c6dcnj, d2c6mix)
++      do iat = 1, mol%nat
++         if (self%ghost(iat)) cycle
++         izp = mol%id(iat)
++         do jat = 1, iat
++            if (self%ghost(jat)) cycle
++            if (.not.owns_pair(partition, iat, jat)) cycle
++            jzp = mol%id(jat)
++            dc6 = 0.0_wp
++            dc6dcni = 0.0_wp
++            dc6dcnj = 0.0_wp
++            d2c6dcni = 0.0_wp
++            d2c6dcnj = 0.0_wp
++            d2c6mix = 0.0_wp
++            do iref = 1, self%ref(izp)
++               do jref = 1, self%ref(jzp)
++                  refc6 = self%c6(iref, jref, izp, jzp)
++                  dc6 = dc6 + gwvec(iref, iat) * gwvec(jref, jat) * refc6
++                  if (do_first) then
++                     dc6dcni = dc6dcni + gwdcn(iref, iat) * gwvec(jref, jat) * refc6
++                     dc6dcnj = dc6dcnj + gwvec(iref, iat) * gwdcn(jref, jat) * refc6
++                  end if
++                  if (do_d2) then
++                     d2c6dcni = d2c6dcni + gwd2cn(iref, iat) * gwvec(jref, jat) * refc6
++                     d2c6dcnj = d2c6dcnj + gwvec(iref, iat) * gwd2cn(jref, jat) * refc6
++                  end if
++                  if (do_mix) then
++                     d2c6mix = d2c6mix + gwdcn(iref, iat) * gwdcn(jref, jat) * refc6
++                  end if
++               end do
++            end do
++            c6(iat, jat) = dc6
++            c6(jat, iat) = dc6
++            if (do_first) then
++               dc6dcn(iat, jat) = dc6dcni
++               dc6dcn(jat, iat) = dc6dcnj
++            end if
++            if (do_d2) then
++               d2c6dcn2(iat, jat) = d2c6dcni
++               d2c6dcn2(jat, iat) = d2c6dcnj
++            end if
++            if (do_mix) then
++               d2c6dcnij(iat, jat) = d2c6mix
++               d2c6dcnij(jat, iat) = d2c6mix
++            end if
++         end do
++      end do
++
++   else if (do_first) then
+       c6(:, :) = 0.0_wp
+       dc6dcn(:, :) = 0.0_wp
+ 

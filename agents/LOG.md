@@ -63,3 +63,13 @@ Corrections to explorer 1: the m = 71 bound is loose (reachable max 47 in SR, 62
 needed for direct calls with m >= 72. New side observations moved to candidates: double-precision loss above t0
 (partly re-checked by explorer 1) and an lrys_wheeler singularity at R = 1.0 on arm64 without quadmath.
 Two 503 capacity errors from the model API during the run; no effect on results.
+
+## 2026-11-26 — Guided search round 1 (catalog-driven)
+Explorer 1: XCFun vs libxc over all 104 comparable names (new OSTRA-027 TW, OSTRA-028 SPBEC; 4 known re-detected) and
+equivalent-cell invariance (D3, PySCF Ewald, tblite clean; dftd4 gradient inconsistency extends OSTRA-005).
+Explorer 2: implicit-API-contract sweep of tblite/dftd4/simple-dftd3/mctc-lib, 56 routines in ~69 min, 5 root causes
+with tested patches. Verification by explorer 1: dftd4 C API sigma-only crash reproduced with the released 4.3.1
+(gradient-only works); mctc-lib dcndr-only reproduced with an independent Fortran program (sentinel kept; rescaled
+when cut > 0); tblite, simple-dftd3 model and dftd4 model conditions confirmed by reading main. Observation: the same
+`present(a) .and. present(b)` convention recurs in mctc-lib, multicharge, dftd4, simple-dftd3 and tblite, i.e. a
+pattern propagated across one software ecosystem.

@@ -1,0 +1,37 @@
+=== 1. mctc-lib: ncoord%get_cn / get_coordination_number (2^2 combinations) ===
+Model exp  1.98625E+00  9.94031E-01  9.95328E-01
+  ref max|dcndr|= 9.32731E-02 max|dcndL|= 1.70875E-01
+  (F,F) max|cn-ref|     =  0.00000E+00
+  (T,F) dcndr only: max|err|= 0.00000E+00 min(dcndr)=-9.32731E-02 max(dcndr)= 9.08627E-02
+  (F,T) dcndL only: max|err|= 0.00000E+00 min(dcndL)=-1.70875E-01 max(dcndL)= 4.03286E-02
+  4pt-FD h= 1.0E-02 max|dcndr-FD|=  4.407E-06 max|dcndL-FD|=  2.354E-04
+  4pt-FD h= 1.0E-03 max|dcndr-FD|=  7.539E-12 max|dcndL-FD|=  3.038E-04
+  4pt-FD h= 1.0E-04 max|dcndr-FD|=  1.027E-11 max|dcndL-FD|=  1.998E-11
+  4pt-FD h= 1.0E-05 max|dcndr-FD|=  1.444E-10 max|dcndL-FD|=  1.728E-10
+Model dftd4  1.60858E+00  8.03784E-01  8.04800E-01
+  ref max|dcndr|= 7.02540E-02 max|dcndL|= 1.30654E-01
+  (F,F) max|cn-ref|     =  0.00000E+00
+  (T,F) dcndr only: max|err|= 0.00000E+00 min(dcndr)=-6.89309E-02 max(dcndr)= 7.02540E-02
+  (F,T) dcndL only: max|err|= 0.00000E+00 min(dcndL)=-1.30654E-01 max(dcndL)= 2.55828E-02
+  4pt-FD h= 1.0E-02 max|dcndr-FD|=  3.942E-08 max|dcndL-FD|=  6.114E-07
+  4pt-FD h= 1.0E-03 max|dcndr-FD|=  4.017E-12 max|dcndL-FD|=  6.173E-11
+  4pt-FD h= 1.0E-04 max|dcndr-FD|=  8.742E-13 max|dcndL-FD|=  1.546E-12
+  4pt-FD h= 1.0E-05 max|dcndr-FD|=  2.154E-11 max|dcndL-FD|=  1.474E-11
+Model erf_cut6  1.69301E+00  8.46944E-01  8.53652E-01
+  ref max|dcndr|= 4.82638E-01 max|dcndL|= 8.04738E-01
+  (F,F) max|cn-ref|     =  0.00000E+00
+  (T,F) dcndr only: max|err|= 0.00000E+00 min(dcndr)=-4.36491E-01 max(dcndr)= 4.82638E-01
+  (F,T) dcndL only: max|err|= 0.00000E+00 min(dcndL)=-8.04738E-01 max(dcndL)= 1.98373E-01
+  4pt-FD h= 1.0E-02 max|dcndr-FD|=  4.321E-09 max|dcndL-FD|=  1.017E-07
+  4pt-FD h= 1.0E-03 max|dcndr-FD|=  8.833E-13 max|dcndL-FD|=  1.013E-11
+  4pt-FD h= 1.0E-04 max|dcndr-FD|=  5.597E-12 max|dcndL-FD|=  9.175E-12
+  4pt-FD h= 1.0E-05 max|dcndr-FD|=  1.069E-10 max|dcndL-FD|=  1.132E-10
+
+=== 2. mctc-lib: get_coordination_number with CSR list (dcndrlist, dcndL) ===
+  ref max|dcndrlist|= 9.32731E-02 max|dcndL|= 1.70875E-01
+  (T,F) dcndrlist only: max|err|= 0.00000E+00 min(val)=-9.32731E-02
+  (F,T) dcndL only:     max|err|= 0.00000E+00 min(val)=-1.70875E-01
+
+=== 3. mctc-lib CONTROL: get_wignerseitz_weights (dwdr, dwdL) ===
+  (T,F) dwdr only: max|w-ref|= 0.00000E+00 max|dwdr-ref|= 0.00000E+00
+  (F,T) dwdL only: max|w-ref|= 0.00000E+00 max|dwdL-ref|= 0.00000E+00

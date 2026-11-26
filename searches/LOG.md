@@ -10,4 +10,4 @@ and free exploration. Effort is agent wall time (approximate), excluding human r
 | 2026-11-26 | Explorer 1 | PySCF PBC Ewald nuclear energy (equivalent cells) | convergence-fixed | invariance | ~0.2 h | 0 |
 | 2026-11-26 | Explorer 1 | tblite GFN2-xTB (8 crystals, equivalent cells) | convergence-fixed | invariance | ~0.5 h | 0 (supercell differences = Gamma-point sampling, by design) |
 | 2026-11-26 | Explorer 1 | dftd4 gradient/virial vs FD on sheared cells | convergence-fixed | energy-gradient consistency | ~0.2 h | extension of OSTRA-005 (gradient inconsistent with energy in sheared MgO) |
-| 2026-11-26 | Explorer 2 | tblite, dftd4, simple-dftd3, mctc-lib optional outputs | implicit-api-contract | api-contract | running | — |
+| 2026-11-26 | Explorer 2 | tblite, dftd4, simple-dftd3, mctc-lib: 56 public routines, all combinations of optional outputs | implicit-api-contract | api-contract | ~69 min | 5 root causes (OSTRA-029 to 033; 2 verified by running, 3 by code); 26 routines clean |

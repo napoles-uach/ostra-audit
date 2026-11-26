@@ -1,0 +1,329 @@
+diff --git a/src/tblite/ceh/ceh.f90 b/src/tblite/ceh/ceh.f90
+index 1643c54..58e6c4f 100644
+--- a/src/tblite/ceh/ceh.f90
++++ b/src/tblite/ceh/ceh.f90
+@@ -1305,30 +1305,21 @@ contains
+       if (present(dqatdr)) dqatdr(:,:,:,:) = 0.0_wp
+       if (present(dqatdL)) dqatdL(:,:,:,:) = 0.0_wp
+ 
+-      if (present(dqatdr) .and. present(dqatdL) .and. &
+-         & present(dcn_endr) .and. present(dcn_endL)) then
+-         do ispin = 1, size(qat, 2)
+-            do iat = 1, size(qat, 1)
+-               isp = mol%id(iat)
+-               izp = mol%num(isp)
+-
+-               qat(iat, ispin) = p_ceh_en_to_q(izp)*cn_en(iat) &
++      do ispin = 1, size(qat, 2)
++         do iat = 1, size(qat, 1)
++            isp = mol%id(iat)
++            izp = mol%num(isp)
++
++            qat(iat, ispin) = p_ceh_en_to_q(izp)*cn_en(iat) &
+                & + p_ceh_total_to_q * mol%charge/real(mol%nat, wp)
++            if (present(dqatdr) .and. present(dcn_endr)) then
+                dqatdr(:,:,iat, ispin) = p_ceh_en_to_q(izp) * dcn_endr(:,:,iat)
++            end if
++            if (present(dqatdL) .and. present(dcn_endL)) then
+                dqatdL(:,:,iat, ispin) = p_ceh_en_to_q(izp) * dcn_endL(:,:,iat)
+-            end do
+-         end do
+-      else
+-         do ispin = 1, size(qat, 2)
+-            do iat = 1, size(qat, 1)
+-               isp = mol%id(iat)
+-               izp = mol%num(isp)
+-
+-               qat(iat, ispin) = p_ceh_en_to_q(izp)*cn_en(iat) &
+-               & + p_ceh_total_to_q * mol%charge/real(mol%nat, wp)
+-            end do
++            end if
+          end do
+-      end if
++      end do
+ 
+    end subroutine get_effective_qat
+ 
+diff --git a/src/tblite/classical/halogen.f90 b/src/tblite/classical/halogen.f90
+index 555115d..045bc32 100644
+--- a/src/tblite/classical/halogen.f90
++++ b/src/tblite/classical/halogen.f90
+@@ -127,6 +127,7 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+ 
+    integer, allocatable :: list(:, :)
+    real(wp), allocatable :: trans(:, :)
++   real(wp), allocatable :: gradient_local(:, :), sigma_local(:, :)
+ 
+    if (count(self%halogen) * count(self%acceptor) == 0) return
+ 
+@@ -138,6 +139,14 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+    if (present(gradient) .and. present(sigma)) then
+       call get_xbond_derivs(mol, trans, list, self%damping, self%bond_strength, self%rad, &
+          & energies, gradient, sigma, self%partition)
++   else if (present(gradient)) then
++      allocate(sigma_local(3, 3), source=0.0_wp)
++      call get_xbond_derivs(mol, trans, list, self%damping, self%bond_strength, self%rad, &
++         & energies, gradient, sigma_local, self%partition)
++   else if (present(sigma)) then
++      allocate(gradient_local(3, mol%nat), source=0.0_wp)
++      call get_xbond_derivs(mol, trans, list, self%damping, self%bond_strength, self%rad, &
++         & energies, gradient_local, sigma, self%partition)
+    else
+       call get_xbond_energy(mol, trans, list, self%damping, self%bond_strength, self%rad, &
+          & energies, self%partition)
+diff --git a/src/tblite/disp/d3.f90 b/src/tblite/disp/d3.f90
+index 1c7633e..2891eff 100644
+--- a/src/tblite/disp/d3.f90
++++ b/src/tblite/disp/d3.f90
+@@ -104,9 +104,10 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+    real(wp), allocatable :: gwvec(:, :), gwdcn(:, :)
+    real(wp), allocatable :: c6(:, :), dc6dcn(:, :)
+    real(wp), allocatable :: dEdcn(:), lattr(:, :)
++   real(wp), allocatable :: gradient_local(:, :), sigma_local(:, :)
+ 
+    mref = maxval(self%model%ref)
+-   grad = present(gradient).and.present(sigma)
++   grad = present(gradient) .or. present(sigma)
+ 
+    allocate(cn(mol%nat))
+    call get_lattice_points(mol%periodic, mol%lattice, self%cutoff%cn, lattr)
+@@ -129,20 +130,32 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+    if (grad) then
+       allocate(dEdcn(mol%nat))
+       dEdcn(:) = 0.0_wp
++      if (present(gradient)) then
++         allocate(gradient_local(3, mol%nat), source=gradient)
++      else
++         allocate(gradient_local(3, mol%nat), source=0.0_wp)
++      end if
++      if (present(sigma)) then
++         allocate(sigma_local(3, 3), source=sigma)
++      else
++         allocate(sigma_local(3, 3), source=0.0_wp)
++      end if
+    end if
+    call get_lattice_points(mol%periodic, mol%lattice, self%cutoff%disp2, lattr)
+    call self%param%get_dispersion2(mol, lattr, self%cutoff%disp2, self%cutoff%width2, &
+-      & self%model%rvdw, self%model%r4r2, c6, dc6dcn, energies, dEdcn, gradient, sigma, &
++      & self%model%rvdw, self%model%r4r2, c6, dc6dcn, energies, dEdcn, gradient_local, sigma_local, &
+       & self%partition%get_d3())
+ 
+    call get_lattice_points(mol%periodic, mol%lattice, self%cutoff%disp3, lattr)
+    call self%param%get_dispersion3(mol, lattr, self%cutoff%disp3, self%cutoff%width3, &
+-      & self%model%rvdw, self%model%r4r2, c6, dc6dcn, energies, dEdcn, gradient, sigma, &
++      & self%model%rvdw, self%model%r4r2, c6, dc6dcn, energies, dEdcn, gradient_local, sigma_local, &
+       & self%partition%get_d3())
+    if (grad) then
+       ! dEdcn holds this part's share, contracting it with the full coordination
+       ! number derivative is linear and sums to the complete result
+-      call self%ncoord%add_coordination_number_derivs(mol, lattr, dEdcn, gradient, sigma)
++      call self%ncoord%add_coordination_number_derivs(mol, lattr, dEdcn, gradient_local, sigma_local)
++      if (present(gradient)) gradient(:, :) = gradient_local
++      if (present(sigma)) sigma(:, :) = sigma_local
+    end if
+ end subroutine get_engrad
+ 
+diff --git a/src/tblite/disp/d4.f90 b/src/tblite/disp/d4.f90
+index f76ffd8..7d33f47 100644
+--- a/src/tblite/disp/d4.f90
++++ b/src/tblite/disp/d4.f90
+@@ -216,12 +216,13 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+    real(wp), allocatable :: c6(:, :), dc6dcn(:, :), dc6dq(:, :)
+    real(wp), allocatable :: dEdcn(:), dEdq(:)
+    real(wp), allocatable :: lattr(:, :)
++   real(wp), allocatable :: gradient_local(:, :), sigma_local(:, :)
+ 
+    if (abs(self%param%s9) < epsilon(1.0_wp)) return
+    call view(cache, ptr)
+ 
+    mref = maxval(self%model%ref)
+-   grad = present(gradient).and.present(sigma)
++   grad = present(gradient) .or. present(sigma)
+ 
+    allocate(gwvec(mref, mol%nat, self%model%ncoup), qat(mol%nat), c6(mol%nat, mol%nat))
+    if (grad) then
+@@ -233,6 +234,16 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+       allocate(dEdcn(mol%nat), dEdq(mol%nat))
+       dEdcn(:) = 0.0_wp
+       dEdq(:) = 0.0_wp
++      if (present(gradient)) then
++         allocate(gradient_local(3, mol%nat), source=gradient)
++      else
++         allocate(gradient_local(3, mol%nat), source=0.0_wp)
++      end if
++      if (present(sigma)) then
++         allocate(sigma_local(3, 3), source=sigma)
++      else
++         allocate(sigma_local(3, 3), source=0.0_wp)
++      end if
+    end if
+ 
+    call self%model%weight_references(mol, ptr%cn, qat, gwvec, gwdcn, gwdq)
+@@ -240,13 +251,15 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+ 
+    call get_lattice_points(mol%periodic, mol%lattice, self%cutoff%disp3, lattr)
+    call self%param%get_dispersion3(mol, lattr, self%cutoff%disp3, self%cutoff%width3, &
+-      & self%model%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient, sigma, &
++      & self%model%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient_local, sigma_local, &
+       & partition=self%partition%get_d4())
+    if (grad) then
+       ! Contract this partition's dEdcn over all CN pairs; the final gradient
+       ! reduction combines the local energy contributions without a CN matrix.
+       call get_lattice_points(mol%periodic, mol%lattice, self%cutoff%cn, lattr)
+-      call self%ncoord%add_coordination_number_derivs(mol, lattr, dEdcn, gradient, sigma)
++      call self%ncoord%add_coordination_number_derivs(mol, lattr, dEdcn, gradient_local, sigma_local)
++      if (present(gradient)) gradient(:, :) = gradient_local
++      if (present(sigma)) sigma(:, :) = sigma_local
+    end if
+ 
+ end subroutine get_engrad
+diff --git a/src/tblite/repulsion/effective.f90 b/src/tblite/repulsion/effective.f90
+index 69fef9f..ae97307 100644
+--- a/src/tblite/repulsion/effective.f90
++++ b/src/tblite/repulsion/effective.f90
+@@ -119,12 +119,21 @@ subroutine get_engrad(self, mol, cache, energies, gradient, sigma)
+    real(wp), contiguous, intent(inout), optional :: sigma(:, :)
+ 
+    real(wp), allocatable :: trans(:, :)
++   real(wp), allocatable :: gradient_local(:, :), sigma_local(:, :)
+ 
+    call get_lattice_points(mol%periodic, mol%lattice, self%cutoff, trans)
+ 
+    if (present(gradient) .and. present(sigma)) then
+       call get_repulsion_derivs(mol, trans, self%cutoff, self%alpha, self%zeff, &
+          & self%kexp, self%rexp, energies, gradient, sigma, self%partition)
++   else if (present(gradient)) then
++      allocate(sigma_local(3, 3), source=0.0_wp)
++      call get_repulsion_derivs(mol, trans, self%cutoff, self%alpha, self%zeff, &
++         & self%kexp, self%rexp, energies, gradient, sigma_local, self%partition)
++   else if (present(sigma)) then
++      allocate(gradient_local(3, mol%nat), source=0.0_wp)
++      call get_repulsion_derivs(mol, trans, self%cutoff, self%alpha, self%zeff, &
++         & self%kexp, self%rexp, energies, gradient_local, sigma, self%partition)
+    else
+       call get_repulsion_energy(mol, trans, self%cutoff, self%alpha, self%zeff, &
+          & self%kexp, self%rexp, energies, self%partition)
+diff --git a/src/tblite/xtb/singlepoint.f90 b/src/tblite/xtb/singlepoint.f90
+index e832278..2f0a554 100644
+--- a/src/tblite/xtb/singlepoint.f90
++++ b/src/tblite/xtb/singlepoint.f90
+@@ -107,6 +107,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+    real(wp), allocatable :: energies(:), edisp(:), erep(:), exbond(:), eint(:), eelec(:)
+    real(wp), allocatable :: cn(:), dcndr(:, :, :), dcndL(:, :, :), dEdcn(:)
+    real(wp), allocatable :: selfenergy(:), dsedcn(:), lattr(:, :), wdensity(:, :, :)
++   real(wp), allocatable :: gradient_local(:, :), sigma_local(:, :)
+    type(integral_type) :: ints
+    type(potential_type) :: pot
+    type(container_cache), allocatable :: ccache, dcache, icache, hcache, rcache
+@@ -148,7 +149,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+          & wfn%density(calc%bas%nao, columns(2)-columns(1)+1, wfn%nspin), source=0.0_wp)
+    end if
+ 
+-   grad = present(gradient) .and. present(sigma)
++   grad = present(gradient) .or. present(sigma)
+ 
+    allocate(energies(mol%nat), source=0.0_wp)
+    allocate(erep(mol%nat), source=0.0_wp)
+@@ -156,8 +157,8 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+    allocate(eint(mol%nat), source=0.0_wp)
+    allocate(exbond(mol%nat), source=0.0_wp)
+    if (grad) then
+-      gradient(:, :) = 0.0_wp
+-      sigma(:, :) = 0.0_wp
++      allocate(gradient_local(3, mol%nat), source=0.0_wp)
++      allocate(sigma_local(3, 3), source=0.0_wp)
+    end if
+ 
+    call get_occupation(mol, calc%bas, calc%h0, wfn%nocc, wfn%n0at, wfn%n0sh)
+@@ -179,7 +180,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+       call timer%push("halogen")
+       allocate(hcache)
+       call calc%halogen%update(mol, hcache)
+-      call calc%halogen%get_engrad(mol, hcache, exbond, gradient, sigma)
++      call calc%halogen%get_engrad(mol, hcache, exbond, gradient_local, sigma_local)
+       energies(:) = energies + exbond
+       call timer%pop
+    end if
+@@ -188,7 +189,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+       call timer%push("repulsion")
+       allocate(rcache)
+       call calc%repulsion%update(mol, rcache)
+-      call calc%repulsion%get_engrad(mol, rcache, erep, gradient, sigma)
++      call calc%repulsion%get_engrad(mol, rcache, erep, gradient_local, sigma_local)
+       energies(:) = energies + erep
+       call timer%pop
+    end if
+@@ -197,7 +198,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+       call timer%push("dispersion")
+       allocate(dcache)
+       call calc%dispersion%update(mol, dcache)
+-      call calc%dispersion%get_engrad(mol, dcache, edisp, gradient, sigma)
++      call calc%dispersion%get_engrad(mol, dcache, edisp, gradient_local, sigma_local)
+       energies(:) = energies + edisp
+       call timer%pop
+    end if
+@@ -206,7 +207,7 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+       call timer%push("interactions")
+       allocate(icache)
+       call calc%interactions%update(mol, icache)
+-      call calc%interactions%get_engrad(mol, icache, eint, gradient, sigma)
++      call calc%interactions%get_engrad(mol, icache, eint, gradient_local, sigma_local)
+       energies(:) = energies + eint
+       call timer%pop
+    end if
+@@ -386,19 +387,19 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+    if (grad) then
+       if (allocated(calc%coulomb)) then
+          call timer%push("coulomb")
+-         call calc%coulomb%get_gradient(mol, ccache, wfn, gradient, sigma)
++         call calc%coulomb%get_gradient(mol, ccache, wfn, gradient_local, sigma_local)
+          call timer%pop
+       end if
+ 
+       if (allocated(calc%dispersion)) then
+          call timer%push("dispersion")
+-         call calc%dispersion%get_gradient(mol, dcache, wfn, gradient, sigma)
++         call calc%dispersion%get_gradient(mol, dcache, wfn, gradient_local, sigma_local)
+          call timer%pop
+       end if
+ 
+       if (allocated(calc%interactions)) then
+          call timer%push("interactions")
+-         call calc%interactions%get_gradient(mol, icache, wfn, gradient, sigma)
++         call calc%interactions%get_gradient(mol, icache, wfn, gradient_local, sigma_local)
+          call timer%pop
+       end if
+ 
+@@ -417,25 +418,27 @@ subroutine xtb_singlepoint(ctx, mol, calc, wfn, accuracy, energy, gradient, sigm
+       call updown_to_magnet(wfn%density)
+       call updown_to_magnet(wdensity)
+       call get_hamiltonian_gradient(mol, lattr, list, calc%bas, calc%h0, selfenergy, &
+-         & dsedcn, pot, wfn%density, wdensity, dEdcn, gradient, sigma, calc%partition, columns)
++         & dsedcn, pot, wfn%density, wdensity, dEdcn, gradient_local, sigma_local, calc%partition, columns)
+       call magnet_to_updown(wfn%density)
+       deallocate(wdensity)
+ 
+       if (allocated(dcndr)) then
+-         call gemv(dcndr, dEdcn, gradient, beta=1.0_wp)
++         call gemv(dcndr, dEdcn, gradient_local, beta=1.0_wp)
+       end if
+       if (allocated(dcndL)) then
+-         call gemv(dcndL, dEdcn, sigma, beta=1.0_wp)
++         call gemv(dcndL, dEdcn, sigma_local, beta=1.0_wp)
+       end if
+       call timer%pop
+ 
+-      call mpi_allreduce_sum(error, gradient, ctx%comm)
+-      call mpi_allreduce_sum(error, sigma, ctx%comm)
++      call mpi_allreduce_sum(error, gradient_local, ctx%comm)
++      call mpi_allreduce_sum(error, sigma_local, ctx%comm)
+       if (allocated(error)) then
+          call ctx%set_error(error)
+          call ctx%delete_solver(solver)
+          return
+       end if
++      if (present(gradient)) gradient(:, :) = gradient_local(:, :)
++      if (present(sigma)) sigma(:, :) = sigma_local(:, :)
+    end if
+ 
+    call ctx%delete_solver(solver)

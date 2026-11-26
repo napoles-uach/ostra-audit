@@ -1,0 +1,3 @@
+C API dftd3_get_dispersion (NULL,NULL):  |dE|=0.000e+00
+C API dftd3_get_dispersion (grad,NULL):  |dE|=0.000e+00 max|dg|=0.000e+00
+C API dftd3_get_dispersion (NULL,sigma): |dE|=0.000e+00 max|ds|=0.000e+00

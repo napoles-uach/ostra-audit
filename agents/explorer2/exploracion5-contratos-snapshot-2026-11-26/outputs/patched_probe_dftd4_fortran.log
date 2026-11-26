@@ -1,0 +1,52 @@
+=== MODE: all ===
+=== 1. dftd4 get_dispersion reference + 4pt FD physical oracle ===
+REF E= -8.54620162E-04 max|g|= 4.32252E-05 max|s|= 1.21348E-03
+  (F,F) |E-ref|= 4.33681E-19
+  4pt-FD h= 1.0E-02 max|g-FD|=  2.997E-08 max|s-FD|=  1.793E-06
+  4pt-FD h= 1.0E-03 max|g-FD|=  2.457E-07 max|s-FD|=  2.977E-06
+  4pt-FD h= 1.0E-04 max|g-FD|=  4.121E-14 max|s-FD|=  2.570E-06
+  4pt-FD h= 1.0E-05 max|g-FD|=  3.115E-13 max|s-FD|=  3.506E-06
+
+=== 2. dftd4_ncoord::get_coordination_number (2^2 combinations) ===
+  (T,F) dcndr only: max|err|= 9.99069E+02 min= 9.99000E+02
+  (F,T) dcndL only: max|err|= 9.99131E+02 min= 9.99000E+02
+
+=== 3. dftd4 d4_model: weight_references, get_atomic_c6, get_polarizabilities ===
+  d4%weight_references (gwdcn only): max|err|= 0.00000E+00 min=-8.08959E-01
+  d4%weight_references (gwdq only):  max|err|= 0.00000E+00 min=-1.35193E+00
+  d4%get_atomic_c6 (dc6dcn only):    max|err|= 0.00000E+00 min=-5.74028E-01
+  d4%get_atomic_c6 (dc6dq only):     max|err|= 0.00000E+00 min=-1.08936E+01
+  d4%get_polarizabilities (dadcn):   max|err|= 0.00000E+00 min=-3.25292E-01
+  d4%get_polarizabilities (dadq):    max|err|= 0.00000E+00 min=-3.82922E+00
+  d4s%weight_references (gwdcn only):max|err|= 0.00000E+00 min=-1.03096E+00
+  d4s%weight_references (gwdq only): max|err|= 0.00000E+00 min=-1.29880E+00
+  d4s%get_atomic_c6 (dc6dcn only):   max|err|= 0.00000E+00 min=-1.16458E+00
+  d4s%get_atomic_c6 (dc6dq only):    max|err|= 0.00000E+00 min=-1.11374E+01
+  d4s%get_polarizabilities (dadcn):  max|err|= 0.00000E+00 min=-8.66591E-01
+  d4s%get_polarizabilities (dadq):   max|err|= 0.00000E+00 min=-4.06753E+00
+
+=== 4. dftd4 rational_damping_param: get_dispersion2 & get_dispersion3 ===
+  disp2 (no sigma): max|gd2-ref|= 9.99000E+02 min(gd2)= 9.99000E+02
+  disp2 (no grad):  max|sd2-ref|= 9.99000E+02 min(sd2)= 9.99000E+02
+  disp3 (no sigma): max|gd3-ref|= 9.99000E+02 min(gd3)= 9.99000E+02
+EXIT=0
+=== MODE: disp_grad_only ===
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Calling dftd4 get_dispersion(gradient only)...
+RETURNED: E=-8.54620E-04 max|g|= 4.32252E-05
+EXIT=0
+=== MODE: disp_sigma_only ===
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Calling dftd4 get_dispersion(sigma only)...
+RETURNED: E=-8.54620E-04 max|s|= 1.21348E-03
+EXIT=0
+=== MODE: disp2_grad_only ===
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Calling dftd4 get_dispersion2(gradient only)...
+RETURNED: E=-8.71049E-04 max|g|= 4.42974E-05
+EXIT=0
+=== MODE: disp2_sigma_only ===
+Note: The following floating-point exceptions are signalling: IEEE_UNDERFLOW_FLAG
+Calling dftd4 get_dispersion2(sigma only)...
+RETURNED: E=-8.71049E-04 max|s|= 1.25604E-03
+EXIT=0

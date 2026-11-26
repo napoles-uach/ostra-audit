@@ -1,0 +1,31 @@
+=== dftd4 C API: all_safe ===
+REF (grad,sigma): E=-8.546201619194e-04 max|g|=3.726980e-05 max|s|=1.213477e-03
+C API (NULL,NULL): |dE|=0.000e+00
+C API (grad,NULL): |dE|=0.000e+00 max|dg|=0.000e+00
+C API dftd4_get_properties (all 16 masks): max_err=0.000e+00
+=== dftd4 C API: sigma_only ===
+REF (grad,sigma): E=-8.546201619194e-04 max|g|=3.726980e-05 max|s|=1.213477e-03
+Calling dftd4_get_dispersion(NULL, sigma)...
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==59146==ERROR: AddressSanitizer: BUS on unknown address (pc 0x000104a99768 bp 0x00016b919050 sp 0x00016b919010 T0)
+==59146==The signal is caused by a WRITE memory access.
+==59146==Hint: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.
+    #0 0x000104a99768 in __dftd4_disp_MOD_get_dispersion disp.f90:126
+    #1 0x000104ae2888 in dftd4_get_dispersion api.f90:744
+    #2 0x0001044e5c3c in main probe_dftd4_c.c:93
+    #3 0x00018d2994e0 in start+0x1b4c (dyld:arm64e+0x204e0)
+
+==59146==Register values:
+ x[0] = 0x000000016b9196f0   x[1] = 0x000000016b919ee0   x[2] = 0x0000000000000001   x[3] = 0x0000000000000001  
+ x[4] = 0x0000000000000000   x[5] = 0x00000002d7232f20   x[6] = 0x000000016b919788   x[7] = 0x0000000000000001  
+ x[8] = 0x00000c760002045a   x[9] = 0x0000000000000000  x[10] = 0x0000000000000000  x[11] = 0x00000c760002045a  
+x[12] = 0x0000000000000002  x[13] = 0x0000000000000000  x[14] = 0xfafafafafa000000  x[15] = 0x00007fffffffffff  
+x[16] = 0x000000018d66e090  x[17] = 0x0000000105290558  x[18] = 0x0000000000000000  x[19] = 0x0000000000000003  
+x[20] = 0x000000016b919788  x[21] = 0x0000000000000001  x[22] = 0x000000016b919798  x[23] = 0x0000000000000018  
+x[24] = 0x0000000000000048  x[25] = 0xfffffffffffffffc  x[26] = 0xfffffffffffffffc  x[27] = 0x0000000000000000  
+x[28] = 0xffffffffffffffef     fp = 0x000000016b919050     lr = 0x0000000104a99548     sp = 0x000000016b919010  
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: BUS disp.f90:126 in __dftd4_disp_MOD_get_dispersion
+==59146==ABORTING
+EXIT_SIGMA_ONLY=134

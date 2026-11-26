@@ -541,6 +541,101 @@
       "impact_level": "I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed)",
       "status": "Verified (run), attributed, fix tested; needs blind verification and a check against the paper",
       "reported": false
+    },
+    {
+      "id": "OSTRA-029",
+      "num": "029",
+      "title": "dftd4: get_dispersion with sigma but no gradient crashes (C API: dftd4_get_dispersion with gradient = NULL)",
+      "path": "findings/OSTRA-029-dftd4-capi-sigma-without-gradient",
+      "libraries": [
+        "dftd4"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (C API and Fortran callers; Python and CLI always pass both; loud: segfault)",
+      "status": "Verified (run on released 4.3.1 by explorer 1), attributed; fix tested by explorer 2",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-030",
+      "num": "030",
+      "title": "tblite: xtb_singlepoint and several get_engrad routines skip the gradient unless sigma is also requested",
+      "path": "findings/OSTRA-030-tblite-singlepoint-gradient-needs-sigma",
+      "libraries": [
+        "tblite"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III-IV (Fortran API only; the C API, Python and CLI allocate both)",
+      "status": "Verified (code, by explorer 1) and run (explorer 2); fix tested by explorer 2",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-031",
+      "num": "031",
+      "title": "mctc-lib: get_coordination_number leaves dcndr unset unless dcndL is also requested; with cut > 0 it rescales the unset memory",
+      "path": "findings/OSTRA-031-mctc-lib-ncoord-derivatives-need-both",
+      "libraries": [
+        "mctc-lib"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 3,
+      "impact_level": "III (Fortran API of mctc-lib and its users in dftd4/simple-dftd3/tblite/multicharge; silent)",
+      "status": "Verified (run by explorer 1), attributed; fix tested by explorer 2",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-032",
+      "num": "032",
+      "title": "simple-dftd3: d3_model weight_references / get_atomic_c6 ignore requested second CN derivatives unless first derivatives are also requested",
+      "path": "findings/OSTRA-032-simple-dftd3-model-second-derivatives",
+      "libraries": [
+        "simple-dftd3"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 4,
+      "impact_level": "IV-III (public Fortran model API only; get_dispersion and C/Python/CLI unaffected)",
+      "status": "Verified (code, explorer 1) and run (explorer 2); fix tested by explorer 2",
+      "reported": false
+    },
+    {
+      "id": "OSTRA-033",
+      "num": "033",
+      "title": "dftd4: d4_model / d4s_model couple CN and charge derivatives with .and.; requesting only one leaves the other intent(out) unset",
+      "path": "findings/OSTRA-033-dftd4-model-cn-q-derivatives-coupled",
+      "libraries": [
+        "dftd4"
+      ],
+      "patterns": [
+        "implicit-api-contract"
+      ],
+      "oracles": [
+        "api-contract"
+      ],
+      "impact": 4,
+      "impact_level": "IV-III (public Fortran model API; not reachable from C/Python/CLI)",
+      "status": "Verified (code, explorer 1) and run (explorer 2); fix tested by explorer 2",
+      "reported": false
     }
   ],
   "libraries": [
@@ -551,7 +646,9 @@
     "multicharge",
     "dftd4",
     "simple-dftd3",
-    "libecpint"
+    "libecpint",
+    "tblite",
+    "mctc-lib"
   ],
   "dependencies": [
     {
@@ -572,6 +669,36 @@
     {
       "from": "dftd4",
       "to": "multicharge",
+      "relation": "uses"
+    },
+    {
+      "from": "tblite",
+      "to": "dftd4",
+      "relation": "uses"
+    },
+    {
+      "from": "tblite",
+      "to": "simple-dftd3",
+      "relation": "uses"
+    },
+    {
+      "from": "tblite",
+      "to": "mctc-lib",
+      "relation": "uses"
+    },
+    {
+      "from": "dftd4",
+      "to": "mctc-lib",
+      "relation": "uses"
+    },
+    {
+      "from": "simple-dftd3",
+      "to": "mctc-lib",
+      "relation": "uses"
+    },
+    {
+      "from": "multicharge",
+      "to": "mctc-lib",
       "relation": "uses"
     }
   ],

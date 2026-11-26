@@ -1,0 +1,46 @@
+=== 1. simple-dftd3 CONTROL: get_dispersion (all 2^3 grad/sigma/hessian masks) ===
+  mask=0 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+  mask=1 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+  mask=2 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+  mask=3 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+  mask=4 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+  mask=5 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+  mask=6 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+  mask=7 |dE|= 0.000E+00 |dg|= 0.000E+00 |ds|= 0.000E+00 |dh|= 0.000E+00
+
+=== 2. simple-dftd3 d3%weight_references (2^2 combinations of gwdcn, gwd2cn) ===
+  ref max|gwdcn|= 1.47165E-01 max|gwd2cn|= 1.12872E+00
+  (T,F) gwdcn only:  max|err|= 0.00000E+00
+  (F,T) gwd2cn only: max|err|= 1.12872E+00 max|gwd2cn|= 0.00000E+00
+
+=== 3. simple-dftd3 d3%get_atomic_c6 (partial optional combinations) ===
+  (gwdcn,dc6dcn,gwd2cn,d2c6dcn2; no d2c6dcnij): |dc6|= 0.00000E+00 |d2c6|= 9.98217E+02 min(d2c6)= 9.99000E+02
+  (gwdcn,dc6dcn,gwd2cn,d2c6dcnij; no d2c6dcn2): |dc6|= 0.00000E+00 |d2mix|= 9.98996E+02 min(d2mix)= 9.99000E+02
+
+=== 4. simple-dftd3 ncoord::get_coordination_number (inherits mctc-lib) ===
+  (T,F) dcndr only: max|err|= 9.99093E+02 min= 9.99000E+02
+  (F,T) dcndL only: max|err|= 9.99171E+02 min= 9.99000E+02
+
+=== 5. simple-dftd3 damping%get_dispersion2/3 (all 6 damping types + ATM) ===
+  rational disp2(no sigma): ref_g= 4.624E-05 |gd-ref|= 9.990E+02 min(gd)= 9.990E+02
+  atm          disp3(no sigma): ref_g= 2.753E-06 |gd-ref|= 9.990E+02 min(gd)= 9.990E+02
+  zero disp2(no sigma): ref_g= 8.810E-05 |gd-ref|= 9.990E+02 min(gd)= 9.990E+02
+  mzero disp2(no sigma): ref_g= 3.487E-04 |gd-ref|= 9.990E+02 min(gd)= 9.990E+02
+  optimizedpower disp2(no sigma): ref_g= 5.530E-05 |gd-ref|= 9.990E+02 min(gd)= 9.990E+02
+  cso disp2(no sigma): ref_g= 3.203E-05 |gd-ref|= 9.990E+02 min(gd)= 9.990E+02
+  z disp2(no sigma): ref_g= 3.427E+00 |gd-ref|= 1.002E+03 min(gd)= 9.990E+02
+=== CRASH CASE: c6_second_no_first ===
+
+Program received signal SIGBUS: Access to an undefined portion of a memory object.
+
+Backtrace for this error:
+#0  0x100cdf2f3 in ???
+#1  0x100cde063 in ???
+#2  0x18d66e743 in ???
+#3  0x10094522b in probe_sdftd3_fortran
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion5-contratos/scripts/probe_sdftd3_fortran.f90:79
+#4  0x10094522b in probe_sdftd3_fortran
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion5-contratos/scripts/probe_sdftd3_fortran.f90:79
+#5  0x10094f487 in main
+	at /Users/napolesd/Documents/Antigravity/PhysAud/exploracion5-contratos/scripts/probe_sdftd3_fortran.f90:2
+EXIT_c6_second_no_first=138

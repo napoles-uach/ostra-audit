@@ -1,0 +1,28 @@
+=== 1. tblite: xtb_singlepoint (GFN2-xTB, 2^2 combinations of gradient/sigma) ===
+REF GFN2 E= -5.06659783E+00 max|g|= 2.35660E-02 max|s|= 3.32319E-02
+  (F,F) |E-ref|= 0.00000E+00
+  (T,F) grad only:  |E-ref|= 0.00000E+00 max|g-ref|= 9.99024E+02 min(g)= 9.99000E+02
+  (F,T) sigma only: |E-ref|= 0.00000E+00 max|s-ref|= 9.99004E+02 min(s)= 9.99000E+02
+  4pt-FD GFN2 h= 1.0E-03 max|g_ref-FD|=  1.483E-07
+  4pt-FD GFN2 h= 1.0E-04 max|g_ref-FD|=  1.483E-07
+  4pt-FD GFN2 h= 1.0E-05 max|g_ref-FD|=  1.481E-07
+
+=== 2. tblite: xtb_singlepoint with ALPB/CDS solvation (gradient only -> adds to uninit!) ===
+  GFN2+ALPB (grad only): max|g-ref|= 9.99018E+02 min(g)= 9.99000E+02 max(g)= 9.99000E+02
+
+=== 3. tblite: individual containers get_engrad (repulsion, d3, d4, halogen) ===
+  repulsion%get_engrad (grad only): ref= 9.01147E-02 max|g-ref|= 9.01147E-02 max|g|= 0.00000E+00
+  repulsion%get_engrad (sigma only):ref= 1.44284E-01 max|s-ref|= 1.44284E-01 max|s|= 0.00000E+00
+  d4_disp%get_engrad   (grad only): ref= 1.28712E-10 max|g-ref|= 1.28712E-10 max|g|= 0.00000E+00
+  d4_disp%get_engrad   (sigma only):ref= 1.72719E-10 max|s-ref|= 1.72719E-10 max|s|= 0.00000E+00
+  d3_disp%get_engrad   (grad only): ref= 7.18245E-07 max|g-ref|= 7.18245E-07 max|g|= 0.00000E+00
+  d3_disp%get_engrad   (sigma only):ref= 1.19873E-06 max|s-ref|= 1.19873E-06 max|s|= 0.00000E+00
+  halogen%get_engrad   (grad only): ref= 5.04778E-03 max|g-ref|= 5.04778E-03 max|g|= 0.00000E+00
+  halogen%get_engrad   (sigma only):ref= 2.72580E-02 max|s-ref|= 2.72580E-02 max|s|= 0.00000E+00
+
+=== 4. tblite: get_effective_qat (CEH) & get_selfenergy (h0) ===
+  get_effective_qat (dqatdr only): ref= 9.58777E-02 max|err|= 9.58777E-02 max|val|= 0.00000E+00
+  get_selfenergy (dsedcn_en w/o cn_en): min(dsedcn_en)= 9.99000E+02
+
+=== 5. tblite CONTROL: get_wignerseitz_weights ===
+  wignerseitz (dwdr only): max|err|= 0.00000E+00

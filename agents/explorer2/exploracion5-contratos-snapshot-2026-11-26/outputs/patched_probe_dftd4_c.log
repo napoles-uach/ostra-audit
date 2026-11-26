@@ -1,0 +1,15 @@
+--- props ---
+REF (grad,sigma): E=-8.546201619194e-04 max|g|=3.726980e-05 max|s|=1.213477e-03
+EXIT=0
+--- disp_both ---
+REF (grad,sigma): E=-8.546201619194e-04 max|g|=3.726980e-05 max|s|=1.213477e-03
+EXIT=0
+--- disp_none ---
+REF (grad,sigma): E=-8.546201619194e-04 max|g|=3.726980e-05 max|s|=1.213477e-03
+EXIT=0
+--- disp_grad_only ---
+REF (grad,sigma): E=-8.546201619194e-04 max|g|=3.726980e-05 max|s|=1.213477e-03
+EXIT=0
+--- disp_sigma_only ---
+REF (grad,sigma): E=-8.546201619194e-04 max|g|=3.726980e-05 max|s|=1.213477e-03
+EXIT=0
