@@ -38,3 +38,10 @@ of the pole; the NaN band of width ~1e-4 remains.
 UKS densities of OH, O2, CH3 and NO (def2-TZVP, grid levels 3, 5, 7): at most 4 points within 5e-4 of the pole (CH3),
 no non-finite values, PK09 correlation energy unchanged to 1e-6 Eh between grid levels. Practical impact negligible.
 
+
+## Erratum check (2026-11-27)
+Proynov and Kong, Phys. Rev. A 95, 059904(E) (2017), prompted by M. Marques (libxc), corrects two misprints:
+(i) Eq. (23) is s = 1.28 f_r f_s; (ii) a_x = (3 pi^2)^(1/3) in Eq. (15). Both are in the libxc maple file
+(lines "ss := ... *1.28" and "ax := (3*Pi^2)^(1/3)"). The erratum does not touch the coefficients of P1/P2 (Eq. 24),
+so the pole at r_s = 22.73941 stands in the corrected model. libxc additionally floors the screening wave vectors
+at K_TOL = 1e-11 "as in Proynov's reference code". Attribution unchanged: model singularity, not an implementation slip.
