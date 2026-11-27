@@ -1,0 +1,96 @@
+diff --git a/src/multicharge/charge.f90 b/src/multicharge/charge.f90
+index a0d9022..cc9de18 100644
+--- a/src/multicharge/charge.f90
++++ b/src/multicharge/charge.f90
+@@ -64,7 +64,7 @@ subroutine get_charges(mchrg_model, mol, error, qvec, dqdr, dqdL, cache)
+    real(wp), allocatable :: qloc(:), dqlocdr(:, :, :), dqlocdL(:, :, :)
+    real(wp), allocatable :: trans(:, :)
+ 
+-   grad = (present(dqdr) .and. present(dqdL)) .or. present(cache)
++   grad = present(dqdr) .or. present(dqdL) .or. present(cache)
+ 
+    allocate(cn(mol%nat), qloc(mol%nat))
+    if (grad) then
+diff --git a/src/multicharge/model/type.F90 b/src/multicharge/model/type.F90
+index c020488..6ae7a25 100644
+--- a/src/multicharge/model/type.F90
++++ b/src/multicharge/model/type.F90
+@@ -179,8 +179,8 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
+ 
+    ! Calculate gradient if the respective arrays are present
+    dcn = present(dcndr) .and. present(dcndL)
+-   grad = present(gradient) .and. present(sigma) .and. dcn
+-   cpq = ((present(dqdr) .and. present(dqdL)) .or. present(response)) .and. dcn
++   grad = (present(gradient) .or. present(sigma)) .and. dcn
++   cpq = (present(dqdr) .or. present(dqdL) .or. present(response)) .and. dcn
+ 
+    cache => local_cache
+    if (present(response)) then
+@@ -268,11 +268,15 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
+    end if
+ 
+    if (grad) then
+-      gradient = 0.0_wp
+-      call gemv(dadr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=0.5_wp)
+-      call gemv(dxdr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=-1.0_wp)
+-      call gemv(dadL, vrhs, sigma, beta=1.0_wp, alpha=0.5_wp)
+-      call gemv(dxdL, vrhs, sigma, beta=1.0_wp, alpha=-1.0_wp)
++      if (present(gradient)) then
++         gradient = 0.0_wp
++         call gemv(dadr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=0.5_wp)
++         call gemv(dxdr(:, :, :mol%nat), vrhs(:mol%nat), gradient, beta=1.0_wp, alpha=-1.0_wp)
++      end if
++      if (present(sigma)) then
++         call gemv(dadL, vrhs, sigma, beta=1.0_wp, alpha=0.5_wp)
++         call gemv(dxdL, vrhs, sigma, beta=1.0_wp, alpha=-1.0_wp)
++      end if
+    end if
+ 
+    if (cpq) then
+@@ -288,7 +292,7 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
+          if (present(dqdr)) dqdr(:, :, :) = cache%dqdr
+          call move_alloc(vrhs, cache%qvec)
+          call move_alloc(ainv, cache%ainv)
+-      else
++      else if (present(dqdr)) then
+          call gemm(dadr, ainv(:, :mol%nat), dqdr, alpha=-1.0_wp)
+       end if
+    end if
+diff --git a/src/multicharge/param.f90 b/src/multicharge/param.f90
+index 605e3cd..eccd583 100644
+--- a/src/multicharge/param.f90
++++ b/src/multicharge/param.f90
+@@ -15,7 +15,7 @@
+ 
+ module multicharge_param
+    use mctc_data, only: get_covalent_rad, get_pauling_en, get_vdw_rad
+-   use mctc_env, only: error_type, wp
++   use mctc_env, only: error_type, fatal_error, wp
+    use mctc_io, only: structure_type
+    use mctc_io_convert, only: autoaa
+    use multicharge_model, only: mchrg_model_type, &
+@@ -64,6 +64,12 @@ subroutine new_eeq2019_model(mol, model, error)
+    rad = get_eeq_rad(mol%num)
+    rcov = get_covalent_rad(mol%num)
+ 
++   if (any(rad <= 0.0_wp)) then
++      call fatal_error(error, "EEQ2019 parameters are not available for element '"// &
++         & trim(mol%sym(minloc(rad, 1)))//"'")
++      return
++   end if
++
+    allocate(eeq)
+    call new_eeq_model(eeq, mol=mol, error=error, chi=chi, &
+       & rad=rad, eta=eta, kcnchi=kcnchi, cutoff=cutoff, &
+@@ -102,6 +108,11 @@ subroutine new_eeqbc2025_model(mol, model, error)
+    cap = get_eeqbc_cap(mol%num)
+    rcov = get_eeqbc_cov_radii(mol%num)
+    avg_cn = get_eeqbc_avg_cn(mol%num)
++   if (any(rad <= 0.0_wp)) then
++      call fatal_error(error, "EEQBC2025 parameters are not available for element '"// &
++         & trim(mol%sym(minloc(rad, 1)))//"'")
++      return
++   end if
+    ! Electronegativities normalized to Fluorine
+    ! with actinides (Th-Lr) set to average of 1.30
+    en = get_pauling_en(mol%num)

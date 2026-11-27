@@ -1,10 +1,10 @@
 TITLE: get_charges leaves dqdr unset when requested without dqdL; no error for elements without EEQ parameters (Z > 103)
 
 ## Summary
-1. `get_charges` computes charge derivatives only if `dqdr` **and** `dqdL` are present (`grad = (present(dqdr) .and. present(dqdL)) .or. present(cache)`, src/multicharge/charge.f90:67). A caller asking only for the Cartesian derivatives gets an `intent(out)` array that is never written. The same pattern is used for `gradient`/`sigma` and `dqdr`/`dqdL` in `solve` (model/type.F90:219-221).
+1. `get_charges` computes charge derivatives only if `dqdr` **and** `dqdL` are present (`grad = (present(dqdr) .and. present(dqdL)) .or. present(cache)`, src/multicharge/charge.f90:67). A caller asking only for the Cartesian derivatives gets an `intent(out)` array that is never written. The same pattern is used for `gradient`/`sigma` and `dqdr`/`dqdL` in `solve` (model/type.F90:181-183).
 2. The EEQ2019 and EEQBC2025 tables stop at Z = 103; the getters return -1 beyond that, and `new_eeq2019_model` / `new_eeqbc2025_model` do not check. Superheavy elements then get unphysical charges without an error. dftd4 rejects only Z = 104-111 (src/dftd4/model/d4.f90:106), so Cn-Og reach this path through dftd4.
 
-Checked on main 4bb6c96.
+Checked on main aa2daad (after #81).
 
 ## Reproducer and results
 Fortran program against the library (attached below):
@@ -33,10 +33,10 @@ index a0d9022..cc9de18 100644
     allocate(cn(mol%nat), qloc(mol%nat))
     if (grad) then
 diff --git a/src/multicharge/model/type.F90 b/src/multicharge/model/type.F90
-index f471007..a1dc8ee 100644
+index c020488..6ae7a25 100644
 --- a/src/multicharge/model/type.F90
 +++ b/src/multicharge/model/type.F90
-@@ -217,8 +217,8 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
+@@ -179,8 +179,8 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
  
     ! Calculate gradient if the respective arrays are present
     dcn = present(dcndr) .and. present(dcndL)
@@ -47,7 +47,7 @@ index f471007..a1dc8ee 100644
  
     cache => local_cache
     if (present(response)) then
-@@ -306,11 +306,15 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
+@@ -268,11 +268,15 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
     end if
  
     if (grad) then
@@ -68,7 +68,7 @@ index f471007..a1dc8ee 100644
     end if
  
     if (cpq) then
-@@ -326,7 +330,7 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
+@@ -288,7 +292,7 @@ subroutine solve(self, mol, error, cn, qloc, dcndr, dcndL, dqlocdr, dqlocdL, &
           if (present(dqdr)) dqdr(:, :, :) = cache%dqdr
           call move_alloc(vrhs, cache%qvec)
           call move_alloc(ainv, cache%ainv)
@@ -125,7 +125,7 @@ Each optional output is handled on its own, and the two constructors return an e
 | dqdr requested alone | not written | equal to dqdr from the call with dqdL |
 | Cn-O, Og-O | charges with the wrong sign, no error | `EEQ2019 parameters are not available for element 'Cn'` |
 | Hg-O, Lr-O charges | — | unchanged |
-| `meson test` | 52 OK | 52 OK, 0 fail |
+| `meson test` | 50 OK | 50 OK, 0 fail |
 
 dftd4 may also want to extend its element check to Z > 111 or pass the multicharge error through.
 

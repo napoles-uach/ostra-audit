@@ -1,0 +1,46 @@
+diff --git a/src/mctc/ncoord/type.f90 b/src/mctc/ncoord/type.f90
+index db77eac..cc8582f 100644
+--- a/src/mctc/ncoord/type.f90
++++ b/src/mctc/ncoord/type.f90
+@@ -212,22 +212,40 @@ contains
+       !> Derivative of the CN with respect to the Cartesian coordinates
+       real(wp), intent(out), optional :: dcndrlist(:, :)
+ 
++      real(wp), allocatable :: dcndr_loc(:, :, :), dcndL_loc(:, :, :), dcndrlist_loc(:, :)
++
+       if (present(list)) then
+          if (present(dcndrlist) .and. present(dcndL)) then
+             call ncoord_d_list(self, mol, trans, cn, dcndrlist, dcndL, list)
++         else if (present(dcndrlist)) then
++            allocate(dcndL_loc(3, 3, mol%nat))
++            call ncoord_d_list(self, mol, trans, cn, dcndrlist, dcndL_loc, list)
++         else if (present(dcndL)) then
++            allocate(dcndrlist_loc(3, size(list%nlat)))
++            call ncoord_d_list(self, mol, trans, cn, dcndrlist_loc, dcndL, list)
+          else
+             call ncoord_list(self, mol, trans, cn, list)
+          end if
+       else
+          if (present(dcndr) .and. present(dcndL)) then
+             call ncoord_d(self, mol, trans, cn, dcndr, dcndL)
++         else if (present(dcndr)) then
++            allocate(dcndL_loc(3, 3, mol%nat))
++            call ncoord_d(self, mol, trans, cn, dcndr, dcndL_loc)
++         else if (present(dcndL)) then
++            allocate(dcndr_loc(3, mol%nat, mol%nat))
++            call ncoord_d(self, mol, trans, cn, dcndr_loc, dcndL)
+          else
+             call ncoord(self, mol, trans, cn)
+          end if
+       end if
+ 
+       if (self%cut > 0.0_wp) then
+-         call cut_coordination_number(self%cut, cn, dcndr, dcndL, dcndrlist, list)
++         if (present(list)) then
++            call cut_coordination_number(self%cut, cn, dcndL=dcndL, dcndrlist=dcndrlist, list=list)
++         else
++            call cut_coordination_number(self%cut, cn, dcndr=dcndr, dcndL=dcndL)
++         end if
+       end if
+ 
+    end subroutine get_coordination_number
