@@ -4,7 +4,7 @@
 |---|---|
 | library | multicharge |
 | location | src/multicharge/charge.f90:67; model/type.F90:219-221 |
-| versions | 4bb6c96 (2026-11-17) |
+| versions | 4bb6c96 (2026-11-17); still present in aa2daad (2026-11-27), patch re-tested there |
 | detected | 2026-11-22 |
 | detected_by | Explorer 2 (Gemini, Antigravity), batch 3; verified by explorer 1 (Claude) |
 | oracle | API contract (intent(out) must be defined) |

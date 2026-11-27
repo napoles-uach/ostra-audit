@@ -13,7 +13,7 @@
 | oracle_class | invariance |
 | class | Convergence, known |
 | impact_level | I for non-reduced cells of compact ionic solids (MgO: 34 % in E_D4, dq = 0.6); III-IV for standard cells (<= 0.05 kJ/mol/f.u.) |
-| status | Known issue; data contributed |
+| status | Resolved upstream in multicharge main (aa2daad, PR #81, 2026-11-27; not yet released, dftd4 still bundles the old version) |
 | report | Commented on known issue: [multicharge#72](https://github.com/grimme-lab/multicharge/issues/72) |
 
 Coordination numbers are invariant (1e-15); the discrepancy comes from the charge model. LLL lattice reduction
@@ -29,4 +29,19 @@ dftd4 4.3.1, MgO a' = a + 2b: analytic gradient 3.8e-5 Eh/bohr while central FD 
 vanish by symmetry): the gradient is not the derivative of the energy. Sheared CaF2: forces 5.7e-5 Eh/bohr,
 consistent with FD but nonzero, breaking the crystal symmetry. Standard cells: consistent to 1e-12. Virial consistent
 in all cases. `searches/2026-11-26-guided/cell_invariance/d4_virial.py`.
+
+## Upstream resolution check (2026-11-27)
+multicharge PR #81 (T. Zakharov, merged 2026-11-27, aa2daad) replaces the fixed [2,2,2] image boxes by
+tolerance-based real/reciprocal cutoffs. The PR reports supercell charge errors going from 0.12 to 1.1e-13.
+Independent check with our invariance oracle (multicharge CLI, rocksalt MgO a = 4.212 A, primitive cell vs
+equivalent cells a' = a + 2b and a' = a + 5b - 3c):
+
+| build | primitive q(Mg) | a+2b q(Mg) | a+5b-3c q(Mg) | E_EEQ primitive / a+2b / a+5b-3c (Eh) |
+|---|---|---|---|---|
+| 4bb6c96 (before #81) | 0.7049 | 1.3140 | -2.9564 | -0.12313 / -0.22953 / +0.51641 |
+| aa2daad (after #81) | 0.7011 | 0.7011 | 0.7011 | -0.12247 (all three identical to 14 digits) |
+
+The primitive cell itself was off by 0.004 e before the fix. Residual exposure: dftd4 4.3.x and tblite bundle
+the earlier multicharge until they update the subproject. OSTRA-026 patch re-applied on aa2daad: applies cleanly
+(offset only), meson test 50 OK, 0 Fail.
 
