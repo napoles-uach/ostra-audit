@@ -1,11 +1,11 @@
 TITLE: Errors in seven functionals: REVTPSSX, REVTPSSC, R4SCANX, TFK, TW, SPBEC (formulas/parameters) and SCANX/SCANC edge cases
 
 ## Summary
-Comparing every XCFun functional exposed through PySCF with libxc, and checking each discrepancy against the original paper and exact constraints, we found errors in seven functionals on master (a89b783). Six have a one- or two-line fix, tested below; the SCAN edge cases (item 7) are reported without a patch. Two built-in tests (R4SCANX, TFK) have reference values generated with the incorrect code, so they pass today and need the new values included in the patch.
+Comparing every XCFun functional exposed through PySCF with libxc, and checking each discrepancy against the original paper and exact constraints, we found errors in seven functionals on master (a89b783). Six have a small fix (one to four lines), tested below; the SCAN edge cases (item 7) are reported without a patch. Two built-in tests (R4SCANX, TFK) have reference values generated with the incorrect code, so they pass today and need the new values included in the patch.
 
 | # | Functional | Problem | Effect |
 |---|---|---|---|
-| 1 | REVTPSSX | registered without `XC_KINETIC`; denominator `(1 + sqrt(e) p)` instead of `(1 + sqrt(e) p)^2`; `p` instead of `p0 = p/|∇n|²` inside the square root | NaN as registered; SCF does not converge |
+| 1 | REVTPSSX | registered without `XC_KINETIC`; denominator `(1 + sqrt(e) p)` instead of `(1 + sqrt(e) p)^2`; `p` instead of `p0 = p/(∇n)²` inside the square root | NaN as registered; SCF does not converge |
 | 2 | REVTPSSC | `z^2` instead of `z^3` in ε_c = ε_revPKZB (1 + d ε_revPKZB z³) (TPSSC uses `pow3`) | silent, up to 1.35 kcal/mol in atomization energies |
 | 3 | R4SCANX | `DX_DAMP4_P = DX_DAMP4_A = 0.232` instead of the published 0.802 and 0.178 | silent, up to 2.0 kcal/mol in atomization energies |
 | 4 | TFK | `C_F n^(5/3)` ignores spin polarization | -8 % at ζ = 0.4, -37 % at ζ = 1 |
