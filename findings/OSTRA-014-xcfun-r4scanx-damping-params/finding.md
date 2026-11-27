@@ -37,3 +37,10 @@ fails with the published parameters. New reference computed with libxc at the te
 same situation as TFK (OSTRA-016). The functional was added by one of the r4SCAN authors in #140 (2020-09), before
 publication ("in preparation"), so 0.232 is most likely a preliminary value.
 
+## Origin confirmed (PR #140, 2020-09)
+The PR description (J. Furness, 2 Sep 2020) adds r++SCAN and r4SCAN as "as yet unpublished functionals" to be
+described in a later publication, and states that the code was originally written for the XCFun shipped with
+Turbomole 7.4. The test reference values were produced during the PR from the implementation itself. So 0.232 is a
+pre-publication value that was never updated after JCP 156, 034109 (2022). Possibly also present in Turbomole 7.4's
+XCFun (closed source; not checked). GitHub search of dftlibs/xcfun issues for "TW": nothing related.
+

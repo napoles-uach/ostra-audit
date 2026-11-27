@@ -19,7 +19,7 @@ Comparing every XCFun functional exposed through PySCF with libxc, and checking 
 
 **2. REVTPSSC** (revtpssc_eps.hpp:107-109). The paper keeps "the form of TPSS correlation unchanged", ε_c = ε_c^revPKZB [1 + d ε_c^revPKZB z³], d = 2.8. The code uses `pow2`. The error is invisible at z = 0 (uniform gas) and z = 1 (one-electron densities). After the fix: libxc to 1e-6 relative; the rest is β = 0.066725 vs the exact PBE β used by libxc.
 
-**3. R4SCANX** (SCAN_like_eps.hpp:156-157). Furness et al., J. Chem. Phys. 156, 034109 (2022) (arXiv:2110.00647), give d_p2 = 0.361, d_p4 = 0.802, d_α4 = 0.178. The functional was added in #140 (2020), before publication, which may explain the values. With the published values: libxc MGGA_X_R4SCAN to 2e-15.
+**3. R4SCANX** (SCAN_like_eps.hpp:156-157). Furness et al., J. Chem. Phys. 156, 034109 (2022) (arXiv:2110.00647), give d_p2 = 0.361, d_p4 = 0.802, d_α4 = 0.178. #140 (2020) added r4SCAN as "as yet unpublished", so 0.232 is presumably a pre-publication value; the self-test reference values were generated with it. With the published values: libxc MGGA_X_R4SCAN to 2e-15.
 
 **4. TFK** (tfk.cpp). The other kinetic functionals in XCFun (BTK, PW91K, VWK) are spin-resolved; TFK should satisfy T[n_a, n_b] = (T[2n_a] + T[2n_b])/2, i.e. C_F 2^(2/3) (n_a^(5/3) + n_b^(5/3)). The test reference at (1, 0.8), 7.64755771625168 = C_F 1.8^(5/3), is the spin-unaware value; the patch updates it.
 
