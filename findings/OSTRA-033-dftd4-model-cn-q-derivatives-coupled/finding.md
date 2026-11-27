@@ -14,7 +14,7 @@
 | class | API contract, new |
 | impact_level | IV-III (public Fortran model API; not reachable from C/Python/CLI) |
 | status | Verified (code, explorer 1) and run (explorer 2); fix tested by explorer 2 |
-| report | Pending |
+| report | Pending (issue drafted in OSTRA-029/report/ together with 033; target repo dftd4/dftd4) |
 
 Explorer 2: in weight_references, get_atomic_c6 and get_polarizabilities of both models, asking only for derivatives
 with respect to CN or only with respect to q leaves the requested intent(out) arrays unwritten (12 partial cases).

@@ -547,7 +547,7 @@
     "class": "API contract, new",
     "impact_level": "III (C API and Fortran callers; Python and CLI always pass both; loud: segfault)",
     "status": "Verified (run on released 4.3.1 by explorer 1), attributed; fix tested by explorer 2",
-    "report": "Pending",
+    "report": "Pending (issue drafted in OSTRA-029/report/ together with 033; target repo dftd4/dftd4)",
     "path": "findings/OSTRA-029-dftd4-capi-sigma-without-gradient",
     "slug": "dftd4-capi-sigma-without-gradient"
   },
@@ -623,7 +623,7 @@
     "class": "API contract, new",
     "impact_level": "IV-III (public Fortran model API; not reachable from C/Python/CLI)",
     "status": "Verified (code, explorer 1) and run (explorer 2); fix tested by explorer 2",
-    "report": "Pending",
+    "report": "Pending (issue drafted in OSTRA-029/report/ together with 033; target repo dftd4/dftd4)",
     "path": "findings/OSTRA-033-dftd4-model-cn-q-derivatives-coupled",
     "slug": "dftd4-model-cn-q-derivatives-coupled"
   }

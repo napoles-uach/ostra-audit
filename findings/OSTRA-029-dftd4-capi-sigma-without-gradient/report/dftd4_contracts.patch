@@ -1,0 +1,372 @@
+diff --git a/src/dftd4/api.f90 b/src/dftd4/api.f90
+index 27d06b7..9517bf6 100644
+--- a/src/dftd4/api.f90
++++ b/src/dftd4/api.f90
+@@ -731,12 +731,6 @@ subroutine get_dispersion_api(verror, vmol, vdisp, vparam, &
+    has_sigma = present(c_sigma)
+    if (has_sigma) then
+       sigma = c_sigma(:3, :3)
+-   ! Still needs to be passed into dispersion subroutines,
+-   ! just won't be returned through the API.
+-   ! Would need to refactor dispersion
+-   ! subroutines to make sigma truly optional.
+-   else if (has_grad) then
+-      allocate(sigma(3,3))
+    end if
+ 
+    ! Evaluate energy, gradient (optional), and sigma (optional) analytically
+diff --git a/src/dftd4/disp.f90 b/src/dftd4/disp.f90
+index 61bc205..c808514 100644
+--- a/src/dftd4/disp.f90
++++ b/src/dftd4/disp.f90
+@@ -79,6 +79,7 @@ subroutine get_dispersion(mol, disp, param, cutoff, energy, gradient, sigma, par
+    real(wp), allocatable :: c6(:, :), dc6dcn(:, :), dc6dq(:, :)
+    real(wp), allocatable :: dEdcn(:), dEdq(:), energies(:)
+    real(wp), allocatable :: lattr(:, :)
++   real(wp), allocatable :: gradient_local(:, :), sigma_local(:, :)
+    type(error_type), allocatable :: local_error
+ 
+    energy = ieee_value(0.0_wp, ieee_quiet_nan)
+@@ -123,17 +124,17 @@ subroutine get_dispersion(mol, disp, param, cutoff, energy, gradient, sigma, par
+       allocate(dEdcn(mol%nat), dEdq(mol%nat))
+       dEdcn(:) = 0.0_wp
+       dEdq(:) = 0.0_wp
+-      gradient(:, :) = 0.0_wp
+-      sigma(:, :) = 0.0_wp
++      allocate(gradient_local(3, mol%nat), source=0.0_wp)
++      allocate(sigma_local(3, 3), source=0.0_wp)
+    end if
+ 
+    call get_lattice_points(mol%periodic, mol%lattice, cutoff%disp2, lattr)
+    call param%get_dispersion2(mol, lattr, cutoff%disp2, cutoff%width2, &
+-      & disp%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient, &
+-      & sigma, partition)
++      & disp%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient_local, &
++      & sigma_local, partition)
+    if (grad) then
+-      call d4_gemv(dqdr, dEdq, gradient, beta=1.0_wp)
+-      call d4_gemv(dqdL, dEdq, sigma, beta=1.0_wp)
++      call d4_gemv(dqdr, dEdq, gradient_local, beta=1.0_wp)
++      call d4_gemv(dqdL, dEdq, sigma_local, beta=1.0_wp)
+    end if
+ 
+    q(:) = 0.0_wp
+@@ -142,16 +143,18 @@ subroutine get_dispersion(mol, disp, param, cutoff, energy, gradient, sigma, par
+ 
+    call get_lattice_points(mol%periodic, mol%lattice, cutoff%disp3, lattr)
+    call param%get_dispersion3(mol, lattr, cutoff%disp3, cutoff%width3, &
+-      & disp%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient, &
+-      & sigma, partition)
++      & disp%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient_local, &
++      & sigma_local, partition)
+    if (grad) then
+       call get_lattice_points(mol%periodic, mol%lattice, cutoff%cn, lattr)
+       call add_coordination_number_derivs(mol, lattr, cutoff%cn, &
+-         & disp%rcov, disp%en, dEdcn, gradient, sigma, error=local_error)
++         & disp%rcov, disp%en, dEdcn, gradient_local, sigma_local, error=local_error)
+       if (allocated(local_error)) then
+          if (present(error)) call move_alloc(local_error, error)
+          return
+       end if
++      if (present(gradient)) gradient(:, :) = gradient_local(:, :)
++      if (present(sigma)) sigma(:, :) = sigma_local(:, :)
+    end if
+ 
+    energy = sum(energies)
+@@ -197,6 +200,7 @@ subroutine get_dispersion2(mol, disp, param, cutoff, energy, gradient, sigma, pa
+    real(wp), allocatable :: c6(:, :), dc6dcn(:, :), dc6dq(:, :)
+    real(wp), allocatable :: dEdcn(:), dEdq(:), energies(:)
+    real(wp), allocatable :: lattr(:, :)
++   real(wp), allocatable :: gradient_local(:, :), sigma_local(:, :)
+    type(error_type), allocatable :: local_error
+ 
+    energy = ieee_value(0.0_wp, ieee_quiet_nan)
+@@ -241,24 +245,26 @@ subroutine get_dispersion2(mol, disp, param, cutoff, energy, gradient, sigma, pa
+       allocate(dEdcn(mol%nat), dEdq(mol%nat))
+       dEdcn(:) = 0.0_wp
+       dEdq(:) = 0.0_wp
+-      gradient(:, :) = 0.0_wp
+-      sigma(:, :) = 0.0_wp
++      allocate(gradient_local(3, mol%nat), source=0.0_wp)
++      allocate(sigma_local(3, 3), source=0.0_wp)
+    end if
+ 
+    call get_lattice_points(mol%periodic, mol%lattice, cutoff%disp2, lattr)
+    call param%get_dispersion2(mol, lattr, cutoff%disp2, cutoff%width2, &
+-      & disp%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient, &
+-      & sigma, partition)
++      & disp%r4r2, c6, dc6dcn, dc6dq, energies, dEdcn, dEdq, gradient_local, &
++      & sigma_local, partition)
+    if (grad) then
+-      call d4_gemv(dqdr, dEdq, gradient, beta=1.0_wp)
+-      call d4_gemv(dqdL, dEdq, sigma, beta=1.0_wp)
++      call d4_gemv(dqdr, dEdq, gradient_local, beta=1.0_wp)
++      call d4_gemv(dqdL, dEdq, sigma_local, beta=1.0_wp)
+       call get_lattice_points(mol%periodic, mol%lattice, cutoff%cn, lattr)
+       call add_coordination_number_derivs(mol, lattr, cutoff%cn, &
+-         & disp%rcov, disp%en, dEdcn, gradient, sigma, error=local_error)
++         & disp%rcov, disp%en, dEdcn, gradient_local, sigma_local, error=local_error)
+       if (allocated(local_error)) then
+          if (present(error)) call move_alloc(local_error, error)
+          return
+       end if
++      if (present(gradient)) gradient(:, :) = gradient_local(:, :)
++      if (present(sigma)) sigma(:, :) = sigma_local(:, :)
+    end if
+ 
+    energy = sum(energies)
+diff --git a/src/dftd4/model/d4.f90 b/src/dftd4/model/d4.f90
+index 45aaa10..5e962eb 100644
+--- a/src/dftd4/model/d4.f90
++++ b/src/dftd4/model/d4.f90
+@@ -267,10 +267,10 @@ subroutine weight_references(self, mol, cn, q, gwvec, gwdcn, gwdq)
+    real(wp) :: norm, dnorm, gw, expw, expd, gwk, dgwk, wf, zi, gi, maxcn
+    real(wp), parameter :: eps_norm = tiny(1.0_wp)**0.5_wp
+ 
+-   if (present(gwdcn) .and. present(gwdq)) then
++   if (present(gwdcn) .or. present(gwdq)) then
+       gwvec(:, :, :) = 0.0_wp
+-      gwdcn(:, :, :) = 0.0_wp
+-      gwdq(:, :, :) = 0.0_wp
++      if (present(gwdcn)) gwdcn(:, :, :) = 0.0_wp
++      if (present(gwdq)) gwdq(:, :, :) = 0.0_wp
+ 
+       !$omp parallel do default(none) schedule(runtime) &
+       !$omp shared(gwvec, gwdcn, gwdq, mol, self, cn, q) private(iat, izp, iref, &
+@@ -317,18 +317,22 @@ subroutine weight_references(self, mol, cn, q, gwvec, gwdcn, gwdq)
+             end if
+ 
+             gwvec(iref, iat, 1) = gwk * zeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
+-            gwdq(iref, iat, 1) = gwk * dzeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
++            if (present(gwdq)) then
++               gwdq(iref, iat, 1) = gwk * dzeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
++            end if
+ 
+             ! This expression behaves differently for -O0 and -O3 optimization
+             ! levels for tiny norm values. It yields incorrect values for -O0
+             ! due to fp underflow. These tiny values can occur if the CN is very
+             ! far from all reference CNs. To ensure consistent behavior, we set
+             ! the norm to zero above.
+-            dgwk = norm * (expd - expw * dnorm * norm)
+-            if (is_exceptional(dgwk) .or. norm == 0.0_wp) then
+-               dgwk = 0.0_wp
++            if (present(gwdcn)) then
++               dgwk = norm * (expd - expw * dnorm * norm)
++               if (is_exceptional(dgwk) .or. norm == 0.0_wp) then
++                  dgwk = 0.0_wp
++               end if
++               gwdcn(iref, iat, 1) = dgwk * zeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
+             end if
+-            gwdcn(iref, iat, 1) = dgwk * zeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
+          end do
+       end do
+ 
+@@ -509,11 +513,11 @@ subroutine get_atomic_c6(self, mol, gwvec, gwdcn, gwdq, c6, dc6dcn, dc6dq)
+    integer :: iat, jat, izp, jzp, iref, jref
+    real(wp) :: refc6, dc6, dc6dcni, dc6dcnj, dc6dqi, dc6dqj
+ 
+-   if (present(gwdcn).and.present(dc6dcn) &
+-      & .and.present(gwdq).and.present(dc6dq)) then
++   if ((present(gwdcn) .and. present(dc6dcn)) &
++      & .or. (present(gwdq) .and. present(dc6dq))) then
+       c6(:, :) = 0.0_wp
+-      dc6dcn(:, :) = 0.0_wp
+-      dc6dq(:, :) = 0.0_wp
++      if (present(gwdcn) .and. present(dc6dcn)) dc6dcn(:, :) = 0.0_wp
++      if (present(gwdq) .and. present(dc6dq)) dc6dq(:, :) = 0.0_wp
+ 
+       !$omp parallel do default(none) schedule(runtime) &
+       !$omp shared(c6, dc6dcn, dc6dq, mol, self, gwvec, gwdcn, gwdq) &
+@@ -532,18 +536,26 @@ subroutine get_atomic_c6(self, mol, gwvec, gwdcn, gwdq, c6, dc6dcn, dc6dq)
+                do jref = 1, self%ref(jzp)
+                   refc6 = self%c6(iref, jref, izp, jzp)
+                   dc6 = dc6 + gwvec(iref, iat, 1) * gwvec(jref, jat, 1) * refc6
+-                  dc6dcni = dc6dcni + gwdcn(iref, iat, 1) * gwvec(jref, jat, 1) * refc6
+-                  dc6dcnj = dc6dcnj + gwvec(iref, iat, 1) * gwdcn(jref, jat, 1) * refc6
+-                  dc6dqi = dc6dqi + gwdq(iref, iat, 1) * gwvec(jref, jat, 1) * refc6
+-                  dc6dqj = dc6dqj + gwvec(iref, iat, 1) * gwdq(jref, jat, 1) * refc6
++                  if (present(gwdcn) .and. present(dc6dcn)) then
++                     dc6dcni = dc6dcni + gwdcn(iref, iat, 1) * gwvec(jref, jat, 1) * refc6
++                     dc6dcnj = dc6dcnj + gwvec(iref, iat, 1) * gwdcn(jref, jat, 1) * refc6
++                  end if
++                  if (present(gwdq) .and. present(dc6dq)) then
++                     dc6dqi = dc6dqi + gwdq(iref, iat, 1) * gwvec(jref, jat, 1) * refc6
++                     dc6dqj = dc6dqj + gwvec(iref, iat, 1) * gwdq(jref, jat, 1) * refc6
++                  end if
+                end do
+             end do
+             c6(iat, jat) = dc6
+             c6(jat, iat) = dc6
+-            dc6dcn(iat, jat) = dc6dcni
+-            dc6dcn(jat, iat) = dc6dcnj
+-            dc6dq(iat, jat) = dc6dqi
+-            dc6dq(jat, iat) = dc6dqj
++            if (present(gwdcn) .and. present(dc6dcn)) then
++               dc6dcn(iat, jat) = dc6dcni
++               dc6dcn(jat, iat) = dc6dcnj
++            end if
++            if (present(gwdq) .and. present(dc6dq)) then
++               dc6dq(iat, jat) = dc6dqi
++               dc6dq(jat, iat) = dc6dqj
++            end if
+          end do
+       end do
+ 
+@@ -668,11 +680,11 @@ subroutine get_polarizabilities(self, mol, gwvec, gwdcn, gwdq, alpha, dadcn, dad
+    integer :: iat, izp, iref
+    real(wp) :: refa, da, dadcni, dadqi
+ 
+-   if (present(gwdcn).and.present(dadcn) &
+-      & .and.present(gwdq).and.present(dadq)) then
++   if ((present(gwdcn) .and. present(dadcn)) &
++      & .or. (present(gwdq) .and. present(dadq))) then
+       alpha(:) = 0.0_wp
+-      dadcn(:) = 0.0_wp
+-      dadq(:) = 0.0_wp
++      if (present(gwdcn) .and. present(dadcn)) dadcn(:) = 0.0_wp
++      if (present(gwdq) .and. present(dadq)) dadq(:) = 0.0_wp
+ 
+       !$omp parallel do default(none) schedule(runtime) &
+       !$omp shared(alpha, dadcn, dadq, mol, self, gwvec, gwdcn, gwdq) &
+@@ -685,12 +697,12 @@ subroutine get_polarizabilities(self, mol, gwvec, gwdcn, gwdq, alpha, dadcn, dad
+          do iref = 1, self%ref(izp)
+             refa = self%aiw(1, iref, izp)
+             da = da + gwvec(iref, iat, 1) * refa
+-            dadcni = dadcni + gwdcn(iref, iat, 1) * refa
+-            dadqi = dadqi + gwdq(iref, iat, 1) * refa
++            if (present(gwdcn) .and. present(dadcn)) dadcni = dadcni + gwdcn(iref, iat, 1) * refa
++            if (present(gwdq) .and. present(dadq)) dadqi = dadqi + gwdq(iref, iat, 1) * refa
+          end do
+          alpha(iat) = da
+-         dadcn(iat) = dadcni
+-         dadq(iat) = dadqi
++         if (present(gwdcn) .and. present(dadcn)) dadcn(iat) = dadcni
++         if (present(gwdq) .and. present(dadq)) dadq(iat) = dadqi
+       end do
+ 
+    else
+diff --git a/src/dftd4/model/d4s.f90 b/src/dftd4/model/d4s.f90
+index f35570a..bf5e3b2 100644
+--- a/src/dftd4/model/d4s.f90
++++ b/src/dftd4/model/d4s.f90
+@@ -264,10 +264,10 @@ subroutine weight_references(self, mol, cn, q, gwvec, gwdcn, gwdq)
+    real(wp) :: norm, dnorm, gw, expw, expd, gwk, dgwk, wf, zi, gi, maxcn
+    real(wp), parameter :: eps_norm = tiny(1.0_wp)**0.5_wp
+ 
+-   if (present(gwdcn) .and. present(gwdq)) then
++   if (present(gwdcn) .or. present(gwdq)) then
+       gwvec(:, :, :) = 0.0_wp
+-      gwdcn(:, :, :) = 0.0_wp
+-      gwdq(:, :, :) = 0.0_wp
++      if (present(gwdcn)) gwdcn(:, :, :) = 0.0_wp
++      if (present(gwdq)) gwdq(:, :, :) = 0.0_wp
+ 
+       !$omp parallel do default(none) schedule(runtime) &
+       !$omp shared(gwvec, gwdcn, gwdq, mol, self, cn, q) &
+@@ -319,13 +319,17 @@ subroutine weight_references(self, mol, cn, q, gwvec, gwdcn, gwdq)
+                end if
+ 
+                gwvec(iref, iat, jat) = gwk * zeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
+-               gwdq(iref, iat, jat) = gwk * dzeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
++               if (present(gwdq)) then
++                  gwdq(iref, iat, jat) = gwk * dzeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
++               end if
+ 
+-               dgwk = norm * (expd - expw * dnorm * norm)
+-               if (is_exceptional(dgwk) .or. norm == 0.0_wp) then
+-                  dgwk = 0.0_wp
++               if (present(gwdcn)) then
++                  dgwk = norm * (expd - expw * dnorm * norm)
++                  if (is_exceptional(dgwk) .or. norm == 0.0_wp) then
++                     dgwk = 0.0_wp
++                  end if
++                  gwdcn(iref, iat, jat) = dgwk * zeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
+                end if
+-               gwdcn(iref, iat, jat) = dgwk * zeta(self%ga, gi, self%q(iref, izp)+zi, q(iat)+zi)
+             end do
+ 
+          end do
+@@ -517,11 +521,11 @@ subroutine get_atomic_c6(self, mol, gwvec, gwdcn, gwdq, c6, dc6dcn, dc6dq)
+    integer :: iat, jat, izp, jzp, iref, jref
+    real(wp) :: refc6, dc6, dc6dcni, dc6dcnj, dc6dqi, dc6dqj
+ 
+-   if (present(gwdcn).and.present(dc6dcn) &
+-      & .and.present(gwdq).and.present(dc6dq)) then
++   if ((present(gwdcn) .and. present(dc6dcn)) &
++      & .or. (present(gwdq) .and. present(dc6dq))) then
+       c6(:, :) = 0.0_wp
+-      dc6dcn(:, :) = 0.0_wp
+-      dc6dq(:, :) = 0.0_wp
++      if (present(gwdcn) .and. present(dc6dcn)) dc6dcn(:, :) = 0.0_wp
++      if (present(gwdq) .and. present(dc6dq)) dc6dq(:, :) = 0.0_wp
+ 
+       !$omp parallel do default(none) schedule(runtime) &
+       !$omp shared(c6, dc6dcn, dc6dq, mol, self, gwvec, gwdcn, gwdq) &
+@@ -540,18 +544,26 @@ subroutine get_atomic_c6(self, mol, gwvec, gwdcn, gwdq, c6, dc6dcn, dc6dq)
+                do jref = 1, self%ref(jzp)
+                   refc6 = self%c6(iref, jref, izp, jzp)
+                   dc6 = dc6 + gwvec(iref, iat, jat) * gwvec(jref, jat, iat) * refc6
+-                  dc6dcni = dc6dcni + gwdcn(iref, iat, jat) * gwvec(jref, jat, iat) * refc6
+-                  dc6dcnj = dc6dcnj + gwvec(iref, iat, jat) * gwdcn(jref, jat, iat) * refc6
+-                  dc6dqi = dc6dqi + gwdq(iref, iat, jat) * gwvec(jref, jat, iat) * refc6
+-                  dc6dqj = dc6dqj + gwvec(iref, iat, jat) * gwdq(jref, jat, iat) * refc6
++                  if (present(gwdcn) .and. present(dc6dcn)) then
++                     dc6dcni = dc6dcni + gwdcn(iref, iat, jat) * gwvec(jref, jat, iat) * refc6
++                     dc6dcnj = dc6dcnj + gwvec(iref, iat, jat) * gwdcn(jref, jat, iat) * refc6
++                  end if
++                  if (present(gwdq) .and. present(dc6dq)) then
++                     dc6dqi = dc6dqi + gwdq(iref, iat, jat) * gwvec(jref, jat, iat) * refc6
++                     dc6dqj = dc6dqj + gwvec(iref, iat, jat) * gwdq(jref, jat, iat) * refc6
++                  end if
+                end do
+             end do
+             c6(iat, jat) = dc6
+             c6(jat, iat) = dc6
+-            dc6dcn(iat, jat) = dc6dcni
+-            dc6dcn(jat, iat) = dc6dcnj
+-            dc6dq(iat, jat) = dc6dqi
+-            dc6dq(jat, iat) = dc6dqj
++            if (present(gwdcn) .and. present(dc6dcn)) then
++               dc6dcn(iat, jat) = dc6dcni
++               dc6dcn(jat, iat) = dc6dcnj
++            end if
++            if (present(gwdq) .and. present(dc6dq)) then
++               dc6dq(iat, jat) = dc6dqi
++               dc6dq(jat, iat) = dc6dqj
++            end if
+          end do
+       end do
+ 
+@@ -676,11 +688,11 @@ subroutine get_polarizabilities(self, mol, gwvec, gwdcn, gwdq, alpha, dadcn, dad
+    integer :: iat, izp, iref
+    real(wp) :: refa, da, dadcni, dadqi
+ 
+-   if (present(gwdcn).and.present(dadcn) &
+-      & .and.present(gwdq).and.present(dadq)) then
++   if ((present(gwdcn) .and. present(dadcn)) &
++      & .or. (present(gwdq) .and. present(dadq))) then
+       alpha(:) = 0.0_wp
+-      dadcn(:) = 0.0_wp
+-      dadq(:) = 0.0_wp
++      if (present(gwdcn) .and. present(dadcn)) dadcn(:) = 0.0_wp
++      if (present(gwdq) .and. present(dadq)) dadq(:) = 0.0_wp
+ 
+       !$omp parallel do default(none) schedule(runtime) &
+       !$omp shared(alpha, dadcn, dadq, mol, self, gwvec, gwdcn, gwdq) &
+@@ -693,12 +705,12 @@ subroutine get_polarizabilities(self, mol, gwvec, gwdcn, gwdq, alpha, dadcn, dad
+          do iref = 1, self%ref(izp)
+             refa = self%aiw(1, iref, izp)
+             da = da + gwvec(iref, iat, iat) * refa
+-            dadcni = dadcni + gwdcn(iref, iat, iat) * refa
+-            dadqi = dadqi + gwdq(iref, iat, iat) * refa
++            if (present(gwdcn) .and. present(dadcn)) dadcni = dadcni + gwdcn(iref, iat, iat) * refa
++            if (present(gwdq) .and. present(dadq)) dadqi = dadqi + gwdq(iref, iat, iat) * refa
+          end do
+          alpha(iat) = da
+-         dadcn(iat) = dadcni
+-         dadq(iat) = dadqi
++         if (present(gwdcn) .and. present(dadcn)) dadcn(iat) = dadcni
++         if (present(gwdq) .and. present(dadq)) dadq(iat) = dadqi
+       end do
+ 
+    else
