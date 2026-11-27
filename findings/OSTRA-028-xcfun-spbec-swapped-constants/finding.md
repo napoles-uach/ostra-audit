@@ -13,8 +13,8 @@
 | oracle_class | independent-implementation, analytic-reference |
 | class | New bug (parameters and formula) |
 | impact_level | I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed) |
-| status | Verified (blind, explorer 2), attributed, fix tested, checked against the paper; ready to report |
-| report | Pending (consolidated XCFun issue drafted in OSTRA-012/report/issue_xcfun.md) |
+| status | Reported; Verified (blind, explorer 2), attributed, fix tested, checked against the paper; ready to report |
+| report | Reported: [xcfun#170](https://github.com/dftlibs/xcfun/issues/170) (2026-11-27, consolidated issue) |
 
 ## Observation
 H2O (def2-SVP, PBE density): sPBE correlation from the paper formula with PBE constants (beta = 0.066725,

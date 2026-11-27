@@ -13,8 +13,8 @@
 | oracle_class | independent-implementation, energy-potential-consistency, branch-boundary |
 | class | Unguarded edge case |
 | impact_level | III-IV (exact points rarely on molecular grids) |
-| status | Verified |
-| report | Pending (consolidated XCFun issue drafted in OSTRA-012/report/issue_xcfun.md) |
+| status | Reported; Verified |
+| report | Reported: [xcfun#170](https://github.com/dftlibs/xcfun/issues/170) (2026-11-27, consolidated issue) |
 
 At alpha = 1 exactly: SCANX exc = +inf, SCANC exc = -inf, v_sigma NaN (libxc finite). At s = 0, alpha = 1.2:
 SCANX v_sigma = -0.0508 vs libxc -0.0993; finite differences give -0.0993, so XCFun is wrong there.

@@ -13,8 +13,8 @@
 | oracle_class | independent-implementation |
 | class | New bug (formula), silent |
 | impact_level | I (silent; atomization energies MAD 0.54, max 1.35 kcal/mol, impact study 2026-11-24) |
-| status | Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11 |
-| report | Pending (consolidated XCFun issue drafted in OSTRA-012/report/issue_xcfun.md) |
+| status | Reported; Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11 |
+| report | Reported: [xcfun#170](https://github.com/dftlibs/xcfun/issues/170) (2026-11-27, consolidated issue) |
 
 `revtpssc_eps.hpp` uses `pow2(...)` where `tpssc_eps.hpp` (same formula, same d = 2.8) uses `pow3(...)`.
 Max relative difference vs libxc 2 % on 200 random points (control TPSSC vs libxc: 3e-11). Silent: passes the

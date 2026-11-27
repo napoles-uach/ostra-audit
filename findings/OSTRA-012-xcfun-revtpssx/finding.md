@@ -13,8 +13,8 @@
 | oracle_class | independent-implementation |
 | class | New bug (registration + formula) |
 | impact_level | III (fails loudly: NaN as registered) |
-| status | Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15 |
-| report | Pending (consolidated XCFun issue drafted in OSTRA-012/report/issue_xcfun.md) |
+| status | Reported; Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15 |
+| report | Reported: [xcfun#170](https://github.com/dftlibs/xcfun/issues/170) (2026-11-27, consolidated issue) |
 
 (a) flags lack XC_KINETIC, so PySCF types it as GGA and it returns NaN on all test points; (b) denominator
 (1 + sqrt(e) p) instead of (1 + sqrt(e) p)^2; (c) inside the square root `p` is used where TPSSX uses `p0 = p/sigma`,

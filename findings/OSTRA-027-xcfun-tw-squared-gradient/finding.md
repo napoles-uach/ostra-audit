@@ -13,8 +13,8 @@
 | oracle_class | independent-implementation, exact-identity |
 | class | New bug (formula) |
 | impact_level | III (wrong by orders of magnitude when used; kinetic functional, used in orbital-free DFT and embedding) |
-| status | Verified (blind, explorer 2), attributed, fix tested; ready to report |
-| report | Pending (consolidated XCFun issue drafted in OSTRA-012/report/issue_xcfun.md) |
+| status | Reported; Verified (blind, explorer 2), attributed, fix tested; ready to report |
+| report | Reported: [xcfun#170](https://github.com/dftlibs/xcfun/issues/170) (2026-11-27, consolidated issue) |
 
 ## Observation
 `d.gaa` and `d.gbb` are already squared gradients |∇ρ_a|², |∇ρ_b|², so the code computes (|∇ρ_a|²+|∇ρ_b|²)²/(8n)

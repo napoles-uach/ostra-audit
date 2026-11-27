@@ -226,8 +226,8 @@
       ],
       "impact": 3,
       "impact_level": "III (fails loudly: NaN as registered)",
-      "status": "Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15",
-      "reported": false
+      "status": "Reported; Confirmed (level 3): minimal fix matches the publication and libxc to 1e-15",
+      "reported": true
     },
     {
       "id": "OSTRA-013",
@@ -245,8 +245,8 @@
       ],
       "impact": 1,
       "impact_level": "I (silent; atomization energies MAD 0.54, max 1.35 kcal/mol, impact study 2026-11-24)",
-      "status": "Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11",
-      "reported": false
+      "status": "Reported; Confirmed (level 3): minimal fix matches the publication and libxc to 4e-11",
+      "reported": true
     },
     {
       "id": "OSTRA-014",
@@ -264,8 +264,8 @@
       ],
       "impact": 1,
       "impact_level": "I (silent; atomization energies MAD 0.63, max 1.99 kcal/mol, impact study 2026-11-24)",
-      "status": "Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14",
-      "reported": false
+      "status": "Reported; Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14",
+      "reported": true
     },
     {
       "id": "OSTRA-015",
@@ -285,8 +285,8 @@
       ],
       "impact": 3,
       "impact_level": "III-IV (exact points rarely on molecular grids)",
-      "status": "Verified",
-      "reported": false
+      "status": "Reported; Verified",
+      "reported": true
     },
     {
       "id": "OSTRA-016",
@@ -305,8 +305,8 @@
       ],
       "impact": 3,
       "impact_level": "III (spin-polarized kinetic-energy use, e.g. embedding)",
-      "status": "Confirmed (level 3): exact spin scaling after minimal fix",
-      "reported": false
+      "status": "Reported; Confirmed (level 3): exact spin scaling after minimal fix",
+      "reported": true
     },
     {
       "id": "OSTRA-017",
@@ -519,8 +519,8 @@
       ],
       "impact": 3,
       "impact_level": "III (wrong by orders of magnitude when used; kinetic functional, used in orbital-free DFT and embedding)",
-      "status": "Verified (blind, explorer 2), attributed, fix tested; ready to report",
-      "reported": false
+      "status": "Reported; Verified (blind, explorer 2), attributed, fix tested; ready to report",
+      "reported": true
     },
     {
       "id": "OSTRA-028",
@@ -539,8 +539,8 @@
       ],
       "impact": 1,
       "impact_level": "I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed)",
-      "status": "Verified (blind, explorer 2), attributed, fix tested, checked against the paper; ready to report",
-      "reported": false
+      "status": "Reported; Verified (blind, explorer 2), attributed, fix tested, checked against the paper; ready to report",
+      "reported": true
     },
     {
       "id": "OSTRA-029",
