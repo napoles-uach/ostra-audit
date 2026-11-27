@@ -340,9 +340,9 @@
         "branch-boundary",
         "exact-identity"
       ],
-      "impact": 2,
-      "impact_level": "II-III (open-shell densities near rho ~ 2e-5)",
-      "status": "Verified (anomaly reproduced); cause: model pole vs implementation pending",
+      "impact": 4,
+      "impact_level": "IV on molecular grids (band rarely hit, no measurable energy effect); III for direct UEG use near r_s = 22.74",
+      "status": "Attributed (paper checked)",
       "reported": false
     },
     {
