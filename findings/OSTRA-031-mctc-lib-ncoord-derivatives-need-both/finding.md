@@ -13,8 +13,8 @@
 | oracle_class | api-contract |
 | class | API contract, new |
 | impact_level | III (Fortran API of mctc-lib and its users in dftd4/simple-dftd3/tblite/multicharge; silent) |
-| status | Verified (run by explorer 1), attributed; fix tested by explorer 2 |
-| report | Pending |
+| status | Reported |
+| report | [mctc-lib#166](https://github.com/grimme-lab/mctc-lib/issues/166) (2026-11-27) |
 
 Verifier (explorer 1, own Fortran program against mctc-lib 71a21af): H2O, erf counting function. dcndr requested
 alone: left at the sentinel 999 (error 1e3); with cut = 1.5 the unset values are rescaled to 444-654 by

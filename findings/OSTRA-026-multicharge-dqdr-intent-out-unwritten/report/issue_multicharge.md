@@ -4,7 +4,7 @@ TITLE: get_charges leaves dqdr unset when requested without dqdL; no error for e
 1. `get_charges` computes charge derivatives only if `dqdr` **and** `dqdL` are present (`grad = (present(dqdr) .and. present(dqdL)) .or. present(cache)`, src/multicharge/charge.f90:67). A caller asking only for the Cartesian derivatives gets an `intent(out)` array that is never written. The same pattern is used for `gradient`/`sigma` and `dqdr`/`dqdL` in `solve` (model/type.F90:181-183).
 2. The EEQ2019 and EEQBC2025 tables stop at Z = 103; the getters return -1 beyond that, and `new_eeq2019_model` / `new_eeqbc2025_model` do not check. Superheavy elements then get unphysical charges without an error. dftd4 rejects only Z = 104-111 (src/dftd4/model/d4.f90:106), so Cn-Og reach this path through dftd4.
 
-Checked on main aa2daad (after #81).
+Checked on main aa2daad (after #81). The same two-optional-outputs convention in mctc-lib is reported in grimme-lab/mctc-lib#166.
 
 ## Reproducer and results
 Fortran program against the library (attached below):
