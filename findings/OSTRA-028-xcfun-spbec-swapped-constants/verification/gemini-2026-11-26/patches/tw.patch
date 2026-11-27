@@ -1,0 +1,13 @@
+diff --git a/src/functionals/tw.cpp b/src/functionals/tw.cpp
+index e7f3e57..864d82a 100644
+--- a/src/functionals/tw.cpp
++++ b/src/functionals/tw.cpp
+@@ -18,7 +18,7 @@
+ //  von Weizsacker kinetic energy functional
+ 
+ template <typename num> static num tw(const densvars<num> & d) {
+-  return 1. / 8. * pow(d.gaa + d.gbb, 2.0) / d.n;
++  return 0.125 * (d.gaa / d.a + d.gbb / d.b);
+ }
+ 
+ FUNCTIONAL(XC_TW) = {

@@ -1,0 +1,52 @@
+==============================================================================
+1. EXACT ANALYTICAL ORACLE: 1-electron H atom (exact 1s orbital)
+   rho_a(r) = (1/pi)*exp(-2r), rho_b = 0, |grad rho_a| = 2*rho_a
+   Exact T_W = int |grad rho|^2 / (8*rho) d^3r = 0.5 Eh
+   Analytic integral of buggy XCFun TW = (1/8)*(4*rho^2)^2/rho = 2/(27*pi^2)
+   2 / (27 * pi^2) = 0.007505272862395 Eh
+==============================================================================
+Grid integral exact N = int rho d3r       : 0.999999999980194
+Grid integral exact T_W                   : 0.499999999990097 Eh (err = -9.903e-12)
+Grid integral buggy formula (gaa^2)/(8n)  : 0.007505272862395 Eh (diff vs 2/(27pi^2) = -8.674e-18)
+XCFun 'TW'  (exact H 1s, spin=1)          : 0.007505272862395 Eh (err vs 0.5 = -4.924947e-01, ratio = 1.501055e-02)
+XCFun 'VWK' (exact H 1s, spin=1)          : 0.499999999990097 Eh (err vs 0.5 = -9.903e-12)
+libxc 'GGA_K_VW' (exact H 1s, spin=1)     : 0.499999999982735 Eh (err vs 0.5 = -1.726e-11)
+
+==============================================================================
+2. PYSCF UHF H ATOM (cc-pVQZ) via mf._numint.libxc = dft.xcfun vs dft.libxc
+==============================================================================
+Exact 1e kinetic energy <T> (UHF/cc-pVQZ) : 0.499944788011 Eh
+PySCF + XCFun 'TW'                        : 0.007481252349 Eh (diff = -4.924635e-01, ratio = 1.496416e-02)
+PySCF + XCFun 'VWK'                       : 0.499944788012 Eh (diff = +8.888e-13)
+PySCF + libxc 'GGA_K_VW'                  : 0.499944788003 Eh (diff = -8.475e-12)
+
+==============================================================================
+3. MOLECULAR DENSITY: H2O (RKS PBE/cc-pVTZ, closed-shell unpolarized)
+==============================================================================
+H2O PySCF + XCFun 'TW'                    : 1.318335556586e+07 Eh
+H2O PySCF + XCFun 'VWK'                   : 57.282882450106 Eh
+H2O PySCF + libxc 'GGA_K_VW'              : 57.282882450107 Eh
+H2O ratio (XCFun TW / libxc GGA_K_VW)     : 2.301448e+05 (orders of magnitude!)
+H2O diff  (XCFun VWK - libxc GGA_K_VW)    : -9.521e-13 Eh
+
+==============================================================================
+4. POINTWISE TEST: UNPOLARIZED AND PARTIALLY SPIN-POLARIZED
+   Distinguishing total-density |grad n|^2/(8n) vs spin-scaled (gaa/na + gbb/nb)/8
+==============================================================================
+Unpolarized point (n=0.5, |grad n|^2=1.0):
+  Exact t_W = |grad n|^2/(8n)             : 0.250000000000000
+  Buggy (gaa+gbb)^2/(8n)                  : 0.062500000000000
+  XCFun 'TW'  n*eps                       : 0.062500000000000
+  XCFun 'VWK' n*eps                       : 0.250000000000000
+  libxc 'GGA_K_VW' n*eps                  : 0.250000000000000
+  (Note: even removing pow(...,2), (gaa+gbb)/(8n) = 0.125000000000000, STILL off by 2x!)
+
+Partially polarized point (na=0.35, nb=0.15, gaa=0.170, gab=-0.010, gbb=0.140, gnn=0.290):
+  Total-density |grad n|^2 / (8n)         : 0.072500000000000
+  Spin-scaled (gaa/na + gbb/nb) / 8       : 0.177380952380952
+  Buggy (gaa+gbb)^2 / (8n)                : 0.024025000000000
+  XCFun 'TW'       n*eps                  : 0.024025000000000
+  XCFun 'VWK'      n*eps                  : 0.177380952380952
+  libxc 'GGA_K_VW' n*eps                  : 0.177380952380952
+  Diff XCFun VWK vs libxc GGA_K_VW        : -8.327e-17
+  Diff Total-density vs libxc GGA_K_VW    : -1.048810e-01

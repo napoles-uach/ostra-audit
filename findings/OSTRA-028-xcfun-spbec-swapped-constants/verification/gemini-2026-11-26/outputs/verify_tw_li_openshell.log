@@ -1,0 +1,8 @@
+Open-shell Li atom (UKS PBE/cc-pVTZ):
+  XCFun 'TW' (buggy baseline)              : 4.141229471299e+02 Eh
+  Total-density 1/8 * gnn / n (OSTRA-027)  : 7.132448511061 Eh
+  Spin-scaled   1/8 * (gaa/a + gbb/b)      : 7.178192879647 Eh
+  XCFun 'VWK' (vonw.cpp)                   : 7.178192879659 Eh
+  libxc 'GGA_K_VW'                         : 7.178192879667 Eh
+  Diff (OSTRA-027 gnn/n  - libxc GGA_K_VW) : -0.045744 Eh (-28.71 kcal/mol)
+  Diff (spin-scaled      - libxc GGA_K_VW) : -1.916e-11 Eh

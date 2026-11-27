@@ -73,3 +73,11 @@ with tested patches. Verification by explorer 1: dftd4 C API sigma-only crash re
 when cut > 0); tblite, simple-dftd3 model and dftd4 model conditions confirmed by reading main. Observation: the same
 `present(a) .and. present(b)` convention recurs in mctc-lib, multicharge, dftd4, simple-dftd3 and tblite, i.e. a
 pattern propagated across one software ecosystem.
+
+## 2026-11-26 — Blind verification of OSTRA-027 and 028 by explorer 2
+Both confirmed at all three evidence levels. Explorer 2 corrected explorer 1's TW patch: the total-density form
+gnn/(8n) breaks the exact spin scaling (open-shell Li -45.7 mEh vs libxc), which explorer 1 missed by testing only the
+H atom; reproduced by explorer 1 and the patch replaced. Explorer 2 also found that XCFun already has a correct
+von Weizsäcker functional (VWK), and added the rapidly-varying limit as a physical oracle for SPBEC. Second time a
+blind verification corrects the proposer (after OSTRA-008's m = 71 bound).
+

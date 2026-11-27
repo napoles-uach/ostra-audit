@@ -1,0 +1,59 @@
+================================================================================
+1. BUILT-IN XCFUN SELF-TESTS (xcfun_test)
+================================================================================
+Baseline xcfun_test() failed count: 0
+Patched  xcfun_test() failed count: 0
+
+================================================================================
+2. PATCHED 'tw' VERIFICATION (H 1s, H2O, polarized point, 4-pt FD)
+================================================================================
+Exact H 1s T_W (exact = 0.5 Eh):
+  Baseline tw : 0.007505272862395 Eh (err = -4.924947e-01)
+  Patched  tw : 0.499999999990097 Eh (err = -9.903e-12)
+
+H2O RKS PBE/cc-pVTZ:
+  Baseline tw       : 1.318335556586e+07 Eh
+  Patched  tw       : 57.282882450105 Eh
+  libxc GGA_K_VW    : 57.282882450107 Eh
+  Diff patched-libxc: -2.260e-12 Eh
+
+Polarized point (na=0.35, nb=0.15) patched tw vs libxc GGA_K_VW:
+  [e, va, vb, vgaa, vgab, vgbb] max|diff| = 1.110e-15
+  4pt-FD tw h=1e-02: max|deriv - FD| = 6.285e-05
+  4pt-FD tw h=1e-03: max|deriv - FD| = 6.147e-09
+  4pt-FD tw h=1e-04: max|deriv - FD| = 7.797e-13
+  4pt-FD tw h=1e-05: max|deriv - FD| = 2.684e-12
+
+================================================================================
+3. PATCHED 'spbec' VERIFICATION (H2O, polarized point, t->inf limit, 4-pt FD)
+================================================================================
+H2O RKS PBE/cc-pVTZ:
+  Baseline spbec    : -0.595477895157 Eh (diff vs libxc = -2.334374e-01)
+  Patched  spbec    : -0.362040491755 Eh
+  libxc GGA_C_SPBE  : -0.362040491755 Eh
+  Diff patched-libxc: -1.665e-15 Eh
+
+Polarized point (na=0.35, nb=0.15) patched spbec vs libxc GGA_C_SPBE:
+  Patched [e, va, vb, vgaa, vgab, vgbb]: [-0.02830536 -0.06469942 -0.10012595  0.00824341  0.01648683  0.00824341]
+  libxc   [e, va, vb, vgaa, vgab, vgbb]: [-0.02830536 -0.06469942 -0.10012595  0.00824341  0.01648683  0.00824341]
+  max|diff| = 4.163e-17
+  4pt-FD spbec h=1e-02: max|deriv - FD| = 2.010e-07
+  4pt-FD spbec h=1e-03: max|deriv - FD| = 1.989e-11
+  4pt-FD spbec h=1e-04: max|deriv - FD| = 7.247e-14
+  4pt-FD spbec h=1e-05: max|deriv - FD| = 1.257e-12
+
+Rapidly varying limit (t -> inf) on patched spbec:
+  n=0.1, |grad n|=    1.0: base eps_c=-4.5886050273e-02 | patched eps_c=-3.6197316246e-03
+  n=0.1, |grad n|=   10.0: base eps_c=-4.5752183512e-02 | patched eps_c=-3.9424840917e-05
+  n=0.1, |grad n|=  100.0: base eps_c=-4.5750820717e-02 | patched eps_c=-3.9460505804e-07
+  n=0.1, |grad n|=10000.0: base eps_c=-4.5750806951e-02 | patched eps_c=-3.9460865131e-11
+
+================================================================================
+4. BIT-FOR-BIT IDENTITY CHECK ACROSS ALL OTHER XCFUN FUNCTIONALS (ORDER 2)
+================================================================================
+Total parameters enumerated   : 82
+Other functionals bit-checked : 78 (4290 IEEE-754 doubles, order 0..2)
+Non-functional params skipped : 4 -> ['BRX', 'BRC', 'BRXC', 'CSC']
+Bit-for-bit mismatches found  : 2
+  MISMATCH: ('SPBEC', 0.026510438081988493)
+  MISMATCH: ('TW', 10.178170370370374)

@@ -1,0 +1,191 @@
+XCFun DFT library Copyright 2009-2020 Ulf Ekstrom and contributors.
+See http://dftlibs.org/xcfun/ for more information.
+
+This is free software; see the source code for copying conditions.
+There is ABSOLUTELY NO WARRANTY; not even for MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE. For details see the documentation.
+Scientific users of this library should cite
+U. Ekstrom, L. Visscher, R. Bast, A. J. Thorvaldsen and K. Ruud;
+J.Chem.Theor.Comp. 2010, DOI: 10.1021/ct100117s
+XCFun version: 2.1.1
+
+Available functionals and other settings:
+SLATERX 	Slater LDA exchange
+PW86X 	PW86 exchange
+VWN3C 	VWN3 LDA Correlation functional
+VWN5C 	VWN5 LDA Correlation functional
+PBEC 	PBE correlation functional
+PBEX 	PBE Exchange Functional
+BECKEX 	Becke 88 exchange
+BECKECORRX 	Becke 88 exchange correction
+BECKESRX 	Short range Becke 88 exchange
+BECKECAMX 	CAM Becke 88 exchange
+BRX 	Becke-Roussells exchange with jp dependence
+BRC 	Becke-Roussells correlation with jp dependence
+BRXC 	Becke-Roussells correlation with jp dependence
+LDAERFX 	Short-range spin-dependent LDA exchange functional
+LDAERFC 	Short-range spin-dependent LDA correlation functional
+LDAERFC_JT 	Short-range spin-unpolarized LDA correlation functional
+LYPC 	LYP correlation
+OPTX 	OPTX Handy & Cohen exchange
+OPTXCORR 	OPTX Handy & Cohen exchange -- correction part only
+REVPBEX 	Revised PBE Exchange Functional
+RPBEX 	RPBE Exchange Functional
+SPBEC 	sPBE correlation functional
+VWN_PBEC 	PBE correlation functional using VWN LDA correlation.
+KTX 	KT exchange GGA correction
+TFK 	Thomas-Fermi Kinetic Energy Functional
+TW 	von Weizsacker Kinetic Energy Functional
+PW91X 	Perdew-Wang 1991 GGA Exchange Functional
+PW91K 	PW91 GGA Kinetic Energy Functional
+PW92C 	PW92 LDA correlation
+M05X 	M05 exchange
+M05X2X 	M05-2X exchange
+M06X 	M06 exchange
+M06X2X 	M06-2X exchange
+M06LX 	M06-L exchange
+M06HFX 	M06-HF exchange
+M05X2C 	M05-2X Correlation
+M05C 	M05 Correlation
+M06C 	M06 Correlation
+M06HFC 	M06-HF Correlation
+M06LC 	M06-L Correlation
+M06X2C 	M06-2X Correlation
+TPSSC 	TPSS original correlation functional
+TPSSX 	TPSS original exchange functional
+REVTPSSC 	Revised TPSS correlation functional
+REVTPSSX 	Reviewed TPSS exchange functional
+SCANC 	SCAN correlation functional
+SCANX 	SCAN exchange functional
+RSCANC 	rSCAN correlation functional
+RSCANX 	rSCAN exchange functional
+RPPSCANC 	r++SCAN correlation functional
+RPPSCANX 	r++SCAN exchange functional
+R2SCANC 	r2SCAN correlation functional
+R2SCANX 	r2SCAN exchange functional
+R4SCANC 	r4SCAN correlation functional
+R4SCANX 	r4SCAN exchange functional
+PZ81C 	PZ81 LDA correlation
+P86C 	P86C GGA correlation
+P86CORRC 	P86C GGA correlation
+BTK 	Borgoo-Tozer TS
+VWK 	von Weizsaecker kinetic energy
+B97X 	B97 exchange
+B97C 	B97 correlation
+B97_1X 	B97-1 exchange
+B97_1C 	B97-1 correlation
+B97_2X 	B97-2 exchange
+B97_2C 	B97-2 correlation
+CSC 	Colle-Salvetti correlation functional
+APBEC 	APBE correlation functional.
+APBEX 	APBE Exchange Functional
+ZVPBESOLC 	zvPBEsol correlation Functional
+BLOCX 	BLOC exchange functional
+PBEINTC 	PBEint correlation Functional
+PBEINTX 	PBEint Exchange Functional
+PBELOCC 	PBEloc correlation functional.
+PBESOLX 	PBEsol Exchange Functional
+TPSSLOCC 	TPSSloc correlation functional
+ZVPBEINTC 	zvPBEint correlation Functional
+PW91C 	PW91 Correlation
+RANGESEP_MU 	Range separation inverse length [1/a0]
+EXX 	Amount of exact (HF like) exchange (must be provided externally)
+CAM_ALPHA 	Amount of exact (HF like) exchange within CAM-B3LYP functional
+CAM_BETA 	Amount of long-range (HF like) exchange within CAM-B3LYP functional
+
+Available aliases:
+null 	No functional
+lda 	Slater exchange and VWN5 correlation
+blyp 	Becke exchange and LYP correlation
+pbe 	PBE exchange and correlation
+bp86 	Becke-Perdew 1986
+kt1 	Keal-Tozer 2
+kt2 	Keal-Tozer 2
+kt3 	Keal-Tozer 3
+ldaerf 	Short-range exchange and correlation LDA functional
+pbe0 	Perdew-Burke-Ernzerhof
+b3lyp 	Becke-3-paramater-LYP (VWN5 form)
+m06 	M06
+m06-2x 	M06 2X
+m06L 	M06 L
+b3lyp-g 	Becke-3-paramater-LYP (VWN3 form)
+b3p86 	Becke-3-paramater-LYP (VWN5 form)
+b3p86-g 	Becke-3-paramater-LYP (VWN3 PW86X has no test
+VWN3C has no test
+PBEX has no test
+BECKESRX has no test
+BECKECAMX has no test
+BRX has no test
+BRC has no test
+BRXC has no test
+LDAERFC_JT has no test
+OPTX has no test
+OPTXCORR has no test
+REVPBEX has no test
+RPBEX has no test
+SPBEC has no test
+VWN_PBEC has no test
+TW has no test
+PW91K has no test
+M06X has no test
+M05X2C has no test
+M05C has no test
+M06HFC has no test
+M06LC has no test
+M06X2C has no test
+REVTPSSC has no test
+REVTPSSX has no test
+P86CORRC has no test
+BTK has no test
+VWK has no test
+B97X has no test
+B97C has no test
+B97_1X has no test
+B97_1C has no test
+B97_2X has no test
+B97_2C has no test
+CSC has no test
+APBEC has no test
+APBEX has no test
+ZVPBESOLC has no test
+BLOCX has no test
+PBEINTC has no test
+PBEINTX has no test
+PBELOCC has no test
+PBESOLX has no test
+TPSSLOCC has no test
+ZVPBEINTC has no test
+form)
+bpw91 	Becke 88 exchange+PW91
+b97 	B97 exchange and correlation
+b97-1 	B97-1 exchange and correlation
+b97_2 	B97-2 exchange and correlation
+camb3lyp 	CAM-B3LYP
+vwn 	VWN5 correlation
+vwn5 	VWN5 correlation
+vwn3 	VWN5 correlation
+svwn 	Slater exchange and VWN5 correlation
+svwn5 	Slater exchange and VWN5 correlation
+svwn3 	Slater exchange and VWN3 correlation
+becke 	Becke exchange
+slater 	Slater exchange
+olyp 	LYP correlation and OPTX exchange
+lyp 	LYP correlation
+B88X 	Becke exchange
+LDAX 	Slater exchange
+PBEX 	PBE Exchange Functional
+HF 	Hartree-Fock exchange
+KT3X 	Keal-Tozer 3 exchange
+OPTX 	OPTX Handy & Cohen exchange
+camcompx 	Complementary part of CAM exchange
+tfk 	Thomas-Fermi Kinetic Energy Functional
+tw 	von Weizsacker Kinetic Energy Functional
+scan 	Strongly Constrained and Appropriately Normed
+rscan 	regularised Strongly Constrained and Appropriately Normed
+rppscan 	regularised-improved Strongly Constrained and Appropriately Normed
+r2scan 	regularised-restored Strongly Constrained and Appropriately Normed
+r4scan 	4th order regularised-restored Strongly Constrained and Appropriately Normed
+
+Running tests..
+
+All tests ok

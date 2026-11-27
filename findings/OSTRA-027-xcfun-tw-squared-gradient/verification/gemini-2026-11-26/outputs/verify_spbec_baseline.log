@@ -1,0 +1,38 @@
+================================================================================
+1. MOLECULAR DENSITY: H2O (RKS PBE/cc-pVTZ)
+================================================================================
+XCFun 'SPBEC' (buggy as-is)               : -0.595477895157 Eh
+Our reproduction of buggy spbec.cpp       : -0.595477895157 Eh  (diff vs XCFun = +8.060e-14)
+libxc 'GGA_C_SPBE'                        : -0.362040491755 Eh
+Our sPBE (PW92, exact PBE consts)         : -0.362040491755 Eh  (diff vs libxc = +0.000e+00)
+Our sPBE (PW92, rounded 0.031091/0.066725): -0.362039114221 Eh  (diff vs libxc = +1.378e-06)
+Our sPBE (VWN5, exact PBE consts)         : -0.364419971153 Eh  (diff vs libxc = -2.379e-03)
+Our sPBE (VWN5, rounded 0.031091/0.066725): -0.364418585787 Eh  (diff vs libxc = -2.378e-03)
+--- Error magnitude on H2O ---
+XCFun SPBEC - libxc GGA_C_SPBE            : -0.233437 Eh (-146.48 kcal/mol, rel=-64.48%)
+XCFun SPBEC - sPBE(VWN5,fixed)            : -0.231059 Eh (-144.99 kcal/mol)
+Ref PBE diff (VWN_PBEC - PBEC)            : -0.002534 Eh (-1.59 kcal/mol)
+
+================================================================================
+2. SPIN-POLARIZED SINGLE POINT TEST + 4-PT FD DERIVATIVES
+================================================================================
+Point: na=0.35, nb=0.15, gnn=0.2900
+  XCFun 'SPBEC' eps_c                     : -0.060204412236421
+  Our buggy model eps_c                   : -0.060204412236421  (diff = -1.388e-17)
+  libxc 'GGA_C_SPBE' eps_c                : -0.056610716012294
+  Our sPBE(PW92, exact) eps_c             : -0.056610716012294  (diff vs libxc = -6.939e-18)
+  Our sPBE(VWN5, paper) eps_c             : -0.056969382478512  (diff vs libxc = -3.587e-04)
+  Error XCFun SPBEC vs libxc GGA_C_SPBE   : -3.593696e-03 (rel = -6.35%)
+  vrho XCFun SPBEC                        : [-0.06089455 -0.09668977]
+  vrho libxc GGA_C_SPBE                   : [-0.06469942 -0.10012595]
+  vsigma XCFun SPBEC                      : [0.0028121 0.0056242 0.0028121]
+  vsigma libxc GGA_C_SPBE                 : [0.00824341 0.01648683 0.00824341]
+
+================================================================================
+3. PHYSICAL EXACT LIMIT CHECK: rapidly varying limit (t -> inf, eps_c -> 0)
+   Exact PBE/sPBE constraint: lim_{t->inf} (eps_LDA + H) = 0
+================================================================================
+  n=0.1, |grad n|=    1.0: XCFun SPBEC eps_c = -4.5886050273e-02, libxc GGA_C_SPBE eps_c = -3.6197316246e-03
+  n=0.1, |grad n|=   10.0: XCFun SPBEC eps_c = -4.5752183512e-02, libxc GGA_C_SPBE eps_c = -3.9424840917e-05
+  n=0.1, |grad n|=  100.0: XCFun SPBEC eps_c = -4.5750820717e-02, libxc GGA_C_SPBE eps_c = -3.9460505804e-07
+  n=0.1, |grad n|=10000.0: XCFun SPBEC eps_c = -4.5750806951e-02, libxc GGA_C_SPBE eps_c = -3.9460865131e-11

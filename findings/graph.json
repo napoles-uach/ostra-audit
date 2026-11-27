@@ -519,7 +519,7 @@
       ],
       "impact": 3,
       "impact_level": "III (wrong by orders of magnitude when used; kinetic functional, used in orbital-free DFT and embedding)",
-      "status": "Verified (run), attributed, fix tested; needs blind verification by a second agent",
+      "status": "Verified (blind, explorer 2), attributed, fix tested; ready to report",
       "reported": false
     },
     {
@@ -539,7 +539,7 @@
       ],
       "impact": 1,
       "impact_level": "I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed)",
-      "status": "Verified (run), attributed, fix tested, checked against the paper; needs blind verification by a second agent",
+      "status": "Verified (blind, explorer 2), attributed, fix tested, checked against the paper; ready to report",
       "reported": false
     },
     {
