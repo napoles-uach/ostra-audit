@@ -13,7 +13,7 @@
 | oracle_class | independent-implementation, analytic-reference |
 | class | New bug (parameters) |
 | impact_level | I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed) |
-| status | Verified (run), attributed, fix tested; needs blind verification and a check against the paper |
+| status | Verified (run), attributed, fix tested, checked against the paper; needs blind verification by a second agent |
 | report | Pending |
 
 ## Observation
@@ -27,6 +27,13 @@ the prefactor of H uses beta instead of gamma; G also divides by beta_gamma*phi3
 two values and using `gamm * phi3` in G gives -0.368140 Eh (= the paper formula with VWN5 to 1e-6 Eh). Other
 functionals bit-identical. `report/spbec.patch`.
 
+## Check against the paper (2026-11-26)
+Swart, Solà, Bickelhaupt, J. Chem. Phys. 131, 094103 (2009), Eq. (9): H_sPBE = gamma phi^3 ln[1 + (beta/gamma) t^2
+/ (1 + G t^2)], G = (beta/gamma) / (exp(-eps_c^unif / (gamma phi^3)) - 1), and the text keeps beta and gamma at the
+PBE values "~0.066 725, ~0.031 091". This is exactly the form re-implemented in the verification and the one the
+patched XCFun computes; the released code has beta and gamma swapped and uses beta/gamma in place of gamma inside G.
+(The PDF is not stored in the repository.)
+
 ## Pending
-Check the constants and the form of H and A against Swart, Solà, Bickelhaupt, JCP 131, 094103 (2009). Assess who uses
-XCFun's SPBEC (SSB-D in Dalton/DIRAC/ADF-like hosts?). No test reference data in the source.
+Blind verification by a second agent. Assess who uses XCFun's SPBEC (SSB-D in XCFun host programs). No test
+reference data in the source.

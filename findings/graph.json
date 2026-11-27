@@ -539,7 +539,7 @@
       ],
       "impact": 1,
       "impact_level": "I-III (I for anyone computing SSB/sPBE correlation with XCFun; usage to be assessed)",
-      "status": "Verified (run), attributed, fix tested; needs blind verification and a check against the paper",
+      "status": "Verified (run), attributed, fix tested, checked against the paper; needs blind verification by a second agent",
       "reported": false
     },
     {
