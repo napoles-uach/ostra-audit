@@ -14,7 +14,7 @@
 | class | New bug (parameters) or outdated preprint values |
 | impact_level | I (silent; atomization energies MAD 0.63, max 1.99 kcal/mol, impact study 2026-11-24) |
 | status | Confirmed (level 3): published values 0.802/0.178; minimal fix matches libxc to 3e-14 |
-| report | Pending |
+| report | Pending (consolidated XCFun issue drafted in OSTRA-012/report/issue_xcfun.md) |
 
 XCFun vs libxc defaults: 1.0e-2 max relative difference; libxc with dp4 = da4 = 0.232: 1.5e-14 (exact attribution).
 XCFun added r4SCAN in 2020-09 (#140), before the r4SCAN paper; 0.232 may be a preliminary value.
@@ -30,3 +30,10 @@ XCFun added r4SCAN in 2020-09 (#140), before the r4SCAN paper; 0.232 may be a pr
 `studies/impact-xcfun-2026-11-24/`: self-consistent r4SCAN, released vs fixed XCFun, 26 molecules, def2-TZVP.
 Atomization energies: MAD 0.63, max 1.99 kcal/mol (C2H6); reaction energies: MAD 0.58, max 2.03 kcal/mol
 (2 H2O2 -> 2 H2O + O2). Fixed build matches libxc. Silent. Impact level I confirmed.
+
+## Built-in test froze the error (2026-11-27)
+XCFun's own R4SCANX self-test (r4SCANx.cpp) has reference values computed with 0.232/0.232, so it passes on master and
+fails with the published parameters. New reference computed with libxc at the test point and included in the patch;
+same situation as TFK (OSTRA-016). The functional was added by one of the r4SCAN authors in #140 (2020-09), before
+publication ("in preparation"), so 0.232 is most likely a preliminary value.
+

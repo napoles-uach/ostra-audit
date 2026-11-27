@@ -1,0 +1,151 @@
+diff --git a/src/functionals/SCAN_like_eps.hpp b/src/functionals/SCAN_like_eps.hpp
+index 27613b3..038a049 100644
+--- a/src/functionals/SCAN_like_eps.hpp
++++ b/src/functionals/SCAN_like_eps.hpp
+@@ -153,8 +153,8 @@ static num SCAN_X_Fx(const num p,
+   const parameter CFDX1 = 1.24;
+ 
+   const parameter D_DAMP2 = 0.361;
+-  const parameter DX_DAMP4_P = 0.232;
+-  const parameter DX_DAMP4_A = 0.232;
++  const parameter DX_DAMP4_P = 0.802;
++  const parameter DX_DAMP4_A = 0.178;
+   const parameter B1 = 0.156632;
+   const parameter B2 = 0.12083;
+   const parameter B3 = 0.5;
+diff --git a/src/functionals/r4SCANx.cpp b/src/functionals/r4SCANx.cpp
+index ee6feff..3782c31 100644
+--- a/src/functionals/r4SCANx.cpp
++++ b/src/functionals/r4SCANx.cpp
+@@ -38,11 +38,11 @@ FUNCTIONAL(XC_R4SCANX) = {"r4SCAN exchange functional",
+                           1,
+                           1e-11,
+                           {0.217, 0.0632, 0.191, 0.0535, 0.015, 0.267, 0.0328},
+-                          {-1.62076202198e-01,
+-                           -8.60008367983e-01,
++                          {-1.62076025565e-01,
++                           -8.60019219236e-01,
+                            -5.57023311096e-01,
+-                           -3.79265181913e-02,
++                           -3.79374373972e-02,
+                            0.00000000000e+00,
+                            -1.04606093722e-01,
+-                           5.89149583569e-02,
++                           5.89332768915e-02,
+                            5.50319523444e-02}};
+diff --git a/src/functionals/revtpssc_eps.hpp b/src/functionals/revtpssc_eps.hpp
+index c3f2bb0..12f7e2b 100644
+--- a/src/functionals/revtpssc_eps.hpp
++++ b/src/functionals/revtpssc_eps.hpp
+@@ -104,8 +104,8 @@ static num epsc_revpkzb(const densvars<num> & d) /* eps_c^{rev PKZB} it is the e
+ 
+ template <typename num> static num revtpssc_eps(const densvars<num> & d) {
+   num eps_pkzb = epsc_revpkzb(d);
+-  num tauwtau2 = pow2(d.gnn / (8.0 * d.n * d.tau));
++  num tauwtau3 = pow3(d.gnn / (8.0 * d.n * d.tau));
+   parameter dd = 2.8;
+-  return eps_pkzb * (1 + dd * eps_pkzb * tauwtau2);
++  return eps_pkzb * (1 + dd * eps_pkzb * tauwtau3);
+ }
+ } // namespace revtpssc_eps
+diff --git a/src/functionals/revtpssx.cpp b/src/functionals/revtpssx.cpp
+index 2dc8a7e..ca6a703 100644
+--- a/src/functionals/revtpssx.cpp
++++ b/src/functionals/revtpssx.cpp
+@@ -28,5 +28,5 @@ FUNCTIONAL(XC_REVTPSSX) = {
+     "for Condensed Matter Physics and Quantum Chemistry\n"
+     "Phys. Rev. Lett. 103 (2009) 026403\n"
+     "Implemented by Andrea Debnarova\n",
+-    XC_DENSITY | XC_GRADIENT,
++    XC_DENSITY | XC_GRADIENT | XC_KINETIC,
+     ENERGY_FUNCTION(revtpssx)};
+diff --git a/src/functionals/revtpssx_eps.hpp b/src/functionals/revtpssx_eps.hpp
+index 5e88898..e12625d 100644
+--- a/src/functionals/revtpssx_eps.hpp
++++ b/src/functionals/revtpssx_eps.hpp
+@@ -30,7 +30,8 @@ static num x(const num & d_n, const num & d_gnn, const num & d_tau) {
+   parameter b = 0.40;
+   parameter e = 2.1677;
+   parameter c = 2.35204;
+-  num p = d_gnn / (4 * pow(3 * PI2, 2.0 / 3.0) * pow(d_n, 8.0 / 3.0));
++  num p0 = 1.0 / (4 * pow(3 * PI2, 2.0 / 3.0) * pow(d_n, 8.0 / 3.0));
++  num p = d_gnn * p0;
+   num tauw = d_gnn / (8.0 * d_n);
+   num z = tauw / d_tau;
+   num z2 = pow2(z);
+@@ -41,11 +42,11 @@ static num x(const num & d_n, const num & d_gnn, const num & d_tau) {
+   x_a += 146.0 * pow2(q_b) / 2025.0;
+   // Take the gradient out of the square root
+   x_a -= 73.0 / 405.0 * q_b * d_gnn *
+-         sqrt((0.5 * 0.6 * 0.6) * pow(8 * d_n * d_tau, -2) + 0.5 * p * p);
++         sqrt((0.5 * 0.6 * 0.6) * pow(8 * d_n * d_tau, -2) + 0.5 * p0 * p0);
+   // instead of x_a -= 73.0*q_b*sqrt(0.5*0.6*0.6*z2 + 0.5*p*p)/405.0;
+   x_a += pow2(10.0 * p / 81.0) / kapa;
+   x_a += sqrt(e) * 0.6 * 0.6 * z2 * 20.0 / 81.0 + e * mu * pow3(p);
+-  return x_a / (1 + sqrt(e) * p);
++  return x_a / pow2(1 + sqrt(e) * p);
+ }
+ 
+ template <typename num>
+diff --git a/src/functionals/spbec.cpp b/src/functionals/spbec.cpp
+index fd3bf75..4f2d814 100644
+--- a/src/functionals/spbec.cpp
++++ b/src/functionals/spbec.cpp
+@@ -19,12 +19,12 @@
+ /* "Simplified" PBEc, spbec. Implemented by ulfek */
+ 
+ /* These are the constants in the paper, not very high precision.. */
+-static const parameter gamm = 0.066725;
+-static const parameter beta = 0.031091;
++static const parameter gamm = 0.031091;
++static const parameter beta = 0.066725;
+ static const parameter beta_gamma = beta / gamm;
+ 
+ template <typename num> static num G(const num & eps, const num & phi3) {
+-  return beta_gamma / expm1(-eps / (beta_gamma * phi3));
++  return beta_gamma / expm1(-eps / (gamm * phi3));
+ }
+ 
+ template <typename num>
+diff --git a/src/functionals/tfk.cpp b/src/functionals/tfk.cpp
+index 9ad7473..1f216ad 100644
+--- a/src/functionals/tfk.cpp
++++ b/src/functionals/tfk.cpp
+@@ -20,7 +20,7 @@
+ template <typename num> static num tfk(const densvars<num> & d) {
+   using xcfun_constants::CF;
+ 
+-  return CF * pow(d.n, 5.0 / 3.0);
++  return CF * pow(2.0, 2.0 / 3.0) * (pow(d.a, 5.0 / 3.0) + pow(d.b, 5.0 / 3.0));
+ }
+ 
+ FUNCTIONAL(XC_TFK) = {"Thomas-Fermi Kinetic Energy Functional",
+@@ -32,9 +32,9 @@ FUNCTIONAL(XC_TFK) = {"Thomas-Fermi Kinetic Energy Functional",
+                       1,
+                       1e-5,
+                       {1., .8},
+-                      {7.64755771625168,
+-                       7.08107195949229,
+-                       7.08107195949229,
+-                       2.62261924425641,
+-                       2.62261924425641,
+-                       2.62261924425641}};
++                      {7.70003416201095,
++                       7.59633312057599,
++                       6.54632143680283,
++                       5.06422208038400,
++                       0.00000000000000,
++                       5.45526786400236}};
+diff --git a/src/functionals/tw.cpp b/src/functionals/tw.cpp
+index e7f3e57..864d82a 100644
+--- a/src/functionals/tw.cpp
++++ b/src/functionals/tw.cpp
+@@ -18,7 +18,7 @@
+ //  von Weizsacker kinetic energy functional
+ 
+ template <typename num> static num tw(const densvars<num> & d) {
+-  return 1. / 8. * pow(d.gaa + d.gbb, 2.0) / d.n;
++  return 0.125 * (d.gaa / d.a + d.gbb / d.b);
+ }
+ 
+ FUNCTIONAL(XC_TW) = {

@@ -14,7 +14,7 @@
 | class | New bug (formula) |
 | impact_level | III (spin-polarized kinetic-energy use, e.g. embedding) |
 | status | Confirmed (level 3): exact spin scaling after minimal fix |
-| report | Pending |
+| report | Pending (consolidated XCFun issue drafted in OSTRA-012/report/issue_xcfun.md) |
 
 Code is `CF * pow(d.n, 5/3)`. Error -8.21 % at zeta = 0.4 (explorer: -26.8 % at 0.8, -37 % at 1).
 
